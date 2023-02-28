@@ -1,0 +1,12 @@
+EMPLOYEE_ID,EMPLOYEE_NAME,EMAIL (text),PASSWORD (text),IS_MANAGER (bool)
+1,Sean Miller,seanm@gmail.com,iHateWorkingHere123,FALSE
+2,Dave Chappelle,realDaveC@gmail.com,iHateTransInclusiveRadicalFeminism,FALSE
+3,Eren Jeager,thefounder@gmail.com,iHateMarley,TRUE
+4,Will Smith,freshprince@gmail.com,iHateChrisRock,TRUE
+5,Joe Biden,potus@whitehouse.gov,iHateDonnieT,FALSE
+6,Nick Miller,millerman@gmail.com,iHateCookieRules,FALSE
+7,Frodo Baggins,hobbit@shiremail.com,iHateMagicRings,FALSE
+8,Gerard Way,myChemBabe@gmail.com,iHatePop,TRUE
+9,Elon Musk,ultimateTeslaBull@yahoo.com,iHateDemocratsUntilINeedEVTaxCredits,FALSE
+10,Michael Hunt,mhunt@protonmail.com,iHateMyName,FALSE
+11,Taylor Swift,theogswiftie@hotmail.com,iHateJakeGyllenhaal,FALSE
