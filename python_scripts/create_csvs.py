@@ -9,8 +9,7 @@ def increment_date(cur_date: date) -> date:
 def add_random_item_sold(item_sold, order_num, prices):
     index = random.randint(1, 25)
     cost = round(float(prices[index][1:]), 2)
-    item = {"ITEM_ID": len(item_sold), "MENU_ITEM_ID": index, "ORDER_ID": order_num,
-            "INVENTORY_ID": "NULL", "ITEM_SOLD_QUANTITY": 1}
+    item = {"ITEM_ID": len(item_sold) + 1, "MENU_ITEM_ID": index + 1, "ORDER_ID": order_num, "ITEM_SOLD_QUANTITY": 1}
     item_sold = item_sold.append(item, ignore_index=True)
     return cost, item_sold
 
@@ -22,6 +21,7 @@ def add_order(orders, item_sold, date_str, prices):
         item_cost, item_sold = add_random_item_sold(item_sold, order_num, prices)
         cost += item_cost
 
+    cost = round(cost, 2)
     order = {'ORDER_ID': order_num, 'DATE_ORDERED': date_str, 'ORDER_COST': cost}
     orders = orders.append(order, ignore_index=True)
     return cost, orders, item_sold
