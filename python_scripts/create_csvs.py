@@ -10,6 +10,16 @@ def incrementDate(curDate: date) -> date:
     return curDate
 
 def add_random_item_sold():
+  menu_Contents = []
+  with open("Menu.csv") as menu:
+    #Content_list is the list that contains the read lines.     
+    for line in menu:
+      menu_Contents.append(line)
+    
+    for line in menu_Contents:
+      menu_Contents[line].split(",")
+
+    
 
   return cost
 

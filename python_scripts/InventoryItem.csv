@@ -1,54 +1,54 @@
-INVENTORY_ID (int),INVENTORY_ITEM_NAME (text),INVENTORY_ITEM_COST (float),INVENTORY_ITEM_QUANTITY (int),,,
-1,Beef Patty,1,0,,,
-2,American Cheese,0.29,0,,,
-3,Black Bean Patty,1.53,0,,,
-4,Gig-em Sauce,0.02,0,,,
-5,Pickles,0.01,0,,,
-6,Lettuce,0.12,0,,,
-7,Tomato,0.07,0,,,
-8,Onion,0.01,0,,,
-9,Buns,0.52,0,,,
-10,Bacon,0.43,0,,,
-11,Chicken Tenders,0.7225,0,,,
-12,Jalapenos,0.01,0,,,
-13,Texas Toast,0.33,0,,,
-14,Steak Fingers,0.69,0,,,
-15,Gravy,0.13,0,,,
-16,American Swiss Cheese,0.32,0,,,
-17,Pepper Jack Cheese,0.3,0,,,
-18,Chocolate Ice Cream,0.3,0,,,
-19,Vanilla Ice Cream,0.3,0,,,
-20,Strawberry Ice Cream,0.3,0,,,
-21,Coffee Ice Cream,0.3,0,,,
-22,Chocolate Chunk Cookie,0.25,0,,,
-23,Chocolate Fudge Brownie,0.24,0,,,
-24,Buffalo Sauce,0.05,0,,,
-25,BBQ Sauce,0.04,0,,,
-26,Honey Mustard Sauce,0.03,0,,,
-27,Ranch ,0.04,0,,,
-28,Spicy Ranch,0.05,0,,,
-29,Fries,0.47,0,,,
-30,Tater Tots,0.25,0,,,
-31,Onion Rings,0.33,0,,,
-32,Kettle Chips,0.1,0,,,
-33,Coffee,0.23,0,,,
-34,Napkins,0.018,0,,,
-35,Tray Paper,0.01,0,,,they serve everything on metal trays that aren't consumed w a piece of paper on top
-36,Cups,0.07,0,,,
-37,To-go Boxes,0.81,0,,,
-38,Small Paper Containers,0.12,0,,,this is what they put fries and tater tots in
-39,Sauce Containers,0.2,0,,,
-40,Fountain Drink Syrup,0.12,0,,,
-41,Ketchup,0.02,0,,,
-42,Mayo,0.04,0,,,
-43,Mustard,0.03,0,,,
-44,Milk,0.211,0,,,
-45,Straws,0.015,0,,,
-46,Lids,0.01,0,,,
-47,Grilled Chicken,0.93,0,,,
-48,Sugar,0.06,0,, ,
-49,Creamer,0.03,0,,,
-50,Fork,0.03,0,,,
-51,Knife,0.05,0,,,
-52,Spoon,0.04,0,,,
-53,croutons,0.13,0,,,
+INVENTORY_ID (int),INVENTORY_ITEM_NAME (text),INVENTORY_ITEM_COST (float),INVENTORY_ITEM_QUANTITY (int)
+1,Beef Patty,1,0
+2,American Cheese,0.29,0
+3,Black Bean Patty,1.53,0
+4,Gig-em Sauce,0.02,0
+5,Pickles,0.01,0
+6,Lettuce,0.12,0
+7,Tomato,0.07,0
+8,Onion,0.01,0
+9,Buns,0.52,0
+10,Bacon,0.43,0
+11,Chicken Tenders,0.7225,0
+12,Jalapenos,0.01,0
+13,Texas Toast,0.33,0
+14,Steak Fingers,0.69,0
+15,Gravy,0.13,0
+16,American Swiss Cheese,0.32,0
+17,Pepper Jack Cheese,0.3,0
+18,Chocolate Ice Cream,0.3,0
+19,Vanilla Ice Cream,0.3,0
+20,Strawberry Ice Cream,0.3,0
+21,Coffee Ice Cream,0.3,0
+22,Chocolate Chunk Cookie,0.25,0
+23,Chocolate Fudge Brownie,0.24,0
+24,Buffalo Sauce,0.05,0
+25,BBQ Sauce,0.04,0
+26,Honey Mustard Sauce,0.03,0
+27,Ranch ,0.04,0
+28,Spicy Ranch,0.05,0
+29,Fries,0.47,0
+30,Tater Tots,0.25,0
+31,Onion Rings,0.33,0
+32,Kettle Chips,0.1,0
+33,Coffee,0.23,0
+34,Napkins,0.018,0
+35,Tray Paper,0.01,0
+36,Cups,0.07,0
+37,To-go Boxes,0.81,0
+38,Small Paper Containers,0.12,0
+39,Sauce Containers,0.2,0
+40,Fountain Drink Syrup,0.12,0
+41,Ketchup,0.02,0
+42,Mayo,0.04,0
+43,Mustard,0.03,0
+44,Milk,0.211,0
+45,Straws,0.015,0
+46,Lids,0.01,0
+47,Grilled Chicken,0.93,0
+48,Sugar,0.06,0
+49,Creamer,0.03,0
+50,Fork,0.03,0
+51,Knife,0.05,0
+52,Spoon,0.04,0
+53,croutons,0.13,0
