@@ -7,7 +7,7 @@ def increment_date(cur_date: date) -> date:
     return cur_date + timedelta(days=1)
 
 def add_random_item_sold(item_sold, order_num, prices):
-    index = random.randint(0, 6)
+    index = random.randint(1, 25)
     cost = round(float(prices[index][1:]), 2)
     item = {"ITEM_ID": len(item_sold), "MENU_ITEM_ID": index, "ORDER_ID": order_num,
             "INVENTORY_ID": "NULL", "ITEM_SOLD_QUANTITY": 1}
