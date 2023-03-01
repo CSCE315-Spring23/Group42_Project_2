@@ -42,9 +42,9 @@ for i in range(365):
     curr_date = increment_date(curr_date)
 
     if i % 21 == 0:
-        num_orders = 400
+        num_orders = 600
     else:
-        num_orders = 100
+        num_orders = 200
 
     for j in range(num_orders):
         cost, orders, item_sold = add_order(orders, item_sold, str(curr_date), prices)
