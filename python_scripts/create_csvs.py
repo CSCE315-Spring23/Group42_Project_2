@@ -7,6 +7,7 @@ def increment_date(cur_date: date) -> date:
     return cur_date + timedelta(days=1)
 
 def add_random_item_sold(item_sold, order_num, prices):
+    '''Create random item sold and add it to item sold table. Function called in add order'''
     index = random.randint(1, 25)
     cost = round(float(prices[index][1:]), 2)
     item = {"ITEM_ID": len(item_sold) + 1, "MENU_ITEM_ID": index + 1, "ORDER_ID": order_num, "ITEM_SOLD_QUANTITY": 1}
@@ -14,6 +15,7 @@ def add_random_item_sold(item_sold, order_num, prices):
     return cost, item_sold
 
 def add_order(orders, item_sold, date_str, prices):
+    '''Create random order with 1-10 menu items in orders table and add each item used to item sold table.'''
     num_items = random.randint(1, 10)
     cost = 0
     order_num = len(orders) + 1
