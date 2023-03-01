@@ -24,4 +24,4 @@ MENU_ITEM_ID (int),MENU_ITEM_NAME (text),NEMU_ITEM_COST (float)
 23,Tater Tots,$1.59
 24,Onion Rings,$1.99
 25,Kettle Chips,$1.59
-26,Silverware,$0.00
+26,Silverware,$0.00 

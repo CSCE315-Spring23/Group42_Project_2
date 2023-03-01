@@ -1,0 +1,27 @@
+MENU_ITEM_ID (int),MENU_ITEM_NAME (text),NEMU_ITEM_COST (float)
+1,Revs Burger,5.59                               
+2,Double Cheese Burger,8.79
+3,Classic Burger,5.49
+4,Bacon Cheesburger,6.99
+5,Three Tender Basket,6.79
+6,Four Steak Finger Basket,7.29
+7,Gig Em Patty Melt,6.29
+8,Howdy Chicken Sandwich,6.99
+9,Chicken Tender Sandwich,5.79
+10,Grilled Cheese,3.49
+11,Burger/Sandwich Combo,1.90
+12,Basket Combo,1.10
+13,Aggie Shake,3.99
+14,Double Scoop Ice Cream,1.59
+15,Chocolate Cookie,4.49
+16,Brownie,4.49
+17,Salad Bar,8.99
+18,Sauce,0.69
+19,Fountain Drink,2.45
+20,Drip Coffee,2.39
+21,Cold Brew,3.65
+22,Fries,1.59
+23,Tater Tots,1.59
+24,Onion Rings,1.99
+25,Kettle Chips,1.59
+26,Silverware,0.00 
