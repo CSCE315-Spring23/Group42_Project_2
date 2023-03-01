@@ -17,7 +17,7 @@ def add_random_item_sold(item_sold, order_num, prices):
 def add_order(orders, item_sold, date_str, prices):
     num_items = random.randint(1, 10)
     cost = 0
-    order_num = len(orders)
+    order_num = len(orders) + 1
     for i in range(num_items):
         item_cost, item_sold = add_random_item_sold(item_sold, order_num, prices)
         cost += item_cost
