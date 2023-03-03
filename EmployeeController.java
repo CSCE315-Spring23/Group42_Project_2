@@ -18,7 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-public class Controller implements Initializable {
+public class EmployeeController implements Initializable {
 	@FXML Button btn1;
 	@FXML Button btn2;
 	@FXML Button btn3;
