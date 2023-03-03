@@ -49,6 +49,7 @@ for i in range(365):
         num_orders = 200
 
     for j in range(num_orders):
+        '''calculates total profit after every order is process'''
         cost, orders, item_sold = add_order(orders, item_sold, str(curr_date), prices)
         total_cost += cost
     print(str(i) + " : " + str(round(total_cost,2)))
