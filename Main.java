@@ -15,28 +15,29 @@ public class Main extends Application { // could be different
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-    	FXMLLoader loader = new FXMLLoader(
+        // set up login scene
+    	FXMLLoader loginLoader = new FXMLLoader(
     	        getClass().getResource("login.fxml")
     	);
-    	loader.setController(loader.getController());
-    	Parent root = (Parent) loader.load();
+    	Parent loginParent = (Parent) loginLoader.load();
+        Scene loginScene = new Scene(loginParent, 750, 750);
+
+        // set up employee scene
+        FXMLLoader employeeLoader = new FXMLLoader(
+                getClass().getResource("employee.fxml")
+        );
+        Parent employeeParent = (Parent) employeeLoader.load();
+        Scene employeeScene = new Scene(employeeParent, 750, 750);
+
+
+        LoginController loginController = (LoginController) loginLoader.getController();
+        loginController.setEmployeeScene(employeeScene);
+
     	
         primaryStage.setTitle("315 Project 2");
-        primaryStage.setScene(new Scene(root, 750, 750));
+        primaryStage.setScene(loginScene);
         primaryStage.show();
     }
-
-    /*public void switchScene(String filename) {
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("login.fxml")
-        );
-        loader.setController(loader.getController());
-        Parent root = (Parent) loader.load();
-        
-        primaryStage.setTitle("315 Project 2");
-        primaryStage.setScene(new Scene(root, 750, 750));
-        primaryStage.show();
-    }*/
     
     
     
