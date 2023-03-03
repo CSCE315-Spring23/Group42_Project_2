@@ -29,9 +29,20 @@ public class Main extends Application { // could be different
         Parent employeeParent = (Parent) employeeLoader.load();
         Scene employeeScene = new Scene(employeeParent, 750, 750);
 
+        // set up manager scene
+        FXMLLoader managerLoader = new FXMLLoader(
+                getClass().getResource("manager.fxml")
+        );
+        Parent managerParent = (Parent) managerLoader.load();
+        Scene managerScene = new Scene(managerParent, 750, 750);
+
 
         LoginController loginController = (LoginController) loginLoader.getController();
+        EmployeeController employeeController = (EmployeeController) employeeLoader.getController();
+        ManagerController managerController = (ManagerController) managerLoader.getController();
+        
         loginController.setEmployeeScene(employeeScene);
+        loginController.setManagerScene(managerScene);
 
     	
         primaryStage.setTitle("315 Project 2");
