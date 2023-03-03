@@ -18,9 +18,21 @@ public class Main extends Application { // could be different
     	FXMLLoader loader = new FXMLLoader(
     	        getClass().getResource("login.fxml")
     	);
-    	//loader.setController(loader.getController());
+    	loader.setController(loader.getController());
     	Parent root = (Parent) loader.load();
     	
+        primaryStage.setTitle("315 Project 2");
+        primaryStage.setScene(new Scene(root, 750, 750));
+        primaryStage.show();
+    }
+
+    public void switchScene(String filename) {
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("login.fxml")
+        );
+        //loader.setController(loader.getController());
+        Parent root = (Parent) loader.load();
+        
         primaryStage.setTitle("315 Project 2");
         primaryStage.setScene(new Scene(root, 750, 750));
         primaryStage.show();

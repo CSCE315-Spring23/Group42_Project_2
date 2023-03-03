@@ -8,8 +8,9 @@ TERMINAL = Driver
 GUI = Main
 
 CLASSES = \
-	Controller.java \
-	Main.java
+	LoginController.java \
+	Main.java \
+	EmployeeController.java
 
 
 default: classes
