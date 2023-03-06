@@ -210,7 +210,7 @@ public class database{
     Menu items is a list of food (ID, Quantity)
     inventoryItems is a list of inventory items (ID, Quantity)
      */
-    public void createOrder(double price, ArrayList<int,int> menuItems, ArrayList<int,int> inventoryItems){
+    public void createOrder(double price, ArrayList<Integer,Integer> menuItems, ArrayList<Integer,Integer> inventoryItems){
         //do the thing
     }
 
