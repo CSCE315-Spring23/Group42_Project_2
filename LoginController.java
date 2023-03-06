@@ -40,6 +40,7 @@ public class LoginController implements Initializable {
 	            }
 	        }
 	    });
+		this.db = new database();
 	}
 
 	// loads in the employee scene for when we want to switch

@@ -2,14 +2,20 @@ import java.sql.*;
 
 public class database{
     
-    Connection conn = null;
-    String teamNumber = "team_42";
-    String dbName = "csce315331_" + teamNumber;
-    String dbConnectionString = "jdbc:postgresql://csce-315-db.engr.tamu.edu/" + dbName;
+    private static final Connection conn;
+    private static final String teamNumber;
+    private static final String dbName;
+    private static final String dbConnectionString;
     dbSetup myCredentials = new dbSetup();
 
     //constructor
     database(){
+        //initialize variables
+        this.conn = null;
+        this.teamNumber = "team_42";
+        this.dbName = "csce315331_" + teamNumber;
+        this.dbConnectionString = "jdbc:postgresql://csce-315-db.engr.tamu.edu/" + dbName;
+
         //open the database
         try {
             conn = DriverManager.getConnection(dbConnectionString, dbSetup.user, dbSetup.pswd);
