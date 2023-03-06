@@ -173,12 +173,38 @@ public class database{
     }
 
     /**
-    returns the specific recipe items used in an item on the menu.
-    list length is fixed and contains quantities for every ingredient.
-     */
-    public ArrayList<int> getRecipe(String item){
-        //do the thing
+    * Returns the specific recipe items used in an item on the menu.
+    * List length is fixed and contains quantities for every ingredient.
+    */
+    public ArrayList<Integer> getRecipe(String item) {
+        int inventoryItemsCount = getNumRows("inventoryItem");
+        ArrayList<Integer> recipe = new ArrayList<>(inventoryItemsCount);
+        // Initialize all inventory items to be set all to zero
+        for (int i = 0; i < inventoryItemsCount; i++) {
+            recipe.add(0);
+        }
+        try {
+            ResultSet menuIdResult = runCommand("SELECT MENU_ITEM_ID FROM Menu WHERE MENU_ITEM_NAME = '" + item + "';");
+            int menuItemId = 0;
+            if (menuIdResult.next()) {
+                menuItemId = menuIdResult.getInt("MENU_ITEM_ID");
+            }
+            menuIdResult.close();
+            ResultSet result = runCommand("SELECT INVENTORY_ID, AMT_USED FROM RecipeItem WHERE MENU_ID = " + menuItemId + ";");
+            while (result.next()) {
+                int inventoryID = result.getInt("INVENTORY_ID");
+                int amount = result.getInt("AMT_USED");
+                recipe.set(inventoryID - 1, amount);
+            }
+            result.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return recipe;
     }
+
 
     /**
     creates row in order table. 
