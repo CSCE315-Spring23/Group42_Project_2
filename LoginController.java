@@ -55,7 +55,7 @@ public class LoginController implements Initializable {
     }
 
 
-	private bool validateCredentials(String email, String pass) {
+	private boolean validateCredentials(String email, String pass) {
 		//return db.getPasswd(email) == pass ? 'm' : 'e';
 		//return m if manager AND password is valid, return e if employee
 		//and password is valid, else return x

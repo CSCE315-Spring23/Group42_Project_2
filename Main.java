@@ -11,7 +11,9 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
  
 public class Main extends Application { // could be different
-    public static void main(String[] args) { launch(args); }
+    public static void main(String[] args) {
+        launch(args); 
+    }
     
     @Override
     public void start(Stage primaryStage) throws IOException {

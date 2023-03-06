@@ -48,8 +48,7 @@ public class database{
         boolean manager = false;
         try{
             //run query
-            ResultSet result = runCommand("
-                SELECT IS_MANAGER FROM Employee WHERE EMAIL = '" + email + "';");
+            ResultSet result = runCommand("SELECT IS_MANAGER FROM Employee WHERE EMAIL = '" + email + "';");
             if(result.next()) {
                 manager = result.getBoolean("IS_MANAGER");
             }
@@ -212,6 +211,7 @@ public class database{
      */
     public void createOrder(double price, ArrayList<Integer,Integer> menuItems, ArrayList<Integer,Integer> inventoryItems){
         //do the thing
+
     }
 
     /**
@@ -263,9 +263,7 @@ public class database{
     public String getPasswd(String email){  //check error handlign
         try{
             //run query
-            ResultSet result = runCommand("
-                SELECT PASSWORD FROM Employee WHERE 
-                EMAIL = '" + email + "';");
+            ResultSet result = runCommand("SELECT PASSWORD FROM Employee WHERE EMAIL = '" + email + "';");
 
             //if null, return empty string, else return password as string
             if (result.next()) return result.getString("PASSWORD") == null ? 
