@@ -37,12 +37,12 @@ public class database{
         }//end try catch
     }
 
-    public String getPasswd(String username){
+    public String getPasswd(String email){
         try{
             //run query
             ResultSet result = runCommand("
                 SELECT PASSWORD FROM Employee WHERE 
-                EMPLOYEE_NAME = " + username + ";");
+                EMPLOYEE_NAME = " + email + ";");
 
             //if null, return empty string, else return password as string
             if (result.next()) return result.getString("PASSWORD") == null ? 
