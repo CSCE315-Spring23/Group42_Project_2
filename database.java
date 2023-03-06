@@ -43,7 +43,66 @@ public class database{
         }//end try catch
     }
 
-    public String getPasswd(String email){
+    public bool isManager(email){
+        //do the thing
+    }
+
+
+    /**
+    Creates ArrayList of inventory items (and quantities)
+    used in a specific day 
+    */
+    public ArrayList<int> inventoryItemsUsed(String date){
+        //do the thing
+    }
+
+    public ArrayList<ArrayList<String>> get20Rows(String tableName, int whichTwenty){
+        //do the thing
+    }
+
+    public int getNumRows(String tableName){
+        //do the thing
+    }
+
+    /**
+    returns the specific recipe items used in an item on the menu.
+    list length is fixed and contains quantities for every ingredient.
+     */
+    public ArrayList<int> getRecipe(String item){
+        //do the thing
+    }
+
+    /**
+    creates row in order table. 
+    Menu items is a list of food (ID, Quantity)
+    inventoryItems is a list of inventory items (ID, Quantity)
+     */
+    public void createOrder(double price, ArrayList<int,int> menuItems, ArrayList<int,int> inventoryItems){
+        //do the thing
+    }
+
+    /**
+    change the cost of any menu item
+     */
+    public void changePrice(String itemName, double newCost){
+        //do the thing
+    }
+
+    /**
+    create item from given info, find Order_ID from last added order + 1
+     */
+    private void createMenuItemSold(int MenuId, int orderID, int quantity){
+        //add a row to ItemsSold
+    }
+    private void createInventoryItemSold(int InventoryId, int orderID, int quantity){
+        //add a row to ItemsSold
+    }
+
+    public double getPriceOfMenuItem(int itemID){
+        //do the thing
+    }
+
+    public String getPasswd(String email){  //check error handlign
         try{
             //run query
             ResultSet result = runCommand("
