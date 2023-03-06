@@ -210,9 +210,23 @@ public class Database{
     Menu items is a list of food (ID, Quantity)
     inventoryItems is a list of inventory items (ID, Quantity)
      */
-    public void createOrder(double price, ArrayList<Integer> menuItems, ArrayList<Integer> inventoryItems){
-        //do the thing
-
+    public void createOrder(double cost, ArrayList<CustomPair> menuItems, ArrayList<CustomPair> inventoryItems){
+        try {
+            int orderID = 0;
+            String date = "date";
+            ResultSet result = runCommand(String.format("INSERT INTO order VALUES (%d, %d, %d)", orderID, date, cost));
+            for(int i=0; i<menuItems.size(); i++) {
+                createMenuItemSold(menuItems.get(i).ID, orderID, menuItems.get(i).Quantity);
+            }
+            for(int i=0; i<inventoryItems.size(); i++) {
+                createMenuItemSold(inventoryItems.get(i).ID, orderID, inventoryItems.get(i).Quantity);
+            }
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
     }
 
     /**
@@ -282,5 +296,13 @@ public class Database{
             System.exit(0);
         }
         return "";
+    }
+}
+class CustomPair {
+    public int ID;
+    public int Quantity;
+    CustomPair(int ID, int Quantity) {
+        this.ID = ID;
+        this.Quantity = Quantity;
     }
 }
