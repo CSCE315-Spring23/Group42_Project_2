@@ -10,7 +10,8 @@ GUI = Main
 CLASSES = \
 	LoginController.java \
 	Main.java \
-	EmployeeController.java
+	EmployeeController.java \
+	Database.java
 
 
 default: classes

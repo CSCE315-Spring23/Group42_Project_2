@@ -25,7 +25,7 @@ public class LoginController implements Initializable {
 	@FXML TextField fPassword;
 	private Scene employeeScene;
 	private Scene managerScene;
-	private database db;
+	private Database db;
 
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println("Login controller running");
@@ -40,7 +40,7 @@ public class LoginController implements Initializable {
 	            }
 	        }
 	    });
-		this.db = new database();
+		this.db = new Database();
 	}
 
 	// loads in the employee scene for when we want to switch
@@ -59,7 +59,7 @@ public class LoginController implements Initializable {
 		//return db.getPasswd(email) == pass ? 'm' : 'e';
 		//return m if manager AND password is valid, return e if employee
 		//and password is valid, else return x
-			
+		return false;
 	}
 
 	private void triggerLogin() {

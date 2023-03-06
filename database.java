@@ -1,15 +1,16 @@
 import java.sql.*;
+import java.util.ArrayList;
 
-public class database{
+public class Database{
     
     private Connection conn;
-    private static final String teamNumber;
-    private static final String dbName;
-    private static final String dbConnectionString;
+    private static String teamNumber;
+    private static String dbName;
+    private static String dbConnectionString;
     dbSetup myCredentials = new dbSetup();
 
     //constructor
-    database(){
+    Database(){
         //initialize variables
         this.conn = null;
         this.teamNumber = "team_42";
@@ -209,7 +210,7 @@ public class database{
     Menu items is a list of food (ID, Quantity)
     inventoryItems is a list of inventory items (ID, Quantity)
      */
-    public void createOrder(double price, ArrayList<Integer,Integer> menuItems, ArrayList<Integer,Integer> inventoryItems){
+    public void createOrder(double price, ArrayList<Integer> menuItems, ArrayList<Integer> inventoryItems){
         //do the thing
 
     }
@@ -266,12 +267,20 @@ public class database{
             ResultSet result = runCommand("SELECT PASSWORD FROM Employee WHERE EMAIL = '" + email + "';");
 
             //if null, return empty string, else return password as string
-            if (result.next()) return result.getString("PASSWORD") == null ? 
-                "" : result.getString("PASSWORD");
+            if (result.next()){ 
+                if (result.getString("PASSWORD") == null) {
+                    return "";
+                }
+                else{
+                    return result.getString("PASSWORD");
+                }
+            }
+                
         } catch (Exception e){
             e.printStackTrace();
             System.err.println(e.getClass().getName()+": "+e.getMessage());
             System.exit(0);
         }
+        return "";
     }
 }
