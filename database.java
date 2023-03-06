@@ -49,8 +49,7 @@ public class database{
         try{
             //run query
             ResultSet result = runCommand("
-                SELECT IS_MANAGER FROM Employee WHERE 
-                EMAIL = '" + email + "';");
+                SELECT IS_MANAGER FROM Employee WHERE EMAIL = '" + email + "';");
             if(result.next()) {
                 manager = result.getBoolean("IS_MANAGER");
             }
@@ -96,16 +95,16 @@ public class database{
         }
         try {
             // Run query to get order IDs for a specific date
-            ResultSet orderResult = runCommand("SELECT ORDER_ID FROM Orders WHERE DATE_ORDERED = '" + date + "'");
+            ResultSet orderResult = runCommand("SELECT ORDER_ID FROM Orders WHERE DATE_ORDERED = '" + date + "';");
             while (orderResult.next()) {
                 int orderID = orderResult.getInt("ORDER_ID");
                 // Run query to get menu item IDs and sold quantities for each order
-                ResultSet menuItemResult = runCommand("SELECT MENU_ITEM_ID, ITEM_SOLD_QUANTITY FROM ItemSold WHERE ORDER_ID = " + orderID);
+                ResultSet menuItemResult = runCommand("SELECT MENU_ITEM_ID, ITEM_SOLD_QUANTITY FROM ItemSold WHERE ORDER_ID = " + orderID + ";");
                 while (menuItemResult.next()) {
                     int menuItemID = menuItemResult.getInt("MENU_ITEM_ID");
                     int menuItemQuantity = menuItemResult.getInt("ITEM_SOLD_QUANTITY");
                     // Run query to get inventory IDs and amounts used for each menu item
-                    ResultSet recipeResult = runCommand("SELECT INVENTORY_ID, AMT_USED FROM RecipeItem WHERE MENU_ID = " + menuItemID);
+                    ResultSet recipeResult = runCommand("SELECT INVENTORY_ID, AMT_USED FROM RecipeItem WHERE MENU_ID = " + menuItemID + ";");
                     while (recipeResult.next()) {
                         int inventoryID = recipeResult.getInt("INVENTORY_ID");
                         int amtUsed = recipeResult.getInt("AMT_USED");
@@ -222,7 +221,7 @@ public class database{
          try{
             //run query
             ResultSet result = runCommand("UPDATE Menu SET MENU_ITEM_COST = " + newCost 
-            + " WHERE name = '" + itemName + "'");
+            + " WHERE name = '" + itemName + "';");
         } catch (Exception e){
             e.printStackTrace();
             System.err.println(e.getClass().getName()+": "+e.getMessage());
@@ -245,7 +244,7 @@ public class database{
         double price = 0.0;
         try {
             // Run query
-            ResultSet result = runCommand("SELECT MENU_ITEM_COST FROM Menu WHERE MENU_ITEM_ID = " + itemID);
+            ResultSet result = runCommand("SELECT MENU_ITEM_COST FROM Menu WHERE MENU_ITEM_ID = " + itemID + ";");
 
             // Extract price from result
             if (result.next()) {
