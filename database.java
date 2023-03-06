@@ -2,7 +2,7 @@ import java.sql.*;
 
 public class database{
     
-    private static final Connection conn;
+    private Connection conn;
     private static final String teamNumber;
     private static final String dbName;
     private static final String dbConnectionString;
