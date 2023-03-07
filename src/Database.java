@@ -1,6 +1,8 @@
 import java.sql.*;
 
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Database {
 
@@ -231,13 +233,17 @@ public class Database {
     public void createOrder(double cost, ArrayList<CustomPair> menuItems, ArrayList<CustomPair> inventoryItems) {
         try {
             int orderID = 0;
-            String date = "date";
-            ResultSet result = runCommand(String.format("INSERT INTO order VALUES (%d, %d, %d)", orderID, date, cost));
+            // get the current date as a LocalDate object
+            LocalDate today = LocalDate.now();
+            // format the date as a string in "MM-dd-yyyy" format
+            String date = today.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
+            runCommand(String.format(
+                    "INSERT INTO orders (order_id, order_date, cost) VALUES (%d, '%s', %f)", orderID, date, cost));
             for (int i = 0; i < menuItems.size(); i++) {
                 createMenuItemSold(menuItems.get(i).ID, orderID, menuItems.get(i).Quantity);
             }
             for (int i = 0; i < inventoryItems.size(); i++) {
-                createMenuItemSold(inventoryItems.get(i).ID, orderID, inventoryItems.get(i).Quantity);
+                createInventoryItemSold(inventoryItems.get(i).ID, orderID, inventoryItems.get(i).Quantity);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -252,7 +258,7 @@ public class Database {
     public void changePrice(String itemName, double newCost) {
         try {
             // run query
-            ResultSet result = runCommand("UPDATE Menu SET MENU_ITEM_COST = " + newCost
+            runCommand("UPDATE Menu SET MENU_ITEM_COST = " + newCost
                     + " WHERE name = '" + itemName + "';");
         } catch (Exception e) {
             e.printStackTrace();
@@ -266,17 +272,19 @@ public class Database {
      */
     private void createMenuItemSold(int MenuId, int orderID, int quantity) {
         // add a row to ItemsSold
-      try{
-          int newItemID = 0;
-        Statement stmt = conn.createStatement();
-        String sqlStatement1 = "SELECT MAX(item_id) FROM item_sold";
-        ResultSet result = stmt.executeQuery(sqlStatement1);
-        if (result.next()){
-            newItemID = result.getInt(1) + 1;
-        }
+        try {
+            int newItemID = 0;
+            Statement stmt = conn.createStatement();
+            String sqlStatement1 = "SELECT MAX(item_id) FROM item_sold";
+            ResultSet result = stmt.executeQuery(sqlStatement1);
+            if (result.next()) {
+                newItemID = result.getInt(1) + 1;
+            }
 
-        String sqlStatement2 = String.format("INSERT INTO item_sold (item_id, menu_item_id, order_id, item_sold_quantity) VALUES (%d, %d, %d, %d)", newItemID, MenuId, orderID, quantity); 
-        stmt.executeUpdate(sqlStatement2);
+            String sqlStatement2 = String.format(
+                    "INSERT INTO item_sold (item_id, menu_item_id, order_id, item_sold_quantity) VALUES (%d, %d, %d, %d)",
+                    newItemID, MenuId, orderID, quantity);
+            stmt.executeUpdate(sqlStatement2);
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -285,30 +293,33 @@ public class Database {
     }
 
     /**
-     * Create inventory item from given info, find Order_ID from last added order + 1
+     * Create inventory item from given info, find Order_ID from last added order +
+     * 1
      */
     private void createInventoryItemSold(int InventoryId, int orderID, int quantity) {
         // add a row to ItemsSold
-        try{
+        try {
             int newItemID = 0;
-          Statement stmt = conn.createStatement();
-          String sqlStatement1 = "SELECT MAX(item_id) FROM item_sold";
-          ResultSet result = stmt.executeQuery(sqlStatement1);
-          if (result.next()){
-              newItemID = result.getInt(1) + 1;
-          }
-  
-          String sqlStatement2 = String.format("INSERT INTO item_sold (item_id, inventory_id, order_id, item_sold_quantity) VALUES (%d, %d, %d, %d)", newItemID, InventoryId, orderID, quantity); 
-          stmt.executeUpdate(sqlStatement2);
-          } catch (Exception e) {
-              e.printStackTrace();
-              System.err.println(e.getClass().getName() + ": " + e.getMessage());
-              System.exit(0);
-          }
+            Statement stmt = conn.createStatement();
+            String sqlStatement1 = "SELECT MAX(item_id) FROM item_sold";
+            ResultSet result = stmt.executeQuery(sqlStatement1);
+            if (result.next()) {
+                newItemID = result.getInt(1) + 1;
+            }
+
+            String sqlStatement2 = String.format(
+                    "INSERT INTO item_sold (item_id, inventory_id, order_id, item_sold_quantity) VALUES (%d, %d, %d, %d)",
+                    newItemID, InventoryId, orderID, quantity);
+            stmt.executeUpdate(sqlStatement2);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
     }
 
-    /** 
-     * Retrieve the cost of a menu item from the menu table based on its ID. 
+    /**
+     * Retrieve the cost of a menu item from the menu table based on its ID.
      */
     public double getPriceOfMenuItem(int itemID) {
         double price = 0.0;
@@ -330,7 +341,7 @@ public class Database {
         return price;
     }
 
-    /** 
+    /**
      * Return password associated with email
      */
     public String getPasswd(String email) { // check error handlign
