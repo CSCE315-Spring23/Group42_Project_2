@@ -37,10 +37,23 @@ public class LoginController implements Initializable {
 		bLogin.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				System.out.println("Attempting to log in...");
-				if (validateCredentials(fEmail.getText(), fPassword.getText())) {
-					triggerLogin();
-				} else {
-					System.out.println("Invalid credentials!");
+				char perm = validateCredentials(fEmail.getText(), fPassword.getText());
+				// if () {
+				// triggerLogin('m');
+
+				// } else {
+				// System.out.println("Invalid credentials!");
+				// }
+				switch (perm) {
+					case 'm':
+						triggerLogin('m');
+						break;
+					case 'e':
+						triggerLogin('e');
+						break;
+					default:
+						System.out.println("login failed");
+
 				}
 			}
 		});
@@ -58,16 +71,22 @@ public class LoginController implements Initializable {
 		managerScene = scene;
 	}
 
-	private boolean validateCredentials(String email, String pass) {
+	private char validateCredentials(String email, String pass) {
 		// return db.getPasswd(email) == pass ? 'm' : 'e';
 		// return m if manager AND password is valid, return e if employee
 		// and password is valid, else return x
-		return false;
+		return db.getPasswd(email).equals(pass) ? db.isManager(email) ? 'm' : 'e' : 'x';
+
 	}
 
-	private void triggerLogin() {
-		System.out.println("triggering login");
-		openManagerScene();
+	private void triggerLogin(char perm) {
+		if (perm == 'm') {
+			System.out.println("triggering manager login");
+			openManagerScene();
+		} else if (perm == 'e') {
+			System.out.println("triggering employee login");
+			openEmployeeScene();
+		}
 	}
 
 	public void openEmployeeScene() {
