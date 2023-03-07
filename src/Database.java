@@ -6,21 +6,15 @@ import java.time.format.DateTimeFormatter;
 
 public class Database {
 
-    private Connection conn;
-    private static String teamNumber;
-    private static String dbName;
-    private static String dbConnectionString;
-    dbSetup myCredentials = new dbSetup();
+    private Connection conn = null;
+    private static String teamNumber = "team_42";
+    private static String dbName = "csce315331_" + teamNumber;
+    private static String dbConnectionString = "jdbc:postgresql://csce-315-db.engr.tamu.edu/" + dbName;
 
     /**
      * Database constructor
      */
     Database() {
-        // initialize variables
-        this.conn = null;
-        this.teamNumber = "team_42";
-        this.dbName = "csce315331_" + teamNumber;
-        this.dbConnectionString = "jdbc:postgresql://csce-315-db.engr.tamu.edu/" + dbName;
 
         // open the database
         try {
