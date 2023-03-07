@@ -1,5 +1,4 @@
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,7 +10,9 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class Main extends Application { // could be different
+
     public static void main(String[] args) {
+
         launch(args);
     }
 
