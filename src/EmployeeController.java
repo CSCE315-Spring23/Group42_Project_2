@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 
@@ -12,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -26,6 +28,7 @@ public class EmployeeController implements Initializable {
 	@FXML Button bBurg4;
 
 	boolean burger = false;
+	ArrayList<String> orderList = new ArrayList<String>();
 
 	@FXML RadioButton cNoBurg;
 	@FXML RadioButton cChipBurg;
@@ -54,11 +57,25 @@ public class EmployeeController implements Initializable {
 	@FXML RadioButton bRegBurg;
 	@FXML RadioButton bExtraBurg;
 	@FXML Button bCheckoutBurg;
+	@FXML Tab checkoutTab;
+	@FXML Label orderListLabel;
 
 
 	public void initialize(URL location, ResourceBundle resources) {
 
 		System.out.println("Employee controller running");
+
+		checkoutTab.setOnSelectionChanged(new EventHandler<Event>() {
+            @Override
+            public void handle(Event t) {
+            	String orders = "";
+            	for(String item: orderList){
+            		orders += item;
+            		orders += "\n";
+            	}
+                orderListLabel.setText(orders);
+            }
+        });
 
 		 bBurg1.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
@@ -79,8 +96,8 @@ public class EmployeeController implements Initializable {
 		 		}
 		 		bCheckoutBurg.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println("Rev's Burger");
-		 				System.out.println(compareToBurgerRecipe(recipe));
+		 				System.out.println(compareToBurgerRecipe(recipe, "Rev's Burger\n"));
+		 				orderList.add(compareToBurgerRecipe(recipe, "Rev's Burger\n"));
 		 			}
 		 		});
 		 	}
@@ -105,8 +122,8 @@ public class EmployeeController implements Initializable {
 		 		}
 		 		bCheckoutBurg.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println("Double Cheese Burger");
-		 				System.out.println(compareToBurgerRecipe(recipe));
+		 				System.out.println(compareToBurgerRecipe(recipe, "Double Cheese Burger\n"));
+		 				orderList.add(compareToBurgerRecipe(recipe, "Double Cheese Burger\n"));
 		 			}
 		 		});
 		 	}
@@ -131,8 +148,8 @@ public class EmployeeController implements Initializable {
 		 		}
 		 		bCheckoutBurg.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println("Classic Burger");
-		 				System.out.println(compareToBurgerRecipe(recipe));
+		 				System.out.println(compareToBurgerRecipe(recipe, "Classic Burger\n"));
+		 				orderList.add(compareToBurgerRecipe(recipe, "Classic Burger\n"));
 		 			}
 		 		});
 		 	}
@@ -157,8 +174,8 @@ public class EmployeeController implements Initializable {
 		 		}
 		 		bCheckoutBurg.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println("Bacon Cheese Burger");
-		 				System.out.println(compareToBurgerRecipe(recipe));
+		 				System.out.println(compareToBurgerRecipe(recipe, "Bacon Cheese Burger\n"));
+		 				orderList.add(compareToBurgerRecipe(recipe, "Bacon Cheese Burger\n"));
 		 			}
 		 		});
 		 	}
@@ -242,8 +259,8 @@ public class EmployeeController implements Initializable {
 		bExtraBurg.setSelected(false);
 	}
 
-	String compareToBurgerRecipe(ArrayList<RadioButton> recipe){
-		String out = "";
+	String compareToBurgerRecipe(ArrayList<RadioButton> recipe, String out){
+		//String out = "";
 		if(checkChanged(cNoBurg, cChipBurg, cFriesBurg, recipe.get(0)) == 2) {
 			out += "Combo with chips\n";
 		} else if(checkChanged(cNoBurg, cChipBurg, cFriesBurg, recipe.get(0)) == 3) {

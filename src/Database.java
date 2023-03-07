@@ -1,6 +1,8 @@
 import java.sql.*;
 
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Database {
 
@@ -231,8 +233,12 @@ public class Database {
     public void createOrder(double cost, ArrayList<CustomPair> menuItems, ArrayList<CustomPair> inventoryItems) {
         try {
             int orderID = 0;
-            String date = "date";
-            runCommand(String.format("INSERT INTO order VALUES (%d, %d, %d)", orderID, date, cost));
+            // get the current date as a LocalDate object
+            LocalDate today = LocalDate.now();
+            // format the date as a string in "MM-dd-yyyy" format
+            String date = today.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
+            ResultSet result = runCommand(String.format(
+                    "INSERT INTO orders (order_id, order_date, cost) VALUES (%d, '%s', %f)", orderID, date, cost));
             for (int i = 0; i < menuItems.size(); i++) {
                 createMenuItemSold(menuItems.get(i).ID, orderID, menuItems.get(i).Quantity);
             }
