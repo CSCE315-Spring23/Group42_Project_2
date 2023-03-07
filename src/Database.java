@@ -10,7 +10,9 @@ public class Database {
     private static String dbConnectionString;
     dbSetup myCredentials = new dbSetup();
 
-    // constructor
+    /**
+     * Database constructor
+     */
     Database() {
         // initialize variables
         this.conn = null;
@@ -29,13 +31,18 @@ public class Database {
         }
     }
 
+    /**
+     * Run SQL Query on database
+     */
     private ResultSet runCommand(String sqlStatement) throws SQLException {
         Statement stmt = conn.createStatement();
         ResultSet result = stmt.executeQuery(sqlStatement);
         return result;
     }
 
-    // call when done, closes connection
+    /**
+     * Call when done to close connection
+     */
     public void closeDB() {
         // closing the connection
         try {
@@ -47,7 +54,7 @@ public class Database {
     }
 
     /**
-     * Retrieves the if login is a manager from the Employee table based on email.
+     * Retrieve the if login is a manager from the Employee table based on email.
      */
     public boolean isManager(String email) {
         boolean manager = false;
@@ -67,7 +74,7 @@ public class Database {
     }
 
     /**
-     * Returns the total amount of rows/items in table specified by tableName
+     * Return the total amount of rows/items in table specified by tableName
      */
     public int getNumRows(String tableName) {
         int rows = 0;
@@ -87,7 +94,7 @@ public class Database {
     }
 
     /**
-     * Creates ArrayList of inventory items (and quantities)
+     * Create ArrayList of inventory items (and quantities)
      * used in a specific day
      */
     public ArrayList<Integer> inventoryItemsUsed(String date) {
@@ -143,7 +150,7 @@ public class Database {
     }
 
     /*
-     * Gets blocks of 20 Rows in any table based on specified table name and
+     * Get blocks of 20 Rows in any table based on specified table name and
      * converts to array list
      */
     public ArrayList<ArrayList<String>> get20Rows(String tableName, int whichTwenty) {
@@ -183,7 +190,7 @@ public class Database {
     }
 
     /**
-     * Returns the specific recipe items used in an item on the menu.
+     * Return the specific recipe items used in an item on the menu.
      * List length is fixed and contains quantities for every ingredient.
      */
     public ArrayList<Integer> getRecipe(String item) {
@@ -217,7 +224,7 @@ public class Database {
     }
 
     /**
-     * creates row in order table.
+     * Create row in order table.
      * Menu items is a list of food (ID, Quantity)
      * inventoryItems is a list of inventory items (ID, Quantity)
      */
@@ -240,7 +247,7 @@ public class Database {
     }
 
     /**
-     * change the cost of any menu item in menu table
+     * Change the cost of any menu item in menu table
      */
     public void changePrice(String itemName, double newCost) {
         try {
@@ -255,7 +262,7 @@ public class Database {
     }
 
     /**
-     * create item from given info, find Order_ID from last added order + 1
+     * Create menu item from given info, find Order_ID from last added order + 1
      */
     private void createMenuItemSold(int MenuId, int orderID, int quantity) {
         // add a row to ItemsSold
@@ -277,6 +284,9 @@ public class Database {
         }
     }
 
+    /**
+     * Create inventory item from given info, find Order_ID from last added order + 1
+     */
     private void createInventoryItemSold(int InventoryId, int orderID, int quantity) {
         // add a row to ItemsSold
         try{
@@ -297,7 +307,9 @@ public class Database {
           }
     }
 
-    /** Retrieves the cost of a menu item from the menu table based on its ID. */
+    /** 
+     * Retrieve the cost of a menu item from the menu table based on its ID. 
+     */
     public double getPriceOfMenuItem(int itemID) {
         double price = 0.0;
         try {
@@ -318,6 +330,9 @@ public class Database {
         return price;
     }
 
+    /** 
+     * Return password associated with email
+     */
     public String getPasswd(String email) { // check error handlign
         try {
             // run query
