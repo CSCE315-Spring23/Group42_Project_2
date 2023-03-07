@@ -37,8 +37,6 @@ public class Main extends Application { // could be different
         Scene managerScene = new Scene(managerParent, 750, 750);
 
         LoginController loginController = (LoginController) loginLoader.getController();
-        EmployeeController employeeController = (EmployeeController) employeeLoader.getController();
-        ManagerController managerController = (ManagerController) managerLoader.getController();
 
         loginController.setEmployeeScene(employeeScene);
         loginController.setManagerScene(managerScene);
