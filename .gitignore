@@ -1,3 +1,7 @@
 /python_scripts/*.csv
 *.class
 *.DS_Store
+
+.vscode/
+
+/src/.metadata/
