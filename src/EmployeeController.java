@@ -30,6 +30,11 @@ public class EmployeeController implements Initializable {
 	@FXML Button bThreeTender;
 	@FXML Button bFourTender;
 
+	@FXML Button bSan1;
+	@FXML Button bSan2;
+	@FXML Button bSan3;
+	@FXML Button bSan4;
+
 	boolean burger = false;
 	ArrayList<String> orderList = new ArrayList<String>();
 
@@ -71,9 +76,61 @@ public class EmployeeController implements Initializable {
 	@FXML RadioButton gExtraBask;
 	@FXML Button bCheckoutBask;
 
+	@FXML RadioButton cNoSan;
+	@FXML RadioButton cChipSan;
+	@FXML RadioButton cFriesSan;
+	@FXML RadioButton patRegSan;
+	@FXML RadioButton patBeanSan;
+	@FXML RadioButton patChickenSan;
+	@FXML RadioButton cNoneSan;
+	@FXML RadioButton cRegSan;
+	@FXML RadioButton cExtraSan;
+	@FXML RadioButton sNoneSan;
+	@FXML RadioButton sRevSan;
+	@FXML RadioButton sSpicySan;
+	@FXML RadioButton pNoneSan;
+	@FXML RadioButton pRegSan;
+	@FXML RadioButton pExtraSan;
+	@FXML RadioButton lNoneSan;
+	@FXML RadioButton lRegSan;
+	@FXML RadioButton lExtraSan;
+	@FXML RadioButton tNoneSan;
+	@FXML RadioButton tRegSan;
+	@FXML RadioButton tExtraSan;
+	@FXML RadioButton oNoneSan;
+	@FXML RadioButton oRegSan;
+	@FXML RadioButton oExtraSan;
+	@FXML Button bCheckoutSan;
+
+	@FXML Button vIce;
+	@FXML Button cIce;
+	@FXML Button sIce;
+	@FXML Button coIce;
+	@FXML Button vMilk;
+	@FXML Button cMilk;
+	@FXML Button sMilk;
+	@FXML Button coMilk;
+	@FXML Button brownie;
+	@FXML Button cookie;
+	@FXML Button salad;
+	@FXML Button gigem;
+	@FXML Button buff;
+	@FXML Button bbq;
+	@FXML Button hMustard;
+	@FXML Button ranch;
+	@FXML Button sRanch;
+	@FXML Button drink;
+	@FXML Button drip;
+	@FXML Button fries;
+	@FXML Button tTots;
+	@FXML Button oRings;
+	@FXML Button kChips;
+	@FXML Button silverware;
+
 
 	@FXML Tab checkoutTab;
 	@FXML Label orderListLabel;
+	@FXML Button placeOrder;
 
 
 	public void initialize(URL location, ResourceBundle resources) {
@@ -91,6 +148,13 @@ public class EmployeeController implements Initializable {
                 orderListLabel.setText(orders);
             }
         });
+
+        placeOrder.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		System.out.println("Placing order...");
+		 		//TO DO: UPDATE DATABASE WHEN ORDER PLACED
+		 	}
+		 });
 
 		 bBurg1.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
@@ -234,6 +298,246 @@ public class EmployeeController implements Initializable {
 		 	}
 		 });
 
+		bSan1.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		toggleOffAll();
+		 		ArrayList<RadioButton> recipe =  new ArrayList<RadioButton>();
+		 		recipe.add(cNoSan);
+		 		recipe.add(patRegSan);
+		 		recipe.add(cRegSan);
+		 		recipe.add(sRevSan);
+		 		recipe.add(pNoneSan);
+		 		recipe.add(lNoneSan);
+		 		recipe.add(tNoneSan);
+		 		recipe.add(oRegSan);
+				for(RadioButton b : recipe){
+		 			b.setSelected(true);
+		 		}
+		 		bCheckoutSan.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+		 				System.out.println(compareToSanRecipe(recipe, "Gig Em Patty Melt\n"));
+		 				orderList.add(compareToSanRecipe(recipe, "Gig Em Patty Melt\n"));
+		 			}
+		 		});
+		 	}
+		 });
+
+		bSan2.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		toggleOffAll();
+		 		ArrayList<RadioButton> recipe =  new ArrayList<RadioButton>();
+		 		recipe.add(cNoSan);
+		 		recipe.add(patChickenSan);
+		 		recipe.add(cRegSan);
+		 		recipe.add(sSpicySan);
+		 		recipe.add(pNoneSan);
+		 		recipe.add(lNoneSan);
+		 		recipe.add(tNoneSan);
+		 		recipe.add(oNoneSan);
+				for(RadioButton b : recipe){
+		 			b.setSelected(true);
+		 		}
+		 		bCheckoutSan.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+		 				System.out.println(compareToSanRecipe(recipe, "Howdy Chicken Sandwich\n"));
+		 				orderList.add(compareToSanRecipe(recipe, "Howdy Chicken Sandwich\n"));
+		 			}
+		 		});
+		 	}
+		 });
+
+		bSan3.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		toggleOffAll();
+		 		ArrayList<RadioButton> recipe =  new ArrayList<RadioButton>();
+		 		recipe.add(cNoSan);
+		 		recipe.add(patChickenSan);
+		 		recipe.add(cNoneSan);
+		 		recipe.add(sNoneSan);
+		 		recipe.add(pRegSan);
+		 		recipe.add(lRegSan);
+		 		recipe.add(tRegSan);
+		 		recipe.add(oRegSan);
+				for(RadioButton b : recipe){
+		 			b.setSelected(true);
+		 		}
+		 		bCheckoutSan.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+		 				System.out.println(compareToSanRecipe(recipe, "Chicken Tender Sandwich\n"));
+		 				orderList.add(compareToSanRecipe(recipe, "Chicken Tender Sandwich\n"));
+		 			}
+		 		});
+		 	}
+		 });
+
+		bSan4.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		toggleOffAll();
+		 		ArrayList<RadioButton> recipe =  new ArrayList<RadioButton>();
+		 		recipe.add(cNoSan);
+		 		recipe.add(patRegSan);
+		 		recipe.add(cRegSan);
+		 		recipe.add(sNoneSan);
+		 		recipe.add(pNoneSan);
+		 		recipe.add(lNoneSan);
+		 		recipe.add(tNoneSan);
+		 		recipe.add(oNoneSan);
+				for(RadioButton b : recipe){
+		 			b.setSelected(true);
+		 		}
+		 		bCheckoutSan.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+		 				System.out.println(compareToSanRecipe(recipe, "Grilled Cheese\n"));
+		 				orderList.add(compareToSanRecipe(recipe, "Grilled Cheese\n"));
+		 			}
+		 		});
+		 	}
+		 });
+
+		vIce.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Vanilla Ice Cream\n");
+		 	}
+		 });
+
+		cIce.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Chocolate Ice Cream\n");
+		 	}
+		 });
+
+		sIce.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Strawberry Ice Cream\n");
+		 	}
+		 });
+
+		coIce.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Coffee Ice Cream\n");
+		 	}
+		 });
+
+		vMilk.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Vanilla Milkshake\n");
+		 	}
+		 });
+
+		coMilk.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Coffee Milkshake\n");
+		 	}
+		 });
+
+		cMilk.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Chocolate Milkshake\n");
+		 	}
+		 });
+
+		sMilk.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Strawberry Milkshake\n");
+		 	}
+		 });
+
+		cookie.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Chocolate Chunk Cookie\n");
+		 	}
+		 });
+
+		brownie.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Brownie\n");
+		 	}
+		 });
+
+		salad.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Salad\n");
+		 	}
+		 });
+
+		gigem.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Gig Em Sauce\n");
+		 	}
+		 });
+
+		buff.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Buffalo Sauce\n");
+		 	}
+		 });
+
+		bbq.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Barbeque Sauce\n");
+		 	}
+		 });
+
+		hMustard.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Honey Mustard\n");
+		 	}
+		 });
+
+		ranch.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Ranch\n");
+		 	}
+		 });
+
+		sRanch.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Spicy Ranch\n");
+		 	}
+		 });
+	
+		drink.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Fountain Drink\n");
+		 	}
+		 });
+
+		drip.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Drip Coffee\n");
+		 	}
+		 });
+
+		fries.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Fries\n");
+		 	}
+		 });
+
+		tTots.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Tater Tots\n");
+		 	}
+		 });
+
+		oRings.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Onion Rings\n");
+		 	}
+		 });
+
+		kChips.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Kettle Chips\n");
+		 	}
+		 });
+
+		silverware.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		orderList.add("Silverware\n");
+		 	}
+		 });
+
 		 onActionGroups(cNoBurg, cChipBurg, cFriesBurg);
 		 onActionGroups(patRegBurg, patBeanBurg, patDoubleBurg);
 		 onActionGroups(cNoneBurg, cRegBurg, cExtraBurg);
@@ -246,6 +550,14 @@ public class EmployeeController implements Initializable {
 		 onActionGroups(cNoBask, cYesBask);
 		 onActionGroups(gNoneBask, gRegBask, gExtraBask);
 		 onActionGroups(tNoneBask, tRegBask, tExtraBask);
+		 onActionGroups(cNoSan, cChipSan, cFriesSan);
+		 onActionGroups(patRegSan, patBeanSan, patChickenSan);
+		 onActionGroups(cNoneSan, cRegSan, cExtraSan);
+		 onActionGroups(sNoneSan, sRevSan, sSpicySan);
+		 onActionGroups(pNoneSan, pRegSan, pExtraSan);
+		 onActionGroups(lNoneSan, lRegSan, lExtraSan);
+		 onActionGroups(tNoneSan, tRegSan, tExtraSan);
+		 onActionGroups(oNoneSan, oRegSan, oExtraSan);
 
 	}
 
@@ -321,6 +633,30 @@ public class EmployeeController implements Initializable {
 		tNoneBask.setSelected(false);
 		tRegBask.setSelected(false);
 		tExtraBask.setSelected(false);
+		cNoSan.setSelected(false);
+		cFriesSan.setSelected(false);
+		cChipSan.setSelected(false);
+		patRegSan.setSelected(false);
+		patBeanSan.setSelected(false);
+		patChickenSan.setSelected(false);
+		cNoneSan.setSelected(false);
+		cRegSan.setSelected(false);
+		cExtraSan.setSelected(false);
+		sNoneSan.setSelected(false);
+		sRevSan.setSelected(false);
+		sSpicySan.setSelected(false);
+		pNoneSan.setSelected(false);
+		pRegSan.setSelected(false);
+		pExtraSan.setSelected(false);
+		lNoneSan.setSelected(false);
+		lRegSan.setSelected(false);
+		lExtraSan.setSelected(false);
+		tNoneSan.setSelected(false);
+		tRegSan.setSelected(false);
+		tExtraSan.setSelected(false);
+		oNoneSan.setSelected(false);
+		oRegSan.setSelected(false);
+		oExtraSan.setSelected(false);
 	}
 
 	String compareToBurgerRecipe(ArrayList<RadioButton> recipe, String out){
@@ -415,6 +751,71 @@ public class EmployeeController implements Initializable {
 			out += "Extra Toast\n";
 		}
 		
+		return out;
+	}
+
+	String compareToSanRecipe(ArrayList<RadioButton> recipe, String out){
+		//String out = "";
+		if(checkChanged(cNoSan, cChipSan, cRegSan, recipe.get(0)) == 2) {
+			out += "Combo with chips\n";
+		} else if(checkChanged(cNoSan, cChipSan, cRegSan, recipe.get(0)) == 3) {
+			out += "Combo with fries\n";
+		}
+
+		if(checkChanged(patRegSan, patBeanSan, patChickenSan, recipe.get(1)) == 2) {
+			out += "Sub Bean Patty\n";
+		} else if(checkChanged(patRegSan, patBeanSan, patChickenSan, recipe.get(1)) == 3) {
+			out += "Chicken Tenders\n";
+		}
+
+		if(checkChanged(cNoneSan, cRegSan, cExtraSan, recipe.get(2)) == 1) {
+			out += "No Cheese\n";
+		} else if(checkChanged(cNoneSan, cRegSan, cExtraSan, recipe.get(2)) == 2) {
+			out += "Add Cheese\n";
+		} else if(checkChanged(cNoneSan, cRegSan, cExtraSan, recipe.get(2)) == 3) {
+			out += "Extra Cheese\n";
+		}
+
+		if(checkChanged(sNoneSan, sRevSan, sSpicySan, recipe.get(3)) == 1) {
+			out += "No Sauce\n";
+		} else if(checkChanged(sNoneSan, sRevSan, sSpicySan, recipe.get(3)) == 2) {
+			out += "Sub Rev's Sacue \n";
+		} else if(checkChanged(sNoneSan, sRevSan, sSpicySan, recipe.get(3)) == 3) {
+			out += "Sub Spicy Sauce\n";
+		}
+
+		if(checkChanged(pNoneSan, pRegSan, pExtraSan, recipe.get(4)) == 1) {
+			out += "No Pickles\n";
+		} else if(checkChanged(pNoneSan, pRegSan, pExtraSan, recipe.get(4)) == 2) {
+			out += "Add Pickles\n";
+		} else if(checkChanged(pNoneSan, pRegSan, pExtraSan, recipe.get(4)) == 3) {
+			out += "Extra Pickles\n";
+		}
+
+		if(checkChanged(lNoneSan, lRegSan, lExtraSan, recipe.get(5)) == 1) {
+			out += "No Lettuce\n";
+		} else if(checkChanged(lNoneSan, lRegSan, lExtraSan, recipe.get(5)) == 2) {
+			out += "Add Lettuce\n";
+		} else if(checkChanged(lNoneSan, lRegSan, lExtraSan, recipe.get(5)) == 3) {
+			out += "Extra Lettuce\n";
+		}
+
+		if(checkChanged(tNoneSan, tRegSan, tExtraSan, recipe.get(6)) == 1) {
+			out += "No Tomato\n";
+		} else if(checkChanged(tNoneSan, tRegSan, tExtraSan, recipe.get(6)) == 2) {
+			out += "Add Tomato\n";
+		} else if(checkChanged(tNoneSan, tRegSan, tExtraSan, recipe.get(6)) == 3) {
+			out += "Extra Tomato\n";
+		}
+
+		if(checkChanged(oNoneSan, oRegSan, oExtraSan, recipe.get(7)) == 1) {
+			out += "No Onion\n";
+		} else if(checkChanged(oNoneSan, oRegSan, oExtraSan, recipe.get(7)) == 2) {
+			out += "Add Onion\n";
+		} else if(checkChanged(oNoneSan, oRegSan, oExtraSan, recipe.get(7)) == 3) {
+			out += "Extra Onion\n";
+		}
+
 		return out;
 	}
 
