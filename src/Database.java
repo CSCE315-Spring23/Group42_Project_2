@@ -237,7 +237,7 @@ public class Database {
             LocalDate today = LocalDate.now();
             // format the date as a string in "MM-dd-yyyy" format
             String date = today.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
-            ResultSet result = runCommand(String.format(
+            runCommand(String.format(
                     "INSERT INTO orders (order_id, order_date, cost) VALUES (%d, '%s', %f)", orderID, date, cost));
             for (int i = 0; i < menuItems.size(); i++) {
                 createMenuItemSold(menuItems.get(i).ID, orderID, menuItems.get(i).Quantity);
