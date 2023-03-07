@@ -27,6 +27,9 @@ public class EmployeeController implements Initializable {
 	@FXML Button bBurg3;
 	@FXML Button bBurg4;
 
+	@FXML Button bThreeTender;
+	@FXML Button bFourTender;
+
 	boolean burger = false;
 	ArrayList<String> orderList = new ArrayList<String>();
 
@@ -57,6 +60,18 @@ public class EmployeeController implements Initializable {
 	@FXML RadioButton bRegBurg;
 	@FXML RadioButton bExtraBurg;
 	@FXML Button bCheckoutBurg;
+
+	@FXML RadioButton cNoBask;
+	@FXML RadioButton cYesBask;
+	@FXML RadioButton tNoneBask;
+	@FXML RadioButton tRegBask;
+	@FXML RadioButton tExtraBask;
+	@FXML RadioButton gNoneBask;
+	@FXML RadioButton gRegBask;
+	@FXML RadioButton gExtraBask;
+	@FXML Button bCheckoutBask;
+
+
 	@FXML Tab checkoutTab;
 	@FXML Label orderListLabel;
 
@@ -181,6 +196,44 @@ public class EmployeeController implements Initializable {
 		 	}
 		 });
 
+		 bThreeTender.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		toggleOffAll();
+		 		ArrayList<RadioButton> recipe =  new ArrayList<RadioButton>();
+		 		recipe.add(cNoBask);
+		 		recipe.add(gRegBask);
+		 		recipe.add(tRegBask);
+				for(RadioButton b : recipe){
+		 			b.setSelected(true);
+		 		}
+		 		bCheckoutBask.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+		 				System.out.println(compareToBasketRecipe(recipe, "Three Tender Basket\n"));
+		 				orderList.add(compareToBasketRecipe(recipe, "Three Tender Basket\n"));
+		 			}
+		 		});
+		 	}
+		 });
+
+		  bFourTender.setOnAction(new EventHandler<ActionEvent>() {
+		 	public void handle(ActionEvent event) {
+		 		toggleOffAll();
+		 		ArrayList<RadioButton> recipe =  new ArrayList<RadioButton>();
+		 		recipe.add(cNoBask);
+		 		recipe.add(gRegBask);
+		 		recipe.add(tRegBask);
+				for(RadioButton b : recipe){
+		 			b.setSelected(true);
+		 		}
+		 		bCheckoutBask.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+		 				System.out.println(compareToBasketRecipe(recipe, "Four Tender Basket\n"));
+		 				orderList.add(compareToBasketRecipe(recipe, "Four Tender Basket\n"));
+		 			}
+		 		});
+		 	}
+		 });
+
 		 onActionGroups(cNoBurg, cChipBurg, cFriesBurg);
 		 onActionGroups(patRegBurg, patBeanBurg, patDoubleBurg);
 		 onActionGroups(cNoneBurg, cRegBurg, cExtraBurg);
@@ -190,6 +243,9 @@ public class EmployeeController implements Initializable {
 		 onActionGroups(tNoneBurg, tRegBurg, tExtraBurg);
 		 onActionGroups(oNoneBurg, oRegBurg, oExtraBurg);
 		 onActionGroups(bNoneBurg, bRegBurg, bExtraBurg);
+		 onActionGroups(cNoBask, cYesBask);
+		 onActionGroups(gNoneBask, gRegBask, gExtraBask);
+		 onActionGroups(tNoneBask, tRegBask, tExtraBask);
 
 	}
 
@@ -257,6 +313,14 @@ public class EmployeeController implements Initializable {
 		bNoneBurg.setSelected(false);
 		bRegBurg.setSelected(false);
 		bExtraBurg.setSelected(false);
+		cNoBask.setSelected(false);
+		cYesBask.setSelected(false);
+		gNoneBask.setSelected(false);
+		gRegBask.setSelected(false);
+		gExtraBask.setSelected(false);
+		tNoneBask.setSelected(false);
+		tRegBask.setSelected(false);
+		tExtraBask.setSelected(false);
 	}
 
 	String compareToBurgerRecipe(ArrayList<RadioButton> recipe, String out){
@@ -328,6 +392,29 @@ public class EmployeeController implements Initializable {
 		} else if(checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 3) {
 			out += "Extra Bacon\n";
 		}
+		return out;
+	}
+
+	String compareToBasketRecipe(ArrayList<RadioButton> recipe, String out){
+		//String out = "";
+		if(!recipe.get(0).isSelected()) {
+			if(cYesBask.isSelected()) {
+				out += "Combo\n";
+			}
+		}
+
+		if(checkChanged(gNoneBask, gRegBask, gExtraBask, recipe.get(1)) == 1) {
+			out += "No Gravy\n";
+		} else if(checkChanged(gNoneBask, gRegBask, gExtraBask, recipe.get(1)) == 3) {
+			out += "Extra Gravy\n";
+		}
+
+		if(checkChanged(tNoneBask, tRegBask, tExtraBask, recipe.get(2)) == 1) {
+			out += "No Toast\n";
+		} else if(checkChanged(tNoneBask, tRegBask, tExtraBask, recipe.get(2)) == 3) {
+			out += "Extra Toast\n";
+		}
+		
 		return out;
 	}
 
