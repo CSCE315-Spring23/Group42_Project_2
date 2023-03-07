@@ -3,7 +3,7 @@ JC = javac
 JVM = java
 .SUFFIXES: .java .class
 .java.class:
-	$(JC) $(JFLAGS) $*.java --module-path "javaFX/lib" --add-modules javafx.controls,javafx.fxml,javafx.graphics *.java
+	$(JC) -cp ".:postgresql-42.5.4.jar" $(JFLAGS) $*.java --module-path "javaFX/lib" --add-modules javafx.controls,javafx.fxml,javafx.graphics *.java
 TERMINAL = Driver
 GUI = Main
 
@@ -13,7 +13,8 @@ CLASSES = \
 	EmployeeController.java \
 	ManagerController.java \
 	Database.java \
-	dbSetup.java
+	dbSetup.java \
+	postgresql-42.5.4.jar
 
 
 default: classes
@@ -25,7 +26,7 @@ noGUI: classes
 
 GUI: 
 	javac $(GUI) --module-path "./javaFX/lib" --add-modules javafx.controls,javafx.fxml
-	java --module-path "./javaFX/lib" --add-modules javafx.controls,javafx.fxml -cp ".;postgresql-42.2.8.jar" 
+	java --module-path "./javaFX/lib" --add-modules javafx.controls,javafx.fxml -cp ".;postgresql-42.5.8.jar" 
 
 me:
 	$(JVM) --module-path "javaFX/lib" --add-modules javafx.controls,javafx.fxml $(GUI) 

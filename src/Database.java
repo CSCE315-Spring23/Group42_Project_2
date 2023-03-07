@@ -20,6 +20,7 @@ public class Database {
 
         // open the database
         try {
+            Class.forName("org.postgresql.Driver")
             conn = DriverManager.getConnection(dbConnectionString, dbSetup.user, dbSetup.pswd);
         } catch (Exception e) {
             e.printStackTrace();
