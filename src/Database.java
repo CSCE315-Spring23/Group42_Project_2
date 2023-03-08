@@ -593,6 +593,36 @@ public class Database {
         }
         return "";
     }
+
+    /**
+     * Updates the quantity of the specified inventory item.
+     * @param itemName the name or ID of the inventory item to update
+     * @param newQuantity the new quantity of the inventory item
+     */
+    public void changeInventoryQuantity(String itemName, int newQuantity) {
+        try {
+            // Get the maximum inventory ID from the table
+            ResultSet result = runQuery("SELECT MAX(INVENTORY_ID) FROM INVENTORY");
+            result.next();
+            int maxId = result.getInt(1);
+            
+            // Check if itemName is a valid integer ID
+            int itemId = Integer.parseInt(itemName);
+            if (itemId < 1 || itemId > maxId) {
+                return;
+            }
+            
+            // run query
+            runCommand("UPDATE INVENTORY SET INVENTORY_ITEM_QUANTITY = " + newQuantity
+                    + " WHERE INVENTORY_ID = " + itemId + ";");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
+
+
 }
 
 /**
