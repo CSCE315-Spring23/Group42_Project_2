@@ -507,6 +507,7 @@ public class Database {
             System.exit(0);
         }
     }
+
     /**
      * Add a new recipe item to Recipe
      * with recipe id which is the last recipe id + 1
@@ -521,8 +522,9 @@ public class Database {
             }
 
             // insert the new recipe item with last recipe id + 1
-            String sqlStatement = String.format("INSERT INTO Recipe (RECIPE_ID, RECIPE_ITEM_NAME, INVENTORY_ID, MENU_ID, AMT_USED) " +
-                    "VALUES (%d, '%s', %d, %d, %d)", lastRecipeId + 1, name, inventoryId, menuId, amtUsed);
+            String sqlStatement = String
+                    .format("INSERT INTO Recipe (RECIPE_ID, RECIPE_ITEM_NAME, INVENTORY_ID, MENU_ID, AMT_USED) " +
+                            "VALUES (%d, '%s', %d, %d, %d)", lastRecipeId + 1, name, inventoryId, menuId, amtUsed);
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(sqlStatement);
         } catch (Exception e) {
@@ -530,6 +532,23 @@ public class Database {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
+    }
+
+    public String getNameFromID(int id) {
+        try{
+        ResultSet result = runCommand("SELECT menu_item_name FROM menu WHERE MENU_ITEM_ID = " + id);
+        if (result.next()) {
+            
+            return result.getString("MENU_ITEM_NAME");
+
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return ""; 
     }
 }
 

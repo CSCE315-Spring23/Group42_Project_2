@@ -60,6 +60,8 @@ public class ManagerController implements Initializable {
 	private TableColumn<Menu, String> menuItemName;
 	@FXML
 	private TableColumn<Menu, Double> menuItemCost;
+	@FXML
+	private TextField fName;
 
 	// @FXML
 	// private Button switchView;
@@ -79,7 +81,9 @@ public class ManagerController implements Initializable {
 
 		addMenu.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				System.out.println("Manager click");
+				db.addMenuItem(fName.getText(), Integer.parseInt(fCost.getText()));
+				updateMenuTable(0);
+				menuTable.refresh();
 			}
 		});
 
