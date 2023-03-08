@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ManagerController">
   <tabs>
@@ -54,6 +55,19 @@
                </children>
             </AnchorPane>
         </content>
+      </Tab>
+      <Tab text="Attributes">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextField fx:id="itemName" layoutX="151.0" layoutY="81.0" promptText="RECIPE_ITEM_NAME" />
+                  <TextField fx:id="inventoryId" layoutX="151.0" layoutY="115.0" promptText="INVENTORY_ID" />
+                  <TextField fx:id="menuId" layoutX="151.0" layoutY="147.0" promptText="MENU_ID" />
+                  <TextField fx:id="amountUsed" layoutX="151.0" layoutY="179.0" promptText="AMT_USED" />
+                  <Text layoutX="169.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adding a Recipe Item" />
+               </children>
+            </AnchorPane>
+         </content>
       </Tab>
   </tabs>
 </TabPane>
