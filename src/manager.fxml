@@ -65,6 +65,7 @@
                   <TextField fx:id="menuId" layoutX="151.0" layoutY="147.0" promptText="MENU_ID" />
                   <TextField fx:id="amountUsed" layoutX="151.0" layoutY="179.0" promptText="AMT_USED" />
                   <Text layoutX="169.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adding a Recipe Item" />
+                  <Button fx:id="addRecipeItem" layoutX="169.0" layoutY="222.0" mnemonicParsing="false" text="Add Recipe Item" />
                </children>
             </AnchorPane>
          </content>
