@@ -287,6 +287,7 @@ public class Database {
      */
     public void createOrder(double cost, ArrayList<CustomPair> menuItems, ArrayList<CustomPair> inventoryItems) {
         try {
+            //get new pk of order
             int orderID = 0;
             Statement stmt2 = conn.createStatement();
             String sqlStatement1 = "SELECT MAX(order_id) FROM orders";
@@ -348,10 +349,33 @@ public class Database {
                 newItemID = result.getInt(1) + 1;
             }
 
+            //insert into item sold
             String sqlStatement2 = String.format(
                     "INSERT INTO item_sold (item_id, menu_item_id, order_id, item_sold_quantity) VALUES ('%d', '%d', '%d', '%d')",
                     newItemID, MenuId, orderID, quantity);
             stmt.executeUpdate(sqlStatement2);
+
+            //update inventory
+            String sqlStatement4 = String.format("SELECT * FROM recipe_item WHERE menu_id = %d", MenuId);
+            ResultSet result2 = stmt.executeQuery(sqlStatement4);
+            String sqlStatement3 = "";
+            ArrayList<Integer> vector1 = new ArrayList<Integer>();
+            ArrayList<Integer> vector2 = new ArrayList<Integer>();
+            while(result2.next()){
+                vector1.add(result2.getInt("amt_used"));
+                vector2.add(result2.getInt("inventory_id")); 
+                // sqlStatement3 = String.format(
+                //         "UPDATE inventory_item SET inventory_item_quantity = inventory_item_quantity - %d WHERE inventory_id = %d"
+                //         , Integer.parseInt(result2.getString("amt_used")), Integer.parseInt(result2.getString("inventory_id")));
+                // stmt.executeUpdate(sqlStatement3);
+            }
+            for (int i = 0; i < vector1.size(); i++){
+                sqlStatement3 = String.format(
+                        "UPDATE inventory_item SET inventory_item_quantity = inventory_item_quantity - %d WHERE inventory_id = %d"
+                        , vector1.get(i), vector2.get(i));
+                stmt.executeUpdate(sqlStatement3);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -374,10 +398,17 @@ public class Database {
                 newItemID = result.getInt(1) + 1;
             }
 
+            //insert into item_sold
             String sqlStatement2 = String.format(
                     "INSERT INTO item_sold (item_id, inventory_id, order_id, item_sold_quantity) VALUES ('%d', '%d', '%d', '%d')",
                     newItemID, InventoryId, orderID, quantity);
             stmt.executeUpdate(sqlStatement2);
+
+            String sqlStatement3 = String.format(
+                        "UPDATE inventory_item SET inventory_item_quantity = inventory_item_quantity - %d WHERE inventory_id = %d"
+                        , quantity, InventoryId);
+            stmt.executeUpdate(sqlStatement3);
+
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
