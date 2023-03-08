@@ -31,19 +31,19 @@ public class LoginController implements Initializable {
 	private Scene managerScene;
 	private Database db;
 
+	/**
+	 * initializes the scene and implements trigger functionality
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println("Login controller running");
 
+		/**
+		 * authenticates password by querying password from database by email address
+		 */
 		bLogin.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				System.out.println("Attempting to log in...");
 				char perm = validateCredentials(fEmail.getText(), fPassword.getText());
-				// if () {
-				// triggerLogin('m');
-
-				// } else {
-				// System.out.println("Invalid credentials!");
-				// }
 				switch (perm) {
 					case 'm':
 						triggerLogin('m');
@@ -52,7 +52,7 @@ public class LoginController implements Initializable {
 						triggerLogin('e');
 						break;
 					default:
-						System.out.println("login failed");
+						System.out.println("Invalid credentials!");
 
 				}
 			}
@@ -60,25 +60,46 @@ public class LoginController implements Initializable {
 		this.db = new Database();
 	}
 
-	// loads in the employee scene for when we want to switch
+	/**
+	 * loads in the employee scene for when we want to switch
+	 * 
+	 * @param scene
+	 */
 	public void setEmployeeScene(Scene scene) {
 		System.out.println("setting employee");
 		employeeScene = scene;
 	}
 
+	/**
+	 * loads in the manager scene for when we want to switch
+	 * 
+	 * @param scene
+	 */
 	public void setManagerScene(Scene scene) {
 		System.out.println("setting manager");
 		managerScene = scene;
 	}
 
+	/**
+	 * Given email and password, gives respective authentication to the application.
+	 * If authentication fails, no access. If manager, full access, if employee,
+	 * limited access.
+	 * 
+	 * @param email
+	 * @param pass
+	 * @return
+	 */
 	private char validateCredentials(String email, String pass) {
-		// return db.getPasswd(email) == pass ? 'm' : 'e';
-		// return m if manager AND password is valid, return e if employee
-		// and password is valid, else return x
 		return db.getPasswd(email).equals(pass) ? db.isManager(email) ? 'm' : 'e' : 'x';
 
 	}
 
+	/**
+	 * based on permissions, logs in to the correct interface, or doesn't log in at
+	 * all
+	 * 
+	 * @param perm
+	 */
 	private void triggerLogin(char perm) {
 		if (perm == 'm') {
 			System.out.println("triggering manager login");
@@ -89,11 +110,17 @@ public class LoginController implements Initializable {
 		}
 	}
 
+	/**
+	 * opens the Employee facing GUI
+	 */
 	public void openEmployeeScene() {
 		Stage stage = (Stage) (bLogin.getScene().getWindow());
 		stage.setScene(employeeScene);
 	}
 
+	/**
+	 * opens the Managerial GUI
+	 */
 	public void openManagerScene() {
 		Stage stage = (Stage) (bLogin.getScene().getWindow());
 		stage.setScene(managerScene);
