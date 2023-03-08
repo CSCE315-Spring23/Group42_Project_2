@@ -31,7 +31,6 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="addMenu" layoutX="81.0" layoutY="14.0" mnemonicParsing="false" text="Add Menu" />
                   <Button fx:id="updateMenu" layoutX="379.0" layoutY="79.0" mnemonicParsing="false" text="Update Menu" />
                   <TableView fx:id="menuTable" layoutX="81.0" layoutY="122.0" prefHeight="289.0" prefWidth="438.0">
                     <columns>
@@ -40,8 +39,10 @@
                       <TableColumn fx:id="menuItemCost" prefWidth="100.0" text="ITEM_COST" />
                     </columns>
                   </TableView>
-                  <TextField fx:id="fItemName" layoutX="379.0" layoutY="14.0" promptText="Item Name" />
+                  <TextField fx:id="fItemName" layoutX="379.0" layoutY="14.0" promptText="Item ID" />
                   <TextField fx:id="fCost" layoutX="379.0" layoutY="46.0" promptText="Price" />
+                  <TextField fx:id="fName" layoutX="214.0" layoutY="14.0" promptText="Item Name" />
+                  <Button fx:id="addMenu" layoutX="214.0" layoutY="67.0" mnemonicParsing="false" text="Add Menu" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -49,7 +50,7 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="switchView" layoutX="257.0" layoutY="197.0" mnemonicParsing="false" text="Switch" />
+                  <Button layoutX="257.0" layoutY="197.0" mnemonicParsing="false" text="Switch" />
                </children>
             </AnchorPane>
         </content>
