@@ -20,19 +20,21 @@ import javafx.stage.Stage;
 
 public class ManagerController implements Initializable {
 	@FXML
-	Button viewMenu;
+	private Button viewMenu;
 	@FXML
-	Button addMenu;
+	private Button addMenu;
 	@FXML
-	Button updateMenu;
+	private Button updateMenu;
 	@FXML
-	Button viewInventory;
+	private Button viewInventory;
 	@FXML
-	Button addInventory;
+	private Button addInventory;
 	@FXML
-	Button updateInventory; 
+	private Button updateInventory;
 
-	// @FXML 
+	private Database db;
+
+	// @FXML
 	// private TableColumn<Class, String> inventoryID;
 	// private TableColumn<Class, String> inventoryItemName;
 	// private TableColumn<Class, String> inventoryItemCost;
@@ -41,11 +43,9 @@ public class ManagerController implements Initializable {
 	// private TableColumn<Class, String> menuItemName;
 	// private TableColumn<Class, String> menuItemCost;
 
-
-
-
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println("Manager controller running");
+		this.db = new Database();
 
 		viewMenu.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {

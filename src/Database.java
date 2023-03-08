@@ -42,7 +42,7 @@ public class Database {
     }
 
     /**
-
+     * 
      * Call when done to close connection
      */
     public void closeDB() {
@@ -155,7 +155,7 @@ public class Database {
      * Get blocks of 20 Rows in any table based on specified table name and
      * converts to array list
      */
-    public ArrayList<ArrayList<String>> get20Rows(String tableName, int whichTwenty) {
+    public ArrayList<ObservableList<Inventory>> get20Rows(String tableName, int whichTwenty) {
         int upperBound = (whichTwenty) * 20;
         int lowerBound = upperBound - 20;
         ArrayList<ArrayList<String>> rows = new ArrayList<>();
