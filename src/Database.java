@@ -97,8 +97,10 @@ public class Database {
     }
 
     /**
+     * Returns the number of rows in the specified table.
      * @param tableName the name of the table to retrieve the number of rows for
      * @return an integer value representing the number of rows in the table
+     * @throws Exception if there is an error executing the query
      */
     public int getNumRows(String tableName) {
         int rows = 0;
@@ -248,8 +250,12 @@ public class Database {
     }
 
     /**
-     * Return the specific recipe items used in an item on the menu.
-     * List length is fixed and contains quantities for every ingredient.
+     * Returns an ArrayList of integers representing the quantities of specific recipe items used in the specified item on the menu.
+     * The ArrayList has a fixed length equal to the number of items in the inventory, with each element representing the 
+     * quantity of the corresponding inventory item used in the recipe.
+     * @param item the name of the menu item to query the recipe for
+     * @return an ArrayList of integers representing the quantities of specific recipe items used in the specified item on the menu
+     * @throws Exception if there is an error executing the query
      */
     public ArrayList<Integer> getRecipe(String item) {
         int inventoryItemsCount = getNumRows("inventoryItem");
@@ -282,10 +288,12 @@ public class Database {
     }
 
     /**
-     * Create row in order table.
-     * Menu items is a list of food (ID, Quantity)
-     * inventoryItems is a list of inventory items (ID, Quantity)
-     */
+    * Creates a new row in the orders table with the specified cost and list of menu items and inventory items.
+    * @param cost the cost of the order
+    * @param menuItems a list of CustomPair objects representing the menu items and their corresponding quantities in the order
+    * @param inventoryItems a list of CustomPair objects representing the inventory items and their corresponding quantities in the order
+    * @throws Exception if there is an error executing the query
+    */
     public void createOrder(double cost, ArrayList<CustomPair> menuItems, ArrayList<CustomPair> inventoryItems) {
         try {
             // get new pk of order
@@ -322,8 +330,10 @@ public class Database {
     }
 
     /**
-     * Change the cost of any menu item in menu table
-     */
+    * Updates the cost of the specified menu item.
+    * @param itemName the name or ID of the menu item to update
+    * @param newCost the new cost of the menu item
+    */
     public void changePrice(String itemName, double newCost) {
         try {
             if (Integer.parseInt(itemName) > 26)
@@ -339,8 +349,11 @@ public class Database {
     }
 
     /**
-     * Create menu item from given info, find Order_ID from last added order + 1
-     */
+    * Create a new menu item sold and update inventory accordingly
+    * @param MenuId the ID of the menu item being sold
+    * @param orderID the ID of the order this menu item is being sold under
+    * @param quantity the quantity of the menu item being sold
+    */
     private void createMenuItemSold(int MenuId, int orderID, int quantity) {
         // add a row to ItemsSold
         try {
@@ -389,9 +402,14 @@ public class Database {
     }
 
     /**
-     * Create inventory item from given info, find Order_ID from last added order +
-     * 1
-     */
+    * Creates an item sold record for a given inventory item with the specified quantity and order ID.
+    * Finds the next available item ID by querying the maximum item ID from the item_sold table and
+    * adding 1 to it. Updates the item_sold table with the new record and updates the inventory_item
+    * table by reducing the quantity of the specified inventory item by the sold quantity.
+    * @param inventoryId the ID of the inventory item being sold
+    * @param orderId the ID of the order associated with the item sold record
+    * @param quantity the quantity of the inventory item being sold
+    */
     private void createInventoryItemSold(int InventoryId, int orderID, int quantity) {
         // add a row to ItemsSold
         try {
@@ -423,6 +441,9 @@ public class Database {
 
     /**
      * Retrieve the cost of a menu item from the menu table based on its ID.
+     *
+     * @param itemID the ID of the menu item to get the price for.
+     * @return the cost of the menu item as a double.
      */
     public double getPriceOfMenuItem(int itemID) {
         double price = 0.0;
@@ -444,6 +465,12 @@ public class Database {
         return price;
     }
 
+    /**
+     * Retrieve the cost of an inventory item from the inventory_item table based on its ID.
+     *
+     * @param itemID the ID of the inventory item to get the price for.
+     * @return the cost of the inventory item as a double.
+     */
     public double getPriceOfInventoryItem(int itemID) {
         double price = 0.0;
         try {
@@ -467,6 +494,9 @@ public class Database {
 
     /**
      * Return password associated with email
+     *
+     * @param email the email address of the employee to get the password for.
+     * @return the password associated with the email address as a String.
      */
     public String getPasswd(String email) { // check error handlign
         try {
@@ -491,8 +521,11 @@ public class Database {
     }
 
     /**
-     * Add a new menu item to Menu
-     * with menu id which is the last menu id + 1
+     * Adds a new menu item to the restaurant's menu.
+     * The menu ID for the new item is the last menu ID + 1.
+     *
+     * @param name the name of the new menu item
+     * @param cost the cost of the new menu item
      */
     public void addMenuItem(String name, double cost) {
         try {
@@ -509,8 +542,13 @@ public class Database {
     }
 
     /**
-     * Add a new recipe item to Recipe
-     * with recipe id which is the last recipe id + 1
+     * Adds a new recipe item to the restaurant's recipe book.
+     * The recipe ID for the new item is the last recipe ID + 1.
+     *
+     * @param name        the name of the new recipe item
+     * @param inventoryId the ID of the inventory item used in the recipe
+     * @param menuId      the ID of the menu item that the recipe item belongs to
+     * @param amtUsed     the amount of the inventory item used in the recipe
      */
     public void addRecipeItem(String name, int inventoryId, int menuId, int amtUsed) {
         try {
@@ -534,6 +572,12 @@ public class Database {
         }
     }
 
+     /**
+     * Gets the name of a menu item given its ID.
+     *
+     * @param id the ID of the menu item to get the name of
+     * @return the name of the menu item with the given ID, or an empty string if no such item exists
+     */
     public String getNameFromID(int id) {
         try{
         ResultSet result = runCommand("SELECT menu_item_name FROM menu WHERE MENU_ITEM_ID = " + id);
