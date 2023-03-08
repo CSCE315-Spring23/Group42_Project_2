@@ -462,72 +462,144 @@ public class EmployeeController implements Initializable {
 		vIce.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Vanilla Ice Cream\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(14, 1);
+				 menuItems.add(menuItemToAdd);
+				 //add customizations
+				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
 		cIce.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Chocolate Ice Cream\n");
+				 CustomPair menuItemToAdd = new CustomPair(14, 1);
+				 menuItems.add(menuItemToAdd);
+				 //add customizations
+				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
 		sIce.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Strawberry Ice Cream\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(14, 1);
+				 menuItems.add(menuItemToAdd);
+				 //add customizations
+				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
 		coIce.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Coffee Ice Cream\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(14, 1);
+				 menuItems.add(menuItemToAdd);
+				 //add customizations
+				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
 		vMilk.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Vanilla Milkshake\n");
+				 CustomPair menuItemToAdd = new CustomPair(13, 1);
+				 menuItems.add(menuItemToAdd);
+				 //add customizations
+				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
 		coMilk.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Coffee Milkshake\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(13, 1);
+				 menuItems.add(menuItemToAdd);
+				 //add customizations
+				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
 		cMilk.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Chocolate Milkshake\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(13, 1);
+				 menuItems.add(menuItemToAdd);
+				 //add customizations
+				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
 		sMilk.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Strawberry Milkshake\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(13, 1);
+				 menuItems.add(menuItemToAdd);
+				 //add customizations
+				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
 		cookie.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Chocolate Chunk Cookie\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(15, 1);
+				 menuItems.add(menuItemToAdd);
+				 //add customizations
+				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+				 // inventoryItems.add(InventoryItemToAdd);
+
+				
 		 	}
 		 });
 
 		brownie.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Brownie\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(16, 1);
+				 menuItems.add(menuItemToAdd);
+				 //add customizations
+				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
 		salad.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Salad\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(17, 1);
+				 menuItems.add(menuItemToAdd);
+				 //add customizations
+				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
 		gigem.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Gig Em Sauce\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(18, 1);
+				 menuItems.add(menuItemToAdd);
+				 //add customizations
+				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
