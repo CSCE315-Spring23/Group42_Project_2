@@ -16,7 +16,7 @@
                   <Button fx:id="addInventory" layoutX="215.0" layoutY="36.0" mnemonicParsing="false" text="Add Invetory" />
                   <Button fx:id="viewInventory" layoutX="86.0" layoutY="36.0" mnemonicParsing="false" text="View Inventory" />
                   <Button fx:id="updateInventory" layoutX="340.0" layoutY="36.0" mnemonicParsing="false" text="Update Inventory" />
-                  <TableView layoutX="81.0" layoutY="85.0" prefHeight="255.0" prefWidth="435.0">
+                  <TableView fx:id="inventoryTable" layoutX="81.0" layoutY="85.0" prefHeight="255.0" prefWidth="435.0">
                     <columns>
                       <TableColumn fx:id="inventoryID" prefWidth="113.33334350585938" text="INVENTORY_ID" />
                       <TableColumn fx:id="inventoryItemName" prefWidth="90.0" text="ITEM_NAME" />
@@ -34,7 +34,7 @@
                   <Button fx:id="viewMenu" layoutX="93.0" layoutY="48.0" mnemonicParsing="false" text="View Menu" />
                   <Button fx:id="addMenu" layoutX="220.0" layoutY="48.0" mnemonicParsing="false" text="Add Menu" />
                   <Button fx:id="updateMenu" layoutX="340.0" layoutY="48.0" mnemonicParsing="false" text="Update Menu" />
-                  <TableView layoutX="93.0" layoutY="103.0" prefHeight="211.0" prefWidth="369.0">
+                  <TableView fx:id="menuTable" layoutX="93.0" layoutY="103.0" prefHeight="211.0" prefWidth="369.0">
                     <columns>
                       <TableColumn fx:id="menuID" prefWidth="75.0" text="MENU_ID" />
                         <TableColumn fx:id="menuItemName" prefWidth="75.0" text="ITEM_NAME" />

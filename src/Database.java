@@ -195,8 +195,7 @@ public class Database {
         try {
             // run query
             ResultSet result = runCommand("Select * FROM "
-                    + tableName + " LIMIT 20 OFFSET " + (20
-                            * whichTwenty));
+                    + tableName);
 
             // Get metadata which gets info about the types/properties of the columns in a
             // ResultSet
@@ -225,8 +224,7 @@ public class Database {
         try {
             // run query
             ResultSet result = runCommand("Select * FROM "
-                    + tableName + " LIMIT 20 OFFSET " + (20
-                            * whichTwenty));
+                    + tableName);
 
             // Get metadata which gets info about the types/properties of the columns in a
             // ResultSet
