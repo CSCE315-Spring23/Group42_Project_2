@@ -39,8 +39,10 @@
                       <TableColumn fx:id="menuItemCost" prefWidth="100.0" text="ITEM_COST" />
                     </columns>
                   </TableView>
-                  <TextField fx:id="fItemName" layoutX="379.0" layoutY="14.0" promptText="Item Name" />
+                  <TextField fx:id="fItemName" layoutX="379.0" layoutY="14.0" promptText="Item ID" />
                   <TextField fx:id="fCost" layoutX="379.0" layoutY="46.0" promptText="Price" />
+                  <TextField fx:id="fName" layoutX="214.0" layoutY="14.0" promptText="Item Name" />
+                  <Button fx:id="addMenu" layoutX="214.0" layoutY="67.0" mnemonicParsing="false" text="Add Menu" />
                </children></AnchorPane>
       </content>
     </Tab>
