@@ -22,6 +22,13 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class EmployeeController implements Initializable {
+	boolean burger = false;
+	ArrayList<String> orderList = new ArrayList<String>();
+	ArrayList<CustomPair> menuItems = new ArrayList<CustomPair>();
+	ArrayList<CustomPair> inventoryItems = new ArrayList<CustomPair>();
+	double totalOrderCost = 0.0;
+	private Database db;
+
 	@FXML
 	Button bBurg1;
 	@FXML
@@ -44,13 +51,6 @@ public class EmployeeController implements Initializable {
 	Button bSan3;
 	@FXML
 	Button bSan4;
-
-	boolean burger = false;
-	ArrayList<String> orderList = new ArrayList<String>();
-	ArrayList<CustomPair> menuItems = new ArrayList<CustomPair>();
-	ArrayList<CustomPair> inventoryItems = new ArrayList<CustomPair>();
-	double totalOrderCost = 0.0;
-	private Database db;
 
 	@FXML
 	RadioButton cNoBurg;
@@ -233,6 +233,9 @@ public class EmployeeController implements Initializable {
 	@FXML
 	Button placeOrder;
 
+	/**
+	 * initialize the scene
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		this.db = new Database();
 
@@ -249,7 +252,9 @@ public class EmployeeController implements Initializable {
 				orderListLabel.setText(orders);
 			}
 		});
-
+		/**
+		 * place order
+		 */
 		placeOrder.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				System.out.println("Placing order...");
@@ -263,7 +268,9 @@ public class EmployeeController implements Initializable {
 
 			}
 		});
-
+		/**
+		 * add a Rev's Burger to the order
+		 */
 		bBurg1.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				burger = true;
@@ -296,7 +303,9 @@ public class EmployeeController implements Initializable {
 				});
 			}
 		});
-
+		/**
+		 * add a Double Cheese Burger to the order
+		 */
 		bBurg2.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				burger = true;
@@ -328,7 +337,9 @@ public class EmployeeController implements Initializable {
 				});
 			}
 		});
-
+		/**
+		 * add Classic Burger to the order
+		 */
 		bBurg3.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				burger = true;
@@ -360,7 +371,9 @@ public class EmployeeController implements Initializable {
 				});
 			}
 		});
-
+		/**
+		 * add Bacon Cheese Burger to the order
+		 */
 		bBurg4.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				burger = true;
@@ -392,7 +405,9 @@ public class EmployeeController implements Initializable {
 				});
 			}
 		});
-
+		/**
+		 * add Three Tender Basket to the order
+		 */
 		bThreeTender.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				toggleOffAll();
@@ -417,7 +432,9 @@ public class EmployeeController implements Initializable {
 				});
 			}
 		});
-
+		/**
+		 * add a Four Tender Basket to the order
+		 */
 		bFourTender.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				toggleOffAll();
@@ -442,7 +459,9 @@ public class EmployeeController implements Initializable {
 				});
 			}
 		});
-
+		/**
+		 * add Gig Em Patty Melt to the order
+		 */
 		bSan1.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				toggleOffAll();
@@ -472,7 +491,9 @@ public class EmployeeController implements Initializable {
 				});
 			}
 		});
-
+		/**
+		 * order Howdy Chicken Sandwich to the order
+		 */
 		bSan2.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				toggleOffAll();
@@ -502,7 +523,9 @@ public class EmployeeController implements Initializable {
 				});
 			}
 		});
-
+		/**
+		 * add Chicken Tender Sandwich to the order
+		 */
 		bSan3.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				toggleOffAll();
@@ -532,7 +555,9 @@ public class EmployeeController implements Initializable {
 				});
 			}
 		});
-
+		/**
+		 * add Grilled Cheese to the order
+		 */
 		bSan4.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				toggleOffAll();
@@ -562,7 +587,9 @@ public class EmployeeController implements Initializable {
 				});
 			}
 		});
-
+		/**
+		 * add Vanilla Ice Cream to the order
+		 */
 		vIce.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Vanilla Ice Cream\n");
@@ -571,7 +598,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Chocolate Ice Cream to the order
+		 */
 		cIce.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Chocolate Ice Cream\n");
@@ -579,7 +608,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Strawberry Ice Cream to the order
+		 */
 		sIce.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Strawberry Ice Cream\n");
@@ -588,7 +619,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Coffee Ice Cream to order
+		 */
 		coIce.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Coffee Ice Cream\n");
@@ -597,7 +630,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Vanilla Milkshake to order
+		 */
 		vMilk.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Vanilla Milkshake\n");
@@ -605,7 +640,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Coffee Milkshake to order
+		 */
 		coMilk.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Coffee Milkshake\n");
@@ -614,7 +651,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Chocolate Milkshake to order
+		 */
 		cMilk.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Chocolate Milkshake\n");
@@ -623,7 +662,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Strawberry Milkshake to Order
+		 */
 		sMilk.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Strawberry Milkshake\n");
@@ -632,7 +673,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Chocolate Chunk Cookie to order
+		 */
 		cookie.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Chocolate Chunk Cookie\n");
@@ -642,7 +685,9 @@ public class EmployeeController implements Initializable {
 
 			}
 		});
-
+		/**
+		 * add Brownie to order
+		 */
 		brownie.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Brownie\n");
@@ -651,7 +696,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Salad to order
+		 */
 		salad.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Salad\n");
@@ -660,7 +707,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Gig Em Sauce to the order
+		 */
 		gigem.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Gig Em Sauce\n");
@@ -669,7 +718,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Buffalo Sauce to the order
+		 */
 		buff.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Buffalo Sauce\n");
@@ -678,7 +729,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Barbeque Sauce to the order
+		 */
 		bbq.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Barbeque Sauce\n");
@@ -687,7 +740,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Honey Mustard to the order
+		 */
 		hMustard.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Honey Mustard\n");
@@ -696,7 +751,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Ranch to the order
+		 */
 		ranch.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Ranch\n");
@@ -705,7 +762,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Spicy Ranch to the order
+		 */
 		sRanch.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Spicy Ranch\n");
@@ -714,7 +773,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Fountain Drink to the order
+		 */
 		drink.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Fountain Drink\n");
@@ -723,7 +784,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Drip Coffee to the order
+		 */
 		drip.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Drip Coffee\n");
@@ -732,7 +795,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Fries to the order
+		 */
 		fries.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Fries\n");
@@ -741,7 +806,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Tater Tots to the order
+		 */
 		tTots.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Tater Tots\n");
@@ -750,7 +817,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Onion Rings to the order
+		 */
 		oRings.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Onion Rings\n");
@@ -759,7 +828,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Kettle Chips to the order
+		 */
 		kChips.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Kettle Chips\n");
@@ -768,7 +839,9 @@ public class EmployeeController implements Initializable {
 				menuItems.add(menuItemToAdd);
 			}
 		});
-
+		/**
+		 * add Silverware to the order (happens every order)
+		 */
 		silverware.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				orderList.add("Silverware\n");
@@ -778,6 +851,10 @@ public class EmployeeController implements Initializable {
 			}
 		});
 
+		/**
+		 * call the various functions below in order to set the appropriate buttons
+		 * based on JavaFX function calls
+		 */
 		onActionGroups(cNoBurg, cChipBurg, cFriesBurg);
 		onActionGroups(patRegBurg, patBeanBurg, patDoubleBurg);
 		onActionGroups(cNoneBurg, cRegBurg, cExtraBurg);
@@ -838,6 +915,9 @@ public class EmployeeController implements Initializable {
 		});
 	}
 
+	/**
+	 * turn all buttons off
+	 */
 	void toggleOffAll() {
 		cNoBurg.setSelected(false);
 		cChipBurg.setSelected(false);
@@ -899,6 +979,13 @@ public class EmployeeController implements Initializable {
 		oExtraSan.setSelected(false);
 	}
 
+	/**
+	 * compares recipe to order to check for modifications
+	 * 
+	 * @param recipe
+	 * @param out
+	 * @return
+	 */
 	String compareToBurgerRecipe(ArrayList<RadioButton> recipe, String out) {
 		// String out = "";
 		if (checkChanged(cNoBurg, cChipBurg, cFriesBurg, recipe.get(0)) == 2) {
@@ -971,6 +1058,14 @@ public class EmployeeController implements Initializable {
 		return out;
 	}
 
+	/**
+	 * executes changes to burger recipe
+	 * 
+	 * @param recipe
+	 * @param inventoryItems
+	 * @param totalOrderCost
+	 * @return
+	 */
 	double addToBurgerRecipe(ArrayList<RadioButton> recipe, ArrayList<CustomPair> inventoryItems,
 			double totalOrderCost) {
 		// String out = "";
@@ -1064,6 +1159,13 @@ public class EmployeeController implements Initializable {
 		return totalOrderCost;
 	}
 
+	/**
+	 * runs comparison to recipe for modifications
+	 * 
+	 * @param recipe
+	 * @param out
+	 * @return
+	 */
 	String compareToBasketRecipe(ArrayList<RadioButton> recipe, String out) {
 		// String out = "";
 		if (!recipe.get(0).isSelected()) {
@@ -1087,6 +1189,13 @@ public class EmployeeController implements Initializable {
 		return out;
 	}
 
+	/**
+	 * compares sandwich recipe to sandwich order for changes
+	 * 
+	 * @param recipe
+	 * @param out
+	 * @return
+	 */
 	String compareToSanRecipe(ArrayList<RadioButton> recipe, String out) {
 		// String out = "";
 		if (checkChanged(cNoSan, cChipSan, cRegSan, recipe.get(0)) == 2) {
@@ -1152,8 +1261,16 @@ public class EmployeeController implements Initializable {
 		return out;
 	}
 
-	// returns 0 if default, 1 if none, 2 if extra
-	// for combo, 2 is chips 3 is fries
+	/**
+	 * 0 for default, 1 if none, 2 if extra
+	 * for combo, 2 is chips and 3 is fries
+	 * 
+	 * @param b1
+	 * @param b2
+	 * @param b3
+	 * @param b4
+	 * @return
+	 */
 	int checkChanged(RadioButton b1, RadioButton b2, RadioButton b3, RadioButton b4) {
 		if (b4.isSelected()) {
 			return 0;
