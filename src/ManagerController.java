@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -29,7 +30,18 @@ public class ManagerController implements Initializable {
 	@FXML
 	Button addInventory;
 	@FXML
-	Button updateInventory;
+	Button updateInventory; 
+
+	// @FXML 
+	// private TableColumn<Class, String> inventoryID;
+	// private TableColumn<Class, String> inventoryItemName;
+	// private TableColumn<Class, String> inventoryItemCost;
+	// private TableColumn<Class, String> inventoryItemQty;
+	// private TableColumn<Class, String> menuID;
+	// private TableColumn<Class, String> menuItemName;
+	// private TableColumn<Class, String> menuItemCost;
+
+
 
 
 	public void initialize(URL location, ResourceBundle resources) {
