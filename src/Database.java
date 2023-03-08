@@ -1,7 +1,6 @@
 import java.sql.*;
 
 import java.util.ArrayList;
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javafx.collections.ObservableList;

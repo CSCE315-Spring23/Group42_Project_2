@@ -9,10 +9,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -34,6 +41,10 @@ public class ManagerController implements Initializable {
 
 	private Database db;
 
+	@FXML
+	private TableView<Inventory> inventoryTable;
+	@FXML
+	private TableView<Menu> menuTable;
 	@FXML
 	private TableColumn<Inventory, Long> inventoryID;
 	@FXML
@@ -89,6 +100,35 @@ public class ManagerController implements Initializable {
 			}
 		});
 
+	}
+
+	private void updateMenuTable(int whichTwenty) {
+		this.menuTable.setItems(db.get20RowsMenu(whichTwenty));
+		this.menuTable.refresh();
+	}
+
+	private void updateInventoryTable(int whichTwenty) {
+		this.inventoryTable.setItems(db.get20RowsInventory(whichTwenty));
+		this.inventoryTable.refresh();
+	}
+
+	private void setUpInventoryTable() {
+		this.inventoryID.setCellValueFactory(cellData -> cellData.getValue().getInventoryID());
+		this.inventoryItemName.setCellValueFactory(cellData -> cellData.getValue().getItemName());
+		this.inventoryItemCost.setCellValueFactory(cellData -> cellData.getValue().getItemCost());
+		this.inventoryItemQty.setCellValueFactory(cellData -> cellData.getValue().getItemQuantity());
+		final ObservableList<Inventory> items = db.get20RowsInventory(0);
+
+		this.inventoryTable.setItems(items);
+	}
+
+	private void setUpMenuTable() {
+		this.menuID.setCellValueFactory(cellData -> cellData.getValue().getMenuId());
+		this.menuItemName.setCellValueFactory(cellData -> cellData.getValue().getItemName());
+		this.menuItemCost.setCellValueFactory(cellData -> cellData.getValue().getItemCost());
+		final ObservableList<Inventory> items = db.get20RowsInventory(0);
+
+		this.inventoryTable.setItems(items);
 	}
 
 }
