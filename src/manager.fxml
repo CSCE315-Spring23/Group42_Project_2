@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
   <tabs>
     <Tab text="Inventory">
       <content>
@@ -18,10 +18,10 @@
                   <Button fx:id="updateInventory" layoutX="340.0" layoutY="36.0" mnemonicParsing="false" text="Update Inventory" />
                   <TableView layoutX="81.0" layoutY="85.0" prefHeight="255.0" prefWidth="435.0">
                     <columns>
-                      <TableColumn prefWidth="113.33334350585938" text="INVENTORY_ID" />
-                      <TableColumn prefWidth="90.0" text="ITEM_NAME" />
-                        <TableColumn prefWidth="96.6666259765625" text="ITEM_COST" />
-                        <TableColumn prefWidth="134.00002034505206" text="ITEM_QUANTITY" />
+                      <TableColumn fx:id="inventoryID" prefWidth="113.33334350585938" text="INVENTORY_ID" />
+                      <TableColumn fx:id="inventoryItemName" prefWidth="90.0" text="ITEM_NAME" />
+                        <TableColumn fx:id="inventoryItemCost" prefWidth="96.6666259765625" text="ITEM_COST" />
+                        <TableColumn fx:id="inventoryItemQty" prefWidth="134.00002034505206" text="ITEM_QUANTITY" />
                     </columns>
                   </TableView>
                </children></AnchorPane>
@@ -36,9 +36,9 @@
                   <Button fx:id="updateMenu" layoutX="340.0" layoutY="48.0" mnemonicParsing="false" text="Update Menu" />
                   <TableView layoutX="93.0" layoutY="103.0" prefHeight="211.0" prefWidth="369.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="MENU_ID" />
-                        <TableColumn prefWidth="75.0" text="ITEM_NAME" />
-                      <TableColumn prefWidth="75.0" text="ITEM_COST" />
+                      <TableColumn fx:id="menuID" prefWidth="75.0" text="MENU_ID" />
+                        <TableColumn fx:id="menuItemName" prefWidth="75.0" text="ITEM_NAME" />
+                      <TableColumn fx:id="menuItemCost" prefWidth="75.0" text="ITEM_COST" />
                     </columns>
                   </TableView>
                </children></AnchorPane>
