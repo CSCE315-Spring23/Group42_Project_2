@@ -26,7 +26,7 @@
                     </columns>
                   </TableView>
                   <TextField fx:id="inventoryId" layoutX="367.0" layoutY="14.0" promptText="INVENTORY_ID" />
-                  <TextField fx:id="inventoryQty" layoutX="367.0" layoutY="50.0" prefHeight="25.0" prefWidth="184.0" text="INVENTORY_ITEM_QUANTITY" />
+                  <TextField fx:id="inventoryQty" layoutX="367.0" layoutY="50.0" prefHeight="25.0" prefWidth="184.0" promptText="INVENTORY_ITEM_QUANTITY" />
                </children></AnchorPane>
       </content>
     </Tab>
