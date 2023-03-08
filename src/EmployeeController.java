@@ -8,18 +8,18 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 
-import javafx.fxml.FXMLLoader;
+// import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+// import javafx.scene.Parent;
+// import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
+// import javafx.scene.image.Image;
+// import javafx.scene.image.ImageView;
+// import javafx.scene.layout.GridPane;
+// import javafx.stage.Stage;
 
 public class EmployeeController implements Initializable {
 	boolean burger = false; //check it item is burger
@@ -235,7 +235,7 @@ public class EmployeeController implements Initializable {
 
 	
 	/**
-	 * initializa databse and java fx buttons
+	 * initializes databse and java fx buttons
 	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		this.db = new Database();
@@ -429,7 +429,7 @@ public class EmployeeController implements Initializable {
 						 menuItems.add(menuItemToAdd);
 						 totalOrderCost += db.getPriceOfMenuItem(5);
 						//add customizations
-						// totalOrderCost = addToBasketRecipe(recipe, inventoryItems, totalOrderCost);
+						totalOrderCost = addToBasketRecipe(recipe, inventoryItems, totalOrderCost);
 		 			}
 		 		});
 		 	}
@@ -1219,7 +1219,7 @@ public class EmployeeController implements Initializable {
 			// out += "Add Bacon\n";
 		} else if (checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 3) {
 			// out += "Extra Bacon\n";
-			CustomPair inventoryItemToAdd = new CustomPair(10, -1);
+			CustomPair inventoryItemToAdd = new CustomPair(10, 1);
 			inventoryItems.add(inventoryItemToAdd);
 			totalOrderCost += db.getPriceOfInventoryItem(10);
 		}
@@ -1257,6 +1257,48 @@ public class EmployeeController implements Initializable {
 	}
 
 	/**
+	 * @author Srikar
+	 * @param recipe
+	 * @param out
+	 * @return
+	 */
+	double addToBasketRecipe(ArrayList<RadioButton> recipe, ArrayList<CustomPair> inventoryItems, double totalOrderCost) {
+		// String out = "";
+		if (!recipe.get(0).isSelected()) {
+			if (cYesBask.isSelected()) {
+				// out += "Combo\n";
+				CustomPair menuItemToAdd = new CustomPair(12, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(12);
+			}
+		}
+
+		if (checkChanged(gNoneBask, gRegBask, gExtraBask, recipe.get(1)) == 1) {
+			// out += "No Gravy\n";
+			CustomPair inventoryItemToAdd = new CustomPair(15, -1);
+			inventoryItems.add(inventoryItemToAdd);
+		} else if (checkChanged(gNoneBask, gRegBask, gExtraBask, recipe.get(1)) == 3) {
+			// out += "Extra Gravy\n";
+			CustomPair inventoryItemToAdd = new CustomPair(15, 1);
+			inventoryItems.add(inventoryItemToAdd);
+			totalOrderCost += db.getPriceOfInventoryItem(15);
+		}
+
+		if (checkChanged(tNoneBask, tRegBask, tExtraBask, recipe.get(2)) == 1) {
+			// out += "No Toast\n";
+			CustomPair inventoryItemToAdd = new CustomPair(13, -1);
+			inventoryItems.add(inventoryItemToAdd);
+		} else if (checkChanged(tNoneBask, tRegBask, tExtraBask, recipe.get(2)) == 3) {
+			// out += "Extra Toast\n";
+			CustomPair inventoryItemToAdd = new CustomPair(13, 1);
+			inventoryItems.add(inventoryItemToAdd);
+			totalOrderCost += db.getPriceOfInventoryItem(13);
+		}
+
+		return totalOrderCost;
+	}
+
+	/**
 	 * compares sandwich recipe to sandwich order for changes
 	 * @author Ariela
 	 * @param recipe
@@ -1288,7 +1330,7 @@ public class EmployeeController implements Initializable {
 		if (checkChanged(sNoneSan, sRevSan, sSpicySan, recipe.get(3)) == 1) {
 			out += "No Sauce\n";
 		} else if (checkChanged(sNoneSan, sRevSan, sSpicySan, recipe.get(3)) == 2) {
-			out += "Sub Rev's Sacue \n";
+			out += "Sub Rev's Sauce \n";
 		} else if (checkChanged(sNoneSan, sRevSan, sSpicySan, recipe.get(3)) == 3) {
 			out += "Sub Spicy Sauce\n";
 		}
@@ -1326,6 +1368,115 @@ public class EmployeeController implements Initializable {
 		}
 
 		return out;
+	}
+
+	double addToSanRecipe(ArrayList<RadioButton> recipe, ArrayList<CustomPair> inventoryItems, double totalOrderCost) {
+		// String out = "";
+		if ((checkChanged(cNoSan, cChipSan, cRegSan, recipe.get(0)) == 2) || (checkChanged(patRegSan, patBeanSan, patChickenSan, recipe.get(1)) == 3)) {
+			// out += "Combo with chips\n";
+			CustomPair menuItemToAdd = new CustomPair(11, 1);
+			menuItems.add(menuItemToAdd);
+			totalOrderCost += db.getPriceOfMenuItem(11);
+		} 
+		// else if (checkChanged(cNoSan, cChipSan, cRegSan, recipe.get(0)) == 3) {
+		// 	out += "Combo with fries\n";
+		// }
+
+		if (checkChanged(patRegSan, patBeanSan, patChickenSan, recipe.get(1)) == 2) {
+			// out += "Sub Bean Patty\n";
+			CustomPair inventoryItemToAdd = new CustomPair(3, 1);
+			inventoryItems.add(inventoryItemToAdd);
+			CustomPair inventoryItemToAdd2 = new CustomPair(47, -1);
+			inventoryItems.add(inventoryItemToAdd2);
+		} else if (checkChanged(patRegSan, patBeanSan, patChickenSan, recipe.get(1)) == 3) {
+			// out += "Chicken Tenders\n";
+			CustomPair inventoryItemToAdd = new CustomPair(11, 1);
+			inventoryItems.add(inventoryItemToAdd);
+			CustomPair inventoryItemToAdd2 = new CustomPair(47, -1);
+			inventoryItems.add(inventoryItemToAdd2);
+		}
+
+		if (checkChanged(cNoneSan, cRegSan, cExtraSan, recipe.get(2)) == 1) {
+			// out += "No Cheese\n";
+			CustomPair inventoryItemToAdd = new CustomPair(2, -1);
+			inventoryItems.add(inventoryItemToAdd);
+			totalOrderCost += db.getPriceOfInventoryItem(2);
+		} else if (checkChanged(cNoneSan, cRegSan, cExtraSan, recipe.get(2)) == 2) {
+			// out += "Add Cheese\n";
+		} else if (checkChanged(cNoneSan, cRegSan, cExtraSan, recipe.get(2)) == 3) {
+			// out += "Extra Cheese\n";
+			CustomPair inventoryItemToAdd = new CustomPair(2, 1);
+			inventoryItems.add(inventoryItemToAdd);
+			totalOrderCost += db.getPriceOfInventoryItem(2);
+		}
+
+		if (checkChanged(sNoneSan, sRevSan, sSpicySan, recipe.get(3)) == 1) {
+			// out += "No Sauce\n";
+			CustomPair inventoryItemToAdd = new CustomPair(4, -1);
+			inventoryItems.add(inventoryItemToAdd);
+		} else if (checkChanged(sNoneSan, sRevSan, sSpicySan, recipe.get(3)) == 2) {
+			// out += "Sub Rev's Sacue \n";
+		} else if (checkChanged(sNoneSan, sRevSan, sSpicySan, recipe.get(3)) == 3) {
+			// out += "Sub Spicy Sauce\n";
+			CustomPair inventoryItemToAdd = new CustomPair(4, -1);
+			inventoryItems.add(inventoryItemToAdd);
+			CustomPair inventoryItemToAdd2 = new CustomPair(28, 1);
+			inventoryItems.add(inventoryItemToAdd2);
+		}
+
+		if (checkChanged(pNoneSan, pRegSan, pExtraSan, recipe.get(4)) == 1) {
+			// out += "No Pickles\n";
+			CustomPair inventoryItemToAdd = new CustomPair(5, -1);
+			inventoryItems.add(inventoryItemToAdd);
+		} else if (checkChanged(pNoneSan, pRegSan, pExtraSan, recipe.get(4)) == 2) {
+			// out += "Add Pickles\n";
+		} else if (checkChanged(pNoneSan, pRegSan, pExtraSan, recipe.get(4)) == 3) {
+			// out += "Extra Pickles\n";
+			CustomPair inventoryItemToAdd = new CustomPair(5, 1);
+			inventoryItems.add(inventoryItemToAdd);
+			totalOrderCost += db.getPriceOfInventoryItem(5);
+		}
+
+		if (checkChanged(lNoneSan, lRegSan, lExtraSan, recipe.get(5)) == 1) {
+			// out += "No Lettuce\n";
+			CustomPair inventoryItemToAdd = new CustomPair(6, -1);
+			inventoryItems.add(inventoryItemToAdd);
+		} else if (checkChanged(lNoneSan, lRegSan, lExtraSan, recipe.get(5)) == 2) {
+			// out += "Add Lettuce\n";
+		} else if (checkChanged(lNoneSan, lRegSan, lExtraSan, recipe.get(5)) == 3) {
+			// out += "Extra Lettuce\n";
+			CustomPair inventoryItemToAdd = new CustomPair(6, 1);
+			inventoryItems.add(inventoryItemToAdd);
+			totalOrderCost += db.getPriceOfInventoryItem(6);
+		}
+
+		if (checkChanged(tNoneSan, tRegSan, tExtraSan, recipe.get(6)) == 1) {
+			// out += "No Tomato\n";
+			CustomPair inventoryItemToAdd = new CustomPair(7, -1);
+			inventoryItems.add(inventoryItemToAdd);
+		} else if (checkChanged(tNoneSan, tRegSan, tExtraSan, recipe.get(6)) == 2) {
+			// out += "Add Tomato\n";
+		} else if (checkChanged(tNoneSan, tRegSan, tExtraSan, recipe.get(6)) == 3) {
+			// out += "Extra Tomato\n";
+			CustomPair inventoryItemToAdd = new CustomPair(7, 1);
+			inventoryItems.add(inventoryItemToAdd);
+			totalOrderCost += db.getPriceOfInventoryItem(7);
+		}
+
+		if (checkChanged(oNoneSan, oRegSan, oExtraSan, recipe.get(7)) == 1) {
+			// out += "No Onion\n";
+			CustomPair inventoryItemToAdd = new CustomPair(8, -1);
+			inventoryItems.add(inventoryItemToAdd);
+		} else if (checkChanged(oNoneSan, oRegSan, oExtraSan, recipe.get(7)) == 2) {
+			// out += "Add Onion\n";
+		} else if (checkChanged(oNoneSan, oRegSan, oExtraSan, recipe.get(7)) == 3) {
+			// out += "Extra Onion\n";
+			CustomPair inventoryItemToAdd = new CustomPair(8, 1);
+			inventoryItems.add(inventoryItemToAdd);
+			totalOrderCost += db.getPriceOfInventoryItem(8);
+		}
+
+		return totalOrderCost;
 	}
 
 	/**
