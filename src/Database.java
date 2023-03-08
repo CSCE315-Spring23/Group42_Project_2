@@ -178,11 +178,12 @@ public class Database {
      * Get blocks of 20 Rows in any table based on specified table name and
      * converts to array list
      */
-    public ArrayList<ObservableList<Inventory>> get20RowsInventory(int whichTwenty) {
+    public ObservableList<Inventory> get20RowsInventory(int whichTwenty) {
         String tableName = "InventoryItem";
         int upperBound = (whichTwenty) * 20;
         int lowerBound = upperBound - 20;
-        ArrayList<ObservableList<Inventory>> rows = new ArrayList<>();
+        ObservableList<Inventory> rows = FXCollections.observableArrayList();
+
         try {
             // run query
             ResultSet result = runCommand("SELECT * FROM "
@@ -197,11 +198,9 @@ public class Database {
 
             // Loop through the 20 rows in result
             while (result.next()) {
-                ObservableList<Inventory> item = FXCollections.observableArrayList();
                 // Loop through columns an
-                item.add(new Inventory(result.getLong(0), result.getString(1), result.getDouble(2), result.getLong(3)));
+                rows.add(new Inventory(result.getLong(0), result.getString(1), result.getDouble(2), result.getLong(3)));
                 // Add current row to rows
-                rows.add(item);
             }
 
             result.close();
@@ -213,11 +212,11 @@ public class Database {
         return rows;
     }
 
-    public ArrayList<ObservableList<Menu>> get20RowsMenu(int whichTwenty) {
+    public ObservableList<Menu> get20RowsMenu(int whichTwenty) {
         String tableName = "Menu";
         int upperBound = (whichTwenty) * 20;
         int lowerBound = upperBound - 20;
-        ArrayList<ObservableList<Menu>> rows = new ArrayList<>();
+        ObservableList<Menu> rows = FXCollections.observableArrayList();
         try {
             // run query
             ResultSet result = runCommand("SELECT * FROM "
@@ -232,11 +231,8 @@ public class Database {
 
             // Loop through the 20 rows in result
             while (result.next()) {
-                ObservableList<Menu> item = FXCollections.observableArrayList();
                 // Loop through columns an
-                item.add(new Menu(result.getLong(0), result.getString(1), result.getDouble(2)));
-                // Add current row to rows
-                rows.add(item);
+                rows.add(new Menu(result.getLong(0), result.getString(1), result.getDouble(2)));
             }
 
             result.close();

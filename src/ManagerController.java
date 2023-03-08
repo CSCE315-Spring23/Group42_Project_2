@@ -88,6 +88,7 @@ public class ManagerController implements Initializable {
 				System.out.println("Manager click");
 			}
 		});
+
 	}
 
 }
