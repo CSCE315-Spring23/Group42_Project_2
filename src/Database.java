@@ -276,7 +276,7 @@ public class Database {
             }
 
             String sqlStatement2 = String.format(
-                    "INSERT INTO item_sold (item_id, menu_item_id, order_id, item_sold_quantity) VALUES (%d, %d, %d, %d)",
+                    "INSERT INTO item_sold (item_id, menu_item_id, order_id, item_sold_quantity) VALUES ('%d', '%d', '%d', '%d')",
                     newItemID, MenuId, orderID, quantity);
             stmt.executeUpdate(sqlStatement2);
         } catch (Exception e) {
@@ -302,7 +302,7 @@ public class Database {
             }
 
             String sqlStatement2 = String.format(
-                    "INSERT INTO item_sold (item_id, inventory_id, order_id, item_sold_quantity) VALUES (%d, %d, %d, %d)",
+                    "INSERT INTO item_sold (item_id, inventory_id, order_id, item_sold_quantity) VALUES ('%d', '%d', '%d', '%d')",
                     newItemID, InventoryId, orderID, quantity);
             stmt.executeUpdate(sqlStatement2);
         } catch (Exception e) {
