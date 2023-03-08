@@ -31,12 +31,18 @@ public class Database {
      * Run SQL Query on database
      */
     private ResultSet runCommand(String sqlStatement) throws SQLException {
-        Statement stmt = conn.createStatement();
-        ResultSet result = stmt.executeQuery(sqlStatement);
-        return result;
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet result = stmt.executeQuery(sqlStatement);
+            return result;
+        } catch (Exception e) {
+            System.out.println("Problems running the command");
+        }
+        return null;
     }
 
     /**
+
      * Call when done to close connection
      */
     public void closeDB() {
@@ -233,13 +239,18 @@ public class Database {
             if (result.next()) {
                 orderID = result.getInt(1) + 1;
             }
+
             // get the current date as a LocalDate object
+            //
             LocalDate today = LocalDate.now();
             // format the date as a string in "MM-dd-yyyy" format
             String date = today.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
             Statement stmt = conn.createStatement();
-            stmt.executeUpdate(String.format("INSERT INTO orders (order_id, date_ordered, order_cost) VALUES (%d, '%s', %f)", orderID, date, cost));
-            // runCommand(String.format("INSERT INTO orders (order_id, date_ordered, order_cost) VALUES (%d, '%s', %f)", orderID, date, cost));
+            stmt.executeUpdate(
+                    String.format("INSERT INTO orders (order_id, date_ordered, order_cost) VALUES (%d, '%s', %f)",
+                            orderID, date, cost));
+            // runCommand(String.format("INSERT INTO orders (order_id, date_ordered,
+            // order_cost) VALUES (%d, '%s', %f)", orderID, date, cost));
             for (int i = 0; i < menuItems.size(); i++) {
                 createMenuItemSold(menuItems.get(i).ID, orderID, menuItems.get(i).Quantity);
             }
@@ -346,7 +357,8 @@ public class Database {
         double price = 0.0;
         try {
             // Run query
-            ResultSet result = runCommand("SELECT inventory_item_cost FROM inventory_item WHERE inventory_id = " + itemID + ";");
+            ResultSet result = runCommand(
+                    "SELECT inventory_item_cost FROM inventory_item WHERE inventory_id = " + itemID + ";");
 
             // Extract price from result
             if (result.next()) {
@@ -389,7 +401,7 @@ public class Database {
 }
 
 /**
- *  Class to store Id and Quantity within the Database function
+ * Class to store Id and Quantity within the Database function
  */
 class CustomPair {
     public int ID;
