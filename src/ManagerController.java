@@ -20,10 +20,15 @@ import javafx.stage.Stage;
 public class ManagerController implements Initializable {
 	@FXML
 	Button viewMenu;
+	@FXML
 	Button addMenu;
+	@FXML
 	Button updateMenu;
+	@FXML
 	Button viewInventory;
+	@FXML
 	Button addInventory;
+	@FXML
 	Button updateInventory;
 
 
