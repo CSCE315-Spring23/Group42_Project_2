@@ -41,6 +41,7 @@ public class Database {
      */
     private ResultSet runCommand(String sqlStatement) throws SQLException {
         try {
+            System.out.println(sqlStatement);
             Statement stmt = conn.createStatement();
             ResultSet result = stmt.executeQuery(sqlStatement);
             return result;
@@ -324,9 +325,11 @@ public class Database {
      */
     public void changePrice(String itemName, double newCost) {
         try {
+            if (Integer.parseInt(itemName) > 26)
+                return;
             // run query
             runCommand("UPDATE Menu SET MENU_ITEM_COST = " + newCost
-                    + " WHERE name = '" + itemName + "';");
+                    + " WHERE menu_item_id = '" + itemName + "';");
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());

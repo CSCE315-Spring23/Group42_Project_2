@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -34,10 +35,10 @@ public class ManagerController implements Initializable {
 	private Button addInventory;
 	@FXML
 	private Button updateInventory;
-	// @FXML
-	// TextField fItemName;
-	// @FXML
-	// TextField fCost;
+	@FXML
+	TextField fItemName;
+	@FXML
+	TextField fCost;
 
 	private Database db;
 
@@ -87,6 +88,13 @@ public class ManagerController implements Initializable {
 		updateMenu.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				System.out.println("Manager click");
+				String newCost = fCost.getText();
+				String itemName = fItemName.getText();
+				itemName = itemName.strip();
+				newCost = newCost.strip();
+				db.changePrice(itemName, Double.parseDouble(newCost));
+				updateMenuTable(0);
+				menuTable.refresh();
 			}
 		});
 
