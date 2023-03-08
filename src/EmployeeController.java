@@ -164,6 +164,7 @@ public class EmployeeController implements Initializable {
 				inventoryItems.clear();
 				burger = false;
 				orderList.clear();
+				System.out.println("Order Placed");
 
 		 	}
 		 });
@@ -225,9 +226,9 @@ public class EmployeeController implements Initializable {
 
 						 CustomPair menuItemToAdd = new CustomPair(2, 1);
 						 menuItems.add(menuItemToAdd);
-						 //add customizations
-						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-						 // inventoryItems.add(InventoryItemToAdd);
+						 totalOrderCost += db.getPriceOfMenuItem(2);
+						//add customizations
+						totalOrderCost = addToBurgerRecipe(recipe, inventoryItems, totalOrderCost);
 		 			}
 		 		});
 		 	}
@@ -257,9 +258,9 @@ public class EmployeeController implements Initializable {
 
 						 CustomPair menuItemToAdd = new CustomPair(3, 1);
 						 menuItems.add(menuItemToAdd);
+						 totalOrderCost += db.getPriceOfMenuItem(3);
 						 //add customizations
-						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-						 // inventoryItems.add(InventoryItemToAdd);
+						 totalOrderCost = addToBurgerRecipe(recipe, inventoryItems, totalOrderCost);
 		 			}
 		 		});
 		 	}
@@ -289,9 +290,9 @@ public class EmployeeController implements Initializable {
 
 						 CustomPair menuItemToAdd = new CustomPair(4, 1);
 						 menuItems.add(menuItemToAdd);
-						 //add customizations
-						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-						 // inventoryItems.add(InventoryItemToAdd);
+						 totalOrderCost += db.getPriceOfMenuItem(4);
+						//add customizations
+						totalOrderCost = addToBurgerRecipe(recipe, inventoryItems, totalOrderCost);
 		 			}
 		 		});
 		 	}
@@ -314,9 +315,9 @@ public class EmployeeController implements Initializable {
 
 						 CustomPair menuItemToAdd = new CustomPair(5, 1);
 						 menuItems.add(menuItemToAdd);
-						 //add customizations
-						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-						 // inventoryItems.add(InventoryItemToAdd);
+						 totalOrderCost += db.getPriceOfMenuItem(5);
+						//add customizations
+						// totalOrderCost = addToBasketRecipe(recipe, inventoryItems, totalOrderCost);
 		 			}
 		 		});
 		 	}
@@ -339,9 +340,7 @@ public class EmployeeController implements Initializable {
 
 						 CustomPair menuItemToAdd = new CustomPair(6, 1);
 						 menuItems.add(menuItemToAdd);
-						 //add customizations
-						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-						 // inventoryItems.add(InventoryItemToAdd);
+						 totalOrderCost += db.getPriceOfMenuItem(6);
 		 			}
 		 		});
 		 	}
@@ -369,9 +368,7 @@ public class EmployeeController implements Initializable {
 
 						 CustomPair menuItemToAdd = new CustomPair(7, 1);
 						 menuItems.add(menuItemToAdd);
-						 //add customizations
-						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-						 // inventoryItems.add(InventoryItemToAdd);
+						 totalOrderCost += db.getPriceOfMenuItem(7);
 		 			}
 		 		});
 		 	}
@@ -399,9 +396,7 @@ public class EmployeeController implements Initializable {
 
 						 CustomPair menuItemToAdd = new CustomPair(8, 1);
 						 menuItems.add(menuItemToAdd);
-						 //add customizations
-						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-						 // inventoryItems.add(InventoryItemToAdd);
+						 totalOrderCost += db.getPriceOfMenuItem(8);
 		 			}
 		 		});
 		 	}
@@ -429,9 +424,7 @@ public class EmployeeController implements Initializable {
 
 						 CustomPair menuItemToAdd = new CustomPair(9, 1);
 						 menuItems.add(menuItemToAdd);
-						 //add customizations
-						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-						 // inventoryItems.add(InventoryItemToAdd);
+						 totalOrderCost += db.getPriceOfMenuItem(9);
 		 			}
 		 		});
 		 	}
@@ -459,9 +452,7 @@ public class EmployeeController implements Initializable {
 
 						 CustomPair menuItemToAdd = new CustomPair(10, 1);
 						 menuItems.add(menuItemToAdd);
-						 //add customizations
-						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-						 // inventoryItems.add(InventoryItemToAdd);
+						 totalOrderCost += db.getPriceOfMenuItem(10);
 		 			}
 		 		});
 		 	}
@@ -473,6 +464,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(14, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(14);
 		 	}
 		 });
 
@@ -481,6 +473,7 @@ public class EmployeeController implements Initializable {
 		 		orderList.add("Chocolate Ice Cream\n");
 				 CustomPair menuItemToAdd = new CustomPair(14, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(14);
 		 	}
 		 });
 
@@ -490,6 +483,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(14, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(14);
 		 	}
 		 });
 
@@ -499,6 +493,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(14, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(14);
 		 	}
 		 });
 
@@ -507,6 +502,7 @@ public class EmployeeController implements Initializable {
 		 		orderList.add("Vanilla Milkshake\n");
 				 CustomPair menuItemToAdd = new CustomPair(13, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(13);
 		 	}
 		 });
 
@@ -516,6 +512,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(13, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(13);
 		 	}
 		 });
 
@@ -525,6 +522,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(13, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(13);
 		 	}
 		 });
 
@@ -534,6 +532,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(13, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(13);
 		 	}
 		 });
 
@@ -543,6 +542,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(15, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(15);
 
 				
 		 	}
@@ -554,6 +554,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(16, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(16);
 		 	}
 		 });
 
@@ -563,6 +564,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(17, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(17);
 		 	}
 		 });
 
@@ -572,6 +574,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(18, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(18);
 		 	}
 		 });
 
@@ -581,6 +584,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(18, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(18);
 		 	}
 		 });
 
@@ -590,6 +594,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(18, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(18);
 		 	}
 		 });
 
@@ -599,6 +604,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(18, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(18);
 		 	}
 		 });
 
@@ -608,6 +614,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(18, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(18);
 		 	}
 		 });
 
@@ -617,6 +624,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(18, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(18);
 		 	}
 		 });
 	
@@ -626,6 +634,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(19, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(19);
 		 	}
 		 });
 
@@ -635,6 +644,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(20, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(20);
 		 	}
 		 });
 
@@ -644,6 +654,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(22, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(22);
 		 	}
 		 });
 
@@ -653,6 +664,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(23, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(23);
 		 	}
 		 });
 
@@ -662,6 +674,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(24, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(24);
 		 	}
 		 });
 
@@ -671,6 +684,7 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(25, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(25);
 		 	}
 		 });
 
@@ -680,6 +694,7 @@ public class EmployeeController implements Initializable {
 				
 				 CustomPair menuItemToAdd = new CustomPair(26, 1);
 				 menuItems.add(menuItemToAdd);
+				 totalOrderCost += db.getPriceOfMenuItem(26);
 		 	}
 		 });
 
@@ -902,6 +917,7 @@ public class EmployeeController implements Initializable {
 			// out += "Double Patty\n";
 			CustomPair inventoryItemToAdd2 = new CustomPair(1, 1);
 			inventoryItems.add(inventoryItemToAdd2);
+			totalOrderCost += db.getPriceOfInventoryItem(1);
 		}
 
 		if(checkChanged(cNoneBurg, cRegBurg, cExtraBurg, recipe.get(2)) == 1) {
@@ -920,49 +936,79 @@ public class EmployeeController implements Initializable {
 		if(!recipe.get(3).isSelected()) {
 			if(sNoneBurg.isSelected()) {
 				// out += "No Sauce\n";
+				CustomPair inventoryItemToAdd = new CustomPair(4, -1);
+				inventoryItems.add(inventoryItemToAdd);
 			} else {
 				// out += "Add Sauce\n";
+				CustomPair inventoryItemToAdd = new CustomPair(4, 1);
+				inventoryItems.add(inventoryItemToAdd);
+				totalOrderCost += db.getPriceOfInventoryItem(4);
 			}
 		}
 
 		if(checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 1) {
 			// out += "No Pickles\n";
+			CustomPair inventoryItemToAdd = new CustomPair(5, -1);
+			inventoryItems.add(inventoryItemToAdd);
 		} else if(checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 2) {
 			// out += "Add Pickles\n";
 		} else if(checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 3) {
 			// out += "Extra Pickles\n";
+			CustomPair inventoryItemToAdd = new CustomPair(5, 1);
+			inventoryItems.add(inventoryItemToAdd);
+			totalOrderCost += db.getPriceOfInventoryItem(5);
 		}
 
 		if(checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 1) {
 			// out += "No Lettuce\n";
+			CustomPair inventoryItemToAdd = new CustomPair(6, -1);
+			inventoryItems.add(inventoryItemToAdd);
 		} else if(checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 2) {
 			// out += "Add Lettuce\n";
 		} else if(checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 3) {
 			// out += "Extra Lettuce\n";
+			CustomPair inventoryItemToAdd = new CustomPair(6, 1);
+			inventoryItems.add(inventoryItemToAdd);
+			totalOrderCost += db.getPriceOfInventoryItem(6);
 		}
 
 		if(checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 1) {
 			// out += "No Tomato\n";
+			CustomPair inventoryItemToAdd = new CustomPair(7, -1);
+			inventoryItems.add(inventoryItemToAdd);
 		} else if(checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 2) {
 			// out += "Add Tomato\n";
 		} else if(checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 3) {
 			// out += "Extra Tomato\n";
+			CustomPair inventoryItemToAdd = new CustomPair(7, 1);
+			inventoryItems.add(inventoryItemToAdd);
+			totalOrderCost += db.getPriceOfInventoryItem(7);
 		}
 
 		if(checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 1) {
 			// out += "No Onion\n";
+			CustomPair inventoryItemToAdd = new CustomPair(8, -1);
+			inventoryItems.add(inventoryItemToAdd);
 		} else if(checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 2) {
 			// out += "Add Onion\n";
 		} else if(checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 3) {
 			// out += "Extra Onion\n";
+			CustomPair inventoryItemToAdd = new CustomPair(8, 1);
+			inventoryItems.add(inventoryItemToAdd);
+			totalOrderCost += db.getPriceOfInventoryItem(8);
 		}
 
 		if(checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 1) {
 			// out += "No Bacon\n";
+			CustomPair inventoryItemToAdd = new CustomPair(10, -1);
+			inventoryItems.add(inventoryItemToAdd);
 		} else if(checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 2) {
 			// out += "Add Bacon\n";
 		} else if(checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 3) {
 			// out += "Extra Bacon\n";
+			CustomPair inventoryItemToAdd = new CustomPair(10, -1);
+			inventoryItems.add(inventoryItemToAdd);
+			totalOrderCost += db.getPriceOfInventoryItem(10);
 		}
 		return totalOrderCost;
 	}

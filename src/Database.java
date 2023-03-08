@@ -227,12 +227,19 @@ public class Database {
     public void createOrder(double cost, ArrayList<CustomPair> menuItems, ArrayList<CustomPair> inventoryItems) {
         try {
             int orderID = 0;
+            Statement stmt2 = conn.createStatement();
+            String sqlStatement1 = "SELECT MAX(order_id) FROM orders";
+            ResultSet result = stmt2.executeQuery(sqlStatement1);
+            if (result.next()) {
+                orderID = result.getInt(1) + 1;
+            }
             // get the current date as a LocalDate object
             LocalDate today = LocalDate.now();
             // format the date as a string in "MM-dd-yyyy" format
             String date = today.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
-            runCommand(String.format(
-                    "INSERT INTO orders (order_id, order_date, cost) VALUES (%d, '%s', %f)", orderID, date, cost));
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(String.format("INSERT INTO orders (order_id, date_ordered, order_cost) VALUES (%d, '%s', %f)", orderID, date, cost));
+            // runCommand(String.format("INSERT INTO orders (order_id, date_ordered, order_cost) VALUES (%d, '%s', %f)", orderID, date, cost));
             for (int i = 0; i < menuItems.size(); i++) {
                 createMenuItemSold(menuItems.get(i).ID, orderID, menuItems.get(i).Quantity);
             }
@@ -323,7 +330,7 @@ public class Database {
 
             // Extract price from result
             if (result.next()) {
-                price = result.getDouble("MENU_ITEM_COST");
+                price = result.getFloat("MENU_ITEM_COST");
             }
 
             result.close();
@@ -343,7 +350,7 @@ public class Database {
 
             // Extract price from result
             if (result.next()) {
-                price = result.getDouble("inventory_item_cost");
+                price = result.getFloat("inventory_item_cost");
             }
 
             result.close();
