@@ -602,7 +602,7 @@ public class Database {
     public void changeInventoryQuantity(String itemName, int newQuantity) {
         try {
             // Get the maximum inventory ID from the table
-            ResultSet result = runQuery("SELECT MAX(INVENTORY_ID) FROM INVENTORY");
+            ResultSet result = runQuery("SELECT MAX(INVENTORY_ID) FROM InventoryItem");
             result.next();
             int maxId = result.getInt(1);
             
@@ -613,7 +613,7 @@ public class Database {
             }
             
             // run query
-            runCommand("UPDATE INVENTORY SET INVENTORY_ITEM_QUANTITY = " + newQuantity
+            runCommand("UPDATE InventoryItem SET INVENTORY_ITEM_QUANTITY = " + newQuantity
                     + " WHERE INVENTORY_ID = " + itemId + ";");
         } catch (Exception e) {
             e.printStackTrace();
