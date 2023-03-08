@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-
 /**
  * JavaFX Main Class
  */
@@ -41,7 +40,7 @@ public class Main extends Application {
 
         // set up manager scene
         FXMLLoader managerLoader = new FXMLLoader(
-                getClass().getResource("manager.fxml"));
+            getClass().getResource("manager.fxml"));
         Parent managerParent = (Parent) managerLoader.load();
         Scene managerScene = new Scene(managerParent, 750, 750);
 

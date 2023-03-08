@@ -32,12 +32,13 @@ public class Database {
     }
 
     /**
-    *Runs a SQL command on the database and returns the results as a ResultSet.
-    *@param command the SQL command to run
-    *@return a ResultSet object containing the results of the query
-    *@throws SQLException if there is an error executing the SQL command
-    *@author Arjun
-    */
+     * Runs a SQL command on the database and returns the results as a ResultSet.
+     * 
+     * @param command the SQL command to run
+     * @return a ResultSet object containing the results of the query
+     * @throws SQLException if there is an error executing the SQL command
+     * @author Arjun
+     */
     private ResultSet runCommand(String sqlStatement) throws SQLException {
         try {
             Statement stmt = conn.createStatement();
@@ -50,12 +51,14 @@ public class Database {
     }
 
     /**
-<<<<<<< HEAD
-=======
+     * <<<<<<< HEAD
+     * =======
      * 
->>>>>>> bd10b86cec59345cb0b60afcdc9b0fb4056336ae
+     * >>>>>>> bd10b86cec59345cb0b60afcdc9b0fb4056336ae
      * Call when done to close connection
-     * Closes the database connection and prints a message indicating whether the connection was closed.
+     * Closes the database connection and prints a message indicating whether the
+     * connection was closed.
+     * 
      * @author Arjun
      */
     public void closeDB() {
@@ -69,11 +72,12 @@ public class Database {
     }
 
     /**
-    * Retrieves whether a user with a specified email address is a manager.
-    * @author Daniela Santos
-    * @param email the email address of the user to check
-    * @return a boolean value indicating whether the user is a manager
-    */
+     * Retrieves whether a user with a specified email address is a manager.
+     * 
+     * @author Daniela Santos
+     * @param email the email address of the user to check
+     * @return a boolean value indicating whether the user is a manager
+     */
     public boolean isManager(String email) {
         boolean manager = false;
         try {
@@ -113,14 +117,21 @@ public class Database {
     }
 
     /**
-
-    * This method is part of a class that interacts with a database and is used to retrieve a list of inventory items (and quantities)
-    * used on a specific day. The inventory items are obtained from the RecipeItem and ItemSold tables, which store the recipes and sales
-    * data for menu items, respectively. The method returns an ArrayList of integers, where each index represents an inventory item ID and
-    * the value at that index represents the total quantity of the inventory item used on the specified day.
-    * @param date a string representing the date for which to retrieve the inventory items used
-    * @return an ArrayList of integers representing the inventory items used on the specified day
-    */
+     * 
+     * This method is part of a class that interacts with a database and is used to
+     * retrieve a list of inventory items (and quantities)
+     * used on a specific day. The inventory items are obtained from the RecipeItem
+     * and ItemSold tables, which store the recipes and sales
+     * data for menu items, respectively. The method returns an ArrayList of
+     * integers, where each index represents an inventory item ID and
+     * the value at that index represents the total quantity of the inventory item
+     * used on the specified day.
+     * 
+     * @param date a string representing the date for which to retrieve the
+     *             inventory items used
+     * @return an ArrayList of integers representing the inventory items used on the
+     *         specified day
+     */
     public ArrayList<Integer> inventoryItemsUsed(String date) {
         int inventoryItemsCount = getNumRows("inventoryItem");
         ArrayList<Integer> inventoryItems = new ArrayList<>(inventoryItemsCount);
@@ -178,17 +189,14 @@ public class Database {
      * converts to array list
      */
     public ObservableList<Inventory> get20RowsInventory(int whichTwenty) {
-        String tableName = "InventoryItem";
-        int upperBound = (whichTwenty) * 20;
-        int lowerBound = upperBound - 20;
+        String tableName = "inventory_item";
         ObservableList<Inventory> rows = FXCollections.observableArrayList();
 
         try {
             // run query
-            ResultSet result = runCommand("SELECT * FROM "
-                    + tableName + " WHERE ROWNUM > "
-                    + lowerBound + " AND ROWNUM <= "
-                    + upperBound + ";");
+            ResultSet result = runCommand("Select * FROM "
+                    + tableName + " LIMIT 20 OFFSET " + (20
+                            * whichTwenty));
 
             // Get metadata which gets info about the types/properties of the columns in a
             // ResultSet
@@ -198,7 +206,7 @@ public class Database {
             // Loop through the 20 rows in result
             while (result.next()) {
                 // Loop through columns an
-                rows.add(new Inventory(result.getLong(0), result.getString(1), result.getDouble(2), result.getLong(3)));
+                rows.add(new Inventory(result.getLong(1), result.getString(2), result.getDouble(3), result.getLong(4)));
                 // Add current row to rows
             }
 
@@ -212,16 +220,13 @@ public class Database {
     }
 
     public ObservableList<Menu> get20RowsMenu(int whichTwenty) {
-        String tableName = "Menu";
-        int upperBound = (whichTwenty) * 20;
-        int lowerBound = upperBound - 20;
+        String tableName = "menu";
         ObservableList<Menu> rows = FXCollections.observableArrayList();
         try {
             // run query
-            ResultSet result = runCommand("SELECT * FROM "
-                    + tableName + " WHERE ROWNUM > "
-                    + lowerBound + " AND ROWNUM <= "
-                    + upperBound + ";");
+            ResultSet result = runCommand("Select * FROM "
+                    + tableName + " LIMIT 20 OFFSET " + (20
+                            * whichTwenty));
 
             // Get metadata which gets info about the types/properties of the columns in a
             // ResultSet
@@ -231,7 +236,7 @@ public class Database {
             // Loop through the 20 rows in result
             while (result.next()) {
                 // Loop through columns an
-                rows.add(new Menu(result.getLong(0), result.getString(1), result.getDouble(2)));
+                rows.add(new Menu(result.getLong(1), result.getString(2), result.getDouble(3)));
             }
 
             result.close();
