@@ -1,6 +1,11 @@
 import java.sql.*;
 
 import java.util.ArrayList;
+import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javafx.collections.ObservableList;
+import javafx.collections.FXCollections;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -155,10 +160,11 @@ public class Database {
      * Get blocks of 20 Rows in any table based on specified table name and
      * converts to array list
      */
-    public ArrayList<ObservableList<Inventory>> get20Rows(String tableName, int whichTwenty) {
+    public ArrayList<ObservableList<Inventory>> get20RowsInventory(int whichTwenty) {
+        String tableName = "InventoryItem";
         int upperBound = (whichTwenty) * 20;
         int lowerBound = upperBound - 20;
-        ArrayList<ArrayList<String>> rows = new ArrayList<>();
+        ArrayList<ObservableList<Inventory>> rows = new ArrayList<>();
         try {
             // run query
             ResultSet result = runCommand("SELECT * FROM "
@@ -168,18 +174,51 @@ public class Database {
 
             // Get metadata which gets info about the types/properties of the columns in a
             // ResultSet
-            ResultSetMetaData metaData = result.getMetaData();
-            int numberOfColumns = metaData.getColumnCount();
+            // ResultSetMetaData metaData = result.getMetaData();
+            // int numberOfColumns = metaData.getColumnCount();
 
             // Loop through the 20 rows in result
             while (result.next()) {
-                ArrayList<String> row = new ArrayList<>();
-                // Loop through columns and add to current row
-                for (int i = 1; i <= numberOfColumns; i++) {
-                    row.add(result.getString(i));
-                }
+                ObservableList<Inventory> item = FXCollections.observableArrayList();
+                // Loop through columns an
+                item.add(new Inventory(result.getLong(0), result.getString(1), result.getDouble(2), result.getLong(3)));
                 // Add current row to rows
-                rows.add(row);
+                rows.add(item);
+            }
+
+            result.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return rows;
+    }
+
+    public ArrayList<ObservableList<Menu>> get20RowsMenu(int whichTwenty) {
+        String tableName = "Menu";
+        int upperBound = (whichTwenty) * 20;
+        int lowerBound = upperBound - 20;
+        ArrayList<ObservableList<Menu>> rows = new ArrayList<>();
+        try {
+            // run query
+            ResultSet result = runCommand("SELECT * FROM "
+                    + tableName + " WHERE ROWNUM > "
+                    + lowerBound + " AND ROWNUM <= "
+                    + upperBound + ";");
+
+            // Get metadata which gets info about the types/properties of the columns in a
+            // ResultSet
+            // ResultSetMetaData metaData = result.getMetaData();
+            // int numberOfColumns = metaData.getColumnCount();
+
+            // Loop through the 20 rows in result
+            while (result.next()) {
+                ObservableList<Menu> item = FXCollections.observableArrayList();
+                // Loop through columns an
+                item.add(new Menu(result.getLong(0), result.getString(1), result.getDouble(2)));
+                // Add current row to rows
+                rows.add(item);
             }
 
             result.close();

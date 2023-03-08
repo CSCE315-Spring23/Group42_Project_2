@@ -34,14 +34,6 @@ public class ManagerController implements Initializable {
 
 	private Database db;
 
-	// @FXML
-	// private TableColumn<Class, String> inventoryID;
-	// private TableColumn<Class, String> inventoryItemName;
-	// private TableColumn<Class, String> inventoryItemCost;
-	// private TableColumn<Class, String> inventoryItemQty;
-	// private TableColumn<Class, String> menuID;
-	// private TableColumn<Class, String> menuItemName;
-	// private TableColumn<Class, String> menuItemCost;
 	@FXML
 	private TableColumn<Inventory, Long> inventoryID;
 	@FXML
