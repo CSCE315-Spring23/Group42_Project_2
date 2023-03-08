@@ -22,18 +22,28 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class EmployeeController implements Initializable {
-	@FXML Button bBurg1;
-	@FXML Button bBurg2;
-	@FXML Button bBurg3;
-	@FXML Button bBurg4;
+	@FXML
+	Button bBurg1;
+	@FXML
+	Button bBurg2;
+	@FXML
+	Button bBurg3;
+	@FXML
+	Button bBurg4;
 
-	@FXML Button bThreeTender;
-	@FXML Button bFourTender;
+	@FXML
+	Button bThreeTender;
+	@FXML
+	Button bFourTender;
 
-	@FXML Button bSan1;
-	@FXML Button bSan2;
-	@FXML Button bSan3;
-	@FXML Button bSan4;
+	@FXML
+	Button bSan1;
+	@FXML
+	Button bSan2;
+	@FXML
+	Button bSan3;
+	@FXML
+	Button bSan4;
 
 	boolean burger = false;
 	ArrayList<String> orderList = new ArrayList<String>();
@@ -42,100 +52,186 @@ public class EmployeeController implements Initializable {
 	double totalOrderCost = 0.0;
 	private Database db;
 
-	@FXML RadioButton cNoBurg;
-	@FXML RadioButton cChipBurg;
-	@FXML RadioButton cFriesBurg;
-	@FXML RadioButton patRegBurg;
-	@FXML RadioButton patBeanBurg;
-	@FXML RadioButton patDoubleBurg;
-	@FXML RadioButton cNoneBurg;
-	@FXML RadioButton cRegBurg;
-	@FXML RadioButton cExtraBurg;
-	@FXML RadioButton sNoneBurg;
-	@FXML RadioButton sRegBurg;
-	@FXML RadioButton pNoneBurg;
-	@FXML RadioButton pRegBurg;
-	@FXML RadioButton pExtraBurg;
-	@FXML RadioButton lNoneBurg;
-	@FXML RadioButton lRegBurg;
-	@FXML RadioButton lExtraBurg;
-	@FXML RadioButton tNoneBurg;
-	@FXML RadioButton tRegBurg;
-	@FXML RadioButton tExtraBurg;
-	@FXML RadioButton oNoneBurg;
-	@FXML RadioButton oRegBurg;
-	@FXML RadioButton oExtraBurg;
-	@FXML RadioButton bNoneBurg;
-	@FXML RadioButton bRegBurg;
-	@FXML RadioButton bExtraBurg;
-	@FXML Button bCheckoutBurg;
+	@FXML
+	RadioButton cNoBurg;
+	@FXML
+	RadioButton cChipBurg;
+	@FXML
+	RadioButton cFriesBurg;
+	@FXML
+	RadioButton patRegBurg;
+	@FXML
+	RadioButton patBeanBurg;
+	@FXML
+	RadioButton patDoubleBurg;
+	@FXML
+	RadioButton cNoneBurg;
+	@FXML
+	RadioButton cRegBurg;
+	@FXML
+	RadioButton cExtraBurg;
+	@FXML
+	RadioButton sNoneBurg;
+	@FXML
+	RadioButton sRegBurg;
+	@FXML
+	RadioButton pNoneBurg;
+	@FXML
+	RadioButton pRegBurg;
+	@FXML
+	RadioButton pExtraBurg;
+	@FXML
+	RadioButton lNoneBurg;
+	@FXML
+	RadioButton lRegBurg;
+	@FXML
+	RadioButton lExtraBurg;
+	@FXML
+	RadioButton tNoneBurg;
+	@FXML
+	RadioButton tRegBurg;
+	@FXML
+	RadioButton tExtraBurg;
+	@FXML
+	RadioButton oNoneBurg;
+	@FXML
+	RadioButton oRegBurg;
+	@FXML
+	RadioButton oExtraBurg;
+	@FXML
+	RadioButton bNoneBurg;
+	@FXML
+	RadioButton bRegBurg;
+	@FXML
+	RadioButton bExtraBurg;
+	@FXML
+	Button bCheckoutBurg;
 
-	@FXML RadioButton cNoBask;
-	@FXML RadioButton cYesBask;
-	@FXML RadioButton tNoneBask;
-	@FXML RadioButton tRegBask;
-	@FXML RadioButton tExtraBask;
-	@FXML RadioButton gNoneBask;
-	@FXML RadioButton gRegBask;
-	@FXML RadioButton gExtraBask;
-	@FXML Button bCheckoutBask;
+	@FXML
+	RadioButton cNoBask;
+	@FXML
+	RadioButton cYesBask;
+	@FXML
+	RadioButton tNoneBask;
+	@FXML
+	RadioButton tRegBask;
+	@FXML
+	RadioButton tExtraBask;
+	@FXML
+	RadioButton gNoneBask;
+	@FXML
+	RadioButton gRegBask;
+	@FXML
+	RadioButton gExtraBask;
+	@FXML
+	Button bCheckoutBask;
 
-	@FXML RadioButton cNoSan;
-	@FXML RadioButton cChipSan;
-	@FXML RadioButton cFriesSan;
-	@FXML RadioButton patRegSan;
-	@FXML RadioButton patBeanSan;
-	@FXML RadioButton patChickenSan;
-	@FXML RadioButton cNoneSan;
-	@FXML RadioButton cRegSan;
-	@FXML RadioButton cExtraSan;
-	@FXML RadioButton sNoneSan;
-	@FXML RadioButton sRevSan;
-	@FXML RadioButton sSpicySan;
-	@FXML RadioButton pNoneSan;
-	@FXML RadioButton pRegSan;
-	@FXML RadioButton pExtraSan;
-	@FXML RadioButton lNoneSan;
-	@FXML RadioButton lRegSan;
-	@FXML RadioButton lExtraSan;
-	@FXML RadioButton tNoneSan;
-	@FXML RadioButton tRegSan;
-	@FXML RadioButton tExtraSan;
-	@FXML RadioButton oNoneSan;
-	@FXML RadioButton oRegSan;
-	@FXML RadioButton oExtraSan;
-	@FXML Button bCheckoutSan;
+	@FXML
+	RadioButton cNoSan;
+	@FXML
+	RadioButton cChipSan;
+	@FXML
+	RadioButton cFriesSan;
+	@FXML
+	RadioButton patRegSan;
+	@FXML
+	RadioButton patBeanSan;
+	@FXML
+	RadioButton patChickenSan;
+	@FXML
+	RadioButton cNoneSan;
+	@FXML
+	RadioButton cRegSan;
+	@FXML
+	RadioButton cExtraSan;
+	@FXML
+	RadioButton sNoneSan;
+	@FXML
+	RadioButton sRevSan;
+	@FXML
+	RadioButton sSpicySan;
+	@FXML
+	RadioButton pNoneSan;
+	@FXML
+	RadioButton pRegSan;
+	@FXML
+	RadioButton pExtraSan;
+	@FXML
+	RadioButton lNoneSan;
+	@FXML
+	RadioButton lRegSan;
+	@FXML
+	RadioButton lExtraSan;
+	@FXML
+	RadioButton tNoneSan;
+	@FXML
+	RadioButton tRegSan;
+	@FXML
+	RadioButton tExtraSan;
+	@FXML
+	RadioButton oNoneSan;
+	@FXML
+	RadioButton oRegSan;
+	@FXML
+	RadioButton oExtraSan;
+	@FXML
+	Button bCheckoutSan;
 
-	@FXML Button vIce;
-	@FXML Button cIce;
-	@FXML Button sIce;
-	@FXML Button coIce;
-	@FXML Button vMilk;
-	@FXML Button cMilk;
-	@FXML Button sMilk;
-	@FXML Button coMilk;
-	@FXML Button brownie;
-	@FXML Button cookie;
-	@FXML Button salad;
-	@FXML Button gigem;
-	@FXML Button buff;
-	@FXML Button bbq;
-	@FXML Button hMustard;
-	@FXML Button ranch;
-	@FXML Button sRanch;
-	@FXML Button drink;
-	@FXML Button drip;
-	@FXML Button fries;
-	@FXML Button tTots;
-	@FXML Button oRings;
-	@FXML Button kChips;
-	@FXML Button silverware;
+	@FXML
+	Button vIce;
+	@FXML
+	Button cIce;
+	@FXML
+	Button sIce;
+	@FXML
+	Button coIce;
+	@FXML
+	Button vMilk;
+	@FXML
+	Button cMilk;
+	@FXML
+	Button sMilk;
+	@FXML
+	Button coMilk;
+	@FXML
+	Button brownie;
+	@FXML
+	Button cookie;
+	@FXML
+	Button salad;
+	@FXML
+	Button gigem;
+	@FXML
+	Button buff;
+	@FXML
+	Button bbq;
+	@FXML
+	Button hMustard;
+	@FXML
+	Button ranch;
+	@FXML
+	Button sRanch;
+	@FXML
+	Button drink;
+	@FXML
+	Button drip;
+	@FXML
+	Button fries;
+	@FXML
+	Button tTots;
+	@FXML
+	Button oRings;
+	@FXML
+	Button kChips;
+	@FXML
+	Button silverware;
 
-
-	@FXML Tab checkoutTab;
-	@FXML Label orderListLabel;
-	@FXML Button placeOrder;
-
+	@FXML
+	Tab checkoutTab;
+	@FXML
+	Label orderListLabel;
+	@FXML
+	Button placeOrder;
 
 	public void initialize(URL location, ResourceBundle resources) {
 		this.db = new Database();
@@ -143,21 +239,21 @@ public class EmployeeController implements Initializable {
 		System.out.println("Employee controller running");
 
 		checkoutTab.setOnSelectionChanged(new EventHandler<Event>() {
-            @Override
-            public void handle(Event t) {
-            	String orders = "";
-            	for(String item: orderList){
-            		orders += item;
-            		orders += "\n";
-            	}
-                orderListLabel.setText(orders);
-            }
-        });
+			@Override
+			public void handle(Event t) {
+				String orders = "";
+				for (String item : orderList) {
+					orders += item;
+					orders += "\n";
+				}
+				orderListLabel.setText(orders);
+			}
+		});
 
-        placeOrder.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		System.out.println("Placing order...");
-		 		//TO DO: UPDATE DATABASE WHEN ORDER PLACED
+		placeOrder.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				System.out.println("Placing order...");
+				// TO DO: UPDATE DATABASE WHEN ORDER PLACED
 				db.createOrder(totalOrderCost, menuItems, inventoryItems);
 				totalOrderCost = 0;
 				menuItems.clear();
@@ -165,585 +261,584 @@ public class EmployeeController implements Initializable {
 				burger = false;
 				orderList.clear();
 
-		 	}
-		 });
+			}
+		});
 
-		 bBurg1.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		burger = true;
-		 		toggleOffAll();
-		 		ArrayList<RadioButton> recipe =  new ArrayList<RadioButton>();
-		 		recipe.add(cNoBurg);
-		 		recipe.add(patRegBurg);
-		 		recipe.add(cRegBurg);
-		 		recipe.add(sRegBurg);
-		 		recipe.add(pRegBurg);
-		 		recipe.add(lNoneBurg);
-		 		recipe.add(tNoneBurg);
-		 		recipe.add(oNoneBurg);
-		 		recipe.add(bNoneBurg);
-		 		for(RadioButton b : recipe){
-		 			b.setSelected(true);
-		 		}
-		 		bCheckoutBurg.setOnAction(new EventHandler<ActionEvent>() {
+		bBurg1.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				burger = true;
+				toggleOffAll();
+				ArrayList<RadioButton> recipe = new ArrayList<RadioButton>();
+				recipe.add(cNoBurg);
+				recipe.add(patRegBurg);
+				recipe.add(cRegBurg);
+				recipe.add(sRegBurg);
+				recipe.add(pRegBurg);
+				recipe.add(lNoneBurg);
+				recipe.add(tNoneBurg);
+				recipe.add(oNoneBurg);
+				recipe.add(bNoneBurg);
+				for (RadioButton b : recipe) {
+					b.setSelected(true);
+				}
+				bCheckoutBurg.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println(compareToBurgerRecipe(recipe, "Rev's Burger\n"));
-		 				orderList.add(compareToBurgerRecipe(recipe, "Rev's Burger\n"));
+						System.out.println(compareToBurgerRecipe(recipe, "Rev's Burger\n"));
+						orderList.add(compareToBurgerRecipe(recipe, "Rev's Burger\n"));
 
-						//add revs burger to menuItems
+						// add revs burger to menuItems
 						CustomPair menuItemToAdd = new CustomPair(1, 1);
 						menuItems.add(menuItemToAdd);
 						totalOrderCost += db.getPriceOfMenuItem(1);
-						//add customizations
+						// add customizations
 						totalOrderCost = addToBurgerRecipe(recipe, inventoryItems, totalOrderCost);
-		 			}
-		 		});
-		 	}
-		 });
+					}
+				});
+			}
+		});
 
-		 bBurg2.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		burger = true;
-		 		toggleOffAll();
-		 		ArrayList<RadioButton> recipe =  new ArrayList<RadioButton>();
-		 		recipe.add(cNoBurg);
-		 		recipe.add(patDoubleBurg);
-		 		recipe.add(cExtraBurg);
-		 		recipe.add(sRegBurg);
-		 		recipe.add(pRegBurg);
-		 		recipe.add(lNoneBurg);
-		 		recipe.add(tNoneBurg);
-		 		recipe.add(oNoneBurg);
-		 		recipe.add(bNoneBurg);
-		 		for(RadioButton b : recipe){
-		 			b.setSelected(true);
-		 		}
-		 		bCheckoutBurg.setOnAction(new EventHandler<ActionEvent>() {
+		bBurg2.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				burger = true;
+				toggleOffAll();
+				ArrayList<RadioButton> recipe = new ArrayList<RadioButton>();
+				recipe.add(cNoBurg);
+				recipe.add(patDoubleBurg);
+				recipe.add(cExtraBurg);
+				recipe.add(sRegBurg);
+				recipe.add(pRegBurg);
+				recipe.add(lNoneBurg);
+				recipe.add(tNoneBurg);
+				recipe.add(oNoneBurg);
+				recipe.add(bNoneBurg);
+				for (RadioButton b : recipe) {
+					b.setSelected(true);
+				}
+				bCheckoutBurg.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println(compareToBurgerRecipe(recipe, "Double Cheese Burger\n"));
-		 				orderList.add(compareToBurgerRecipe(recipe, "Double Cheese Burger\n"));
+						System.out.println(compareToBurgerRecipe(recipe, "Double Cheese Burger\n"));
+						orderList.add(compareToBurgerRecipe(recipe, "Double Cheese Burger\n"));
 
-						 CustomPair menuItemToAdd = new CustomPair(2, 1);
-						 menuItems.add(menuItemToAdd);
-						 //add customizations
-						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-						 // inventoryItems.add(InventoryItemToAdd);
-		 			}
-		 		});
-		 	}
-		 });
+						CustomPair menuItemToAdd = new CustomPair(2, 1);
+						menuItems.add(menuItemToAdd);
+						// add customizations
+						// CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+						// inventoryItems.add(InventoryItemToAdd);
+					}
+				});
+			}
+		});
 
-		 bBurg3.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		burger = true;
-		 		toggleOffAll();
-		 		ArrayList<RadioButton> recipe =  new ArrayList<RadioButton>();
-		 		recipe.add(cNoBurg);
-		 		recipe.add(patRegBurg);
-		 		recipe.add(cNoneBurg);
-		 		recipe.add(sNoneBurg);
-		 		recipe.add(pRegBurg);
-		 		recipe.add(lRegBurg);
-		 		recipe.add(tRegBurg);
-		 		recipe.add(oRegBurg);
-		 		recipe.add(bNoneBurg);
-		 		for(RadioButton b : recipe){
-		 			b.setSelected(true);
-		 		}
-		 		bCheckoutBurg.setOnAction(new EventHandler<ActionEvent>() {
+		bBurg3.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				burger = true;
+				toggleOffAll();
+				ArrayList<RadioButton> recipe = new ArrayList<RadioButton>();
+				recipe.add(cNoBurg);
+				recipe.add(patRegBurg);
+				recipe.add(cNoneBurg);
+				recipe.add(sNoneBurg);
+				recipe.add(pRegBurg);
+				recipe.add(lRegBurg);
+				recipe.add(tRegBurg);
+				recipe.add(oRegBurg);
+				recipe.add(bNoneBurg);
+				for (RadioButton b : recipe) {
+					b.setSelected(true);
+				}
+				bCheckoutBurg.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println(compareToBurgerRecipe(recipe, "Classic Burger\n"));
-		 				orderList.add(compareToBurgerRecipe(recipe, "Classic Burger\n"));
+						System.out.println(compareToBurgerRecipe(recipe, "Classic Burger\n"));
+						orderList.add(compareToBurgerRecipe(recipe, "Classic Burger\n"));
 
-						 CustomPair menuItemToAdd = new CustomPair(3, 1);
-						 menuItems.add(menuItemToAdd);
-						 //add customizations
-						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-						 // inventoryItems.add(InventoryItemToAdd);
-		 			}
-		 		});
-		 	}
-		 });
+						CustomPair menuItemToAdd = new CustomPair(3, 1);
+						menuItems.add(menuItemToAdd);
+						// add customizations
+						// CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+						// inventoryItems.add(InventoryItemToAdd);
+					}
+				});
+			}
+		});
 
-		 bBurg4.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		burger = true;
-		 		toggleOffAll();
-		 		ArrayList<RadioButton> recipe =  new ArrayList<RadioButton>();
-		 		recipe.add(cNoBurg);
-		 		recipe.add(patRegBurg);
-		 		recipe.add(cRegBurg);
-		 		recipe.add(sNoneBurg);
-		 		recipe.add(pNoneBurg);
-		 		recipe.add(lNoneBurg);
-		 		recipe.add(tNoneBurg);
-		 		recipe.add(oNoneBurg);
-		 		recipe.add(bRegBurg);
-				for(RadioButton b : recipe){
-		 			b.setSelected(true);
-		 		}
-		 		bCheckoutBurg.setOnAction(new EventHandler<ActionEvent>() {
+		bBurg4.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				burger = true;
+				toggleOffAll();
+				ArrayList<RadioButton> recipe = new ArrayList<RadioButton>();
+				recipe.add(cNoBurg);
+				recipe.add(patRegBurg);
+				recipe.add(cRegBurg);
+				recipe.add(sNoneBurg);
+				recipe.add(pNoneBurg);
+				recipe.add(lNoneBurg);
+				recipe.add(tNoneBurg);
+				recipe.add(oNoneBurg);
+				recipe.add(bRegBurg);
+				for (RadioButton b : recipe) {
+					b.setSelected(true);
+				}
+				bCheckoutBurg.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println(compareToBurgerRecipe(recipe, "Bacon Cheese Burger\n"));
-		 				orderList.add(compareToBurgerRecipe(recipe, "Bacon Cheese Burger\n"));
+						System.out.println(compareToBurgerRecipe(recipe, "Bacon Cheese Burger\n"));
+						orderList.add(compareToBurgerRecipe(recipe, "Bacon Cheese Burger\n"));
 
-						 CustomPair menuItemToAdd = new CustomPair(4, 1);
-						 menuItems.add(menuItemToAdd);
-						 //add customizations
-						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-						 // inventoryItems.add(InventoryItemToAdd);
-		 			}
-		 		});
-		 	}
-		 });
+						CustomPair menuItemToAdd = new CustomPair(4, 1);
+						menuItems.add(menuItemToAdd);
+						// add customizations
+						// CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+						// inventoryItems.add(InventoryItemToAdd);
+					}
+				});
+			}
+		});
 
-		 bThreeTender.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		toggleOffAll();
-		 		ArrayList<RadioButton> recipe =  new ArrayList<RadioButton>();
-		 		recipe.add(cNoBask);
-		 		recipe.add(gRegBask);
-		 		recipe.add(tRegBask);
-				for(RadioButton b : recipe){
-		 			b.setSelected(true);
-		 		}
-		 		bCheckoutBask.setOnAction(new EventHandler<ActionEvent>() {
+		bThreeTender.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				toggleOffAll();
+				ArrayList<RadioButton> recipe = new ArrayList<RadioButton>();
+				recipe.add(cNoBask);
+				recipe.add(gRegBask);
+				recipe.add(tRegBask);
+				for (RadioButton b : recipe) {
+					b.setSelected(true);
+				}
+				bCheckoutBask.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println(compareToBasketRecipe(recipe, "Three Tender Basket\n"));
-		 				orderList.add(compareToBasketRecipe(recipe, "Three Tender Basket\n"));
+						System.out.println(compareToBasketRecipe(recipe, "Three Tender Basket\n"));
+						orderList.add(compareToBasketRecipe(recipe, "Three Tender Basket\n"));
 
-						 CustomPair menuItemToAdd = new CustomPair(5, 1);
-						 menuItems.add(menuItemToAdd);
-						 //add customizations
-						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-						 // inventoryItems.add(InventoryItemToAdd);
-		 			}
-		 		});
-		 	}
-		 });
+						CustomPair menuItemToAdd = new CustomPair(5, 1);
+						menuItems.add(menuItemToAdd);
+						// add customizations
+						// CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+						// inventoryItems.add(InventoryItemToAdd);
+					}
+				});
+			}
+		});
 
-		  bFourTender.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		toggleOffAll();
-		 		ArrayList<RadioButton> recipe =  new ArrayList<RadioButton>();
-		 		recipe.add(cNoBask);
-		 		recipe.add(gRegBask);
-		 		recipe.add(tRegBask);
-				for(RadioButton b : recipe){
-		 			b.setSelected(true);
-		 		}
-		 		bCheckoutBask.setOnAction(new EventHandler<ActionEvent>() {
+		bFourTender.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				toggleOffAll();
+				ArrayList<RadioButton> recipe = new ArrayList<RadioButton>();
+				recipe.add(cNoBask);
+				recipe.add(gRegBask);
+				recipe.add(tRegBask);
+				for (RadioButton b : recipe) {
+					b.setSelected(true);
+				}
+				bCheckoutBask.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println(compareToBasketRecipe(recipe, "Four Tender Basket\n"));
-		 				orderList.add(compareToBasketRecipe(recipe, "Four Tender Basket\n"));
+						System.out.println(compareToBasketRecipe(recipe, "Four Tender Basket\n"));
+						orderList.add(compareToBasketRecipe(recipe, "Four Tender Basket\n"));
 
-						 CustomPair menuItemToAdd = new CustomPair(6, 1);
-						 menuItems.add(menuItemToAdd);
-						 //add customizations
-						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-						 // inventoryItems.add(InventoryItemToAdd);
-		 			}
-		 		});
-		 	}
-		 });
+						CustomPair menuItemToAdd = new CustomPair(6, 1);
+						menuItems.add(menuItemToAdd);
+						// add customizations
+						// CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+						// inventoryItems.add(InventoryItemToAdd);
+					}
+				});
+			}
+		});
 
 		bSan1.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		toggleOffAll();
-		 		ArrayList<RadioButton> recipe =  new ArrayList<RadioButton>();
-		 		recipe.add(cNoSan);
-		 		recipe.add(patRegSan);
-		 		recipe.add(cRegSan);
-		 		recipe.add(sRevSan);
-		 		recipe.add(pNoneSan);
-		 		recipe.add(lNoneSan);
-		 		recipe.add(tNoneSan);
-		 		recipe.add(oRegSan);
-				for(RadioButton b : recipe){
-		 			b.setSelected(true);
-		 		}
-		 		bCheckoutSan.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				toggleOffAll();
+				ArrayList<RadioButton> recipe = new ArrayList<RadioButton>();
+				recipe.add(cNoSan);
+				recipe.add(patRegSan);
+				recipe.add(cRegSan);
+				recipe.add(sRevSan);
+				recipe.add(pNoneSan);
+				recipe.add(lNoneSan);
+				recipe.add(tNoneSan);
+				recipe.add(oRegSan);
+				for (RadioButton b : recipe) {
+					b.setSelected(true);
+				}
+				bCheckoutSan.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println(compareToSanRecipe(recipe, "Gig Em Patty Melt\n"));
-		 				orderList.add(compareToSanRecipe(recipe, "Gig Em Patty Melt\n"));
+						System.out.println(compareToSanRecipe(recipe, "Gig Em Patty Melt\n"));
+						orderList.add(compareToSanRecipe(recipe, "Gig Em Patty Melt\n"));
 
-						 CustomPair menuItemToAdd = new CustomPair(7, 1);
-						 menuItems.add(menuItemToAdd);
-						 //add customizations
-						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-						 // inventoryItems.add(InventoryItemToAdd);
-		 			}
-		 		});
-		 	}
-		 });
+						CustomPair menuItemToAdd = new CustomPair(7, 1);
+						menuItems.add(menuItemToAdd);
+						// add customizations
+						// CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+						// inventoryItems.add(InventoryItemToAdd);
+					}
+				});
+			}
+		});
 
 		bSan2.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		toggleOffAll();
-		 		ArrayList<RadioButton> recipe =  new ArrayList<RadioButton>();
-		 		recipe.add(cNoSan);
-		 		recipe.add(patChickenSan);
-		 		recipe.add(cRegSan);
-		 		recipe.add(sSpicySan);
-		 		recipe.add(pNoneSan);
-		 		recipe.add(lNoneSan);
-		 		recipe.add(tNoneSan);
-		 		recipe.add(oNoneSan);
-				for(RadioButton b : recipe){
-		 			b.setSelected(true);
-		 		}
-		 		bCheckoutSan.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				toggleOffAll();
+				ArrayList<RadioButton> recipe = new ArrayList<RadioButton>();
+				recipe.add(cNoSan);
+				recipe.add(patChickenSan);
+				recipe.add(cRegSan);
+				recipe.add(sSpicySan);
+				recipe.add(pNoneSan);
+				recipe.add(lNoneSan);
+				recipe.add(tNoneSan);
+				recipe.add(oNoneSan);
+				for (RadioButton b : recipe) {
+					b.setSelected(true);
+				}
+				bCheckoutSan.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println(compareToSanRecipe(recipe, "Howdy Chicken Sandwich\n"));
-		 				orderList.add(compareToSanRecipe(recipe, "Howdy Chicken Sandwich\n"));
+						System.out.println(compareToSanRecipe(recipe, "Howdy Chicken Sandwich\n"));
+						orderList.add(compareToSanRecipe(recipe, "Howdy Chicken Sandwich\n"));
 
-						 CustomPair menuItemToAdd = new CustomPair(8, 1);
-						 menuItems.add(menuItemToAdd);
-						 //add customizations
-						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-						 // inventoryItems.add(InventoryItemToAdd);
-		 			}
-		 		});
-		 	}
-		 });
+						CustomPair menuItemToAdd = new CustomPair(8, 1);
+						menuItems.add(menuItemToAdd);
+						// add customizations
+						// CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+						// inventoryItems.add(InventoryItemToAdd);
+					}
+				});
+			}
+		});
 
 		bSan3.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		toggleOffAll();
-		 		ArrayList<RadioButton> recipe =  new ArrayList<RadioButton>();
-		 		recipe.add(cNoSan);
-		 		recipe.add(patChickenSan);
-		 		recipe.add(cNoneSan);
-		 		recipe.add(sNoneSan);
-		 		recipe.add(pRegSan);
-		 		recipe.add(lRegSan);
-		 		recipe.add(tRegSan);
-		 		recipe.add(oRegSan);
-				for(RadioButton b : recipe){
-		 			b.setSelected(true);
-		 		}
-		 		bCheckoutSan.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				toggleOffAll();
+				ArrayList<RadioButton> recipe = new ArrayList<RadioButton>();
+				recipe.add(cNoSan);
+				recipe.add(patChickenSan);
+				recipe.add(cNoneSan);
+				recipe.add(sNoneSan);
+				recipe.add(pRegSan);
+				recipe.add(lRegSan);
+				recipe.add(tRegSan);
+				recipe.add(oRegSan);
+				for (RadioButton b : recipe) {
+					b.setSelected(true);
+				}
+				bCheckoutSan.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println(compareToSanRecipe(recipe, "Chicken Tender Sandwich\n"));
-		 				orderList.add(compareToSanRecipe(recipe, "Chicken Tender Sandwich\n"));
+						System.out.println(compareToSanRecipe(recipe, "Chicken Tender Sandwich\n"));
+						orderList.add(compareToSanRecipe(recipe, "Chicken Tender Sandwich\n"));
 
-						 CustomPair menuItemToAdd = new CustomPair(9, 1);
-						 menuItems.add(menuItemToAdd);
-						 //add customizations
-						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-						 // inventoryItems.add(InventoryItemToAdd);
-		 			}
-		 		});
-		 	}
-		 });
+						CustomPair menuItemToAdd = new CustomPair(9, 1);
+						menuItems.add(menuItemToAdd);
+						// add customizations
+						// CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+						// inventoryItems.add(InventoryItemToAdd);
+					}
+				});
+			}
+		});
 
 		bSan4.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		toggleOffAll();
-		 		ArrayList<RadioButton> recipe =  new ArrayList<RadioButton>();
-		 		recipe.add(cNoSan);
-		 		recipe.add(patRegSan);
-		 		recipe.add(cRegSan);
-		 		recipe.add(sNoneSan);
-		 		recipe.add(pNoneSan);
-		 		recipe.add(lNoneSan);
-		 		recipe.add(tNoneSan);
-		 		recipe.add(oNoneSan);
-				for(RadioButton b : recipe){
-		 			b.setSelected(true);
-		 		}
-		 		bCheckoutSan.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				toggleOffAll();
+				ArrayList<RadioButton> recipe = new ArrayList<RadioButton>();
+				recipe.add(cNoSan);
+				recipe.add(patRegSan);
+				recipe.add(cRegSan);
+				recipe.add(sNoneSan);
+				recipe.add(pNoneSan);
+				recipe.add(lNoneSan);
+				recipe.add(tNoneSan);
+				recipe.add(oNoneSan);
+				for (RadioButton b : recipe) {
+					b.setSelected(true);
+				}
+				bCheckoutSan.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println(compareToSanRecipe(recipe, "Grilled Cheese\n"));
-		 				orderList.add(compareToSanRecipe(recipe, "Grilled Cheese\n"));
+						System.out.println(compareToSanRecipe(recipe, "Grilled Cheese\n"));
+						orderList.add(compareToSanRecipe(recipe, "Grilled Cheese\n"));
 
-						 CustomPair menuItemToAdd = new CustomPair(10, 1);
-						 menuItems.add(menuItemToAdd);
-						 //add customizations
-						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-						 // inventoryItems.add(InventoryItemToAdd);
-		 			}
-		 		});
-		 	}
-		 });
+						CustomPair menuItemToAdd = new CustomPair(10, 1);
+						menuItems.add(menuItemToAdd);
+						// add customizations
+						// CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+						// inventoryItems.add(InventoryItemToAdd);
+					}
+				});
+			}
+		});
 
 		vIce.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Vanilla Ice Cream\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Vanilla Ice Cream\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(14, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(14, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		cIce.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Chocolate Ice Cream\n");
-				 CustomPair menuItemToAdd = new CustomPair(14, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+			public void handle(ActionEvent event) {
+				orderList.add("Chocolate Ice Cream\n");
+				CustomPair menuItemToAdd = new CustomPair(14, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		sIce.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Strawberry Ice Cream\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Strawberry Ice Cream\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(14, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(14, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		coIce.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Coffee Ice Cream\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Coffee Ice Cream\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(14, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(14, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		vMilk.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Vanilla Milkshake\n");
-				 CustomPair menuItemToAdd = new CustomPair(13, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+			public void handle(ActionEvent event) {
+				orderList.add("Vanilla Milkshake\n");
+				CustomPair menuItemToAdd = new CustomPair(13, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		coMilk.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Coffee Milkshake\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Coffee Milkshake\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(13, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(13, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		cMilk.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Chocolate Milkshake\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Chocolate Milkshake\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(13, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(13, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		sMilk.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Strawberry Milkshake\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Strawberry Milkshake\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(13, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(13, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		cookie.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Chocolate Chunk Cookie\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Chocolate Chunk Cookie\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(15, 1);
-				 menuItems.add(menuItemToAdd);
+				CustomPair menuItemToAdd = new CustomPair(15, 1);
+				menuItems.add(menuItemToAdd);
 
-				
-		 	}
-		 });
+			}
+		});
 
 		brownie.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Brownie\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Brownie\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(16, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(16, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		salad.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Salad\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Salad\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(17, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(17, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		gigem.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Gig Em Sauce\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Gig Em Sauce\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(18, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(18, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		buff.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Buffalo Sauce\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Buffalo Sauce\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(18, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(18, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		bbq.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Barbeque Sauce\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Barbeque Sauce\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(18, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(18, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		hMustard.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Honey Mustard\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Honey Mustard\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(18, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(18, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		ranch.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Ranch\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Ranch\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(18, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(18, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		sRanch.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Spicy Ranch\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Spicy Ranch\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(18, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
-	
+				CustomPair menuItemToAdd = new CustomPair(18, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
+
 		drink.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Fountain Drink\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Fountain Drink\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(19, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(19, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		drip.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Drip Coffee\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Drip Coffee\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(20, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(20, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		fries.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Fries\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Fries\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(22, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(22, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		tTots.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Tater Tots\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Tater Tots\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(23, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(23, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		oRings.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Onion Rings\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Onion Rings\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(24, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(24, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		kChips.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Kettle Chips\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Kettle Chips\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(25, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(25, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
 
 		silverware.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Silverware\n");
-				
-				 CustomPair menuItemToAdd = new CustomPair(26, 1);
-				 menuItems.add(menuItemToAdd);
-		 	}
-		 });
+			public void handle(ActionEvent event) {
+				orderList.add("Silverware\n");
 
-		 onActionGroups(cNoBurg, cChipBurg, cFriesBurg);
-		 onActionGroups(patRegBurg, patBeanBurg, patDoubleBurg);
-		 onActionGroups(cNoneBurg, cRegBurg, cExtraBurg);
-		 onActionGroups(sNoneBurg, sRegBurg);
-		 onActionGroups(pNoneBurg, pRegBurg, pExtraBurg);
-		 onActionGroups(lNoneBurg, lRegBurg, lExtraBurg);
-		 onActionGroups(tNoneBurg, tRegBurg, tExtraBurg);
-		 onActionGroups(oNoneBurg, oRegBurg, oExtraBurg);
-		 onActionGroups(bNoneBurg, bRegBurg, bExtraBurg);
-		 onActionGroups(cNoBask, cYesBask);
-		 onActionGroups(gNoneBask, gRegBask, gExtraBask);
-		 onActionGroups(tNoneBask, tRegBask, tExtraBask);
-		 onActionGroups(cNoSan, cChipSan, cFriesSan);
-		 onActionGroups(patRegSan, patBeanSan, patChickenSan);
-		 onActionGroups(cNoneSan, cRegSan, cExtraSan);
-		 onActionGroups(sNoneSan, sRevSan, sSpicySan);
-		 onActionGroups(pNoneSan, pRegSan, pExtraSan);
-		 onActionGroups(lNoneSan, lRegSan, lExtraSan);
-		 onActionGroups(tNoneSan, tRegSan, tExtraSan);
-		 onActionGroups(oNoneSan, oRegSan, oExtraSan);
+				CustomPair menuItemToAdd = new CustomPair(26, 1);
+				menuItems.add(menuItemToAdd);
+			}
+		});
+
+		onActionGroups(cNoBurg, cChipBurg, cFriesBurg);
+		onActionGroups(patRegBurg, patBeanBurg, patDoubleBurg);
+		onActionGroups(cNoneBurg, cRegBurg, cExtraBurg);
+		onActionGroups(sNoneBurg, sRegBurg);
+		onActionGroups(pNoneBurg, pRegBurg, pExtraBurg);
+		onActionGroups(lNoneBurg, lRegBurg, lExtraBurg);
+		onActionGroups(tNoneBurg, tRegBurg, tExtraBurg);
+		onActionGroups(oNoneBurg, oRegBurg, oExtraBurg);
+		onActionGroups(bNoneBurg, bRegBurg, bExtraBurg);
+		onActionGroups(cNoBask, cYesBask);
+		onActionGroups(gNoneBask, gRegBask, gExtraBask);
+		onActionGroups(tNoneBask, tRegBask, tExtraBask);
+		onActionGroups(cNoSan, cChipSan, cFriesSan);
+		onActionGroups(patRegSan, patBeanSan, patChickenSan);
+		onActionGroups(cNoneSan, cRegSan, cExtraSan);
+		onActionGroups(sNoneSan, sRevSan, sSpicySan);
+		onActionGroups(pNoneSan, pRegSan, pExtraSan);
+		onActionGroups(lNoneSan, lRegSan, lExtraSan);
+		onActionGroups(tNoneSan, tRegSan, tExtraSan);
+		onActionGroups(oNoneSan, oRegSan, oExtraSan);
 
 	}
 
 	void onActionGroups(RadioButton b1, RadioButton b2, RadioButton b3) {
-		b1.setOnAction(new EventHandler<ActionEvent>() { //combo for burger
-		 	public void handle(ActionEvent event) {
-		 		b2.setSelected(false);
-		 		b3.setSelected(false);
-		 	}
-		 });
+		b1.setOnAction(new EventHandler<ActionEvent>() { // combo for burger
+			public void handle(ActionEvent event) {
+				b2.setSelected(false);
+				b3.setSelected(false);
+			}
+		});
 
-		 b2.setOnAction(new EventHandler<ActionEvent>() { //combo for burger
-		 	public void handle(ActionEvent event) {
-		 		b1.setSelected(false);
-		 		b3.setSelected(false);
-		 	}
-		 });
+		b2.setOnAction(new EventHandler<ActionEvent>() { // combo for burger
+			public void handle(ActionEvent event) {
+				b1.setSelected(false);
+				b3.setSelected(false);
+			}
+		});
 
-		 b3.setOnAction(new EventHandler<ActionEvent>() { //combo for burger
-		 	public void handle(ActionEvent event) {
-		 		b1.setSelected(false);
-		 		b2.setSelected(false);
-		 	}
-		 });
+		b3.setOnAction(new EventHandler<ActionEvent>() { // combo for burger
+			public void handle(ActionEvent event) {
+				b1.setSelected(false);
+				b2.setSelected(false);
+			}
+		});
 	}
 
 	void onActionGroups(RadioButton b1, RadioButton b2) {
-		b1.setOnAction(new EventHandler<ActionEvent>() { //combo for burger
-		 	public void handle(ActionEvent event) {
-		 		b2.setSelected(false);
-		 	}
-		 });
+		b1.setOnAction(new EventHandler<ActionEvent>() { // combo for burger
+			public void handle(ActionEvent event) {
+				b2.setSelected(false);
+			}
+		});
 
-		 b2.setOnAction(new EventHandler<ActionEvent>() { //combo for burger
-		 	public void handle(ActionEvent event) {
-		 		b1.setSelected(false);
-		 	}
-		 });
+		b2.setOnAction(new EventHandler<ActionEvent>() { // combo for burger
+			public void handle(ActionEvent event) {
+				b1.setSelected(false);
+			}
+		});
 	}
 
-	void toggleOffAll(){
+	void toggleOffAll() {
 		cNoBurg.setSelected(false);
 		cChipBurg.setSelected(false);
 		cFriesBurg.setSelected(false);
@@ -804,251 +899,253 @@ public class EmployeeController implements Initializable {
 		oExtraSan.setSelected(false);
 	}
 
-	String compareToBurgerRecipe(ArrayList<RadioButton> recipe, String out){
-		//String out = "";
-		if(checkChanged(cNoBurg, cChipBurg, cFriesBurg, recipe.get(0)) == 2) {
+	String compareToBurgerRecipe(ArrayList<RadioButton> recipe, String out) {
+		// String out = "";
+		if (checkChanged(cNoBurg, cChipBurg, cFriesBurg, recipe.get(0)) == 2) {
 			out += "Combo with chips\n";
-		} else if(checkChanged(cNoBurg, cChipBurg, cFriesBurg, recipe.get(0)) == 3) {
+		} else if (checkChanged(cNoBurg, cChipBurg, cFriesBurg, recipe.get(0)) == 3) {
 			out += "Combo with fries\n";
 		}
 
-		if(checkChanged(patRegBurg, patBeanBurg, patDoubleBurg, recipe.get(1)) == 2) {
+		if (checkChanged(patRegBurg, patBeanBurg, patDoubleBurg, recipe.get(1)) == 2) {
 			out += "Sub Bean Patty\n";
-		} else if(checkChanged(patRegBurg, patBeanBurg, patDoubleBurg, recipe.get(1)) == 3) {
+		} else if (checkChanged(patRegBurg, patBeanBurg, patDoubleBurg, recipe.get(1)) == 3) {
 			out += "Double Patty\n";
 		}
 
-		if(checkChanged(cNoneBurg, cRegBurg, cExtraBurg, recipe.get(2)) == 1) {
+		if (checkChanged(cNoneBurg, cRegBurg, cExtraBurg, recipe.get(2)) == 1) {
 			out += "No Cheese\n";
-		} else if(checkChanged(patRegBurg, patBeanBurg, patDoubleBurg, recipe.get(2)) == 2) {
+		} else if (checkChanged(patRegBurg, patBeanBurg, patDoubleBurg, recipe.get(2)) == 2) {
 			out += "Add Cheese\n";
-		} else if(checkChanged(patRegBurg, patBeanBurg, patDoubleBurg, recipe.get(2)) == 3) {
+		} else if (checkChanged(patRegBurg, patBeanBurg, patDoubleBurg, recipe.get(2)) == 3) {
 			out += "Extra Cheese\n";
 		}
 
-		if(!recipe.get(3).isSelected()) {
-			if(sNoneBurg.isSelected()) {
+		if (!recipe.get(3).isSelected()) {
+			if (sNoneBurg.isSelected()) {
 				out += "No Sauce\n";
 			} else {
 				out += "Add Sauce\n";
 			}
 		}
 
-		if(checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 1) {
+		if (checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 1) {
 			out += "No Pickles\n";
-		} else if(checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 2) {
+		} else if (checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 2) {
 			out += "Add Pickles\n";
-		} else if(checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 3) {
+		} else if (checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 3) {
 			out += "Extra Pickles\n";
 		}
 
-		if(checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 1) {
+		if (checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 1) {
 			out += "No Lettuce\n";
-		} else if(checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 2) {
+		} else if (checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 2) {
 			out += "Add Lettuce\n";
-		} else if(checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 3) {
+		} else if (checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 3) {
 			out += "Extra Lettuce\n";
 		}
 
-		if(checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 1) {
+		if (checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 1) {
 			out += "No Tomato\n";
-		} else if(checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 2) {
+		} else if (checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 2) {
 			out += "Add Tomato\n";
-		} else if(checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 3) {
+		} else if (checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 3) {
 			out += "Extra Tomato\n";
 		}
 
-		if(checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 1) {
+		if (checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 1) {
 			out += "No Onion\n";
-		} else if(checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 2) {
+		} else if (checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 2) {
 			out += "Add Onion\n";
-		} else if(checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 3) {
+		} else if (checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 3) {
 			out += "Extra Onion\n";
 		}
 
-		if(checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 1) {
+		if (checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 1) {
 			out += "No Bacon\n";
-		} else if(checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 2) {
+		} else if (checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 2) {
 			out += "Add Bacon\n";
-		} else if(checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 3) {
+		} else if (checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 3) {
 			out += "Extra Bacon\n";
 		}
 		return out;
 	}
 
-	double addToBurgerRecipe(ArrayList<RadioButton> recipe, ArrayList<CustomPair> inventoryItems, double totalOrderCost){
-		//String out = "";
-		if((checkChanged(cNoBurg, cChipBurg, cFriesBurg, recipe.get(0)) == 2) || (checkChanged(cNoBurg, cChipBurg, cFriesBurg, recipe.get(0)) == 3)) {
+	double addToBurgerRecipe(ArrayList<RadioButton> recipe, ArrayList<CustomPair> inventoryItems,
+			double totalOrderCost) {
+		// String out = "";
+		if ((checkChanged(cNoBurg, cChipBurg, cFriesBurg, recipe.get(0)) == 2)
+				|| (checkChanged(cNoBurg, cChipBurg, cFriesBurg, recipe.get(0)) == 3)) {
 			// out += "Combo with chips\n";
 			CustomPair menuItemToAdd = new CustomPair(11, 1);
 			menuItems.add(menuItemToAdd);
 			totalOrderCost += db.getPriceOfMenuItem(11);
-			
-		} 
+
+		}
 		// else if(checkChanged(cNoBurg, cChipBurg, cFriesBurg, recipe.get(0)) == 3) {
-		// 	// out += "Combo with fries\n";
-		// 	CustomPair menuItemToAdd = new CustomPair(11, 1);
-		// 	menuItems.add(menuItemToAdd);
+		// // out += "Combo with fries\n";
+		// CustomPair menuItemToAdd = new CustomPair(11, 1);
+		// menuItems.add(menuItemToAdd);
 		// }
 
-		if(checkChanged(patRegBurg, patBeanBurg, patDoubleBurg, recipe.get(1)) == 2) {
+		if (checkChanged(patRegBurg, patBeanBurg, patDoubleBurg, recipe.get(1)) == 2) {
 			// out += "Sub Bean Patty\n";
 			CustomPair inventoryItemToAdd = new CustomPair(3, 1);
 			inventoryItems.add(inventoryItemToAdd);
 			CustomPair inventoryItemToAdd2 = new CustomPair(1, -1);
 			inventoryItems.add(inventoryItemToAdd2);
 
-		} else if(checkChanged(patRegBurg, patBeanBurg, patDoubleBurg, recipe.get(1)) == 3) {
+		} else if (checkChanged(patRegBurg, patBeanBurg, patDoubleBurg, recipe.get(1)) == 3) {
 			// out += "Double Patty\n";
 			CustomPair inventoryItemToAdd2 = new CustomPair(1, 1);
 			inventoryItems.add(inventoryItemToAdd2);
 		}
 
-		if(checkChanged(cNoneBurg, cRegBurg, cExtraBurg, recipe.get(2)) == 1) {
+		if (checkChanged(cNoneBurg, cRegBurg, cExtraBurg, recipe.get(2)) == 1) {
 			// out += "No Cheese\n";
 			CustomPair inventoryItemToAdd = new CustomPair(2, -1);
 			inventoryItems.add(inventoryItemToAdd);
-		} else if(checkChanged(patRegBurg, patBeanBurg, patDoubleBurg, recipe.get(2)) == 2) {
+		} else if (checkChanged(patRegBurg, patBeanBurg, patDoubleBurg, recipe.get(2)) == 2) {
 			// out += "Add Cheese\n";
-		} else if(checkChanged(patRegBurg, patBeanBurg, patDoubleBurg, recipe.get(2)) == 3) {
+		} else if (checkChanged(patRegBurg, patBeanBurg, patDoubleBurg, recipe.get(2)) == 3) {
 			// out += "Extra Cheese\n";
 			CustomPair inventoryItemToAdd = new CustomPair(2, 1);
 			inventoryItems.add(inventoryItemToAdd);
 			totalOrderCost += db.getPriceOfInventoryItem(2);
 		}
 
-		if(!recipe.get(3).isSelected()) {
-			if(sNoneBurg.isSelected()) {
+		if (!recipe.get(3).isSelected()) {
+			if (sNoneBurg.isSelected()) {
 				// out += "No Sauce\n";
 			} else {
 				// out += "Add Sauce\n";
 			}
 		}
 
-		if(checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 1) {
+		if (checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 1) {
 			// out += "No Pickles\n";
-		} else if(checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 2) {
+		} else if (checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 2) {
 			// out += "Add Pickles\n";
-		} else if(checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 3) {
+		} else if (checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 3) {
 			// out += "Extra Pickles\n";
 		}
 
-		if(checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 1) {
+		if (checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 1) {
 			// out += "No Lettuce\n";
-		} else if(checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 2) {
+		} else if (checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 2) {
 			// out += "Add Lettuce\n";
-		} else if(checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 3) {
+		} else if (checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 3) {
 			// out += "Extra Lettuce\n";
 		}
 
-		if(checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 1) {
+		if (checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 1) {
 			// out += "No Tomato\n";
-		} else if(checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 2) {
+		} else if (checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 2) {
 			// out += "Add Tomato\n";
-		} else if(checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 3) {
+		} else if (checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 3) {
 			// out += "Extra Tomato\n";
 		}
 
-		if(checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 1) {
+		if (checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 1) {
 			// out += "No Onion\n";
-		} else if(checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 2) {
+		} else if (checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 2) {
 			// out += "Add Onion\n";
-		} else if(checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 3) {
+		} else if (checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 3) {
 			// out += "Extra Onion\n";
 		}
 
-		if(checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 1) {
+		if (checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 1) {
 			// out += "No Bacon\n";
-		} else if(checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 2) {
+		} else if (checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 2) {
 			// out += "Add Bacon\n";
-		} else if(checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 3) {
+		} else if (checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 3) {
 			// out += "Extra Bacon\n";
 		}
 		return totalOrderCost;
 	}
 
-	String compareToBasketRecipe(ArrayList<RadioButton> recipe, String out){
-		//String out = "";
-		if(!recipe.get(0).isSelected()) {
-			if(cYesBask.isSelected()) {
+	String compareToBasketRecipe(ArrayList<RadioButton> recipe, String out) {
+		// String out = "";
+		if (!recipe.get(0).isSelected()) {
+			if (cYesBask.isSelected()) {
 				out += "Combo\n";
 			}
 		}
 
-		if(checkChanged(gNoneBask, gRegBask, gExtraBask, recipe.get(1)) == 1) {
+		if (checkChanged(gNoneBask, gRegBask, gExtraBask, recipe.get(1)) == 1) {
 			out += "No Gravy\n";
-		} else if(checkChanged(gNoneBask, gRegBask, gExtraBask, recipe.get(1)) == 3) {
+		} else if (checkChanged(gNoneBask, gRegBask, gExtraBask, recipe.get(1)) == 3) {
 			out += "Extra Gravy\n";
 		}
 
-		if(checkChanged(tNoneBask, tRegBask, tExtraBask, recipe.get(2)) == 1) {
+		if (checkChanged(tNoneBask, tRegBask, tExtraBask, recipe.get(2)) == 1) {
 			out += "No Toast\n";
-		} else if(checkChanged(tNoneBask, tRegBask, tExtraBask, recipe.get(2)) == 3) {
+		} else if (checkChanged(tNoneBask, tRegBask, tExtraBask, recipe.get(2)) == 3) {
 			out += "Extra Toast\n";
 		}
-		
+
 		return out;
 	}
 
-	String compareToSanRecipe(ArrayList<RadioButton> recipe, String out){
-		//String out = "";
-		if(checkChanged(cNoSan, cChipSan, cRegSan, recipe.get(0)) == 2) {
+	String compareToSanRecipe(ArrayList<RadioButton> recipe, String out) {
+		// String out = "";
+		if (checkChanged(cNoSan, cChipSan, cRegSan, recipe.get(0)) == 2) {
 			out += "Combo with chips\n";
-		} else if(checkChanged(cNoSan, cChipSan, cRegSan, recipe.get(0)) == 3) {
+		} else if (checkChanged(cNoSan, cChipSan, cRegSan, recipe.get(0)) == 3) {
 			out += "Combo with fries\n";
 		}
 
-		if(checkChanged(patRegSan, patBeanSan, patChickenSan, recipe.get(1)) == 2) {
+		if (checkChanged(patRegSan, patBeanSan, patChickenSan, recipe.get(1)) == 2) {
 			out += "Sub Bean Patty\n";
-		} else if(checkChanged(patRegSan, patBeanSan, patChickenSan, recipe.get(1)) == 3) {
+		} else if (checkChanged(patRegSan, patBeanSan, patChickenSan, recipe.get(1)) == 3) {
 			out += "Chicken Tenders\n";
 		}
 
-		if(checkChanged(cNoneSan, cRegSan, cExtraSan, recipe.get(2)) == 1) {
+		if (checkChanged(cNoneSan, cRegSan, cExtraSan, recipe.get(2)) == 1) {
 			out += "No Cheese\n";
-		} else if(checkChanged(cNoneSan, cRegSan, cExtraSan, recipe.get(2)) == 2) {
+		} else if (checkChanged(cNoneSan, cRegSan, cExtraSan, recipe.get(2)) == 2) {
 			out += "Add Cheese\n";
-		} else if(checkChanged(cNoneSan, cRegSan, cExtraSan, recipe.get(2)) == 3) {
+		} else if (checkChanged(cNoneSan, cRegSan, cExtraSan, recipe.get(2)) == 3) {
 			out += "Extra Cheese\n";
 		}
 
-		if(checkChanged(sNoneSan, sRevSan, sSpicySan, recipe.get(3)) == 1) {
+		if (checkChanged(sNoneSan, sRevSan, sSpicySan, recipe.get(3)) == 1) {
 			out += "No Sauce\n";
-		} else if(checkChanged(sNoneSan, sRevSan, sSpicySan, recipe.get(3)) == 2) {
+		} else if (checkChanged(sNoneSan, sRevSan, sSpicySan, recipe.get(3)) == 2) {
 			out += "Sub Rev's Sacue \n";
-		} else if(checkChanged(sNoneSan, sRevSan, sSpicySan, recipe.get(3)) == 3) {
+		} else if (checkChanged(sNoneSan, sRevSan, sSpicySan, recipe.get(3)) == 3) {
 			out += "Sub Spicy Sauce\n";
 		}
 
-		if(checkChanged(pNoneSan, pRegSan, pExtraSan, recipe.get(4)) == 1) {
+		if (checkChanged(pNoneSan, pRegSan, pExtraSan, recipe.get(4)) == 1) {
 			out += "No Pickles\n";
-		} else if(checkChanged(pNoneSan, pRegSan, pExtraSan, recipe.get(4)) == 2) {
+		} else if (checkChanged(pNoneSan, pRegSan, pExtraSan, recipe.get(4)) == 2) {
 			out += "Add Pickles\n";
-		} else if(checkChanged(pNoneSan, pRegSan, pExtraSan, recipe.get(4)) == 3) {
+		} else if (checkChanged(pNoneSan, pRegSan, pExtraSan, recipe.get(4)) == 3) {
 			out += "Extra Pickles\n";
 		}
 
-		if(checkChanged(lNoneSan, lRegSan, lExtraSan, recipe.get(5)) == 1) {
+		if (checkChanged(lNoneSan, lRegSan, lExtraSan, recipe.get(5)) == 1) {
 			out += "No Lettuce\n";
-		} else if(checkChanged(lNoneSan, lRegSan, lExtraSan, recipe.get(5)) == 2) {
+		} else if (checkChanged(lNoneSan, lRegSan, lExtraSan, recipe.get(5)) == 2) {
 			out += "Add Lettuce\n";
-		} else if(checkChanged(lNoneSan, lRegSan, lExtraSan, recipe.get(5)) == 3) {
+		} else if (checkChanged(lNoneSan, lRegSan, lExtraSan, recipe.get(5)) == 3) {
 			out += "Extra Lettuce\n";
 		}
 
-		if(checkChanged(tNoneSan, tRegSan, tExtraSan, recipe.get(6)) == 1) {
+		if (checkChanged(tNoneSan, tRegSan, tExtraSan, recipe.get(6)) == 1) {
 			out += "No Tomato\n";
-		} else if(checkChanged(tNoneSan, tRegSan, tExtraSan, recipe.get(6)) == 2) {
+		} else if (checkChanged(tNoneSan, tRegSan, tExtraSan, recipe.get(6)) == 2) {
 			out += "Add Tomato\n";
-		} else if(checkChanged(tNoneSan, tRegSan, tExtraSan, recipe.get(6)) == 3) {
+		} else if (checkChanged(tNoneSan, tRegSan, tExtraSan, recipe.get(6)) == 3) {
 			out += "Extra Tomato\n";
 		}
 
-		if(checkChanged(oNoneSan, oRegSan, oExtraSan, recipe.get(7)) == 1) {
+		if (checkChanged(oNoneSan, oRegSan, oExtraSan, recipe.get(7)) == 1) {
 			out += "No Onion\n";
-		} else if(checkChanged(oNoneSan, oRegSan, oExtraSan, recipe.get(7)) == 2) {
+		} else if (checkChanged(oNoneSan, oRegSan, oExtraSan, recipe.get(7)) == 2) {
 			out += "Add Onion\n";
-		} else if(checkChanged(oNoneSan, oRegSan, oExtraSan, recipe.get(7)) == 3) {
+		} else if (checkChanged(oNoneSan, oRegSan, oExtraSan, recipe.get(7)) == 3) {
 			out += "Extra Onion\n";
 		}
 
@@ -1058,7 +1155,7 @@ public class EmployeeController implements Initializable {
 	// returns 0 if default, 1 if none, 2 if extra
 	// for combo, 2 is chips 3 is fries
 	int checkChanged(RadioButton b1, RadioButton b2, RadioButton b3, RadioButton b4) {
-		if(b4.isSelected()){
+		if (b4.isSelected()) {
 			return 0;
 		} else if (b1.isSelected()) {
 			return 1;
@@ -1069,6 +1166,5 @@ public class EmployeeController implements Initializable {
 		}
 		return 0;
 	}
-
 
 }
