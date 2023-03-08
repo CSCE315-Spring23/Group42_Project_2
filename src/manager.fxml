@@ -16,11 +16,11 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button fx:id="mButton" mnemonicParsing="false" text="View Menu" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-      <Button mnemonicParsing="false" text="Add Menu" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-      <Button mnemonicParsing="false" text="Update Menu" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-      <Button mnemonicParsing="false" text="View Inventory" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
-      <Button mnemonicParsing="false" text="Add Inventory" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
-      <Button mnemonicParsing="false" text="Update Inventory" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+      <Button fx:id="viewMenu" mnemonicParsing="false" text="View Menu" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+      <Button fx:id="addMenu" mnemonicParsing="false" text="Add Menu" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+      <Button fx:id="updateMenu" mnemonicParsing="false" text="Update Menu" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+      <Button fx:id="viewInventory" mnemonicParsing="false" text="View Inventory" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+      <Button fx:id="addInventory" mnemonicParsing="false" text="Add Inventory" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
+      <Button fx:id="updateInventory" mnemonicParsing="false" text="Update Inventory" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER"/>
    </children>
 </GridPane>

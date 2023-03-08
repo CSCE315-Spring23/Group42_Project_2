@@ -19,12 +19,48 @@ import javafx.stage.Stage;
 
 public class ManagerController implements Initializable {
 	@FXML
-	Button mButton;
+	Button viewMenu;
+	Button addMenu;
+	Button updateMenu;
+	Button viewInventory;
+	Button addInventory;
+	Button updateInventory;
+
 
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println("Manager controller running");
 
-		mButton.setOnAction(new EventHandler<ActionEvent>() {
+		viewMenu.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				System.out.println("Manager click");
+			}
+		});
+
+		addMenu.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				System.out.println("Manager click");
+			}
+		});
+
+		updateMenu.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				System.out.println("Manager click");
+			}
+		});
+
+		viewInventory.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				System.out.println("Manager click");
+			}
+		});
+
+		addInventory.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				System.out.println("Manager click");
+			}
+		});
+
+		updateInventory.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				System.out.println("Manager click");
 			}
