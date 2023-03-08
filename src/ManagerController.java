@@ -64,7 +64,15 @@ public class ManagerController implements Initializable {
 		System.out.println("Manager controller running");
 		this.db = new Database();
 
+		this.setUpInventoryTable();
+		this.setUpMenuTable();
+		this.updateInventoryTable(0);
+		this.updateMenuTable(0);
+		this.inventoryTable.refresh();
+		this.menuTable.refresh();
+		System.out.println("we get here");
 		viewMenu.setOnAction(new EventHandler<ActionEvent>() {
+
 			public void handle(ActionEvent event) {
 				System.out.println("Manager click");
 			}
@@ -123,7 +131,7 @@ public class ManagerController implements Initializable {
 	}
 
 	private void setUpMenuTable() {
-		this.menuID.setCellValueFactory(cellData -> cellData.getValue().getMenuId());
+		this.menuID.setCellValueFactory(cellData -> cellData.getValue().getMenuID());
 		this.menuItemName.setCellValueFactory(cellData -> cellData.getValue().getItemName());
 		this.menuItemCost.setCellValueFactory(cellData -> cellData.getValue().getItemCost());
 		final ObservableList<Inventory> items = db.get20RowsInventory(0);
