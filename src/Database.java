@@ -325,7 +325,8 @@ public class Database {
      */
     public void changePrice(String itemName, double newCost) {
         try {
-            if(Integer.parseInt(itemName) > 26) return;
+            if (Integer.parseInt(itemName) > 26)
+                return;
             // run query
             runCommand("UPDATE Menu SET MENU_ITEM_COST = " + newCost
                     + " WHERE menu_item_id = '" + itemName + "';");
