@@ -40,15 +40,15 @@ public class Main extends Application {
 
         // set up manager scene
         FXMLLoader managerLoader = new FXMLLoader(
-            getClass().getResource("manager.fxml"));
+                getClass().getResource("manager.fxml"));
         Parent managerParent = (Parent) managerLoader.load();
         Scene managerScene = new Scene(managerParent, 750, 750);
 
         LoginController loginController = (LoginController) loginLoader.getController();
-        ManagerController managerController = (ManagerController) loginLoader.getController();
+        // ManagerController managerController = (ManagerController) loginLoader.getController();
 
         loginController.setEmployeeScene(employeeScene);
-        managerController.setEmployeeScene(employeeScene);
+        // managerController.setEmployeeScene(employeeScene);
         loginController.setManagerScene(managerScene);
 
         primaryStage.setTitle("315 Project 2");
