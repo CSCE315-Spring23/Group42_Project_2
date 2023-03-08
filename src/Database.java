@@ -335,6 +335,26 @@ public class Database {
         return price;
     }
 
+    public double getPriceOfInventoryItem(int itemID) {
+        double price = 0.0;
+        try {
+            // Run query
+            ResultSet result = runCommand("SELECT inventory_item_cost FROM inventory_item WHERE inventory_id = " + itemID + ";");
+
+            // Extract price from result
+            if (result.next()) {
+                price = result.getDouble("inventory_item_cost");
+            }
+
+            result.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return price;
+    }
+
     /**
      * Return password associated with email
      */

@@ -39,6 +39,8 @@ public class EmployeeController implements Initializable {
 	ArrayList<String> orderList = new ArrayList<String>();
 	ArrayList<CustomPair> menuItems = new ArrayList<CustomPair>();
 	ArrayList<CustomPair> inventoryItems = new ArrayList<CustomPair>();
+	double totalOrderCost = 0.0;
+	private Database db;
 
 	@FXML RadioButton cNoBurg;
 	@FXML RadioButton cChipBurg;
@@ -136,6 +138,7 @@ public class EmployeeController implements Initializable {
 
 
 	public void initialize(URL location, ResourceBundle resources) {
+		this.db = new Database();
 
 		System.out.println("Employee controller running");
 
@@ -155,7 +158,12 @@ public class EmployeeController implements Initializable {
 		 	public void handle(ActionEvent event) {
 		 		System.out.println("Placing order...");
 		 		//TO DO: UPDATE DATABASE WHEN ORDER PLACED
-				// createOrder()
+				db.createOrder(totalOrderCost, menuItems, inventoryItems);
+				totalOrderCost = 0;
+				menuItems.clear();
+				inventoryItems.clear();
+				burger = false;
+				orderList.clear();
 
 		 	}
 		 });
@@ -185,9 +193,9 @@ public class EmployeeController implements Initializable {
 						//add revs burger to menuItems
 						CustomPair menuItemToAdd = new CustomPair(1, 1);
 						menuItems.add(menuItemToAdd);
+						totalOrderCost += db.getPriceOfMenuItem(1);
 						//add customizations
-						// CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-						// inventoryItems.add(InventoryItemToAdd);
+						totalOrderCost = addToBurgerRecipe(recipe, inventoryItems, totalOrderCost);
 		 			}
 		 		});
 		 	}
@@ -465,9 +473,6 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(14, 1);
 				 menuItems.add(menuItemToAdd);
-				 //add customizations
-				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
@@ -476,9 +481,6 @@ public class EmployeeController implements Initializable {
 		 		orderList.add("Chocolate Ice Cream\n");
 				 CustomPair menuItemToAdd = new CustomPair(14, 1);
 				 menuItems.add(menuItemToAdd);
-				 //add customizations
-				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
@@ -488,9 +490,6 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(14, 1);
 				 menuItems.add(menuItemToAdd);
-				 //add customizations
-				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
@@ -500,9 +499,6 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(14, 1);
 				 menuItems.add(menuItemToAdd);
-				 //add customizations
-				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
@@ -511,9 +507,6 @@ public class EmployeeController implements Initializable {
 		 		orderList.add("Vanilla Milkshake\n");
 				 CustomPair menuItemToAdd = new CustomPair(13, 1);
 				 menuItems.add(menuItemToAdd);
-				 //add customizations
-				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
@@ -523,9 +516,6 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(13, 1);
 				 menuItems.add(menuItemToAdd);
-				 //add customizations
-				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
@@ -535,9 +525,6 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(13, 1);
 				 menuItems.add(menuItemToAdd);
-				 //add customizations
-				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
@@ -547,9 +534,6 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(13, 1);
 				 menuItems.add(menuItemToAdd);
-				 //add customizations
-				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
@@ -559,9 +543,6 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(15, 1);
 				 menuItems.add(menuItemToAdd);
-				 //add customizations
-				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-				 // inventoryItems.add(InventoryItemToAdd);
 
 				
 		 	}
@@ -573,9 +554,6 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(16, 1);
 				 menuItems.add(menuItemToAdd);
-				 //add customizations
-				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
@@ -585,9 +563,6 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(17, 1);
 				 menuItems.add(menuItemToAdd);
-				 //add customizations
-				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
@@ -597,81 +572,114 @@ public class EmployeeController implements Initializable {
 
 				 CustomPair menuItemToAdd = new CustomPair(18, 1);
 				 menuItems.add(menuItemToAdd);
-				 //add customizations
-				 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
-				 // inventoryItems.add(InventoryItemToAdd);
 		 	}
 		 });
 
 		buff.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Buffalo Sauce\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(18, 1);
+				 menuItems.add(menuItemToAdd);
 		 	}
 		 });
 
 		bbq.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Barbeque Sauce\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(18, 1);
+				 menuItems.add(menuItemToAdd);
 		 	}
 		 });
 
 		hMustard.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Honey Mustard\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(18, 1);
+				 menuItems.add(menuItemToAdd);
 		 	}
 		 });
 
 		ranch.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Ranch\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(18, 1);
+				 menuItems.add(menuItemToAdd);
 		 	}
 		 });
 
 		sRanch.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Spicy Ranch\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(18, 1);
+				 menuItems.add(menuItemToAdd);
 		 	}
 		 });
 	
 		drink.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Fountain Drink\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(19, 1);
+				 menuItems.add(menuItemToAdd);
 		 	}
 		 });
 
 		drip.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Drip Coffee\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(20, 1);
+				 menuItems.add(menuItemToAdd);
 		 	}
 		 });
 
 		fries.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Fries\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(22, 1);
+				 menuItems.add(menuItemToAdd);
 		 	}
 		 });
 
 		tTots.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Tater Tots\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(23, 1);
+				 menuItems.add(menuItemToAdd);
 		 	}
 		 });
 
 		oRings.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Onion Rings\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(24, 1);
+				 menuItems.add(menuItemToAdd);
 		 	}
 		 });
 
 		kChips.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Kettle Chips\n");
+
+				 CustomPair menuItemToAdd = new CustomPair(25, 1);
+				 menuItems.add(menuItemToAdd);
 		 	}
 		 });
 
 		silverware.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Silverware\n");
+				
+				 CustomPair menuItemToAdd = new CustomPair(26, 1);
+				 menuItems.add(menuItemToAdd);
 		 	}
 		 });
 
@@ -866,6 +874,97 @@ public class EmployeeController implements Initializable {
 			out += "Extra Bacon\n";
 		}
 		return out;
+	}
+
+	double addToBurgerRecipe(ArrayList<RadioButton> recipe, ArrayList<CustomPair> inventoryItems, double totalOrderCost){
+		//String out = "";
+		if((checkChanged(cNoBurg, cChipBurg, cFriesBurg, recipe.get(0)) == 2) || (checkChanged(cNoBurg, cChipBurg, cFriesBurg, recipe.get(0)) == 3)) {
+			// out += "Combo with chips\n";
+			CustomPair menuItemToAdd = new CustomPair(11, 1);
+			menuItems.add(menuItemToAdd);
+			totalOrderCost += db.getPriceOfMenuItem(11);
+			
+		} 
+		// else if(checkChanged(cNoBurg, cChipBurg, cFriesBurg, recipe.get(0)) == 3) {
+		// 	// out += "Combo with fries\n";
+		// 	CustomPair menuItemToAdd = new CustomPair(11, 1);
+		// 	menuItems.add(menuItemToAdd);
+		// }
+
+		if(checkChanged(patRegBurg, patBeanBurg, patDoubleBurg, recipe.get(1)) == 2) {
+			// out += "Sub Bean Patty\n";
+			CustomPair inventoryItemToAdd = new CustomPair(3, 1);
+			inventoryItems.add(inventoryItemToAdd);
+			CustomPair inventoryItemToAdd2 = new CustomPair(1, -1);
+			inventoryItems.add(inventoryItemToAdd2);
+
+		} else if(checkChanged(patRegBurg, patBeanBurg, patDoubleBurg, recipe.get(1)) == 3) {
+			// out += "Double Patty\n";
+			CustomPair inventoryItemToAdd2 = new CustomPair(1, 1);
+			inventoryItems.add(inventoryItemToAdd2);
+		}
+
+		if(checkChanged(cNoneBurg, cRegBurg, cExtraBurg, recipe.get(2)) == 1) {
+			// out += "No Cheese\n";
+			CustomPair inventoryItemToAdd = new CustomPair(2, -1);
+			inventoryItems.add(inventoryItemToAdd);
+		} else if(checkChanged(patRegBurg, patBeanBurg, patDoubleBurg, recipe.get(2)) == 2) {
+			// out += "Add Cheese\n";
+		} else if(checkChanged(patRegBurg, patBeanBurg, patDoubleBurg, recipe.get(2)) == 3) {
+			// out += "Extra Cheese\n";
+			CustomPair inventoryItemToAdd = new CustomPair(2, 1);
+			inventoryItems.add(inventoryItemToAdd);
+			totalOrderCost += db.getPriceOfInventoryItem(2);
+		}
+
+		if(!recipe.get(3).isSelected()) {
+			if(sNoneBurg.isSelected()) {
+				// out += "No Sauce\n";
+			} else {
+				// out += "Add Sauce\n";
+			}
+		}
+
+		if(checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 1) {
+			// out += "No Pickles\n";
+		} else if(checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 2) {
+			// out += "Add Pickles\n";
+		} else if(checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 3) {
+			// out += "Extra Pickles\n";
+		}
+
+		if(checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 1) {
+			// out += "No Lettuce\n";
+		} else if(checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 2) {
+			// out += "Add Lettuce\n";
+		} else if(checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 3) {
+			// out += "Extra Lettuce\n";
+		}
+
+		if(checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 1) {
+			// out += "No Tomato\n";
+		} else if(checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 2) {
+			// out += "Add Tomato\n";
+		} else if(checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 3) {
+			// out += "Extra Tomato\n";
+		}
+
+		if(checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 1) {
+			// out += "No Onion\n";
+		} else if(checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 2) {
+			// out += "Add Onion\n";
+		} else if(checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 3) {
+			// out += "Extra Onion\n";
+		}
+
+		if(checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 1) {
+			// out += "No Bacon\n";
+		} else if(checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 2) {
+			// out += "Add Bacon\n";
+		} else if(checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 3) {
+			// out += "Extra Bacon\n";
+		}
+		return totalOrderCost;
 	}
 
 	String compareToBasketRecipe(ArrayList<RadioButton> recipe, String out){
