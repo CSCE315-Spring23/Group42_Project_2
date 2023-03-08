@@ -76,7 +76,6 @@ public class ManagerController implements Initializable {
 		this.updateMenuTable(0);
 		this.inventoryTable.refresh();
 		this.menuTable.refresh();
-		System.out.println("we get here");
 
 		addMenu.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
