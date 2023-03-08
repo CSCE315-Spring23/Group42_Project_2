@@ -61,11 +61,10 @@ public class ManagerController implements Initializable {
 	@FXML
 	private TableColumn<Menu, Double> menuItemCost;
 
-
-	@FXML
-	private Button switchView;
-
-	private Scene employeeScene;
+	// @FXML
+	// private Button switchView;
+	//
+	// private Scene employeeScene;
 
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println("Manager controller running");
@@ -110,17 +109,17 @@ public class ManagerController implements Initializable {
 			}
 		});
 
-		switchView.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				openEmployeeScene();
-			}
-		});
+		// switchView.setOnAction(new EventHandler<ActionEvent>() {
+		// public void handle(ActionEvent event) {
+		// openEmployeeScene();
+		// }
+		// });
 
 	}
-	public void openEmployeeScene() {
-		Stage stage = (Stage) (switchView.getScene().getWindow());
-		stage.setScene(employeeScene);
-	}
+	// public void openEmployeeScene() {
+	// Stage stage = (Stage) (switchView.getScene().getWindow());
+	// stage.setScene(employeeScene);
+	// }
 
 	private void updateMenuTable(int whichTwenty) {
 		this.menuTable.setItems(db.get20RowsMenu(whichTwenty));
@@ -151,7 +150,7 @@ public class ManagerController implements Initializable {
 		this.inventoryTable.setItems(items);
 	}
 
-	public void setEmployeeScene(Scene scene) {
-		employeeScene = scene;
-	}
+	// public void setEmployeeScene(Scene scene) {
+	// employeeScene = scene;
+	// }
 }
