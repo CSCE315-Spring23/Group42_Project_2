@@ -37,6 +37,8 @@ public class EmployeeController implements Initializable {
 
 	boolean burger = false;
 	ArrayList<String> orderList = new ArrayList<String>();
+	ArrayList<CustomPair> menuItems = new ArrayList<CustomPair>();
+	ArrayList<CustomPair> inventoryItems = new ArrayList<CustomPair>();
 
 	@FXML RadioButton cNoBurg;
 	@FXML RadioButton cChipBurg;
@@ -153,6 +155,8 @@ public class EmployeeController implements Initializable {
 		 	public void handle(ActionEvent event) {
 		 		System.out.println("Placing order...");
 		 		//TO DO: UPDATE DATABASE WHEN ORDER PLACED
+				// createOrder()
+
 		 	}
 		 });
 
@@ -177,6 +181,13 @@ public class EmployeeController implements Initializable {
 					public void handle(ActionEvent event) {
 		 				System.out.println(compareToBurgerRecipe(recipe, "Rev's Burger\n"));
 		 				orderList.add(compareToBurgerRecipe(recipe, "Rev's Burger\n"));
+
+						//add revs burger to menuItems
+						CustomPair menuItemToAdd = new CustomPair(1, 1);
+						menuItems.add(menuItemToAdd);
+						//add customizations
+						// CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+						// inventoryItems.add(InventoryItemToAdd);
 		 			}
 		 		});
 		 	}
@@ -203,6 +214,12 @@ public class EmployeeController implements Initializable {
 					public void handle(ActionEvent event) {
 		 				System.out.println(compareToBurgerRecipe(recipe, "Double Cheese Burger\n"));
 		 				orderList.add(compareToBurgerRecipe(recipe, "Double Cheese Burger\n"));
+
+						 CustomPair menuItemToAdd = new CustomPair(2, 1);
+						 menuItems.add(menuItemToAdd);
+						 //add customizations
+						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+						 // inventoryItems.add(InventoryItemToAdd);
 		 			}
 		 		});
 		 	}
@@ -229,6 +246,12 @@ public class EmployeeController implements Initializable {
 					public void handle(ActionEvent event) {
 		 				System.out.println(compareToBurgerRecipe(recipe, "Classic Burger\n"));
 		 				orderList.add(compareToBurgerRecipe(recipe, "Classic Burger\n"));
+
+						 CustomPair menuItemToAdd = new CustomPair(3, 1);
+						 menuItems.add(menuItemToAdd);
+						 //add customizations
+						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+						 // inventoryItems.add(InventoryItemToAdd);
 		 			}
 		 		});
 		 	}
@@ -255,6 +278,12 @@ public class EmployeeController implements Initializable {
 					public void handle(ActionEvent event) {
 		 				System.out.println(compareToBurgerRecipe(recipe, "Bacon Cheese Burger\n"));
 		 				orderList.add(compareToBurgerRecipe(recipe, "Bacon Cheese Burger\n"));
+
+						 CustomPair menuItemToAdd = new CustomPair(4, 1);
+						 menuItems.add(menuItemToAdd);
+						 //add customizations
+						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+						 // inventoryItems.add(InventoryItemToAdd);
 		 			}
 		 		});
 		 	}
@@ -274,6 +303,12 @@ public class EmployeeController implements Initializable {
 					public void handle(ActionEvent event) {
 		 				System.out.println(compareToBasketRecipe(recipe, "Three Tender Basket\n"));
 		 				orderList.add(compareToBasketRecipe(recipe, "Three Tender Basket\n"));
+
+						 CustomPair menuItemToAdd = new CustomPair(5, 1);
+						 menuItems.add(menuItemToAdd);
+						 //add customizations
+						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+						 // inventoryItems.add(InventoryItemToAdd);
 		 			}
 		 		});
 		 	}
@@ -293,6 +328,12 @@ public class EmployeeController implements Initializable {
 					public void handle(ActionEvent event) {
 		 				System.out.println(compareToBasketRecipe(recipe, "Four Tender Basket\n"));
 		 				orderList.add(compareToBasketRecipe(recipe, "Four Tender Basket\n"));
+
+						 CustomPair menuItemToAdd = new CustomPair(6, 1);
+						 menuItems.add(menuItemToAdd);
+						 //add customizations
+						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+						 // inventoryItems.add(InventoryItemToAdd);
 		 			}
 		 		});
 		 	}
@@ -317,6 +358,12 @@ public class EmployeeController implements Initializable {
 					public void handle(ActionEvent event) {
 		 				System.out.println(compareToSanRecipe(recipe, "Gig Em Patty Melt\n"));
 		 				orderList.add(compareToSanRecipe(recipe, "Gig Em Patty Melt\n"));
+
+						 CustomPair menuItemToAdd = new CustomPair(7, 1);
+						 menuItems.add(menuItemToAdd);
+						 //add customizations
+						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+						 // inventoryItems.add(InventoryItemToAdd);
 		 			}
 		 		});
 		 	}
@@ -341,6 +388,12 @@ public class EmployeeController implements Initializable {
 					public void handle(ActionEvent event) {
 		 				System.out.println(compareToSanRecipe(recipe, "Howdy Chicken Sandwich\n"));
 		 				orderList.add(compareToSanRecipe(recipe, "Howdy Chicken Sandwich\n"));
+
+						 CustomPair menuItemToAdd = new CustomPair(8, 1);
+						 menuItems.add(menuItemToAdd);
+						 //add customizations
+						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+						 // inventoryItems.add(InventoryItemToAdd);
 		 			}
 		 		});
 		 	}
@@ -365,6 +418,12 @@ public class EmployeeController implements Initializable {
 					public void handle(ActionEvent event) {
 		 				System.out.println(compareToSanRecipe(recipe, "Chicken Tender Sandwich\n"));
 		 				orderList.add(compareToSanRecipe(recipe, "Chicken Tender Sandwich\n"));
+
+						 CustomPair menuItemToAdd = new CustomPair(9, 1);
+						 menuItems.add(menuItemToAdd);
+						 //add customizations
+						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+						 // inventoryItems.add(InventoryItemToAdd);
 		 			}
 		 		});
 		 	}
@@ -389,6 +448,12 @@ public class EmployeeController implements Initializable {
 					public void handle(ActionEvent event) {
 		 				System.out.println(compareToSanRecipe(recipe, "Grilled Cheese\n"));
 		 				orderList.add(compareToSanRecipe(recipe, "Grilled Cheese\n"));
+
+						 CustomPair menuItemToAdd = new CustomPair(10, 1);
+						 menuItems.add(menuItemToAdd);
+						 //add customizations
+						 // CustomPair InventoryItemToAdd = new CustomPair(1, -1);
+						 // inventoryItems.add(InventoryItemToAdd);
 		 			}
 		 		});
 		 	}

@@ -365,8 +365,8 @@ class CustomPair {
     public int ID;
     public int Quantity;
 
-    CustomPair(int ID, int Quantity) {
-        this.ID = ID;
-        this.Quantity = Quantity;
+    CustomPair(int iD, int quantity) {
+        this.ID = iD;
+        this.Quantity = quantity;
     }
 }
