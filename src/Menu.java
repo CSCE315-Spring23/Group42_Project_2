@@ -11,7 +11,7 @@ public class Menu {
         this.itemCost = new SimpleObjectProperty<>(cost);
     }
     
-    public SimpleObjectProperty<Long> getInventoryID(){
+    public SimpleObjectProperty<Long> getMenuID(){
         return this.menuID;
     }
     

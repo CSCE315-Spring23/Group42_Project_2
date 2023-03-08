@@ -32,8 +32,12 @@ public class Database {
     }
 
     /**
-     * Run SQL Query on database
-     */
+    *Runs a SQL command on the database and returns the results as a ResultSet.
+    *@param command the SQL command to run
+    *@return a ResultSet object containing the results of the query
+    *@throws SQLException if there is an error executing the SQL command
+    *@author Arjun
+    */
     private ResultSet runCommand(String sqlStatement) throws SQLException {
         try {
             Statement stmt = conn.createStatement();
@@ -46,8 +50,13 @@ public class Database {
     }
 
     /**
+<<<<<<< HEAD
+=======
      * 
+>>>>>>> bd10b86cec59345cb0b60afcdc9b0fb4056336ae
      * Call when done to close connection
+     * Closes the database connection and prints a message indicating whether the connection was closed.
+     * @author Arjun
      */
     public void closeDB() {
         // closing the connection
@@ -60,8 +69,11 @@ public class Database {
     }
 
     /**
-     * Retrieve the if login is a manager from the Employee table based on email.
-     */
+    * Retrieves whether a user with a specified email address is a manager.
+    * @author Daniela Santos
+    * @param email the email address of the user to check
+    * @return a boolean value indicating whether the user is a manager
+    */
     public boolean isManager(String email) {
         boolean manager = false;
         try {
@@ -80,7 +92,8 @@ public class Database {
     }
 
     /**
-     * Return the total amount of rows/items in table specified by tableName
+     * @param tableName the name of the table to retrieve the number of rows for
+     * @return an integer value representing the number of rows in the table
      */
     public int getNumRows(String tableName) {
         int rows = 0;
@@ -100,9 +113,14 @@ public class Database {
     }
 
     /**
-     * Create ArrayList of inventory items (and quantities)
-     * used in a specific day
-     */
+
+    * This method is part of a class that interacts with a database and is used to retrieve a list of inventory items (and quantities)
+    * used on a specific day. The inventory items are obtained from the RecipeItem and ItemSold tables, which store the recipes and sales
+    * data for menu items, respectively. The method returns an ArrayList of integers, where each index represents an inventory item ID and
+    * the value at that index represents the total quantity of the inventory item used on the specified day.
+    * @param date a string representing the date for which to retrieve the inventory items used
+    * @return an ArrayList of integers representing the inventory items used on the specified day
+    */
     public ArrayList<Integer> inventoryItemsUsed(String date) {
         int inventoryItemsCount = getNumRows("inventoryItem");
         ArrayList<Integer> inventoryItems = new ArrayList<>(inventoryItemsCount);
