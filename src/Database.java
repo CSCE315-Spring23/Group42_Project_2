@@ -288,6 +288,7 @@ public class Database {
      */
     public void createOrder(double cost, ArrayList<CustomPair> menuItems, ArrayList<CustomPair> inventoryItems) {
         try {
+            // get new pk of order
             int orderID = 0;
             Statement stmt2 = conn.createStatement();
             String sqlStatement1 = "SELECT MAX(order_id) FROM orders";
@@ -351,10 +352,35 @@ public class Database {
                 newItemID = result.getInt(1) + 1;
             }
 
+            // insert into item sold
             String sqlStatement2 = String.format(
                     "INSERT INTO item_sold (item_id, menu_item_id, order_id, item_sold_quantity) VALUES ('%d', '%d', '%d', '%d')",
                     newItemID, MenuId, orderID, quantity);
             stmt.executeUpdate(sqlStatement2);
+
+            // update inventory
+            String sqlStatement4 = String.format("SELECT * FROM recipe_item WHERE menu_id = %d", MenuId);
+            ResultSet result2 = stmt.executeQuery(sqlStatement4);
+            String sqlStatement3 = "";
+            ArrayList<Integer> vector1 = new ArrayList<Integer>();
+            ArrayList<Integer> vector2 = new ArrayList<Integer>();
+            while (result2.next()) {
+                vector1.add(result2.getInt("amt_used"));
+                vector2.add(result2.getInt("inventory_id"));
+                // sqlStatement3 = String.format(
+                // "UPDATE inventory_item SET inventory_item_quantity = inventory_item_quantity
+                // - %d WHERE inventory_id = %d"
+                // , Integer.parseInt(result2.getString("amt_used")),
+                // Integer.parseInt(result2.getString("inventory_id")));
+                // stmt.executeUpdate(sqlStatement3);
+            }
+            for (int i = 0; i < vector1.size(); i++) {
+                sqlStatement3 = String.format(
+                        "UPDATE inventory_item SET inventory_item_quantity = inventory_item_quantity - %d WHERE inventory_id = %d",
+                        vector1.get(i), vector2.get(i));
+                stmt.executeUpdate(sqlStatement3);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -377,10 +403,17 @@ public class Database {
                 newItemID = result.getInt(1) + 1;
             }
 
+            // insert into item_sold
             String sqlStatement2 = String.format(
                     "INSERT INTO item_sold (item_id, inventory_id, order_id, item_sold_quantity) VALUES ('%d', '%d', '%d', '%d')",
                     newItemID, InventoryId, orderID, quantity);
             stmt.executeUpdate(sqlStatement2);
+
+            String sqlStatement3 = String.format(
+                    "UPDATE inventory_item SET inventory_item_quantity = inventory_item_quantity - %d WHERE inventory_id = %d",
+                    quantity, InventoryId);
+            stmt.executeUpdate(sqlStatement3);
+
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -455,6 +488,48 @@ public class Database {
             System.exit(0);
         }
         return "";
+    }
+
+    /**
+     * Add a new menu item to Menu
+     * with menu id which is the last menu id + 1
+     */
+    public void addMenuItem(String name, double cost) {
+        try {
+            // run query
+            String sqlStatement = String.format("INSERT INTO Menu (MENU_ITEM_ID, MENU_ITEM_NAME, MENU_ITEM_COST) " +
+                    "VALUES ((SELECT MAX(MENU_ITEM_ID) FROM Menu) + 1, '%s', %f)", name, cost);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(sqlStatement);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
+    /**
+     * Add a new recipe item to Recipe
+     * with recipe id which is the last recipe id + 1
+     */
+    public void addRecipeItem(String name, int inventoryId, int menuId, int amtUsed) {
+        try {
+            // get the last recipe id
+            ResultSet result = runCommand("SELECT MAX(RECIPE_ID) as max_id FROM Recipe");
+            int lastRecipeId = 0;
+            if (result.next()) {
+                lastRecipeId = result.getInt("max_id");
+            }
+
+            // insert the new recipe item with last recipe id + 1
+            String sqlStatement = String.format("INSERT INTO Recipe (RECIPE_ID, RECIPE_ITEM_NAME, INVENTORY_ID, MENU_ID, AMT_USED) " +
+                    "VALUES (%d, '%s', %d, %d, %d)", lastRecipeId + 1, name, inventoryId, menuId, amtUsed);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(sqlStatement);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
     }
 }
 
