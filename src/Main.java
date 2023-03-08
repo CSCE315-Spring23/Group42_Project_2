@@ -9,13 +9,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class Main extends Application { // could be different
-
+public class Main extends Application {
+    /**
+     * launches the program
+     */
     public static void main(String[] args) {
 
         launch(args);
     }
 
+    /**
+     * starts the program by setting up the login, employee, and manager fxml scenes
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
         // set up login scene
