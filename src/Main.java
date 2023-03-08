@@ -9,9 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+
+/**
+ * JavaFX Main Class
+ */
 public class Main extends Application {
     /**
-     * launches the program
+     * 
      */
     public static void main(String[] args) {
 

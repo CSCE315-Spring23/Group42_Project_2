@@ -46,6 +46,10 @@ public class Database {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * 
+>>>>>>> bd10b86cec59345cb0b60afcdc9b0fb4056336ae
      * Call when done to close connection
      * Closes the database connection and prints a message indicating whether the connection was closed.
      * @author Arjun
@@ -169,7 +173,7 @@ public class Database {
      * Get blocks of 20 Rows in any table based on specified table name and
      * converts to array list
      */
-    public ArrayList<ArrayList<String>> get20Rows(String tableName, int whichTwenty) {
+    public ArrayList<ObservableList<Inventory>> get20Rows(String tableName, int whichTwenty) {
         int upperBound = (whichTwenty) * 20;
         int lowerBound = upperBound - 20;
         ArrayList<ArrayList<String>> rows = new ArrayList<>();
