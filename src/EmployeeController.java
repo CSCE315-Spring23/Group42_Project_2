@@ -22,12 +22,14 @@ import javafx.scene.control.Label;
 // import javafx.stage.Stage;
 
 public class EmployeeController implements Initializable {
-	boolean burger = false; //check it item is burger
-	ArrayList<String> orderList = new ArrayList<String>();//ArrayList for the string of orders to print at checkout
-	ArrayList<CustomPair> menuItems = new ArrayList<CustomPair>();//ArrayList for menu items to be passed into createOrder()
-	ArrayList<CustomPair> inventoryItems = new ArrayList<CustomPair>();//ArrayList for inventory items to be passed into createOrder()
-	double totalOrderCost = 0.0;//total cost per order 
-	private Database db;//database object to be used in all functions
+	boolean burger = false; // check it item is burger
+	ArrayList<String> orderList = new ArrayList<String>();// ArrayList for the string of orders to print at checkout
+	ArrayList<CustomPair> menuItems = new ArrayList<CustomPair>();// ArrayList for menu items to be passed into
+																	// createOrder()
+	ArrayList<CustomPair> inventoryItems = new ArrayList<CustomPair>();// ArrayList for inventory items to be passed
+																		// into createOrder()
+	double totalOrderCost = 0.0;// total cost per order
+	private Database db;// database object to be used in all functions
 
 	@FXML
 	Button bBurg1;
@@ -233,13 +235,12 @@ public class EmployeeController implements Initializable {
 	@FXML
 	Button placeOrder;
 
-	
 	/**
 	 * initializes databse and java fx buttons
 	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		this.db = new Database();
-
+		initNewItem();
 		System.out.println("Employee controller running");
 
 		checkoutTab.setOnSelectionChanged(new EventHandler<Event>() {
@@ -327,140 +328,140 @@ public class EmployeeController implements Initializable {
 				}
 				bCheckoutBurg.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println(compareToBurgerRecipe(recipe, "Double Cheese Burger\n"));
-		 				orderList.add(compareToBurgerRecipe(recipe, "Double Cheese Burger\n"));
+						System.out.println(compareToBurgerRecipe(recipe, "Double Cheese Burger\n"));
+						orderList.add(compareToBurgerRecipe(recipe, "Double Cheese Burger\n"));
 
-						 CustomPair menuItemToAdd = new CustomPair(2, 1);
-						 menuItems.add(menuItemToAdd);
-						 totalOrderCost += db.getPriceOfMenuItem(2);
-						//add customizations
+						CustomPair menuItemToAdd = new CustomPair(2, 1);
+						menuItems.add(menuItemToAdd);
+						totalOrderCost += db.getPriceOfMenuItem(2);
+						// add customizations
 						totalOrderCost = addToBurgerRecipe(recipe, inventoryItems, totalOrderCost);
-		 			}
-		 		});
-		 	}
-		 });
+					}
+				});
+			}
+		});
 
-		 /**
-		  * add Classic Burger to order
-		  */
-		 bBurg3.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		burger = true;
-		 		toggleOffAll();
-		 		ArrayList<RadioButton> recipe =  new ArrayList<RadioButton>();
-		 		recipe.add(cNoBurg);
-		 		recipe.add(patRegBurg);
-		 		recipe.add(cNoneBurg);
-		 		recipe.add(sNoneBurg);
-		 		recipe.add(pRegBurg);
-		 		recipe.add(lRegBurg);
-		 		recipe.add(tRegBurg);
-		 		recipe.add(oRegBurg);
-		 		recipe.add(bNoneBurg);
-		 		for(RadioButton b : recipe){
-		 			b.setSelected(true);
-		 		}
-		 		bCheckoutBurg.setOnAction(new EventHandler<ActionEvent>() {
+		/**
+		 * add Classic Burger to order
+		 */
+		bBurg3.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				burger = true;
+				toggleOffAll();
+				ArrayList<RadioButton> recipe = new ArrayList<RadioButton>();
+				recipe.add(cNoBurg);
+				recipe.add(patRegBurg);
+				recipe.add(cNoneBurg);
+				recipe.add(sNoneBurg);
+				recipe.add(pRegBurg);
+				recipe.add(lRegBurg);
+				recipe.add(tRegBurg);
+				recipe.add(oRegBurg);
+				recipe.add(bNoneBurg);
+				for (RadioButton b : recipe) {
+					b.setSelected(true);
+				}
+				bCheckoutBurg.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println(compareToBurgerRecipe(recipe, "Classic Burger\n"));
-		 				orderList.add(compareToBurgerRecipe(recipe, "Classic Burger\n"));
+						System.out.println(compareToBurgerRecipe(recipe, "Classic Burger\n"));
+						orderList.add(compareToBurgerRecipe(recipe, "Classic Burger\n"));
 
-						 CustomPair menuItemToAdd = new CustomPair(3, 1);
-						 menuItems.add(menuItemToAdd);
-						 totalOrderCost += db.getPriceOfMenuItem(3);
-						 //add customizations
-						 totalOrderCost = addToBurgerRecipe(recipe, inventoryItems, totalOrderCost);
-		 			}
-		 		});
-		 	}
-		 });
-
-		 /** 
-		  * add Bacon Cheese Burger to order
-		  */
-		 bBurg4.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		burger = true;
-		 		toggleOffAll();
-		 		ArrayList<RadioButton> recipe =  new ArrayList<RadioButton>();
-		 		recipe.add(cNoBurg);
-		 		recipe.add(patRegBurg);
-		 		recipe.add(cRegBurg);
-		 		recipe.add(sNoneBurg);
-		 		recipe.add(pNoneBurg);
-		 		recipe.add(lNoneBurg);
-		 		recipe.add(tNoneBurg);
-		 		recipe.add(oNoneBurg);
-		 		recipe.add(bRegBurg);
-				for(RadioButton b : recipe){
-		 			b.setSelected(true);
-		 		}
-		 		bCheckoutBurg.setOnAction(new EventHandler<ActionEvent>() {
-					public void handle(ActionEvent event) {
-		 				System.out.println(compareToBurgerRecipe(recipe, "Bacon Cheese Burger\n"));
-		 				orderList.add(compareToBurgerRecipe(recipe, "Bacon Cheese Burger\n"));
-
-						 CustomPair menuItemToAdd = new CustomPair(4, 1);
-						 menuItems.add(menuItemToAdd);
-						 totalOrderCost += db.getPriceOfMenuItem(4);
-						//add customizations
+						CustomPair menuItemToAdd = new CustomPair(3, 1);
+						menuItems.add(menuItemToAdd);
+						totalOrderCost += db.getPriceOfMenuItem(3);
+						// add customizations
 						totalOrderCost = addToBurgerRecipe(recipe, inventoryItems, totalOrderCost);
-		 			}
-		 		});
-		 	}
-		 });
+					}
+				});
+			}
+		});
 
-		 bThreeTender.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		toggleOffAll();
-		 		ArrayList<RadioButton> recipe =  new ArrayList<RadioButton>();
-		 		recipe.add(cNoBask);
-		 		recipe.add(gRegBask);
-		 		recipe.add(tRegBask);
-				for(RadioButton b : recipe){
-		 			b.setSelected(true);
-		 		}
-		 		bCheckoutBask.setOnAction(new EventHandler<ActionEvent>() {
+		/**
+		 * add Bacon Cheese Burger to order
+		 */
+		bBurg4.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				burger = true;
+				toggleOffAll();
+				ArrayList<RadioButton> recipe = new ArrayList<RadioButton>();
+				recipe.add(cNoBurg);
+				recipe.add(patRegBurg);
+				recipe.add(cRegBurg);
+				recipe.add(sNoneBurg);
+				recipe.add(pNoneBurg);
+				recipe.add(lNoneBurg);
+				recipe.add(tNoneBurg);
+				recipe.add(oNoneBurg);
+				recipe.add(bRegBurg);
+				for (RadioButton b : recipe) {
+					b.setSelected(true);
+				}
+				bCheckoutBurg.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println(compareToBasketRecipe(recipe, "Three Tender Basket\n"));
-		 				orderList.add(compareToBasketRecipe(recipe, "Three Tender Basket\n"));
+						System.out.println(compareToBurgerRecipe(recipe, "Bacon Cheese Burger\n"));
+						orderList.add(compareToBurgerRecipe(recipe, "Bacon Cheese Burger\n"));
 
-						 CustomPair menuItemToAdd = new CustomPair(5, 1);
-						 menuItems.add(menuItemToAdd);
-						 totalOrderCost += db.getPriceOfMenuItem(5);
-						//add customizations
+						CustomPair menuItemToAdd = new CustomPair(4, 1);
+						menuItems.add(menuItemToAdd);
+						totalOrderCost += db.getPriceOfMenuItem(4);
+						// add customizations
+						totalOrderCost = addToBurgerRecipe(recipe, inventoryItems, totalOrderCost);
+					}
+				});
+			}
+		});
+
+		bThreeTender.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				toggleOffAll();
+				ArrayList<RadioButton> recipe = new ArrayList<RadioButton>();
+				recipe.add(cNoBask);
+				recipe.add(gRegBask);
+				recipe.add(tRegBask);
+				for (RadioButton b : recipe) {
+					b.setSelected(true);
+				}
+				bCheckoutBask.setOnAction(new EventHandler<ActionEvent>() {
+					public void handle(ActionEvent event) {
+						System.out.println(compareToBasketRecipe(recipe, "Three Tender Basket\n"));
+						orderList.add(compareToBasketRecipe(recipe, "Three Tender Basket\n"));
+
+						CustomPair menuItemToAdd = new CustomPair(5, 1);
+						menuItems.add(menuItemToAdd);
+						totalOrderCost += db.getPriceOfMenuItem(5);
+						// add customizations
 						totalOrderCost = addToBasketRecipe(recipe, inventoryItems, totalOrderCost);
-		 			}
-		 		});
-		 	}
-		 });
+					}
+				});
+			}
+		});
 
-		 /**
-		  * add four tender basket to order
-		  */
-		  bFourTender.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		toggleOffAll();
-		 		ArrayList<RadioButton> recipe =  new ArrayList<RadioButton>();
-		 		recipe.add(cNoBask);
-		 		recipe.add(gRegBask);
-		 		recipe.add(tRegBask);
-				for(RadioButton b : recipe){
-		 			b.setSelected(true);
-		 		}
-		 		bCheckoutBask.setOnAction(new EventHandler<ActionEvent>() {
+		/**
+		 * add four tender basket to order
+		 */
+		bFourTender.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				toggleOffAll();
+				ArrayList<RadioButton> recipe = new ArrayList<RadioButton>();
+				recipe.add(cNoBask);
+				recipe.add(gRegBask);
+				recipe.add(tRegBask);
+				for (RadioButton b : recipe) {
+					b.setSelected(true);
+				}
+				bCheckoutBask.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println(compareToBasketRecipe(recipe, "Four Tender Basket\n"));
-		 				orderList.add(compareToBasketRecipe(recipe, "Four Tender Basket\n"));
+						System.out.println(compareToBasketRecipe(recipe, "Four Tender Basket\n"));
+						orderList.add(compareToBasketRecipe(recipe, "Four Tender Basket\n"));
 
-						 CustomPair menuItemToAdd = new CustomPair(6, 1);
-						 menuItems.add(menuItemToAdd);
-						 totalOrderCost += db.getPriceOfMenuItem(6);
-		 			}
-		 		});
-		 	}
-		 });
-		 
+						CustomPair menuItemToAdd = new CustomPair(6, 1);
+						menuItems.add(menuItemToAdd);
+						totalOrderCost += db.getPriceOfMenuItem(6);
+					}
+				});
+			}
+		});
+
 		/**
 		 * add Gig Em Patty Melt to the order
 		 */
@@ -481,16 +482,16 @@ public class EmployeeController implements Initializable {
 				}
 				bCheckoutSan.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println(compareToSanRecipe(recipe, "Gig Em Patty Melt\n"));
-		 				orderList.add(compareToSanRecipe(recipe, "Gig Em Patty Melt\n"));
+						System.out.println(compareToSanRecipe(recipe, "Gig Em Patty Melt\n"));
+						orderList.add(compareToSanRecipe(recipe, "Gig Em Patty Melt\n"));
 
-						 CustomPair menuItemToAdd = new CustomPair(7, 1);
-						 menuItems.add(menuItemToAdd);
-						 totalOrderCost += db.getPriceOfMenuItem(7);
-		 			}
-		 		});
-		 	}
-		 });
+						CustomPair menuItemToAdd = new CustomPair(7, 1);
+						menuItems.add(menuItemToAdd);
+						totalOrderCost += db.getPriceOfMenuItem(7);
+					}
+				});
+			}
+		});
 		/**
 		 * order Howdy Chicken Sandwich to the order
 		 */
@@ -511,16 +512,16 @@ public class EmployeeController implements Initializable {
 				}
 				bCheckoutSan.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println(compareToSanRecipe(recipe, "Howdy Chicken Sandwich\n"));
-		 				orderList.add(compareToSanRecipe(recipe, "Howdy Chicken Sandwich\n"));
+						System.out.println(compareToSanRecipe(recipe, "Howdy Chicken Sandwich\n"));
+						orderList.add(compareToSanRecipe(recipe, "Howdy Chicken Sandwich\n"));
 
-						 CustomPair menuItemToAdd = new CustomPair(8, 1);
-						 menuItems.add(menuItemToAdd);
-						 totalOrderCost += db.getPriceOfMenuItem(8);
-		 			}
-		 		});
-		 	}
-		 });
+						CustomPair menuItemToAdd = new CustomPair(8, 1);
+						menuItems.add(menuItemToAdd);
+						totalOrderCost += db.getPriceOfMenuItem(8);
+					}
+				});
+			}
+		});
 
 		/**
 		 * add Chicken Tender Sandwich to the order
@@ -542,16 +543,16 @@ public class EmployeeController implements Initializable {
 				}
 				bCheckoutSan.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println(compareToSanRecipe(recipe, "Chicken Tender Sandwich\n"));
-		 				orderList.add(compareToSanRecipe(recipe, "Chicken Tender Sandwich\n"));
+						System.out.println(compareToSanRecipe(recipe, "Chicken Tender Sandwich\n"));
+						orderList.add(compareToSanRecipe(recipe, "Chicken Tender Sandwich\n"));
 
-						 CustomPair menuItemToAdd = new CustomPair(9, 1);
-						 menuItems.add(menuItemToAdd);
-						 totalOrderCost += db.getPriceOfMenuItem(9);
-		 			}
-		 		});
-		 	}
-		 });
+						CustomPair menuItemToAdd = new CustomPair(9, 1);
+						menuItems.add(menuItemToAdd);
+						totalOrderCost += db.getPriceOfMenuItem(9);
+					}
+				});
+			}
+		});
 		/**
 		 * add Grilled Cheese to the order
 		 */
@@ -572,128 +573,128 @@ public class EmployeeController implements Initializable {
 				}
 				bCheckoutSan.setOnAction(new EventHandler<ActionEvent>() {
 					public void handle(ActionEvent event) {
-		 				System.out.println(compareToSanRecipe(recipe, "Grilled Cheese\n"));
-		 				orderList.add(compareToSanRecipe(recipe, "Grilled Cheese\n"));
+						System.out.println(compareToSanRecipe(recipe, "Grilled Cheese\n"));
+						orderList.add(compareToSanRecipe(recipe, "Grilled Cheese\n"));
 
-						 CustomPair menuItemToAdd = new CustomPair(10, 1);
-						 menuItems.add(menuItemToAdd);
-						 totalOrderCost += db.getPriceOfMenuItem(10);
-		 			}
-		 		});
-		 	}
-		 });
+						CustomPair menuItemToAdd = new CustomPair(10, 1);
+						menuItems.add(menuItemToAdd);
+						totalOrderCost += db.getPriceOfMenuItem(10);
+					}
+				});
+			}
+		});
 		/**
 		 * add Vanilla Ice Cream to the order
 		 */
 		vIce.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Vanilla Ice Cream\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Vanilla Ice Cream\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(14, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(14);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(14, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(14);
+			}
+		});
 
 		/**
 		 * add Chocolate Ice Cream to the order
 		 */
 		cIce.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Chocolate Ice Cream\n");
-				 CustomPair menuItemToAdd = new CustomPair(14, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(14);
-		 	}
-		 });
+			public void handle(ActionEvent event) {
+				orderList.add("Chocolate Ice Cream\n");
+				CustomPair menuItemToAdd = new CustomPair(14, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(14);
+			}
+		});
 
-		 /**
-		  * add Strawberry Ice cream to order
-		  */
+		/**
+		 * add Strawberry Ice cream to order
+		 */
 		sIce.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Strawberry Ice Cream\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Strawberry Ice Cream\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(14, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(14);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(14, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(14);
+			}
+		});
 
 		/**
 		 * add Coffee Ice Cream to order
 		 */
 		coIce.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Coffee Ice Cream\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Coffee Ice Cream\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(14, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(14);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(14, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(14);
+			}
+		});
 
 		/**
 		 * add Vanilla Milkshake to order
 		 */
 		vMilk.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Vanilla Milkshake\n");
-				 CustomPair menuItemToAdd = new CustomPair(13, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(13);
-		 	}
-		 });
+			public void handle(ActionEvent event) {
+				orderList.add("Vanilla Milkshake\n");
+				CustomPair menuItemToAdd = new CustomPair(13, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(13);
+			}
+		});
 
-		 /**
-		  * add Cofee Milkshake to order
-		  */
+		/**
+		 * add Cofee Milkshake to order
+		 */
 		coMilk.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Coffee Milkshake\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Coffee Milkshake\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(13, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(13);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(13, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(13);
+			}
+		});
 
 		/**
 		 * add Chocolate Milkshake to order
 		 */
 		cMilk.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Chocolate Milkshake\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Chocolate Milkshake\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(13, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(13);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(13, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(13);
+			}
+		});
 
 		/**
 		 * add Strawberry Milkshake to Order
 		 */
 		sMilk.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Strawberry Milkshake\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Strawberry Milkshake\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(13, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(13);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(13, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(13);
+			}
+		});
 
 		/**
 		 * add Chocolate Chunk Cookie to order
 		 */
 		cookie.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Chocolate Chunk Cookie\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Chocolate Chunk Cookie\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(15, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(15);
+				CustomPair menuItemToAdd = new CustomPair(15, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(15);
 
 			}
 		});
@@ -701,209 +702,209 @@ public class EmployeeController implements Initializable {
 		 * add Brownie to order
 		 */
 		brownie.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Brownie\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Brownie\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(16, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(16);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(16, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(16);
+			}
+		});
 		/**
 		 * add Salad to order
 		 */
 		salad.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Salad\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Salad\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(17, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(17);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(17, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(17);
+			}
+		});
 		/**
 		 * add Gig Em Sauce to the order
 		 */
 		gigem.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Gig Em Sauce\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Gig Em Sauce\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(18, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(18);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(18, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(18);
+			}
+		});
 
 		/**
 		 * add Buffalo Sauce to the order
 		 */
 		buff.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Buffalo Sauce\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Buffalo Sauce\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(18, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(18);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(18, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(18);
+			}
+		});
 		/**
 		 * add Barbeque Sauce to the order
 		 */
 		bbq.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Barbeque Sauce\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Barbeque Sauce\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(18, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(18);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(18, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(18);
+			}
+		});
 		/**
 		 * add Honey Mustard to the order
 		 */
 		hMustard.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Honey Mustard\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Honey Mustard\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(18, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(18);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(18, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(18);
+			}
+		});
 		/**
 		 * add Ranch to the order
 		 */
 		ranch.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Ranch\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Ranch\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(18, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(18);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(18, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(18);
+			}
+		});
 		/**
 		 * add Spicy Ranch to the order
 		 */
 		sRanch.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Spicy Ranch\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Spicy Ranch\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(18, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(18);
-		 	}
-		 });
-	
-		 /**
-		  * add Fountain Drink to the order
-		  */
+				CustomPair menuItemToAdd = new CustomPair(18, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(18);
+			}
+		});
+
+		/**
+		 * add Fountain Drink to the order
+		 */
 		drink.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Fountain Drink\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Fountain Drink\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(19, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(19);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(19, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(19);
+			}
+		});
 
 		/**
 		 * add Drip Coffee to the order
 		 */
 		drip.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Drip Coffee\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Drip Coffee\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(20, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(20);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(20, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(20);
+			}
+		});
 		/**
 		 * add Fries to the order
 		 */
 		fries.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Fries\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Fries\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(22, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(22);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(22, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(22);
+			}
+		});
 
 		/**
 		 * add Tater Tots to the order
 		 */
 		tTots.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Tater Tots\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Tater Tots\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(23, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(23);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(23, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(23);
+			}
+		});
 
 		/**
 		 * add Onion Rings to the order
 		 */
 		oRings.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Onion Rings\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Onion Rings\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(24, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(24);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(24, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(24);
+			}
+		});
 
 		/**
 		 * add Kettle Chips to the order
 		 */
 		kChips.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Kettle Chips\n");
+			public void handle(ActionEvent event) {
+				orderList.add("Kettle Chips\n");
 
-				 CustomPair menuItemToAdd = new CustomPair(25, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(25);
-		 	}
-		 });
+				CustomPair menuItemToAdd = new CustomPair(25, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(25);
+			}
+		});
 		/**
 		 * add Silverware to the order (happens every order)
 		 */
-		silverware.setOnAction(new EventHandler<ActionEvent>() {
-		 	public void handle(ActionEvent event) {
-		 		orderList.add("Silverware\n");
-				
-				 CustomPair menuItemToAdd = new CustomPair(26, 1);
-				 menuItems.add(menuItemToAdd);
-				 totalOrderCost += db.getPriceOfMenuItem(26);
-		 	}
-		 });
+		// silverware.setOnAction(new EventHandler<ActionEvent>() {
+		// public void handle(ActionEvent event) {
+		// orderList.add("Silverware\n");
 
-		 onActionGroups(cNoBurg, cChipBurg, cFriesBurg);
-		 onActionGroups(patRegBurg, patBeanBurg, patDoubleBurg);
-		 onActionGroups(cNoneBurg, cRegBurg, cExtraBurg);
-		 onActionGroups(sNoneBurg, sRegBurg);
-		 onActionGroups(pNoneBurg, pRegBurg, pExtraBurg);
-		 onActionGroups(lNoneBurg, lRegBurg, lExtraBurg);
-		 onActionGroups(tNoneBurg, tRegBurg, tExtraBurg);
-		 onActionGroups(oNoneBurg, oRegBurg, oExtraBurg);
-		 onActionGroups(bNoneBurg, bRegBurg, bExtraBurg);
-		 onActionGroups(cNoBask, cYesBask);
-		 onActionGroups(gNoneBask, gRegBask, gExtraBask);
-		 onActionGroups(tNoneBask, tRegBask, tExtraBask);
-		 onActionGroups(cNoSan, cChipSan, cFriesSan);
-		 onActionGroups(patRegSan, patBeanSan, patChickenSan);
-		 onActionGroups(cNoneSan, cRegSan, cExtraSan);
-		 onActionGroups(sNoneSan, sRevSan, sSpicySan);
-		 onActionGroups(pNoneSan, pRegSan, pExtraSan);
-		 onActionGroups(lNoneSan, lRegSan, lExtraSan);
-		 onActionGroups(tNoneSan, tRegSan, tExtraSan);
-		 onActionGroups(oNoneSan, oRegSan, oExtraSan);
+		// CustomPair menuItemToAdd = new CustomPair(26, 1);
+		// menuItems.add(menuItemToAdd);
+		// totalOrderCost += db.getPriceOfMenuItem(26);
+		// }
+		// });
+
+		onActionGroups(cNoBurg, cChipBurg, cFriesBurg);
+		onActionGroups(patRegBurg, patBeanBurg, patDoubleBurg);
+		onActionGroups(cNoneBurg, cRegBurg, cExtraBurg);
+		onActionGroups(sNoneBurg, sRegBurg);
+		onActionGroups(pNoneBurg, pRegBurg, pExtraBurg);
+		onActionGroups(lNoneBurg, lRegBurg, lExtraBurg);
+		onActionGroups(tNoneBurg, tRegBurg, tExtraBurg);
+		onActionGroups(oNoneBurg, oRegBurg, oExtraBurg);
+		onActionGroups(bNoneBurg, bRegBurg, bExtraBurg);
+		onActionGroups(cNoBask, cYesBask);
+		onActionGroups(gNoneBask, gRegBask, gExtraBask);
+		onActionGroups(tNoneBask, tRegBask, tExtraBask);
+		onActionGroups(cNoSan, cChipSan, cFriesSan);
+		onActionGroups(patRegSan, patBeanSan, patChickenSan);
+		onActionGroups(cNoneSan, cRegSan, cExtraSan);
+		onActionGroups(sNoneSan, sRevSan, sSpicySan);
+		onActionGroups(pNoneSan, pRegSan, pExtraSan);
+		onActionGroups(lNoneSan, lRegSan, lExtraSan);
+		onActionGroups(tNoneSan, tRegSan, tExtraSan);
+		onActionGroups(oNoneSan, oRegSan, oExtraSan);
 
 	}
 
@@ -952,7 +953,7 @@ public class EmployeeController implements Initializable {
 
 	/**
 	 * @Ariela
-	 * turn all buttons off
+	 *         turn all buttons off
 	 */
 	void toggleOffAll() {
 		cNoBurg.setSelected(false);
@@ -1017,6 +1018,7 @@ public class EmployeeController implements Initializable {
 
 	/**
 	 * compares recipe to order to check for modifications
+	 * 
 	 * @Ariela
 	 * @param recipe
 	 * @param out
@@ -1096,6 +1098,7 @@ public class EmployeeController implements Initializable {
 
 	/**
 	 * executes changes to burger recipe
+	 * 
 	 * @Srikar
 	 * @param recipe
 	 * @param inventoryItems
@@ -1163,7 +1166,7 @@ public class EmployeeController implements Initializable {
 			// out += "No Pickles\n";
 			CustomPair inventoryItemToAdd = new CustomPair(5, -1);
 			inventoryItems.add(inventoryItemToAdd);
-		} else if(checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 2) {
+		} else if (checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 2) {
 			// out += "Add Pickles\n";
 		} else if (checkChanged(pNoneBurg, pRegBurg, pExtraBurg, recipe.get(4)) == 3) {
 			// out += "Extra Pickles\n";
@@ -1176,7 +1179,7 @@ public class EmployeeController implements Initializable {
 			// out += "No Lettuce\n";
 			CustomPair inventoryItemToAdd = new CustomPair(6, -1);
 			inventoryItems.add(inventoryItemToAdd);
-		} else if(checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 2) {
+		} else if (checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 2) {
 			// out += "Add Lettuce\n";
 		} else if (checkChanged(lNoneBurg, lRegBurg, lExtraBurg, recipe.get(5)) == 3) {
 			// out += "Extra Lettuce\n";
@@ -1189,7 +1192,7 @@ public class EmployeeController implements Initializable {
 			// out += "No Tomato\n";
 			CustomPair inventoryItemToAdd = new CustomPair(7, -1);
 			inventoryItems.add(inventoryItemToAdd);
-		} else if(checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 2) {
+		} else if (checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 2) {
 			// out += "Add Tomato\n";
 		} else if (checkChanged(tNoneBurg, tRegBurg, tExtraBurg, recipe.get(6)) == 3) {
 			// out += "Extra Tomato\n";
@@ -1202,7 +1205,7 @@ public class EmployeeController implements Initializable {
 			// out += "No Onion\n";
 			CustomPair inventoryItemToAdd = new CustomPair(8, -1);
 			inventoryItems.add(inventoryItemToAdd);
-		} else if(checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 2) {
+		} else if (checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 2) {
 			// out += "Add Onion\n";
 		} else if (checkChanged(oNoneBurg, oRegBurg, oExtraBurg, recipe.get(7)) == 3) {
 			// out += "Extra Onion\n";
@@ -1215,7 +1218,7 @@ public class EmployeeController implements Initializable {
 			// out += "No Bacon\n";
 			CustomPair inventoryItemToAdd = new CustomPair(10, -1);
 			inventoryItems.add(inventoryItemToAdd);
-		} else if(checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 2) {
+		} else if (checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 2) {
 			// out += "Add Bacon\n";
 		} else if (checkChanged(bNoneBurg, bRegBurg, bExtraBurg, recipe.get(8)) == 3) {
 			// out += "Extra Bacon\n";
@@ -1228,6 +1231,7 @@ public class EmployeeController implements Initializable {
 
 	/**
 	 * runs comparison to recipe for modifications
+	 * 
 	 * @author Ariela
 	 * @param recipe
 	 * @param out
@@ -1262,7 +1266,8 @@ public class EmployeeController implements Initializable {
 	 * @param out
 	 * @return
 	 */
-	double addToBasketRecipe(ArrayList<RadioButton> recipe, ArrayList<CustomPair> inventoryItems, double totalOrderCost) {
+	double addToBasketRecipe(ArrayList<RadioButton> recipe, ArrayList<CustomPair> inventoryItems,
+			double totalOrderCost) {
 		// String out = "";
 		if (!recipe.get(0).isSelected()) {
 			if (cYesBask.isSelected()) {
@@ -1298,8 +1303,24 @@ public class EmployeeController implements Initializable {
 		return totalOrderCost;
 	}
 
+	void initNewItem() {
+		if (db.getNumRows("menu") > 26) {
+			silverware.setText(db.getNameFromID(27));
+			silverware.setOnAction(new EventHandler<ActionEvent>() {
+				public void handle(ActionEvent event) {
+					orderList.add(db.getNameFromID(27) + "\n");
+
+					CustomPair menuItemToAdd = new CustomPair(27, 1);
+					menuItems.add(menuItemToAdd);
+					totalOrderCost += db.getPriceOfMenuItem(27);
+				}
+			});
+		}
+	}
+
 	/**
 	 * compares sandwich recipe to sandwich order for changes
+	 * 
 	 * @author Ariela
 	 * @param recipe
 	 * @param out
@@ -1372,14 +1393,15 @@ public class EmployeeController implements Initializable {
 
 	double addToSanRecipe(ArrayList<RadioButton> recipe, ArrayList<CustomPair> inventoryItems, double totalOrderCost) {
 		// String out = "";
-		if ((checkChanged(cNoSan, cChipSan, cRegSan, recipe.get(0)) == 2) || (checkChanged(patRegSan, patBeanSan, patChickenSan, recipe.get(1)) == 3)) {
+		if ((checkChanged(cNoSan, cChipSan, cRegSan, recipe.get(0)) == 2)
+				|| (checkChanged(patRegSan, patBeanSan, patChickenSan, recipe.get(1)) == 3)) {
 			// out += "Combo with chips\n";
 			CustomPair menuItemToAdd = new CustomPair(11, 1);
 			menuItems.add(menuItemToAdd);
 			totalOrderCost += db.getPriceOfMenuItem(11);
-		} 
+		}
 		// else if (checkChanged(cNoSan, cChipSan, cRegSan, recipe.get(0)) == 3) {
-		// 	out += "Combo with fries\n";
+		// out += "Combo with fries\n";
 		// }
 
 		if (checkChanged(patRegSan, patBeanSan, patChickenSan, recipe.get(1)) == 2) {
@@ -1482,6 +1504,7 @@ public class EmployeeController implements Initializable {
 	/**
 	 * 0 for default, 1 if none, 2 if extra
 	 * for combo, 2 is chips and 3 is fries
+	 * 
 	 * @Ariela
 	 * @param b1
 	 * @param b2
