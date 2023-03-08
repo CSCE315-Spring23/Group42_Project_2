@@ -361,9 +361,9 @@ public class Database {
     }
 }
 
-/** 
-* Class to store Id and Quantity within the Database function
-*/
+/**
+  Class to store Id and Quantity within the Database functio
+ /
 class CustomPair {
     public int ID;
     public int Quantity;
