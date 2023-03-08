@@ -87,6 +87,8 @@ public class ManagerController implements Initializable {
 				itemName = itemName.strip();
 				newCost = newCost.strip();
 				db.changePrice(itemName, Double.parseDouble(newCost));
+				updateMenuTable(0);
+				menuTable.refresh();
 			}
 		});
 
