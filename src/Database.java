@@ -622,7 +622,37 @@ public class Database {
         }
     }
 
-
+    // /**
+    //  * Creates Sales History list to display in manager UI
+    //  * @param initialDate lowerbound for sales history interval
+    //  * @param finalDate upperbound for sales history interval
+    //  */
+    // public ObservableList<SaleData> salesHistory(String initialDate, String finalDate) {
+    //     ObservableList<SaleData> saleData = FXCollections.observableArrayList();
+    //     try {
+    //         // Get the sales data for the given time window
+    //         ResultSet result = runCommand("SELECT Menu.MENU_ITEM_ID, Menu.MENU_ITEM_NAME, SUM(ItemSold.ITEM_SOLD_QUANTITY) AS TOTAL_QUANTITY FROM ItemSold " +
+    //                                     "JOIN Menu ON Menu.MENU_ITEM_ID = ItemSold.MENU_ITEM_ID " +
+    //                                     "JOIN Orders ON Orders.ORDER_ID = ItemSold.ORDER_ID " +
+    //                                     "WHERE Orders.DATE_ORDERED BETWEEN '" + initialDate + "' AND '" + finalDate + "' " +
+    //                                     "GROUP BY Menu.MENU_ITEM_ID, Menu.MENU_ITEM_NAME;");
+            
+    //         // Parse the sales data into a list of SaleData objects
+    //         while (result.next()) {
+    //             int menuItemId = result.getInt("MENU_ITEM_ID");
+    //             String menuItemName = result.getString("MENU_ITEM_NAME");
+    //             int totalQuantity = result.getInt("TOTAL_QUANTITY");
+    //             SaleData data = new SaleData(menuItemId, menuItemName, totalQuantity);
+    //             saleData.add(data);
+    //         }
+            
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+    //         System.exit(0);
+    //     }
+    //     return saleData;
+    // }
 }
 
 /**

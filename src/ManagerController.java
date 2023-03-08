@@ -170,6 +170,22 @@ public class ManagerController implements Initializable {
 		this.inventoryTable.setItems(items);
 	}
 
+	// private void setUpSalesHistoryTable(String initialDate, String finalDate) {
+	// 	this.menuItemIdCol.setCellValueFactory(cellData -> cellData.getValue().getMenuItemId());
+	// 	this.menuItemNameCol.setCellValueFactory(cellData -> cellData.getValue().getMenuItemName());
+	// 	this.totalQuantityCol.setCellValueFactory(cellData -> cellData.getValue().getTotalQuantity());
+		
+	// 	final ObservableList<SaleData> salesData = db.salesHistory("01/01/2022", "01/01/2022");
+		
+	// 	this.salesTable.setItems(salesData);
+	// }
+
+	// private void updateSalesHistoryTable(String initialDate, int finalDate) {
+	// 	this.salesHistoryTable.setItems(db.getSalesHistory(initialDate, finalDate));
+	// 	this.salesHistoryTable.refresh();
+	// }
+
+
 	// public void setEmployeeScene(Scene scene) {
 	// employeeScene = scene;
 	// }
