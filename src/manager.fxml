@@ -45,5 +45,14 @@
                </children></AnchorPane>
       </content>
     </Tab>
+      <Tab text="Switch to Employee View">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="switchView" layoutX="257.0" layoutY="197.0" mnemonicParsing="false" text="Switch" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
   </tabs>
 </TabPane>
