@@ -27,13 +27,9 @@ import javafx.stage.Stage;
 
 public class ManagerController implements Initializable {
 	@FXML
-	private Button viewMenu;
-	@FXML
 	private Button addMenu;
 	@FXML
 	private Button updateMenu;
-	@FXML
-	private Button viewInventory;
 	@FXML
 	private Button addInventory;
 	@FXML
@@ -71,12 +67,6 @@ public class ManagerController implements Initializable {
 		this.inventoryTable.refresh();
 		this.menuTable.refresh();
 		System.out.println("we get here");
-		viewMenu.setOnAction(new EventHandler<ActionEvent>() {
-
-			public void handle(ActionEvent event) {
-				System.out.println("Manager click");
-			}
-		});
 
 		addMenu.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -85,12 +75,6 @@ public class ManagerController implements Initializable {
 		});
 
 		updateMenu.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				System.out.println("Manager click");
-			}
-		});
-
-		viewInventory.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				System.out.println("Manager click");
 			}

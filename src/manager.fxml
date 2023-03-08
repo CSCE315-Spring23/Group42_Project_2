@@ -13,15 +13,14 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="addInventory" layoutX="215.0" layoutY="36.0" mnemonicParsing="false" text="Add Invetory" />
-                  <Button fx:id="viewInventory" layoutX="86.0" layoutY="36.0" mnemonicParsing="false" text="View Inventory" />
-                  <Button fx:id="updateInventory" layoutX="340.0" layoutY="36.0" mnemonicParsing="false" text="Update Inventory" />
-                  <TableView fx:id="inventoryTable" layoutX="81.0" layoutY="85.0" prefHeight="255.0" prefWidth="435.0">
+                  <Button fx:id="addInventory" layoutX="71.0" layoutY="14.0" mnemonicParsing="false" text="Add Invetory" />
+                  <Button fx:id="updateInventory" layoutX="168.0" layoutY="14.0" mnemonicParsing="false" text="Update Inventory" />
+                  <TableView fx:id="inventoryTable" layoutX="22.0" layoutY="51.0" prefHeight="309.0" prefWidth="555.0">
                     <columns>
-                      <TableColumn fx:id="inventoryID" prefWidth="113.33334350585938" text="INVENTORY_ID" />
-                      <TableColumn fx:id="inventoryItemName" prefWidth="90.0" text="ITEM_NAME" />
-                        <TableColumn fx:id="inventoryItemCost" prefWidth="96.6666259765625" text="ITEM_COST" />
-                        <TableColumn fx:id="inventoryItemQty" prefWidth="134.00002034505206" text="ITEM_QUANTITY" />
+                      <TableColumn fx:id="inventoryID" prefWidth="104.0" text="INVENTORY_ID" />
+                      <TableColumn fx:id="inventoryItemName" prefWidth="186.66665649414062" text="ITEM_NAME" />
+                        <TableColumn fx:id="inventoryItemCost" prefWidth="103.33331298828125" text="ITEM_COST" />
+                        <TableColumn fx:id="inventoryItemQty" prefWidth="160.66668701171875" text="ITEM_QUANTITY" />
                     </columns>
                   </TableView>
                </children></AnchorPane>
@@ -31,14 +30,13 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="viewMenu" layoutX="93.0" layoutY="48.0" mnemonicParsing="false" text="View Menu" />
-                  <Button fx:id="addMenu" layoutX="220.0" layoutY="48.0" mnemonicParsing="false" text="Add Menu" />
-                  <Button fx:id="updateMenu" layoutX="340.0" layoutY="48.0" mnemonicParsing="false" text="Update Menu" />
-                  <TableView fx:id="menuTable" layoutX="93.0" layoutY="103.0" prefHeight="211.0" prefWidth="369.0">
+                  <Button fx:id="addMenu" layoutX="50.0" layoutY="14.0" mnemonicParsing="false" text="Add Menu" />
+                  <Button fx:id="updateMenu" layoutX="135.0" layoutY="14.0" mnemonicParsing="false" text="Update Menu" />
+                  <TableView fx:id="menuTable" layoutX="81.0" layoutY="47.0" prefHeight="310.0" prefWidth="438.0">
                     <columns>
-                      <TableColumn fx:id="menuID" prefWidth="75.0" text="MENU_ID" />
-                        <TableColumn fx:id="menuItemName" prefWidth="75.0" text="ITEM_NAME" />
-                      <TableColumn fx:id="menuItemCost" prefWidth="75.0" text="ITEM_COST" />
+                      <TableColumn fx:id="menuID" prefWidth="83.33328247070312" text="MENU_ID" />
+                        <TableColumn fx:id="menuItemName" prefWidth="130.66668701171875" text="ITEM_NAME" />
+                      <TableColumn fx:id="menuItemCost" prefWidth="100.0" text="ITEM_COST" />
                     </columns>
                   </TableView>
                </children></AnchorPane>
