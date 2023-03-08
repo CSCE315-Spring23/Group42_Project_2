@@ -22,12 +22,12 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class EmployeeController implements Initializable {
-	boolean burger = false;
-	ArrayList<String> orderList = new ArrayList<String>();
-	ArrayList<CustomPair> menuItems = new ArrayList<CustomPair>();
-	ArrayList<CustomPair> inventoryItems = new ArrayList<CustomPair>();
-	double totalOrderCost = 0.0;
-	private Database db;
+	boolean burger = false; //check it item is burger
+	ArrayList<String> orderList = new ArrayList<String>();//ArrayList for the string of orders to print at checkout
+	ArrayList<CustomPair> menuItems = new ArrayList<CustomPair>();//ArrayList for menu items to be passed into createOrder()
+	ArrayList<CustomPair> inventoryItems = new ArrayList<CustomPair>();//ArrayList for inventory items to be passed into createOrder()
+	double totalOrderCost = 0.0;//total cost per order 
+	private Database db;//database object to be used in all functions
 
 	@FXML
 	Button bBurg1;
@@ -233,8 +233,9 @@ public class EmployeeController implements Initializable {
 	@FXML
 	Button placeOrder;
 
+	
 	/**
-	 * initialize the scene
+	 * initializa databse and java fx buttons
 	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		this.db = new Database();
@@ -339,6 +340,9 @@ public class EmployeeController implements Initializable {
 		 	}
 		 });
 
+		 /**
+		  * add Classic Burger to order
+		  */
 		 bBurg3.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		burger = true;
@@ -371,6 +375,9 @@ public class EmployeeController implements Initializable {
 		 	}
 		 });
 
+		 /** 
+		  * add Bacon Cheese Burger to order
+		  */
 		 bBurg4.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		burger = true;
@@ -428,6 +435,9 @@ public class EmployeeController implements Initializable {
 		 	}
 		 });
 
+		 /**
+		  * add four tender basket to order
+		  */
 		  bFourTender.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		toggleOffAll();
@@ -597,6 +607,9 @@ public class EmployeeController implements Initializable {
 		 	}
 		 });
 
+		 /**
+		  * add Strawberry Ice cream to order
+		  */
 		sIce.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Strawberry Ice Cream\n");
@@ -632,6 +645,9 @@ public class EmployeeController implements Initializable {
 		 	}
 		 });
 
+		 /**
+		  * add Cofee Milkshake to order
+		  */
 		coMilk.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Coffee Milkshake\n");
@@ -779,6 +795,9 @@ public class EmployeeController implements Initializable {
 		 	}
 		 });
 	
+		 /**
+		  * add Fountain Drink to the order
+		  */
 		drink.setOnAction(new EventHandler<ActionEvent>() {
 		 	public void handle(ActionEvent event) {
 		 		orderList.add("Fountain Drink\n");
@@ -888,6 +907,12 @@ public class EmployeeController implements Initializable {
 
 	}
 
+	/**
+	 * 
+	 * @param b1
+	 * @param b2
+	 * @param b3
+	 */
 	void onActionGroups(RadioButton b1, RadioButton b2, RadioButton b3) {
 		b1.setOnAction(new EventHandler<ActionEvent>() { // combo for burger
 			public void handle(ActionEvent event) {
@@ -926,6 +951,7 @@ public class EmployeeController implements Initializable {
 	}
 
 	/**
+	 * @Ariela
 	 * turn all buttons off
 	 */
 	void toggleOffAll() {
@@ -991,7 +1017,7 @@ public class EmployeeController implements Initializable {
 
 	/**
 	 * compares recipe to order to check for modifications
-	 * 
+	 * @Ariela
 	 * @param recipe
 	 * @param out
 	 * @return
@@ -1070,7 +1096,7 @@ public class EmployeeController implements Initializable {
 
 	/**
 	 * executes changes to burger recipe
-	 * 
+	 * @Srikar
 	 * @param recipe
 	 * @param inventoryItems
 	 * @param totalOrderCost
@@ -1202,7 +1228,7 @@ public class EmployeeController implements Initializable {
 
 	/**
 	 * runs comparison to recipe for modifications
-	 * 
+	 * @author Ariela
 	 * @param recipe
 	 * @param out
 	 * @return
@@ -1232,7 +1258,7 @@ public class EmployeeController implements Initializable {
 
 	/**
 	 * compares sandwich recipe to sandwich order for changes
-	 * 
+	 * @author Ariela
 	 * @param recipe
 	 * @param out
 	 * @return
@@ -1305,7 +1331,7 @@ public class EmployeeController implements Initializable {
 	/**
 	 * 0 for default, 1 if none, 2 if extra
 	 * for combo, 2 is chips and 3 is fries
-	 * 
+	 * @Ariela
 	 * @param b1
 	 * @param b2
 	 * @param b3
