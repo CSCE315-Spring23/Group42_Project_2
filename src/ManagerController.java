@@ -34,6 +34,10 @@ public class ManagerController implements Initializable {
 	private Button addInventory;
 	@FXML
 	private Button updateInventory;
+	// @FXML
+	// TextField fItemName;
+	// @FXML
+	// TextField fCost;
 
 	private Database db;
 
