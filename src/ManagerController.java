@@ -42,6 +42,20 @@ public class ManagerController implements Initializable {
 	// private TableColumn<Class, String> menuID;
 	// private TableColumn<Class, String> menuItemName;
 	// private TableColumn<Class, String> menuItemCost;
+	@FXML
+	private TableColumn<Inventory, Long> inventoryID;
+	@FXML
+	private TableColumn<Inventory, String> inventoryItemName;
+	@FXML
+	private TableColumn<Inventory, Double> inventoryItemCost;
+	@FXML
+	private TableColumn<Inventory, Long> inventoryItemQty;
+	@FXML
+	private TableColumn<Menu, Long> menuID;
+	@FXML
+	private TableColumn<Menu, String> menuItemName;
+	@FXML
+	private TableColumn<Menu, Double> menuItemCost;
 
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println("Manager controller running");
