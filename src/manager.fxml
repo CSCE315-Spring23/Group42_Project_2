@@ -5,17 +5,18 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ManagerController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ManagerController">
   <tabs>
     <Tab text="Inventory">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="addInventory" layoutX="71.0" layoutY="14.0" mnemonicParsing="false" text="Add Invetory" />
+                  <Button fx:id="addInventory" layoutX="71.0" layoutY="14.0" mnemonicParsing="false" text="Add Inventory" />
                   <Button fx:id="updateInventory" layoutX="168.0" layoutY="14.0" mnemonicParsing="false" text="Update Inventory" />
-                  <TableView fx:id="inventoryTable" layoutX="22.0" layoutY="51.0" prefHeight="309.0" prefWidth="555.0">
+                  <TableView fx:id="inventoryTable" layoutX="22.0" layoutY="102.0" prefHeight="319.0" prefWidth="555.0">
                     <columns>
                       <TableColumn fx:id="inventoryID" prefWidth="104.0" text="INVENTORY_ID" />
                       <TableColumn fx:id="inventoryItemName" prefWidth="186.66665649414062" text="ITEM_NAME" />
@@ -30,17 +31,29 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="addMenu" layoutX="50.0" layoutY="14.0" mnemonicParsing="false" text="Add Menu" />
-                  <Button fx:id="updateMenu" layoutX="135.0" layoutY="14.0" mnemonicParsing="false" text="Update Menu" />
-                  <TableView fx:id="menuTable" layoutX="81.0" layoutY="47.0" prefHeight="310.0" prefWidth="438.0">
+                  <Button fx:id="updateMenu" layoutX="379.0" layoutY="79.0" mnemonicParsing="false" text="Update Menu" />
+                  <TableView fx:id="menuTable" layoutX="81.0" layoutY="122.0" prefHeight="289.0" prefWidth="438.0">
                     <columns>
                       <TableColumn fx:id="menuID" prefWidth="83.33328247070312" text="MENU_ID" />
                         <TableColumn fx:id="menuItemName" prefWidth="130.66668701171875" text="ITEM_NAME" />
                       <TableColumn fx:id="menuItemCost" prefWidth="100.0" text="ITEM_COST" />
                     </columns>
                   </TableView>
+                  <TextField fx:id="fItemName" layoutX="379.0" layoutY="14.0" promptText="Item ID" />
+                  <TextField fx:id="fCost" layoutX="379.0" layoutY="46.0" promptText="Price" />
+                  <TextField fx:id="fName" layoutX="214.0" layoutY="14.0" promptText="Item Name" />
+                  <Button fx:id="addMenu" layoutX="214.0" layoutY="67.0" mnemonicParsing="false" text="Add Menu" />
                </children></AnchorPane>
       </content>
     </Tab>
+      <Tab text="Switch to Employee View">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button layoutX="257.0" layoutY="197.0" mnemonicParsing="false" text="Switch" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
   </tabs>
 </TabPane>

@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -34,6 +35,10 @@ public class ManagerController implements Initializable {
 	private Button addInventory;
 	@FXML
 	private Button updateInventory;
+	@FXML
+	TextField fItemName;
+	@FXML
+	TextField fCost;
 
 	private Database db;
 
@@ -56,6 +61,11 @@ public class ManagerController implements Initializable {
 	@FXML
 	private TableColumn<Menu, Double> menuItemCost;
 
+	// @FXML
+	// private Button switchView;
+	//
+	// private Scene employeeScene;
+
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println("Manager controller running");
 		this.db = new Database();
@@ -66,7 +76,6 @@ public class ManagerController implements Initializable {
 		this.updateMenuTable(0);
 		this.inventoryTable.refresh();
 		this.menuTable.refresh();
-		System.out.println("we get here");
 
 		addMenu.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -77,6 +86,13 @@ public class ManagerController implements Initializable {
 		updateMenu.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				System.out.println("Manager click");
+				String newCost = fCost.getText();
+				String itemName = fItemName.getText();
+				itemName = itemName.strip();
+				newCost = newCost.strip();
+				db.changePrice(itemName, Double.parseDouble(newCost));
+				updateMenuTable(0);
+				menuTable.refresh();
 			}
 		});
 
@@ -92,7 +108,17 @@ public class ManagerController implements Initializable {
 			}
 		});
 
+		// switchView.setOnAction(new EventHandler<ActionEvent>() {
+		// public void handle(ActionEvent event) {
+		// openEmployeeScene();
+		// }
+		// });
+
 	}
+	// public void openEmployeeScene() {
+	// Stage stage = (Stage) (switchView.getScene().getWindow());
+	// stage.setScene(employeeScene);
+	// }
 
 	private void updateMenuTable(int whichTwenty) {
 		this.menuTable.setItems(db.get20RowsMenu(whichTwenty));
@@ -123,4 +149,7 @@ public class ManagerController implements Initializable {
 		this.inventoryTable.setItems(items);
 	}
 
+	// public void setEmployeeScene(Scene scene) {
+	// employeeScene = scene;
+	// }
 }
