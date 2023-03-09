@@ -515,7 +515,7 @@ public class Database {
     public void addRecipeItem(String name, int inventoryId, int menuId, int amtUsed) {
         try {
             // get the last recipe id
-            ResultSet result = runCommand("SELECT MAX(RECIPE_ID) as max_id FROM Recipe");
+            ResultSet result = runCommand("SELECT MAX(RECIPE_ID) as max_id FROM Recipe_item");
             int lastRecipeId = 0;
             if (result.next()) {
                 lastRecipeId = result.getInt("max_id");
@@ -523,7 +523,7 @@ public class Database {
 
             // insert the new recipe item with last recipe id + 1
             String sqlStatement = String
-                    .format("INSERT INTO Recipe (RECIPE_ID, RECIPE_ITEM_NAME, INVENTORY_ID, MENU_ID, AMT_USED) " +
+                    .format("INSERT INTO Recipe_item (RECIPE_ID, RECIPE_ITEM_NAME, INVENTORY_ID, MENU_ID, AMT_USED) " +
                             "VALUES (%d, '%s', %d, %d, %d)", lastRecipeId + 1, name, inventoryId, menuId, amtUsed);
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(sqlStatement);
@@ -535,20 +535,19 @@ public class Database {
     }
 
     public String getNameFromID(int id) {
-        try{
-        ResultSet result = runCommand("SELECT menu_item_name FROM menu WHERE MENU_ITEM_ID = " + id);
-        if (result.next()) {
-            
-            return result.getString("MENU_ITEM_NAME");
+        try {
+            ResultSet result = runCommand("SELECT menu_item_name FROM menu WHERE MENU_ITEM_ID = " + id);
+            if (result.next()) {
+
+                return result.getString("MENU_ITEM_NAME");
 
             }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
         }
-        return ""; 
+        return "";
     }
 }
 

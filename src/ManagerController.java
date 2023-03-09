@@ -99,8 +99,8 @@ public class ManagerController implements Initializable {
 
 		addRecipeItem.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				db.addRecipeItem(itemName.getText(), Integer.parseInt(inventoryId.getText()),
-						Integer.parseInt(menuId.getText()), Integer.parseInt(amountUsed.getText()));
+				db.addRecipeItem(itemName.getText().strip(), Integer.parseInt(inventoryId.getText().strip()),
+						Integer.parseInt(menuId.getText().strip()), Integer.parseInt(amountUsed.getText().strip()));
 			}
 		});
 
