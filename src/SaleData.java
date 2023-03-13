@@ -1,6 +1,6 @@
 import javafx.beans.property.SimpleObjectProperty;
 
-public static class SaleData {
+public class SaleData {
     private SimpleObjectProperty<Integer> menuItemId;
     private SimpleObjectProperty<String> menuItemName;
     private SimpleObjectProperty<Integer> totalQuantity;

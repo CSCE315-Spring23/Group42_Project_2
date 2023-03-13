@@ -602,7 +602,7 @@ public class Database {
     public void changeInventoryQuantity(String itemName, int newQuantity) {
         try {
             // Get the maximum inventory ID from the table
-            ResultSet result = runQuery("SELECT MAX(INVENTORY_ID) FROM InventoryItem");
+            ResultSet result = runCommand("SELECT MAX(INVENTORY_ID) FROM InventoryItem");
             result.next();
             int maxId = result.getInt(1);
             
