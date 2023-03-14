@@ -32,11 +32,17 @@ public class ManagerController implements Initializable {
 	@FXML
 	private Button updateMenu;
 	@FXML
-	private Button addInventory;
+	private Button bAddInventory;
 	@FXML
-	private Button updateInventory;
+	private Button bUpdateInventory;
+	@FXML
+	TextField fInventoryID;
 	@FXML
 	TextField fItemName;
+	@FXML
+	TextField fItemCost;
+	@FXML
+	TextField fItemQuantity;
 	@FXML
 	TextField fCost;
 
@@ -117,13 +123,15 @@ public class ManagerController implements Initializable {
 			}
 		});
 
-		addInventory.setOnAction(new EventHandler<ActionEvent>() {
+		bAddInventory.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				System.out.println("Manager click");
+				if(fItemName.getText().strip() == "") {
+					System.out.println("Missing Item Name");
+				}
 			}
 		});
 
-		updateInventory.setOnAction(new EventHandler<ActionEvent>() {
+		bUpdateInventory.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				System.out.println("Manager click");
 			}

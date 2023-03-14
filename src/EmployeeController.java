@@ -229,6 +229,15 @@ public class EmployeeController implements Initializable {
 	Button silverware;
 
 	@FXML
+	Button sb1;
+	@FXML
+	Button sb2;
+	@FXML
+	Button sb3;
+	@FXML
+	Button sb4;
+
+	@FXML
 	Tab checkoutTab;
 	@FXML
 	Label orderListLabel;
@@ -875,15 +884,15 @@ public class EmployeeController implements Initializable {
 		/**
 		 * add Silverware to the order (happens every order)
 		 */
-		// silverware.setOnAction(new EventHandler<ActionEvent>() {
-		// public void handle(ActionEvent event) {
-		// orderList.add("Silverware\n");
+		silverware.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				orderList.add("Silverware\n");
 
-		// CustomPair menuItemToAdd = new CustomPair(26, 1);
-		// menuItems.add(menuItemToAdd);
-		// totalOrderCost += db.getPriceOfMenuItem(26);
-		// }
-		// });
+				CustomPair menuItemToAdd = new CustomPair(26, 1);
+				menuItems.add(menuItemToAdd);
+				totalOrderCost += db.getPriceOfMenuItem(26);
+			}
+		});
 
 		onActionGroups(cNoBurg, cChipBurg, cFriesBurg);
 		onActionGroups(patRegBurg, patBeanBurg, patDoubleBurg);
@@ -1305,8 +1314,8 @@ public class EmployeeController implements Initializable {
 
 	void initNewItem() {
 		if (db.getNumRows("menu") > 26) {
-			silverware.setText(db.getNameFromID(27));
-			silverware.setOnAction(new EventHandler<ActionEvent>() {
+			sb1.setText(db.getNameFromID(27));
+			sb1.setOnAction(new EventHandler<ActionEvent>() {
 				public void handle(ActionEvent event) {
 					orderList.add(db.getNameFromID(27) + "\n");
 
@@ -1315,6 +1324,50 @@ public class EmployeeController implements Initializable {
 					totalOrderCost += db.getPriceOfMenuItem(27);
 				}
 			});
+		} else {
+			sb1.setVisible(false);
+		}
+		if (db.getNumRows("menu") > 27) {
+			sb2.setText(db.getNameFromID(28));
+			sb2.setOnAction(new EventHandler<ActionEvent>() {
+				public void handle(ActionEvent event) {
+					orderList.add(db.getNameFromID(28) + "\n");
+
+					CustomPair menuItemToAdd = new CustomPair(28, 1);
+					menuItems.add(menuItemToAdd);
+					totalOrderCost += db.getPriceOfMenuItem(28);
+				}
+			});
+		} else {
+			sb2.setVisible(false);
+		}
+		if (db.getNumRows("menu") > 28) {
+			sb3.setText(db.getNameFromID(29));
+			sb3.setOnAction(new EventHandler<ActionEvent>() {
+				public void handle(ActionEvent event) {
+					orderList.add(db.getNameFromID(29) + "\n");
+
+					CustomPair menuItemToAdd = new CustomPair(29, 1);
+					menuItems.add(menuItemToAdd);
+					totalOrderCost += db.getPriceOfMenuItem(29);
+				}
+			});
+		} else {
+			sb3.setVisible(false);
+		}
+		if (db.getNumRows("menu") > 29) {
+			sb4.setText(db.getNameFromID(30));
+			sb4.setOnAction(new EventHandler<ActionEvent>() {
+				public void handle(ActionEvent event) {
+					orderList.add(db.getNameFromID(30) + "\n");
+
+					CustomPair menuItemToAdd = new CustomPair(30, 1);
+					menuItems.add(menuItemToAdd);
+					totalOrderCost += db.getPriceOfMenuItem(30);
+				}
+			});
+		} else {
+			sb4.setVisible(false);
 		}
 	}
 
