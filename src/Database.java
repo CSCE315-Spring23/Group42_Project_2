@@ -727,37 +727,80 @@ public class Database {
         }
     }
 
-    // /**
-    //  * Creates Sales History list to display in manager UI
-    //  * @param initialDate lowerbound for sales history interval
-    //  * @param finalDate upperbound for sales history interval
-    //  */
-    // public ObservableList<SaleData> salesHistory(String initialDate, String finalDate) {
-    //     ObservableList<SaleData> saleData = FXCollections.observableArrayList();
-    //     try {
-    //         // Get the sales data for the given time window
-    //         ResultSet result = runCommand("SELECT Menu.MENU_ITEM_ID, Menu.MENU_ITEM_NAME, SUM(ItemSold.ITEM_SOLD_QUANTITY) AS TOTAL_QUANTITY FROM ItemSold " +
-    //                                     "JOIN Menu ON Menu.MENU_ITEM_ID = ItemSold.MENU_ITEM_ID " +
-    //                                     "JOIN Orders ON Orders.ORDER_ID = ItemSold.ORDER_ID " +
-    //                                     "WHERE Orders.DATE_ORDERED BETWEEN '" + initialDate + "' AND '" + finalDate + "' " +
-    //                                     "GROUP BY Menu.MENU_ITEM_ID, Menu.MENU_ITEM_NAME;");
+    /**
+     * Creates Sales History list to display in manager UI
+     * @param initialDate lowerbound for sales history interval
+     * @param finalDate upperbound for sales history interval
+     */
+    public ObservableList<SaleData> salesHistory(String initialDate, String finalDate) {
+        ObservableList<SaleData> saleData = FXCollections.observableArrayList();
+        try {
+            // Get the sales data for the given time window
+            ResultSet result = runCommand("SELECT Menu.MENU_ITEM_ID, Menu.MENU_ITEM_NAME, SUM(ItemSold.ITEM_SOLD_QUANTITY) AS TOTAL_QUANTITY FROM ItemSold " +
+                                        "JOIN Menu ON Menu.MENU_ITEM_ID = ItemSold.MENU_ITEM_ID " +
+                                        "JOIN Orders ON Orders.ORDER_ID = ItemSold.ORDER_ID " +
+                                        "WHERE Orders.DATE_ORDERED BETWEEN '" + initialDate + "' AND '" + finalDate + "' " +
+                                        "GROUP BY Menu.MENU_ITEM_ID, Menu.MENU_ITEM_NAME;");
             
-    //         // Parse the sales data into a list of SaleData objects
-    //         while (result.next()) {
-    //             int menuItemId = result.getInt("MENU_ITEM_ID");
-    //             String menuItemName = result.getString("MENU_ITEM_NAME");
-    //             int totalQuantity = result.getInt("TOTAL_QUANTITY");
-    //             SaleData data = new SaleData(menuItemId, menuItemName, totalQuantity);
-    //             saleData.add(data);
-    //         }
+            // Parse the sales data into a list of SaleData objects
+            while (result.next()) {
+                int menuItemId = result.getInt("MENU_ITEM_ID");
+                String menuItemName = result.getString("MENU_ITEM_NAME");
+                int totalQuantity = result.getInt("TOTAL_QUANTITY");
+                SaleData data = new SaleData(menuItemId, menuItemName, totalQuantity);
+                saleData.add(data);
+            }
             
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //         System.err.println(e.getClass().getName() + ": " + e.getMessage());
-    //         System.exit(0);
-    //     }
-    //     return saleData;
-    // }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return saleData;
+    }
+
+    /**
+     * Retrieves a list of the 20 most popular menu item combos sold within a given date range.
+     *
+     * @param initialDate the start of the date range
+     * @param finalDate the end of the date range
+     * @return an ObservableList of String arrays, each containing the names of two menu items that are frequently sold together
+     */
+    public ObservableList<String[]> popularCombos(String initialDate, String finalDate) {
+        ObservableList<String[]> popularCombos = FXCollections.observableArrayList();
+        try {
+            // Query to get the most popular combos
+            String query = "SELECT m1.MENU_ITEM_NAME, m2.MENU_ITEM_NAME, COUNT(*) AS combo_count " +
+               "FROM ItemSold s1, ItemSold s2, Menu m1, Menu m2 " +
+               "WHERE s1.ORDER_ID = s2.ORDER_ID " +
+               "  AND s1.MENU_ITEM_ID = m1.MENU_ITEM_ID " +
+               "  AND s2.MENU_ITEM_ID = m2.MENU_ITEM_ID " +
+               "  AND s1.MENU_ITEM_ID < s2.MENU_ITEM_ID " +
+               "  AND s1.ORDER_ID IN (SELECT ORDER_ID " +
+               "                      FROM Order " +
+               "                      WHERE DATE_ORDERED BETWEEN '" + initialDate + "' AND '" + finalDate + "') " +
+               "GROUP BY s1.MENU_ITEM_ID, s2.MENU_ITEM_ID " +
+               "ORDER BY combo_count DESC " +
+               "LIMIT 20";
+
+            PreparedStatement stmt = connection.prepareStatement(query);
+            ResultSet result = stmt.executeQuery();
+
+            while (result.next()) {
+                String menuItem1 = result.getString("MENU_ITEM_NAME");
+                String menuItem2 = result.getString("MENU_ITEM_NAME");
+                int comboCount = result.getInt("combo_count");
+                String[] combo = new String[]{menuItem1, menuItem2, String.valueOf(comboCount)};
+                popularCombos.add(combo);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return popularCombos;
+    }
 }
 
 /**

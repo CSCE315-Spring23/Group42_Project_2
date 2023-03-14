@@ -295,20 +295,59 @@ public class ManagerController implements Initializable {
 		this.recipeTable.setItems(items);
 	}
 
-	// private void setUpSalesHistoryTable(String initialDate, String finalDate) {
-	// 	this.menuItemIdCol.setCellValueFactory(cellData -> cellData.getValue().getMenuItemId());
-	// 	this.menuItemNameCol.setCellValueFactory(cellData -> cellData.getValue().getMenuItemName());
-	// 	this.totalQuantityCol.setCellValueFactory(cellData -> cellData.getValue().getTotalQuantity());
+	/**
+	* Sets up the columns and data for the sales history table with given initial and final dates.
+	* This method should be called after the FXML view is loaded.
+	*/
+	private void setUpSalesHistoryTable() {
+		this.menuItemIdCol.setCellValueFactory(cellData -> cellData.getValue().getMenuItemId());
+		this.menuItemNameCol.setCellValueFactory(cellData -> cellData.getValue().getMenuItemName());
+		this.totalQuantityCol.setCellValueFactory(cellData -> cellData.getValue().getTotalQuantity());
 		
-	// 	final ObservableList<SaleData> salesData = db.salesHistory("01/01/2022", "01/01/2022");
+		final ObservableList<SaleData> salesData = db.salesHistory("01/01/2022", "01/01/2022");
 		
-	// 	this.salesTable.setItems(salesData);
-	// }
+		this.salesTable.setItems(salesData);
+	}
 
-	// private void updateSalesHistoryTable(String initialDate, int finalDate) {
-	// 	this.salesHistoryTable.setItems(db.getSalesHistory(initialDate, finalDate));
-	// 	this.salesHistoryTable.refresh();
-	// }
+	/**
+	 * Updates the sales history table with new data based on given initial and final dates.
+	 * @param initialDate the initial date of the sales history
+	 * @param finalDate the final date of the sales history
+	 */
+	private void updateSalesHistoryTable(String initialDate, int finalDate) {
+		this.salesHistoryTable.setItems(db.getSalesHistory(initialDate, finalDate));
+		this.salesHistoryTable.refresh();
+	}
+
+	/**
+	 * Sets up the columns and data for the popular combos table.
+	 * This method should be called after the FXML view is loaded.
+	 */
+	private void setUpPopularCombosTable() {
+		this.menuItem1Col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[0]));
+		this.menuItem2Col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[1]));
+
+		TableColumn<String[], Integer> countCol = new TableColumn<>("Count");
+		countCol.setCellValueFactory(cellData -> new SimpleIntegerProperty(Integer.parseInt(cellData.getValue()[2])).asObject());
+
+		final ObservableList<String[]> popularCombosData = db.getPopularCombosData("01/01/2022", "01/01/2022");
+
+		this.popularCombosTable.getColumns().add(countCol);
+		this.popularCombosTable.setItems(popularCombosData);
+	}
+
+	/**
+	 * Updates the sales history table to display sales data for a specific date range.
+	 *
+	 * @param initialDate The initial date of the range to display sales data for.
+	 * @param finalDate   The final date of the range to display sales data for.
+	 */
+	private void updatePopularCombosTable(String initialDate, String finalDate) {
+		this.popularCombosTable.setItems(db.popularCombos(initialDate, finalDate));
+		this.popularCombosTable.refresh();
+	}
+
+
 
 
 	// public void setEmployeeScene(Scene scene) {
