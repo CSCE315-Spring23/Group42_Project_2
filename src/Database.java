@@ -47,6 +47,7 @@ public class Database {
             return result;
         } catch (Exception e) {
             System.out.println("Problems running the command");
+            System.out.println(e);
         }
         return null;
     }
@@ -249,6 +250,34 @@ public class Database {
         return rows;
     }
 
+        public ObservableList<Recipe> get20RowsRecipe(int whichTwenty) {
+        String tableName = "recipe_item";
+        ObservableList<Recipe> rows = FXCollections.observableArrayList();
+        try {
+            // run query
+            ResultSet result = runCommand("SELECT * FROM "
+                    + tableName);
+
+            // Get metadata which gets info about the types/properties of the columns in a
+            // ResultSet
+            // ResultSetMetaData metaData = result.getMetaData();
+            // int numberOfColumns = metaData.getColumnCount();
+
+            // Loop through the 20 rows in result
+            while (result.next()) {
+                // Loop through columns an
+                rows.add(new Recipe(result.getLong(1), result.getString(2), result.getLong(3), result.getLong(4), result.getDouble(5)));
+            }
+
+            result.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return rows;
+    }
+
     /**
      * Returns an ArrayList of integers representing the quantities of specific recipe items used in the specified item on the menu.
      * The ArrayList has a fixed length equal to the number of items in the inventory, with each element representing the 
@@ -336,11 +365,40 @@ public class Database {
     */
     public void changePrice(String itemName, double newCost) {
         try {
-            if (Integer.parseInt(itemName) > 26)
-                return;
+            //if (Integer.parseInt(itemName) > 26) //TODO: make this dynamic
+              //  return;
             // run query
             runCommand("UPDATE Menu SET MENU_ITEM_COST = " + newCost
                     + " WHERE menu_item_id = '" + itemName + "';");
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
+
+    /**
+    * Updates an inventory item.
+    * @param itemName the name or ID of the menu item to update
+    * @param newCost the new cost of the menu item
+    */
+    public void updateInventoryItem(String itemID, String itemName, String newCost, String quantity) {
+        try {
+            //if (Integer.parseInt(ID) > 26) //TODO: make this dynamic
+            //    return;
+            // run query
+            if(newCost != ""){
+                runCommand("UPDATE inventory_item SET INVENTORY_ITEM_COST = " + Double.parseDouble(newCost)
+                    + " WHERE inventory_id = '" + itemID + "';");
+            }
+            if(itemName != ""){
+                runCommand("UPDATE inventory_item SET INVENTORY_ITEM_NAME = '" + itemName
+                    + "' WHERE inventory_id = '" + itemID + "';");
+            }
+            if(quantity != ""){
+                runCommand("UPDATE inventory_item SET INVENTORY_ITEM_QUANTITY = " + Double.parseDouble(quantity)
+                    + " WHERE inventory_id = '" + itemID + "';");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());

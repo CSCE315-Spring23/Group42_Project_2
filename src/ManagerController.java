@@ -36,6 +36,12 @@ public class ManagerController implements Initializable {
 	@FXML
 	private Button bUpdateInventory;
 	@FXML
+	private Button bAddRecipe;
+	@FXML
+	private Button bUpdateRecipe;
+
+
+	@FXML
 	TextField fInventoryID;
 	@FXML
 	TextField fItemName;
@@ -43,8 +49,24 @@ public class ManagerController implements Initializable {
 	TextField fItemCost;
 	@FXML
 	TextField fItemQuantity;
+	
 	@FXML
-	TextField fCost;
+	TextField fMenuID;
+	@FXML
+	TextField fMenuName;
+	@FXML
+	TextField fMenuPrice;
+
+	@FXML 
+	TextField fRecipeName;
+	@FXML 
+	TextField fRecipeID;
+	@FXML 
+	TextField fRecipeInventoryID;
+	@FXML 
+	TextField fRecipeMenuID;
+	@FXML 
+	TextField fRecipeQuantity;
 
 	private Database db;
 
@@ -52,6 +74,8 @@ public class ManagerController implements Initializable {
 	private TableView<Inventory> inventoryTable;
 	@FXML
 	private TableView<Menu> menuTable;
+	@FXML
+	private TableView<Recipe> recipeTable;
 	@FXML
 	private TableColumn<Inventory, Long> inventoryID;
 	@FXML
@@ -67,17 +91,15 @@ public class ManagerController implements Initializable {
 	@FXML
 	private TableColumn<Menu, Double> menuItemCost;
 	@FXML
-	private TextField fName;
+	private TableColumn<Recipe, Long> recipeID;
 	@FXML
-	private Button addRecipeItem;
+	private TableColumn<Recipe, String> recipeItemName;
 	@FXML
-	private TextField itemName;
+	private TableColumn<Recipe, Long> recipeInventoryID;
 	@FXML
-	private TextField inventoryId;
+	private TableColumn<Recipe, Long> recipeMenuID;
 	@FXML
-	private TextField menuId;
-	@FXML
-	private TextField amountUsed;
+	private TableColumn<Recipe, Double> recipeAmountUsed;
 
 	// @FXML
 	// private Button switchView;
@@ -90,36 +112,54 @@ public class ManagerController implements Initializable {
 
 		this.setUpInventoryTable();
 		this.setUpMenuTable();
+		this.setUpRecipeTable();
 		this.updateInventoryTable(0);
 		this.updateMenuTable(0);
+		this.updateRecipeTable(0);
 		this.inventoryTable.refresh();
 		this.menuTable.refresh();
+		this.recipeTable.refresh();
 
 		addMenu.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				db.addMenuItem(fName.getText(), Integer.parseInt(fCost.getText()));
-				updateMenuTable(0);
-				menuTable.refresh();
+				String newCost = fMenuPrice.getText();
+				String itemName = fMenuName.getText();
+				itemName = itemName.strip();
+				newCost = newCost.strip();
+				if(itemName == ""){
+					System.out.println("Missing menu item name");
+				} else if(newCost == ""){
+					System.out.println("Missing menu item cost");
+				} else {
+					db.addMenuItem(itemName,  Double.parseDouble(newCost));
+					updateMenuTable(0);
+					menuTable.refresh();
+				}
 			}
 		});
 
-		addRecipeItem.setOnAction(new EventHandler<ActionEvent>() {
+		/*addRecipeItem.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				db.addRecipeItem(itemName.getText().strip(), Integer.parseInt(inventoryId.getText().strip()),
 						Integer.parseInt(menuId.getText().strip()), Integer.parseInt(amountUsed.getText().strip()));
 			}
-		});
+		});*/
 
 		updateMenu.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				System.out.println("Manager click");
-				String newCost = fCost.getText();
-				String itemName = fItemName.getText();
+				String newCost = fMenuPrice.getText();
+				String itemName = fMenuID.getText();
 				itemName = itemName.strip();
 				newCost = newCost.strip();
-				db.changePrice(itemName, Double.parseDouble(newCost));
-				updateMenuTable(0);
-				menuTable.refresh();
+				if(itemName == ""){
+					System.out.println("Missing menu item ID");
+				} else if(newCost == ""){
+					System.out.println("Missing menu item cost");
+				} else {
+					db.changePrice(itemName, Double.parseDouble(newCost));
+					updateMenuTable(0);
+					menuTable.refresh();
+				}
 			}
 		});
 
@@ -127,13 +167,33 @@ public class ManagerController implements Initializable {
 			public void handle(ActionEvent event) {
 				if(fItemName.getText().strip() == "") {
 					System.out.println("Missing Item Name");
+				} else if(fItemCost.getText().strip() == "") {
+					System.out.println("Missing Item Cost");
+				} else if(fItemQuantity.getText().strip() == "") {
+					System.out.println("Missing Item Quantity");
+				} else { // actually add the item to the database
+					//TODO: add this to the database
+					updateInventoryTable(0);
+					inventoryTable.refresh();
 				}
 			}
 		});
 
 		bUpdateInventory.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				System.out.println("Manager click");
+				String ID = fInventoryID.getText().strip();
+				String name = fItemName.getText().strip();
+				String cost = fItemCost.getText().strip();
+				String quantity = fItemQuantity.getText().strip();
+				if(ID == "") {
+					System.out.println("Missing Item ID");
+				} else { // actually edit this in the database
+					//TODO: add this to the database
+					//make it able to handle empty values; only ID is guaranteed to not be null
+					db.updateInventoryItem(ID, name, cost, quantity);
+					updateInventoryTable(0);
+					inventoryTable.refresh();
+				}
 			}
 		});
 
@@ -159,6 +219,11 @@ public class ManagerController implements Initializable {
 		this.inventoryTable.refresh();
 	}
 
+	private void updateRecipeTable(int whichTwenty) {
+		//this.recipeTable.setItems(db.get20RowsRecipe(whichTwenty)); // TODO: code this in db
+		this.recipeTable.refresh();
+	}
+
 	private void setUpInventoryTable() {
 		this.inventoryID.setCellValueFactory(cellData -> cellData.getValue().getInventoryID());
 		this.inventoryItemName.setCellValueFactory(cellData -> cellData.getValue().getItemName());
@@ -176,6 +241,17 @@ public class ManagerController implements Initializable {
 		final ObservableList<Inventory> items = db.get20RowsInventory(0);
 
 		this.inventoryTable.setItems(items);
+	}
+
+	private void setUpRecipeTable() {
+		this.recipeID.setCellValueFactory(cellData -> cellData.getValue().getRecipeID());
+		this.recipeItemName.setCellValueFactory(cellData -> cellData.getValue().getRecipeName());
+		this.recipeInventoryID.setCellValueFactory(cellData -> cellData.getValue().getInventoryID());
+		this.recipeMenuID.setCellValueFactory(cellData -> cellData.getValue().getMenuID());
+		this.recipeAmountUsed.setCellValueFactory(cellData -> cellData.getValue().getQuantity());
+		final ObservableList<Recipe> items = db.get20RowsRecipe(0);
+
+		this.recipeTable.setItems(items);
 	}
 
 	// private void setUpSalesHistoryTable(String initialDate, String finalDate) {
