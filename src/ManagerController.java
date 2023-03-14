@@ -165,14 +165,17 @@ public class ManagerController implements Initializable {
 
 		bAddInventory.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
+				String name = fItemName.getText().strip();
+				String cost = fItemCost.getText().strip();
+				String quantity = fItemQuantity.getText().strip();
 				if(fItemName.getText().strip() == "") {
 					System.out.println("Missing Item Name");
 				} else if(fItemCost.getText().strip() == "") {
 					System.out.println("Missing Item Cost");
 				} else if(fItemQuantity.getText().strip() == "") {
 					System.out.println("Missing Item Quantity");
-				} else { // actually add the item to the database
-					//TODO: add this to the database
+				} else { 
+					db.addInventoryItem(name, Double.parseDouble(cost), Double.parseDouble(quantity));
 					updateInventoryTable(0);
 					inventoryTable.refresh();
 				}
@@ -187,12 +190,50 @@ public class ManagerController implements Initializable {
 				String quantity = fItemQuantity.getText().strip();
 				if(ID == "") {
 					System.out.println("Missing Item ID");
-				} else { // actually edit this in the database
-					//TODO: add this to the database
-					//make it able to handle empty values; only ID is guaranteed to not be null
+				} else { 
 					db.updateInventoryItem(ID, name, cost, quantity);
 					updateInventoryTable(0);
 					inventoryTable.refresh();
+				}
+			}
+		});
+
+		bAddRecipe.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				String name = fRecipeName.getText().strip();
+				String invID = fRecipeInventoryID.getText().strip();
+				String menuID = fRecipeMenuID.getText().strip();
+				String  quantity = fRecipeQuantity.getText().strip();
+				if(name == "") {
+					System.out.println("Missing Item Name");
+				} else if(invID == "") {
+					System.out.println("Missing Inventory ID");
+				} else if(menuID == "") {
+					System.out.println("Missing Menu ID");
+				} else if(quantity == "") {
+					System.out.println("Missing Quantity");
+				} else { 
+					db.addRecipeItem(name, Integer.parseInt(invID), Integer.parseInt(menuID), Integer.parseInt(quantity));
+					updateRecipeTable(0);
+					recipeTable.refresh(); //TODO: this wasn't updating the gui for me (but yes the database)
+					//plz check if it works on someone else's end
+				}
+			}
+		});
+
+		bUpdateRecipe.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				String ID = fRecipeID.getText().strip();
+				String name = fRecipeName.getText().strip();
+				String invID = fRecipeInventoryID.getText().strip();
+				String menuID = fRecipeMenuID.getText().strip();
+				String  quantity = fRecipeQuantity.getText().strip();
+				if(ID == "") {
+					System.out.println("Missing Item Name");
+				} else { 
+					db.updateRecipeItem(ID, name, invID, menuID, quantity);
+					updateRecipeTable(0);
+					recipeTable.refresh();
 				}
 			}
 		});

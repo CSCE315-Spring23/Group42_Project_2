@@ -377,11 +377,7 @@ public class Database {
         }
     }
 
-    /**
-    * Updates an inventory item.
-    * @param itemName the name or ID of the menu item to update
-    * @param newCost the new cost of the menu item
-    */
+
     public void updateInventoryItem(String itemID, String itemName, String newCost, String quantity) {
         try {
             //if (Integer.parseInt(ID) > 26) //TODO: make this dynamic
@@ -398,6 +394,35 @@ public class Database {
             if(quantity != ""){
                 runCommand("UPDATE inventory_item SET INVENTORY_ITEM_QUANTITY = " + Double.parseDouble(quantity)
                     + " WHERE inventory_id = '" + itemID + "';");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
+
+    public void updateRecipeItem(String itemID, String itemName, String invID, String menuID, String quantity) {
+        try {
+            //if (Integer.parseInt(ID) > 26) //TODO: make this dynamic
+            //    return;
+            // run query
+
+            if(itemName != ""){
+                runCommand("UPDATE recipe_item SET RECIPE_ITEM_NAME = '" + itemName
+                    + "' WHERE RECIPE_ID = '" + itemID + "';");
+            }
+            if(invID != ""){
+                runCommand("UPDATE recipe_item SET INVENTORY_ID = " + Integer.parseInt(invID)
+                    + " WHERE RECIPE_ID = '" + itemID + "';");
+            }
+            if(menuID != ""){
+                runCommand("UPDATE recipe_item SET MENU_ID = " + Integer.parseInt(menuID)
+                    + " WHERE RECIPE_ID = '" + itemID + "';");
+            }
+            if(quantity != ""){
+                runCommand("UPDATE recipe_item SET AMT_USED = " + Double.parseDouble(quantity)
+                    + " WHERE RECIPE_ID = '" + itemID + "';");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -621,6 +646,28 @@ public class Database {
             String sqlStatement = String
                     .format("INSERT INTO Recipe_item (RECIPE_ID, RECIPE_ITEM_NAME, INVENTORY_ID, MENU_ID, AMT_USED) " +
                             "VALUES (%d, '%s', %d, %d, %d)", lastRecipeId + 1, name, inventoryId, menuId, amtUsed);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate(sqlStatement);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
+
+    public void addInventoryItem(String name, double cost, double quantity) {
+        try {
+            // get the last recipe id
+            ResultSet result = runCommand("SELECT MAX(INVENTORY_ID) as max_id FROM inventory_item");
+            int lastInventoryID = 0;
+            if (result.next()) {
+                lastInventoryID = result.getInt("max_id");
+            }
+
+            // insert the new recipe item with last recipe id + 1
+            String sqlStatement = String
+                    .format("INSERT INTO inventory_item (inventory_ID, inventory_ITEM_NAME, inventory_item_cost, inventory_item_quantity) " +
+                            "VALUES (%d, '%s', %f, %f)", lastInventoryID + 1, name, cost, quantity);
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(sqlStatement);
         } catch (Exception e) {
