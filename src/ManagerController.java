@@ -78,13 +78,22 @@ public class ManagerController implements Initializable {
 	@FXML
 	private TableView<Recipe> recipeTable;
 	@FXML
+	private TableView<SaleData> salesHistoryTable;
+	@FXML
+	private TableView<SaleData> popularCombosTable;
+
+	@FXML
 	TableColumn<SaleData, Long> menuItemIDCol;
-
 	@FXML
-	TableColumn<SaleData, Long> totalQuantity;
-
+	private TableColumn<SaleData, Long> totalQuantity;
 	@FXML
-	TableColumn<SaleData, String> menuItem1Col;
+	private TableColumn<SaleData, String> menuItemNameCol;
+	@FXML
+	private TableColumn<SaleData, Long> totalQuantityCol;
+	@FXML
+	private TableColumn<SaleData, String> menuItem1Col;
+	@FXML
+	private TableColumn<SaleData, String> menuItem2Col;
 
 	@FXML
 	private TableColumn<Inventory, Long> inventoryID;
