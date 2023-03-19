@@ -99,6 +99,7 @@ public class Database {
 
     /**
      * Returns the number of rows in the specified table.
+     * 
      * @param tableName the name of the table to retrieve the number of rows for
      * @return an integer value representing the number of rows in the table
      * @throws Exception if there is an error executing the query
@@ -250,7 +251,7 @@ public class Database {
         return rows;
     }
 
-        public ObservableList<Recipe> get20RowsRecipe(int whichTwenty) {
+    public ObservableList<Recipe> get20RowsRecipe(int whichTwenty) {
         String tableName = "recipe_item";
         ObservableList<Recipe> rows = FXCollections.observableArrayList();
         try {
@@ -266,7 +267,8 @@ public class Database {
             // Loop through the 20 rows in result
             while (result.next()) {
                 // Loop through columns an
-                rows.add(new Recipe(result.getLong(1), result.getString(2), result.getLong(3), result.getLong(4), result.getDouble(5)));
+                rows.add(new Recipe(result.getLong(1), result.getString(2), result.getLong(3), result.getLong(4),
+                        result.getDouble(5)));
             }
 
             result.close();
@@ -279,11 +281,15 @@ public class Database {
     }
 
     /**
-     * Returns an ArrayList of integers representing the quantities of specific recipe items used in the specified item on the menu.
-     * The ArrayList has a fixed length equal to the number of items in the inventory, with each element representing the 
+     * Returns an ArrayList of integers representing the quantities of specific
+     * recipe items used in the specified item on the menu.
+     * The ArrayList has a fixed length equal to the number of items in the
+     * inventory, with each element representing the
      * quantity of the corresponding inventory item used in the recipe.
+     * 
      * @param item the name of the menu item to query the recipe for
-     * @return an ArrayList of integers representing the quantities of specific recipe items used in the specified item on the menu
+     * @return an ArrayList of integers representing the quantities of specific
+     *         recipe items used in the specified item on the menu
      * @throws Exception if there is an error executing the query
      */
     public ArrayList<Integer> getRecipe(String item) {
@@ -317,12 +323,16 @@ public class Database {
     }
 
     /**
-    * Creates a new row in the orders table with the specified cost and list of menu items and inventory items.
-    * @param cost the cost of the order
-    * @param menuItems a list of CustomPair objects representing the menu items and their corresponding quantities in the order
-    * @param inventoryItems a list of CustomPair objects representing the inventory items and their corresponding quantities in the order
-    * @throws Exception if there is an error executing the query
-    */
+     * Creates a new row in the orders table with the specified cost and list of
+     * menu items and inventory items.
+     * 
+     * @param cost           the cost of the order
+     * @param menuItems      a list of CustomPair objects representing the menu
+     *                       items and their corresponding quantities in the order
+     * @param inventoryItems a list of CustomPair objects representing the inventory
+     *                       items and their corresponding quantities in the order
+     * @throws Exception if there is an error executing the query
+     */
     public void createOrder(double cost, ArrayList<CustomPair> menuItems, ArrayList<CustomPair> inventoryItems) {
         try {
             // get new pk of order
@@ -359,14 +369,15 @@ public class Database {
     }
 
     /**
-    * Updates the cost of the specified menu item.
-    * @param itemName the name or ID of the menu item to update
-    * @param newCost the new cost of the menu item
-    */
+     * Updates the cost of the specified menu item.
+     * 
+     * @param itemName the name or ID of the menu item to update
+     * @param newCost  the new cost of the menu item
+     */
     public void changePrice(String itemName, double newCost) {
         try {
-            //if (Integer.parseInt(itemName) > 26) //TODO: make this dynamic
-              //  return;
+            // if (Integer.parseInt(itemName) > 26) //TODO: make this dynamic
+            // return;
             // run query
             runCommand("UPDATE Menu SET MENU_ITEM_COST = " + newCost
                     + " WHERE menu_item_id = '" + itemName + "';");
@@ -377,23 +388,22 @@ public class Database {
         }
     }
 
-
     public void updateInventoryItem(String itemID, String itemName, String newCost, String quantity) {
         try {
-            //if (Integer.parseInt(ID) > 26) //TODO: make this dynamic
-            //    return;
+            // if (Integer.parseInt(ID) > 26) //TODO: make this dynamic
+            // return;
             // run query
-            if(newCost != ""){
+            if (newCost != "") {
                 runCommand("UPDATE inventory_item SET INVENTORY_ITEM_COST = " + Double.parseDouble(newCost)
-                    + " WHERE inventory_id = '" + itemID + "';");
+                        + " WHERE inventory_id = '" + itemID + "';");
             }
-            if(itemName != ""){
+            if (itemName != "") {
                 runCommand("UPDATE inventory_item SET INVENTORY_ITEM_NAME = '" + itemName
-                    + "' WHERE inventory_id = '" + itemID + "';");
+                        + "' WHERE inventory_id = '" + itemID + "';");
             }
-            if(quantity != ""){
+            if (quantity != "") {
                 runCommand("UPDATE inventory_item SET INVENTORY_ITEM_QUANTITY = " + Double.parseDouble(quantity)
-                    + " WHERE inventory_id = '" + itemID + "';");
+                        + " WHERE inventory_id = '" + itemID + "';");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -404,25 +414,25 @@ public class Database {
 
     public void updateRecipeItem(String itemID, String itemName, String invID, String menuID, String quantity) {
         try {
-            //if (Integer.parseInt(ID) > 26) //TODO: make this dynamic
-            //    return;
+            // if (Integer.parseInt(ID) > 26) //TODO: make this dynamic
+            // return;
             // run query
 
-            if(itemName != ""){
+            if (itemName != "") {
                 runCommand("UPDATE recipe_item SET RECIPE_ITEM_NAME = '" + itemName
-                    + "' WHERE RECIPE_ID = '" + itemID + "';");
+                        + "' WHERE RECIPE_ID = '" + itemID + "';");
             }
-            if(invID != ""){
+            if (invID != "") {
                 runCommand("UPDATE recipe_item SET INVENTORY_ID = " + Integer.parseInt(invID)
-                    + " WHERE RECIPE_ID = '" + itemID + "';");
+                        + " WHERE RECIPE_ID = '" + itemID + "';");
             }
-            if(menuID != ""){
+            if (menuID != "") {
                 runCommand("UPDATE recipe_item SET MENU_ID = " + Integer.parseInt(menuID)
-                    + " WHERE RECIPE_ID = '" + itemID + "';");
+                        + " WHERE RECIPE_ID = '" + itemID + "';");
             }
-            if(quantity != ""){
+            if (quantity != "") {
                 runCommand("UPDATE recipe_item SET AMT_USED = " + Double.parseDouble(quantity)
-                    + " WHERE RECIPE_ID = '" + itemID + "';");
+                        + " WHERE RECIPE_ID = '" + itemID + "';");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -432,11 +442,12 @@ public class Database {
     }
 
     /**
-    * Create a new menu item sold and update inventory accordingly
-    * @param MenuId the ID of the menu item being sold
-    * @param orderID the ID of the order this menu item is being sold under
-    * @param quantity the quantity of the menu item being sold
-    */
+     * Create a new menu item sold and update inventory accordingly
+     * 
+     * @param MenuId   the ID of the menu item being sold
+     * @param orderID  the ID of the order this menu item is being sold under
+     * @param quantity the quantity of the menu item being sold
+     */
     private void createMenuItemSold(int MenuId, int orderID, int quantity) {
         // add a row to ItemsSold
         try {
@@ -485,14 +496,19 @@ public class Database {
     }
 
     /**
-    * Creates an item sold record for a given inventory item with the specified quantity and order ID.
-    * Finds the next available item ID by querying the maximum item ID from the item_sold table and
-    * adding 1 to it. Updates the item_sold table with the new record and updates the inventory_item
-    * table by reducing the quantity of the specified inventory item by the sold quantity.
-    * @param inventoryId the ID of the inventory item being sold
-    * @param orderId the ID of the order associated with the item sold record
-    * @param quantity the quantity of the inventory item being sold
-    */
+     * Creates an item sold record for a given inventory item with the specified
+     * quantity and order ID.
+     * Finds the next available item ID by querying the maximum item ID from the
+     * item_sold table and
+     * adding 1 to it. Updates the item_sold table with the new record and updates
+     * the inventory_item
+     * table by reducing the quantity of the specified inventory item by the sold
+     * quantity.
+     * 
+     * @param inventoryId the ID of the inventory item being sold
+     * @param orderId     the ID of the order associated with the item sold record
+     * @param quantity    the quantity of the inventory item being sold
+     */
     private void createInventoryItemSold(int InventoryId, int orderID, int quantity) {
         // add a row to ItemsSold
         try {
@@ -549,7 +565,8 @@ public class Database {
     }
 
     /**
-     * Retrieve the cost of an inventory item from the inventory_item table based on its ID.
+     * Retrieve the cost of an inventory item from the inventory_item table based on
+     * its ID.
      *
      * @param itemID the ID of the inventory item to get the price for.
      * @return the cost of the inventory item as a double.
@@ -666,7 +683,8 @@ public class Database {
 
             // insert the new recipe item with last recipe id + 1
             String sqlStatement = String
-                    .format("INSERT INTO inventory_item (inventory_ID, inventory_ITEM_NAME, inventory_item_cost, inventory_item_quantity) " +
+                    .format("INSERT INTO inventory_item (inventory_ID, inventory_ITEM_NAME, inventory_item_cost, inventory_item_quantity) "
+                            +
                             "VALUES (%d, '%s', %f, %f)", lastInventoryID + 1, name, cost, quantity);
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(sqlStatement);
@@ -677,11 +695,12 @@ public class Database {
         }
     }
 
-     /**
+    /**
      * Gets the name of a menu item given its ID.
      *
      * @param id the ID of the menu item to get the name of
-     * @return the name of the menu item with the given ID, or an empty string if no such item exists
+     * @return the name of the menu item with the given ID, or an empty string if no
+     *         such item exists
      */
     public String getNameFromID(int id) {
         try {
@@ -701,7 +720,8 @@ public class Database {
 
     /**
      * Updates the quantity of the specified inventory item.
-     * @param itemName the name or ID of the inventory item to update
+     * 
+     * @param itemName    the name or ID of the inventory item to update
      * @param newQuantity the new quantity of the inventory item
      */
     public void changeInventoryQuantity(String itemName, int newQuantity) {
@@ -710,13 +730,13 @@ public class Database {
             ResultSet result = runCommand("SELECT MAX(INVENTORY_ID) FROM InventoryItem");
             result.next();
             int maxId = result.getInt(1);
-            
+
             // Check if itemName is a valid integer ID
             int itemId = Integer.parseInt(itemName);
             if (itemId < 1 || itemId > maxId) {
                 return;
             }
-            
+
             // run query
             runCommand("UPDATE InventoryItem SET INVENTORY_ITEM_QUANTITY = " + newQuantity
                     + " WHERE INVENTORY_ID = " + itemId + ";");
@@ -729,19 +749,22 @@ public class Database {
 
     /**
      * Creates Sales History list to display in manager UI
+     * 
      * @param initialDate lowerbound for sales history interval
-     * @param finalDate upperbound for sales history interval
+     * @param finalDate   upperbound for sales history interval
      */
     public ObservableList<SaleData> salesHistory(String initialDate, String finalDate) {
         ObservableList<SaleData> saleData = FXCollections.observableArrayList();
         try {
             // Get the sales data for the given time window
-            ResultSet result = runCommand("SELECT Menu.MENU_ITEM_ID, Menu.MENU_ITEM_NAME, SUM(ItemSold.ITEM_SOLD_QUANTITY) AS TOTAL_QUANTITY FROM ItemSold " +
-                                        "JOIN Menu ON Menu.MENU_ITEM_ID = ItemSold.MENU_ITEM_ID " +
-                                        "JOIN Orders ON Orders.ORDER_ID = ItemSold.ORDER_ID " +
-                                        "WHERE Orders.DATE_ORDERED BETWEEN '" + initialDate + "' AND '" + finalDate + "' " +
-                                        "GROUP BY Menu.MENU_ITEM_ID, Menu.MENU_ITEM_NAME;");
-            
+            ResultSet result = runCommand(
+                    "SELECT Menu.MENU_ITEM_ID, Menu.MENU_ITEM_NAME, SUM(ItemSold.ITEM_SOLD_QUANTITY) AS TOTAL_QUANTITY FROM ItemSold "
+                            +
+                            "JOIN Menu ON Menu.MENU_ITEM_ID = ItemSold.MENU_ITEM_ID " +
+                            "JOIN Orders ON Orders.ORDER_ID = ItemSold.ORDER_ID " +
+                            "WHERE Orders.DATE_ORDERED BETWEEN '" + initialDate + "' AND '" + finalDate + "' " +
+                            "GROUP BY Menu.MENU_ITEM_ID, Menu.MENU_ITEM_NAME;");
+
             // Parse the sales data into a list of SaleData objects
             while (result.next()) {
                 int menuItemId = result.getInt("MENU_ITEM_ID");
@@ -750,7 +773,7 @@ public class Database {
                 SaleData data = new SaleData(menuItemId, menuItemName, totalQuantity);
                 saleData.add(data);
             }
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -760,37 +783,38 @@ public class Database {
     }
 
     /**
-     * Retrieves a list of the 20 most popular menu item combos sold within a given date range.
+     * Retrieves a list of the 20 most popular menu item combos sold within a given
+     * date range.
      *
      * @param initialDate the start of the date range
-     * @param finalDate the end of the date range
-     * @return an ObservableList of String arrays, each containing the names of two menu items that are frequently sold together
+     * @param finalDate   the end of the date range
+     * @return an ObservableList of String arrays, each containing the names of two
+     *         menu items that are frequently sold together
      */
     public ObservableList<String[]> popularCombos(String initialDate, String finalDate) {
         ObservableList<String[]> popularCombos = FXCollections.observableArrayList();
         try {
             // Query to get the most popular combos
             String query = "SELECT m1.MENU_ITEM_NAME, m2.MENU_ITEM_NAME, COUNT(*) AS combo_count " +
-               "FROM ItemSold s1, ItemSold s2, Menu m1, Menu m2 " +
-               "WHERE s1.ORDER_ID = s2.ORDER_ID " +
-               "  AND s1.MENU_ITEM_ID = m1.MENU_ITEM_ID " +
-               "  AND s2.MENU_ITEM_ID = m2.MENU_ITEM_ID " +
-               "  AND s1.MENU_ITEM_ID < s2.MENU_ITEM_ID " +
-               "  AND s1.ORDER_ID IN (SELECT ORDER_ID " +
-               "                      FROM Order " +
-               "                      WHERE DATE_ORDERED BETWEEN '" + initialDate + "' AND '" + finalDate + "') " +
-               "GROUP BY s1.MENU_ITEM_ID, s2.MENU_ITEM_ID " +
-               "ORDER BY combo_count DESC " +
-               "LIMIT 20";
+                    "FROM ItemSold s1, ItemSold s2, Menu m1, Menu m2 " +
+                    "WHERE s1.ORDER_ID = s2.ORDER_ID " +
+                    "  AND s1.MENU_ITEM_ID = m1.MENU_ITEM_ID " +
+                    "  AND s2.MENU_ITEM_ID = m2.MENU_ITEM_ID " +
+                    "  AND s1.MENU_ITEM_ID < s2.MENU_ITEM_ID " +
+                    "  AND s1.ORDER_ID IN (SELECT ORDER_ID " +
+                    "                      FROM Order " +
+                    "                      WHERE DATE_ORDERED BETWEEN '" + initialDate + "' AND '" + finalDate + "') " +
+                    "GROUP BY s1.MENU_ITEM_ID, s2.MENU_ITEM_ID " +
+                    "ORDER BY combo_count DESC " +
+                    "LIMIT 20";
 
-            PreparedStatement stmt = connection.prepareStatement(query);
-            ResultSet result = stmt.executeQuery();
+            ResultSet result = runCommand(query);
 
             while (result.next()) {
                 String menuItem1 = result.getString("MENU_ITEM_NAME");
                 String menuItem2 = result.getString("MENU_ITEM_NAME");
                 int comboCount = result.getInt("combo_count");
-                String[] combo = new String[]{menuItem1, menuItem2, String.valueOf(comboCount)};
+                String[] combo = new String[] { menuItem1, menuItem2, String.valueOf(comboCount) };
                 popularCombos.add(combo);
             }
 
