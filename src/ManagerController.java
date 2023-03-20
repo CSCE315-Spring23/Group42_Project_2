@@ -289,8 +289,7 @@ public class ManagerController implements Initializable {
 	}
 
 	private void updateRecipeTable(int whichTwenty) {
-		// this.recipeTable.setItems(db.get20RowsRecipe(whichTwenty)); // TODO: code
-		// this in db
+		this.recipeTable.setItems(db.get20RowsRecipe(whichTwenty));
 		this.recipeTable.refresh();
 	}
 
