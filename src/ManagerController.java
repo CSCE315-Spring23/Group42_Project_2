@@ -356,8 +356,8 @@ public class ManagerController implements Initializable {
 	 * This method should be called after the FXML view is loaded.
 	 */
 	private void setUpPopularCombosTable() {
-		this.menuItem1Col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getItem1()));
-		this.menuItem2Col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getItem2()));
+		this.menuItem1Col.setCellValueFactory(cellData -> cellData.getValue().getItem1());
+		this.menuItem2Col.setCellValueFactory(cellData -> cellData.getValue().getItem2());
 
 		// TableColumn<String[], Integer> countCol = new TableColumn<>("Count");
 		this.countCol.setCellValueFactory(cellData -> cellData.getValue().getNumTimesOrdered());
