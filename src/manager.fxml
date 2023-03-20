@@ -51,6 +51,7 @@
                         <TextField fx:id="fMenuName" promptText="ITEM_NAME" GridPane.columnIndex="1" GridPane.columnSpan="2" />
                         <TextField fx:id="fMenuID" promptText="MENU_ID" />
                         <TextField fx:id="fMenuPrice" promptText="ITEM_COST" GridPane.columnIndex="3" />
+                        <Button fx:id="deleteMenuItem" mnemonicParsing="false" text="Delete Menu Item" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                   <TableView fx:id="menuTable" prefHeight="289.0" prefWidth="438.0" GridPane.rowIndex="1">
@@ -92,12 +93,14 @@
                      </rowConstraints>
                      <children>
                         <Button fx:id="bAddRecipe" mnemonicParsing="false" text="Add Recipe Item" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                        <Button fx:id="bUpdateRecipe" mnemonicParsing="false" text="Update Recipe Item" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Button fx:id="bUpdateRecipe" mnemonicParsing="false" text="Update Recipe Item" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                         <TextField fx:id="fRecipeName" promptText="RECIPE_ITEM_NAME" GridPane.columnIndex="1" />
                         <TextField fx:id="fRecipeInventoryID" promptText="INVENTORY_ID" GridPane.columnIndex="2" />
                         <TextField fx:id="fRecipeMenuID" promptText="MENU_ID" GridPane.columnIndex="3" />
                         <TextField fx:id="fRecipeQuantity" promptText="AMT_USED" GridPane.columnIndex="4" />
                         <TextField fx:id="fRecipeID" promptText="RECIPE_ITEM_ID" />
+                        <Button mnemonicParsing="false" text="Delete Recipe Item" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <Button layoutX="370.0" layoutY="38.0" mnemonicParsing="false" text="Delete Recipe Item" />
                      </children>
                   </GridPane>
                   <TableView fx:id="recipeTable" prefHeight="289.0" prefWidth="438.0" GridPane.rowIndex="1">
@@ -156,6 +159,7 @@
                         <TextField fx:id="fItemQuantity" promptText="ITEM_QUANTITY" GridPane.columnIndex="3" />
                         <Button fx:id="bAddInventory" mnemonicParsing="false" text="Add Inventory Item" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                         <Button fx:id="bUpdateInventory" mnemonicParsing="false" text="Update Inventory Item" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                        <Button fx:id="deleteInvItem" mnemonicParsing="false" text="Delete Inventory Item" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>
