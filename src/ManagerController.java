@@ -342,8 +342,8 @@ public class ManagerController implements Initializable {
 	 * @param initialDate the initial date of the sales history
 	 * @param finalDate   the final date of the sales history
 	 */
-	private void updateSalesHistoryTable(String initialDate, int finalDate) {
-		this.salesHistoryTable.setItems(db.getSalesHistory(initialDate, finalDate));
+	private void updateSalesHistoryTable(String initialDate, String finalDate) {
+		this.salesHistoryTable.setItems(db.salesHistory(initialDate, finalDate));
 		this.salesHistoryTable.refresh();
 	}
 
@@ -359,7 +359,7 @@ public class ManagerController implements Initializable {
 		countCol.setCellValueFactory(
 				cellData -> new SimpleIntegerProperty(Integer.parseInt(cellData.getValue()[2])).asObject());
 
-		final ObservableList<String[]> popularCombosData = db.getPopularCombosData("01/01/2022", "01/01/2022");
+		final ObservableList<String[]> popularCombosData = db.popularCombos("01/01/2022", "01/01/2022");
 
 		this.popularCombosTable.getColumns().add(countCol);
 		this.popularCombosTable.setItems(popularCombosData);
