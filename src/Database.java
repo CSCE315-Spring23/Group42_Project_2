@@ -767,9 +767,9 @@ public class Database {
 
             // Parse the sales data into a list of SaleData objects
             while (result.next()) {
-                int menuItemId = result.getInt("MENU_ITEM_ID");
+                Long menuItemId = result.getLong("MENU_ITEM_ID");
                 String menuItemName = result.getString("MENU_ITEM_NAME");
-                int totalQuantity = result.getInt("TOTAL_QUANTITY");
+                Long totalQuantity = result.getLong("TOTAL_QUANTITY");
                 SaleData data = new SaleData(menuItemId, menuItemName, totalQuantity);
                 saleData.add(data);
             }
