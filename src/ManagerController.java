@@ -12,6 +12,8 @@ import javafx.scene.Parent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javafx.collections.ObservableList;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
