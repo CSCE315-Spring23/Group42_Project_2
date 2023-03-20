@@ -99,8 +99,7 @@
                         <TextField fx:id="fRecipeMenuID" promptText="MENU_ID" GridPane.columnIndex="3" />
                         <TextField fx:id="fRecipeQuantity" promptText="AMT_USED" GridPane.columnIndex="4" />
                         <TextField fx:id="fRecipeID" promptText="RECIPE_ITEM_ID" />
-                        <Button mnemonicParsing="false" text="Delete Recipe Item" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                        <Button layoutX="370.0" layoutY="38.0" mnemonicParsing="false" text="Delete Recipe Item" />
+                        <Button fx:id="deleteRecipeItem" mnemonicParsing="false" text="Delete Recipe Item" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                   <TableView fx:id="recipeTable" prefHeight="289.0" prefWidth="438.0" GridPane.rowIndex="1">
