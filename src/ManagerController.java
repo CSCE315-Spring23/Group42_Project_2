@@ -82,8 +82,10 @@ public class ManagerController implements Initializable {
 	@FXML
 	private TableView<SaleData> salesHistoryTable;
 	@FXML
-	private TableView<SaleData> popularCombosTable;
+	private TableView<Combo> popularCombosTable;
 
+	@FXML
+	private TableColumn<Combo, Long> countCol;
 	@FXML
 	TableColumn<SaleData, Long> menuItemIDCol;
 	@FXML
@@ -93,9 +95,9 @@ public class ManagerController implements Initializable {
 	@FXML
 	private TableColumn<SaleData, Long> totalQuantityCol;
 	@FXML
-	private TableColumn<SaleData, String> menuItem1Col;
+	private TableColumn<Combo, String> menuItem1Col;
 	@FXML
-	private TableColumn<SaleData, String> menuItem2Col;
+	private TableColumn<Combo, String> menuItem2Col;
 
 	@FXML
 	private TableColumn<Inventory, Long> inventoryID;
@@ -354,14 +356,13 @@ public class ManagerController implements Initializable {
 	 * This method should be called after the FXML view is loaded.
 	 */
 	private void setUpPopularCombosTable() {
-		this.menuItem1Col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[0]));
-		this.menuItem2Col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[1]));
+		this.menuItem1Col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getItem1()));
+		this.menuItem2Col.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getItem2()));
 
-		TableColumn<String[], Integer> countCol = new TableColumn<>("Count");
-		countCol.setCellValueFactory(
-				cellData -> new SimpleIntegerProperty(Integer.parseInt(cellData.getValue()[2])).asObject());
+		// TableColumn<String[], Integer> countCol = new TableColumn<>("Count");
+		this.countCol.setCellValueFactory(cellData -> cellData.getValue().getNumTimesOrdered());
 
-		final ObservableList<String[]> popularCombosData = db.popularCombos("01/01/2022", "01/01/2022");
+		final ObservableList<Combo> popularCombosData = db.popularCombos("01/01/2022", "01/01/2022");
 
 		this.popularCombosTable.getColumns().add(countCol);
 		this.popularCombosTable.setItems(popularCombosData);
