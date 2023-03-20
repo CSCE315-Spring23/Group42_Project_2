@@ -34,13 +34,20 @@ public class ManagerController implements Initializable {
 	@FXML
 	private Button updateMenu;
 	@FXML
+	private Button deleteMenuItem;
+	@FXML
 	private Button bAddInventory;
 	@FXML
 	private Button bUpdateInventory;
 	@FXML
+	private Button deleteInvItem;
+	@FXML
 	private Button bAddRecipe;
 	@FXML
 	private Button bUpdateRecipe;
+	@FXML
+	private Button deleteRecipeItem;
+
 
 	@FXML
 	TextField fInventoryID;
@@ -147,11 +154,12 @@ public class ManagerController implements Initializable {
 			public void handle(ActionEvent event) {
 				String newCost = fMenuPrice.getText();
 				String itemName = fMenuName.getText();
+				String none = "";
 				itemName = itemName.strip();
 				newCost = newCost.strip();
-				if (itemName == "") {
+				if (itemName.equals(none)) {
 					System.out.println("Missing menu item name");
-				} else if (newCost == "") {
+				} else if (newCost.equals(none)) {
 					System.out.println("Missing menu item cost");
 				} else {
 					db.addMenuItem(itemName, Double.parseDouble(newCost));
@@ -176,14 +184,31 @@ public class ManagerController implements Initializable {
 			public void handle(ActionEvent event) {
 				String newCost = fMenuPrice.getText();
 				String itemName = fMenuID.getText();
+				String none = "";
 				itemName = itemName.strip();
 				newCost = newCost.strip();
-				if (itemName == "") {
+				if (itemName.equals(none)) {
 					System.out.println("Missing menu item ID");
-				} else if (newCost == "") {
+				} else if (newCost.equals(none)) {
 					System.out.println("Missing menu item cost");
 				} else {
 					db.changePrice(itemName, Double.parseDouble(newCost));
+					updateMenuTable(0);
+					menuTable.refresh();
+				}
+			}
+		});
+
+		deleteMenuItem.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				String itemID = fMenuID.getText().strip();
+				String tableName = "menu";
+				String columnName = "menu_item_id";
+				String none = "";
+				if (itemID.equals(none)) {
+					System.out.println("Missing menu item ID");
+				} else {
+					db.deleteRow(tableName, columnName, Long.parseLong(itemID));
 					updateMenuTable(0);
 					menuTable.refresh();
 				}
@@ -195,11 +220,12 @@ public class ManagerController implements Initializable {
 				String name = fItemName.getText().strip();
 				String cost = fItemCost.getText().strip();
 				String quantity = fItemQuantity.getText().strip();
-				if (fItemName.getText().strip() == "") {
+				String none = "";
+				if (fItemName.getText().strip().equals(none)) {
 					System.out.println("Missing Item Name");
-				} else if (fItemCost.getText().strip() == "") {
+				} else if (fItemCost.getText().strip().equals(none)) {
 					System.out.println("Missing Item Cost");
-				} else if (fItemQuantity.getText().strip() == "") {
+				} else if (fItemQuantity.getText().strip().equals(none)) {
 					System.out.println("Missing Item Quantity");
 				} else {
 					db.addInventoryItem(name, Double.parseDouble(cost), Double.parseDouble(quantity));
@@ -215,10 +241,27 @@ public class ManagerController implements Initializable {
 				String name = fItemName.getText().strip();
 				String cost = fItemCost.getText().strip();
 				String quantity = fItemQuantity.getText().strip();
-				if (ID == "") {
+				String none = "";
+				if (ID.equals(none)) {
 					System.out.println("Missing Item ID");
 				} else {
 					db.updateInventoryItem(ID, name, cost, quantity);
+					updateInventoryTable(0);
+					inventoryTable.refresh();
+				}
+			}
+		});
+
+		deleteInvItem.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				String itemID = fInventoryID.getText().strip();
+				String tableName = "inventory_item";
+				String columnName = "inventory_id";
+				String none = "";
+				if (itemID.equals(none)) {
+					System.out.println("Missing item ID");
+				} else {
+					db.deleteRow(tableName, columnName, Long.parseLong(itemID));
 					updateInventoryTable(0);
 					inventoryTable.refresh();
 				}
@@ -231,13 +274,14 @@ public class ManagerController implements Initializable {
 				String invID = fRecipeInventoryID.getText().strip();
 				String menuID = fRecipeMenuID.getText().strip();
 				String quantity = fRecipeQuantity.getText().strip();
-				if (name == "") {
+				String none = "";
+				if (name.equals(none)) {
 					System.out.println("Missing Item Name");
-				} else if (invID == "") {
+				} else if (invID.equals(none)) {
 					System.out.println("Missing Inventory ID");
-				} else if (menuID == "") {
+				} else if (menuID.equals(none)) {
 					System.out.println("Missing Menu ID");
-				} else if (quantity == "") {
+				} else if (quantity.equals(none)) {
 					System.out.println("Missing Quantity");
 				} else {
 					db.addRecipeItem(name, Integer.parseInt(invID), Integer.parseInt(menuID),
@@ -256,10 +300,27 @@ public class ManagerController implements Initializable {
 				String invID = fRecipeInventoryID.getText().strip();
 				String menuID = fRecipeMenuID.getText().strip();
 				String quantity = fRecipeQuantity.getText().strip();
-				if (ID == "") {
+				String none = "";
+				if (ID.equals(none)) {
 					System.out.println("Missing Item Name");
 				} else {
 					db.updateRecipeItem(ID, name, invID, menuID, quantity);
+					updateRecipeTable(0);
+					recipeTable.refresh();
+				}
+			}
+		});
+
+		deleteRecipeItem.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				String itemID = fRecipeID.getText().strip();
+				String tableName = "recipe_item";
+				String columnName = "recipe_id";
+				String none = "";
+				if (itemID.equals(none)) {
+					System.out.println("Missing recipe ID");
+				} else {
+					db.deleteRow(tableName, columnName, Long.parseLong(itemID));
 					updateRecipeTable(0);
 					recipeTable.refresh();
 				}
