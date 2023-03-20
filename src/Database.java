@@ -791,8 +791,8 @@ public class Database {
      * @return an ObservableList of String arrays, each containing the names of two
      *         menu items that are frequently sold together
      */
-    public ObservableList<String[]> popularCombos(String initialDate, String finalDate) {
-        ObservableList<String[]> popularCombos = FXCollections.observableArrayList();
+    public ObservableList<Combo> popularCombos(String initialDate, String finalDate) {
+        ObservableList<Combo> popularCombos = FXCollections.observableArrayList();
         try {
             // Query to get the most popular combos
             String query = "SELECT m1.MENU_ITEM_NAME, m2.MENU_ITEM_NAME, COUNT(*) AS combo_count " +
@@ -813,8 +813,8 @@ public class Database {
             while (result.next()) {
                 String menuItem1 = result.getString("MENU_ITEM_NAME");
                 String menuItem2 = result.getString("MENU_ITEM_NAME");
-                int comboCount = result.getInt("combo_count");
-                String[] combo = new String[] { menuItem1, menuItem2, String.valueOf(comboCount) };
+                Long comboCount = result.getLong("combo_count");
+                Combo combo = new Combo(menuItem1, menuItem2, comboCount);
                 popularCombos.add(combo);
             }
 
