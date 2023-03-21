@@ -14,6 +14,7 @@ public class Database {
     private static String teamNumber = "team_42";
     private static String dbName = "csce315331_" + teamNumber;
     private static String dbConnectionString = "jdbc:postgresql://csce-315-db.engr.tamu.edu/" + dbName;
+    private float zReportTotal = 0;
 
     /**
      * Database constructor
