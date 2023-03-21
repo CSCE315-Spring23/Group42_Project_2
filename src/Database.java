@@ -309,6 +309,34 @@ public class Database {
         return rows;
     }
 
+    public ObservableList<Report> get20RowsReport(int whichTwenty) {
+        String tableName = "zreports";
+        ObservableList<Report> rows = FXCollections.observableArrayList();
+        try {
+            // run query
+            ResultSet result = runCommand("SELECT * FROM "
+                    + tableName);
+
+            // Get metadata which gets info about the types/properties of the columns in a
+            // ResultSet
+            // ResultSetMetaData metaData = result.getMetaData();
+            // int numberOfColumns = metaData.getColumnCount();
+
+            // Loop through the 20 rows in result
+            while (result.next()) {
+                // Loop through columns an
+                rows.add(new Report(result.getInt(1), result.getInt(2), result.getString(3), result.getFloat(4)));
+            }
+
+            result.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return rows;
+    }
+
     /**
      * Returns an ArrayList of integers representing the quantities of specific
      * recipe items used in the specified item on the menu.
@@ -954,9 +982,9 @@ public class Database {
             System.exit(0);
         }
     }
-    public void createXReport(){
+    // public void createXReport(){
 
-    }
+    // }
 }
 
 /**

@@ -176,12 +176,12 @@
                   <RowConstraints maxHeight="429.5" minHeight="10.0" prefHeight="416.5" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <TableView fx:id="inventoryTable1" prefHeight="379.0" prefWidth="397.0" GridPane.rowIndex="1">
+                  <TableView fx:id="reportTable" prefHeight="379.0" prefWidth="397.0" GridPane.rowIndex="1">
                      <columns>
                         <TableColumn fx:id="reportID" prefWidth="71.33334350585938" text="REPORT_ID" />
-                        <TableColumn fx:id="LastOrderID" prefWidth="101.33334350585938" text="LAST_ORDER_ID" />
-                        <TableColumn fx:id="ZReportDate" prefWidth="94.666748046875" text="ZREPORT_DATE" />
-                        <TableColumn fx:id="ReportTotalCost" prefWidth="136.6666259765625" text="REPORT_TOTAL_COST" />
+                        <TableColumn fx:id="lastOrderID" prefWidth="101.33334350585938" text="LAST_ORDER_ID" />
+                        <TableColumn fx:id="zReportDate" prefWidth="94.666748046875" text="ZREPORT_DATE" />
+                        <TableColumn fx:id="reportTotalCost" prefWidth="136.6666259765625" text="REPORT_TOTAL_COST" />
                      </columns>
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

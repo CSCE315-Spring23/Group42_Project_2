@@ -96,6 +96,8 @@ public class ManagerController implements Initializable {
 	private TableView<SaleData> salesHistoryTable;
 	@FXML
 	private TableView<Combo> popularCombosTable;
+	@FXML
+	private TableView<Report> reportTable;
 
 	@FXML
 	private TableColumn<Combo, Long> countCol;
@@ -137,11 +139,21 @@ public class ManagerController implements Initializable {
 	@FXML
 	private TableColumn<Recipe, Double> recipeAmountUsed;
 
+	@FXML
+	private TableColumn<Report, Integer> reportID;
+	@FXML
+	private TableColumn<Report, Integer> lastOrderID;
+	@FXML
+	private TableColumn<Report, String> zReportDate;
+	@FXML
+	private TableColumn<Report, Float> reportTotalCost;
+
 
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println("Manager controller running");
 		this.db = new Database();
 
+		this.setUpReportTable();
 		this.setUpInventoryTable();
 		this.setUpMenuTable();
 		this.setUpRecipeTable();
@@ -400,6 +412,16 @@ public class ManagerController implements Initializable {
 	private void updateRecipeTable(int whichTwenty) {
 		this.recipeTable.setItems(db.get20RowsRecipe(whichTwenty));
 		this.recipeTable.refresh();
+	}
+
+	private void setUpReportTable() {
+		this.reportID.setCellValueFactory(cellData -> cellData.getValue().getReportID());
+		this.lastOrderID.setCellValueFactory(cellData -> cellData.getValue().getLastOrderID());
+		this.zReportDate.setCellValueFactory(cellData -> cellData.getValue().getZReportDate());
+		this.reportTotalCost.setCellValueFactory(cellData -> cellData.getValue().getReportTotalCost());
+		final ObservableList<Report> items = db.get20RowsReport(0);
+
+		this.reportTable.setItems(items);
 	}
 
 	private void setUpInventoryTable() {
