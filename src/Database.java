@@ -747,6 +747,14 @@ public class Database {
         }
     }
 
+    /**
+     * Adds an inventory item to the database with the given name, cost, and quantity.
+     *
+     * @param name the name of the inventory item
+     * @param cost the cost of the inventory item
+     * @param quantity the quantity of the inventory item
+     * @author
+     */
     public void addInventoryItem(String name, double cost, double quantity) {
         try {
             // get the last recipe id
