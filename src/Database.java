@@ -866,7 +866,7 @@ public class Database {
      * 
      * @param initialDate lowerbound for sales history interval
      * @param finalDate   upperbound for sales history interval
-     * @author
+     * @author Daniela Santos
      */
     public ObservableList<SaleData> salesHistory(String initialDate, String finalDate) {
         ObservableList<SaleData> saleData = FXCollections.observableArrayList();
@@ -908,7 +908,7 @@ public class Database {
      * @param finalDate   the end of the date range
      * @return an ObservableList of String arrays, each containing the names of two
      *         menu items that are frequently sold together
-     * @author
+     * @author Daniela Santos
      */
     public ObservableList<Combo> popularCombos(String initialDate, String finalDate) {
         ObservableList<Combo> popularCombos = FXCollections.observableArrayList();
