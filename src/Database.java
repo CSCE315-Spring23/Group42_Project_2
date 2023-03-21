@@ -845,10 +845,10 @@ public class Database {
         try {
             // Get the sales data for the given time window
             ResultSet result = runCommand(
-                    "SELECT Menu.MENU_ITEM_ID, Menu.MENU_ITEM_NAME, SUM(ItemSold.ITEM_SOLD_QUANTITY) AS TOTAL_QUANTITY FROM ItemSold "
+                    "SELECT Menu.MENU_ITEM_ID, Menu.MENU_ITEM_NAME, SUM(item_sold.ITEM_SOLD_QUANTITY) AS TOTAL_QUANTITY FROM item_sold "
                             +
-                            "JOIN Menu ON Menu.MENU_ITEM_ID = ItemSold.MENU_ITEM_ID " +
-                            "JOIN Orders ON Orders.ORDER_ID = ItemSold.ORDER_ID " +
+                            "JOIN Menu ON Menu.MENU_ITEM_ID = item_sold.MENU_ITEM_ID " +
+                            "JOIN Orders ON Orders.ORDER_ID = item_sold.ORDER_ID " +
                             "WHERE Orders.DATE_ORDERED BETWEEN '" + initialDate + "' AND '" + finalDate + "' " +
                             "GROUP BY Menu.MENU_ITEM_ID, Menu.MENU_ITEM_NAME;");
 
