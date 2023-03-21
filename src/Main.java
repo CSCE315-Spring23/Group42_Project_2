@@ -30,19 +30,19 @@ public class Main extends Application {
         FXMLLoader loginLoader = new FXMLLoader(
                 getClass().getResource("login.fxml"));
         Parent loginParent = (Parent) loginLoader.load();
-        Scene loginScene = new Scene(loginParent, 750, 750);
+        Scene loginScene = new Scene(loginParent, 650, 650);
 
         // set up employee scene
         FXMLLoader employeeLoader = new FXMLLoader(
                 getClass().getResource("employee.fxml"));
         Parent employeeParent = (Parent) employeeLoader.load();
-        Scene employeeScene = new Scene(employeeParent, 750, 750);
+        Scene employeeScene = new Scene(employeeParent, 650, 650);
 
         // set up manager scene
         FXMLLoader managerLoader = new FXMLLoader(
                 getClass().getResource("manager.fxml"));
         Parent managerParent = (Parent) managerLoader.load();
-        Scene managerScene = new Scene(managerParent, 750, 750);
+        Scene managerScene = new Scene(managerParent, 650, 650);
 
         LoginController loginController = (LoginController) loginLoader.getController();
         // ManagerController managerController = (ManagerController)

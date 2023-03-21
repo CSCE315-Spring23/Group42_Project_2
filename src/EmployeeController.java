@@ -8,18 +8,19 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 
-// import javafx.fxml.FXMLLoader;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-// import javafx.scene.Parent;
-// import javafx.scene.Scene;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Label;
-// import javafx.scene.image.Image;
-// import javafx.scene.image.ImageView;
-// import javafx.scene.layout.GridPane;
-// import javafx.stage.Stage;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 public class EmployeeController implements Initializable {
 	boolean burger = false; // check it item is burger
@@ -243,6 +244,9 @@ public class EmployeeController implements Initializable {
 	Label orderListLabel;
 	@FXML
 	Button placeOrder;
+	@FXML
+	Button logout;
+
 
 	/**
 	 * initializes databse and java fx buttons
@@ -280,6 +284,47 @@ public class EmployeeController implements Initializable {
 
 			}
 		});
+		/**
+		 * Log Out
+		 */
+		logout.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				try{
+					// set up login scene
+					FXMLLoader loginLoader = new FXMLLoader(
+							getClass().getResource("login.fxml"));
+					Parent loginParent = (Parent) loginLoader.load();
+					Scene loginScene = new Scene(loginParent, 650, 650);
+			
+					// set up employee scene
+					FXMLLoader employeeLoader = new FXMLLoader(
+							getClass().getResource("employee.fxml"));
+					Parent employeeParent = (Parent) employeeLoader.load();
+					Scene employeeScene = new Scene(employeeParent, 650, 650);
+			
+					// set up manager scene
+					FXMLLoader managerLoader = new FXMLLoader(
+							getClass().getResource("manager.fxml"));
+					Parent managerParent = (Parent) managerLoader.load();
+					Scene managerScene = new Scene(managerParent, 650, 650);
+			
+					LoginController loginController = (LoginController) loginLoader.getController();
+					Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			
+					loginController.setEmployeeScene(employeeScene);
+					// managerController.setEmployeeScene(employeeScene)
+					loginController.setManagerScene(managerScene);
+			
+					stage.setTitle("315 Project 2");
+					stage.setScene(loginScene);
+					stage.show();
+				} catch(IOException e){
+					e.printStackTrace();
+				}
+				
+			}
+		});
+
 		/**
 		 * add a Rev's Burger to the order
 		 */

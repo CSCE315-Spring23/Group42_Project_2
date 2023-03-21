@@ -357,8 +357,21 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Label fx:id="orderListLabel" alignment="TOP_LEFT" layoutX="7.0" layoutY="12.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="357.0" prefWidth="585.0" text="No items" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="12.0" />
-                  <Button fx:id="placeOrder" layoutY="-30.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Place Order" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+                  <GridPane prefHeight="365.0" prefWidth="601.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="526.3333231608074" minWidth="200.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="104.3333740234375" minWidth="10.0" prefWidth="100.33337402343756" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="200.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="60.33334350585938" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label fx:id="orderListLabel" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="310.0" prefWidth="469.0" text="No items" />
+                        <Button fx:id="placeOrder" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="25.0" prefWidth="457.0" text="Place Order" GridPane.rowIndex="1" />
+                        <Button fx:id="logout" mnemonicParsing="false" prefHeight="25.0" prefWidth="107.0" text="Log Out" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
                </children>
             </AnchorPane>
         </content>
