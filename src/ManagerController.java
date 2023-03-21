@@ -331,13 +331,18 @@ public class ManagerController implements Initializable {
 
 		switchView.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				FXMLLoader employeeLoader = new FXMLLoader(getClass().getResource("employee.fxml"));
-				Parent employeeParent = (Parent) employeeLoader.load();
-				Scene employeeScene = new Scene(employeeParent, 750, 750);
-				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-				stage.setTitle("315 Project 2");
-				stage.setScene(employeeScene);
-				stage.show();
+				try{
+					FXMLLoader employeeLoader = new FXMLLoader(getClass().getResource("employee.fxml"));
+					Parent employeeParent = (Parent) employeeLoader.load();
+					Scene employeeScene = new Scene(employeeParent, 750, 750);
+					Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+					stage.setTitle("315 Project 2");
+					stage.setScene(employeeScene);
+					stage.show();
+				} catch(IOException e){
+					e.printStackTrace();
+				}
+				
 			}
 		});
 
