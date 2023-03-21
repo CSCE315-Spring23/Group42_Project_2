@@ -18,7 +18,8 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button layoutX="257.0" layoutY="197.0" mnemonicParsing="false" text="Switch" />
+                  <Button fx:id="switchView" layoutX="232.0" layoutY="50.0" mnemonicParsing="false" text="Switch" />
+                  <Button fx:id="logout" layoutX="309.0" layoutY="50.0" mnemonicParsing="false" text="Log out" />
                </children>
             </AnchorPane>
         </content>
@@ -30,7 +31,7 @@
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints maxHeight="223.0" minHeight="10.0" prefHeight="53.5" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="429.5" minHeight="10.0" prefHeight="416.5" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
@@ -54,7 +55,7 @@
                         <Button fx:id="deleteMenuItem" mnemonicParsing="false" text="Delete Menu Item" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
-                  <TableView fx:id="menuTable" prefHeight="289.0" prefWidth="438.0" GridPane.rowIndex="1">
+                  <TableView fx:id="menuTable" prefHeight="409.0" prefWidth="580.0" GridPane.rowIndex="1">
                      <columns>
                         <TableColumn fx:id="menuID" prefWidth="83.33328247070312" text="MENU_ID" />
                         <TableColumn fx:id="menuItemName" prefWidth="130.66668701171875" text="ITEM_NAME" />
@@ -75,7 +76,7 @@
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints maxHeight="223.0" minHeight="10.0" prefHeight="53.5" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="429.5" minHeight="10.0" prefHeight="416.5" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
@@ -125,7 +126,7 @@
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="223.0" minHeight="10.0" prefHeight="53.5" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="429.5" minHeight="10.0" prefHeight="416.5" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>

@@ -18,6 +18,8 @@ import javafx.collections.FXCollections;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javafx.scene.Scene;
+import javafx.scene.Parent;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -29,6 +31,10 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class ManagerController implements Initializable {
+	@FXML
+	private Button switchView;
+	@FXML
+	private Button logout;
 	@FXML
 	private Button addMenu;
 	@FXML
@@ -131,10 +137,6 @@ public class ManagerController implements Initializable {
 	@FXML
 	private TableColumn<Recipe, Double> recipeAmountUsed;
 
-	// @FXML
-	// private Button switchView;
-	//
-	// private Scene employeeScene;
 
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println("Manager controller running");
@@ -327,11 +329,17 @@ public class ManagerController implements Initializable {
 			}
 		});
 
-		// switchView.setOnAction(new EventHandler<ActionEvent>() {
-		// public void handle(ActionEvent event) {
-		// openEmployeeScene();
-		// }
-		// });
+		switchView.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				FXMLLoader employeeLoader = new FXMLLoader(getClass().getResource("employee.fxml"));
+				Parent employeeParent = (Parent) employeeLoader.load();
+				Scene employeeScene = new Scene(employeeParent, 750, 750);
+				Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+				stage.setTitle("315 Project 2");
+				stage.setScene(employeeScene);
+				stage.show();
+			}
+		});
 
 	}
 	// public void openEmployeeScene() {
