@@ -914,6 +914,49 @@ public class Database {
         return popularCombos;
     }
 
+    
+    public void createZReport(){
+        try {
+            //get new pk
+            int newReportID = 0;
+            Statement stmt = conn.createStatement();
+            String sqlStatement1 = "SELECT MAX(report_id) FROM zreports";
+            ResultSet result = stmt.executeQuery(sqlStatement1);
+            if (result.next()) {
+                newReportID = result.getInt(1) + 1;
+            }
+
+            //get new latest order
+            int lastOrderID = 0;
+            String sqlStatement5 = "SELECT MAX(order_id) FROM orders";
+            ResultSet result3 = stmt.executeQuery(sqlStatement1);
+            if (result3.next()) {
+                lastOrderID = result.getInt(1);
+            }
+
+            //get zreport date
+            // get the current date as a LocalDate object
+            //
+            LocalDate today = LocalDate.now();
+            // format the date as a string in "MM-dd-yyyy" format
+            String date = today.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
+
+            // insert into item sold
+            String sqlStatement2 = String.format(
+                    "INSERT INTO zreports (report_id, last_order_id, zreport_date, report_total_cost) VALUES ('%d', '%d', '%s', '%f')",
+                    newReportID, lastOrderID, date, zReportTotal);
+            stmt.executeUpdate(sqlStatement2);
+            zReportTotal = 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
+    public void createXReport(){
+
+    }
 }
 
 /**
