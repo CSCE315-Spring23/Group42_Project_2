@@ -346,11 +346,46 @@ public class ManagerController implements Initializable {
 			}
 		});
 
+		logout.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				try{
+					// set up login scene
+					FXMLLoader loginLoader = new FXMLLoader(
+							getClass().getResource("login.fxml"));
+					Parent loginParent = (Parent) loginLoader.load();
+					Scene loginScene = new Scene(loginParent, 650, 650);
+			
+					// set up employee scene
+					FXMLLoader employeeLoader = new FXMLLoader(
+							getClass().getResource("employee.fxml"));
+					Parent employeeParent = (Parent) employeeLoader.load();
+					Scene employeeScene = new Scene(employeeParent, 650, 650);
+			
+					// set up manager scene
+					FXMLLoader managerLoader = new FXMLLoader(
+							getClass().getResource("manager.fxml"));
+					Parent managerParent = (Parent) managerLoader.load();
+					Scene managerScene = new Scene(managerParent, 650, 650);
+			
+					LoginController loginController = (LoginController) loginLoader.getController();
+					Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			
+					loginController.setEmployeeScene(employeeScene);
+					// managerController.setEmployeeScene(employeeScene)
+					loginController.setManagerScene(managerScene);
+			
+					stage.setTitle("315 Project 2");
+					stage.setScene(loginScene);
+					stage.show();
+				} catch(IOException e){
+					e.printStackTrace();
+				}
+				
+			}
+		});
+
 	}
-	// public void openEmployeeScene() {
-	// Stage stage = (Stage) (switchView.getScene().getWindow());
-	// stage.setScene(employeeScene);
-	// }
+	
 
 	private void updateMenuTable(int whichTwenty) {
 		this.menuTable.setItems(db.get20RowsMenu(whichTwenty));
