@@ -3,5 +3,6 @@
 *.DS_Store
 
 .vscode/
+*.zip
 
 /src/.metadata/
