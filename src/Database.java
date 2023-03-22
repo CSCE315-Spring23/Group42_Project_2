@@ -270,6 +270,42 @@ public class Database {
         return rows;
     }
 
+    public ObservableList<Excess> getExcess(String initialDate, String finalDate){
+        ObservableList<Excess> excess = FXCollections.observableArrayList();
+        try {
+            // Get the sales data for the given time window
+            ResultSet result = runCommand(
+                    "SELECT RI.MENU_ID AS MENU_ITEM_ID,
+                    RI.INVENTORY_ID,
+                    RI.AMT_USED * SUM(IS.QTY_SOLD) AS TOTAL_AMT_USED
+                FROM RECIPE_ITEM AS RI
+                JOIN ITEM_SOLD AS IS ON RI.MENU_ID = IS.MENU_ITEM_ID AND RI.INVENTORY_ID = IS.INVENTORY_ID
+                JOIN ORDERS AS O ON O.ORDER_ID = IS.ORDER_ID
+                WHERE O.DATE_ORDERED BETWEEN initialDate AND finalDate
+                GROUP BY RI.MENU_ID, RI.INVENTORY_ID
+                ");
+
+            // Parse the sales data into a list of SaleData objects
+            while (result.next()) {
+                String inventoryItemName = result.getString("INVENTORY_ITEM_NAME");
+                Long inventoryID = result.getLong("INVENTORY_ID");
+                Long quantityUsed = result.getLong("TOTAL_AMT_USED");
+                
+                ResultSet res2 = runCommand("SELECT INVENTORY_ITEM_QUANTITY FROM INVENTORY_ITEM WHERE INVENTORY_ID = " + inventoryID + ";");
+                Long inventoryOnHand = res2.getLong("INVENTORY_ITEM_QUANTITY");
+                if (inventoryOnHand + quantityUsed > quantityUsed * 10){
+                    excess.add(new Excess(inventoryID, inventoryItemName));
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return excess;
+    }
+
     /**
      * Retrieves 20 rows of recipe items from the "recipe_item" table starting from
      * a specified position.
