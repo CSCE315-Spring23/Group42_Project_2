@@ -1001,7 +1001,7 @@ public class Database {
         try {
             //Get inventory that has a quantity of less than 30
             ResultSet result = runCommand("Select * FROM "
-                    + tableName + "WHERE inventory_item_quantity <= 50");
+                    + tableName + "WHERE inventory_item_quantity <= 50;");
             // Loop through the rows in result
             while (result.next()) {
                 // Loop through columns an
