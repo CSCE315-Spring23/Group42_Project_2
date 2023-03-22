@@ -10,9 +10,6 @@ import javafx.collections.FXCollections;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Contains all functionality to access the SQL Database
- */
 public class Database {
 
     private Connection conn = null;
@@ -40,7 +37,7 @@ public class Database {
     /**
      * Runs a SQL command on the database and returns the results as a ResultSet.
      * 
-     * @param sqlStatement the SQL command to run
+     * @param command the SQL command to run
      * @return a ResultSet object containing the results of the query
      * @throws SQLException if there is an error executing the SQL command
      * @author Arjun
@@ -59,7 +56,10 @@ public class Database {
     }
 
     /**
+     * <<<<<<< HEAD
+     * =======
      * 
+     * >>>>>>> bd10b86cec59345cb0b60afcdc9b0fb4056336ae
      * Call when done to close connection
      * Closes the database connection and prints a message indicating whether the
      * connection was closed.
@@ -106,7 +106,7 @@ public class Database {
      * @param tableName the name of the table to retrieve the number of rows for
      * @return an integer value representing the number of rows in the table
      * @throws Exception if there is an error executing the query
-     * @author Arjun
+     * @author
      */
     public int getNumRows(String tableName) {
         int rows = 0;
@@ -139,7 +139,7 @@ public class Database {
      *             inventory items used
      * @return an ArrayList of integers representing the inventory items used on the
      *         specified day
-     * @author Arjun
+     * @author
      */
     public ArrayList<Integer> inventoryItemsUsed(String date) {
         int inventoryItemsCount = getNumRows("inventoryItem");
@@ -201,7 +201,7 @@ public class Database {
      *                    the inventory table
      * @return an ObservableList of Inventory objects representing the retrieved
      *         rows of inventory items.
-     * @author Bryan
+     * @author
      */
     public ObservableList<Inventory> get20RowsInventory(int whichTwenty) {
         String tableName = "inventory_item";
@@ -242,7 +242,7 @@ public class Database {
      *                    be 2, and so on.
      * @return An ObservableList of Menu objects representing the retrieved rows of
      *         menu items.
-     * @author Daniela Santos
+     * @author
      */
     public ObservableList<Menu> get20RowsMenu(int whichTwenty) {
         String tableName = "menu";
@@ -273,54 +273,38 @@ public class Database {
     }
 
     /**
-     * Retrieves a list of items that have used less than 10% of their inventory in
-     * the given timeframe
-     * 
+     * Retrieves a list of items that have used less than 10% of their inventory in the given timeframe
      * @param initialDate
-     *                    the start date for this measure.
+     * the start date for this measure.
      * @param finalDate
-     *                    the end date for this measure. use current date for the
-     *                    most up to date measurement.
-     * @return list of items
-     * @author Arjun
+     * the end date for this measure.  use current date for the most up to date measurement.
+     * @return
      */
-    public ObservableList<Excess> getExcess(String initialDate, String finalDate) {
+    public ObservableList<Excess> getExcess(String initialDate, String finalDate){
         ObservableList<Excess> excess = FXCollections.observableArrayList();
-        if (initialDate.equals(finalDate))
-            return excess;
-
         try {
             // Get the sales data for the given time window
             ResultSet result = runCommand(
-                    "SELECT SUM(AMT_USED) AS total_amt_used, i.INVENTORY_ID, i.INVENTORY_ITEM_NAME " +
-                            "FROM Recipe_Item r " +
-                            "JOIN Inventory_Item i ON r.INVENTORY_ID = i.INVENTORY_ID " +
-                            "JOIN Item_Sold s ON r.MENU_ID = s.MENU_ITEM_ID " +
-                            "JOIN Orders o ON s.ORDER_ID = o.ORDER_ID " +
-                            "WHERE o.DATE_ORDERED BETWEEN '" + initialDate.strip() + "' AND '" + finalDate.strip() +
-                            "' GROUP BY i.INVENTORY_ID, i.INVENTORY_ITEM_NAME"
+                "SELECT SUM(AMT_USED) AS total_amt_used, i.INVENTORY_ID, i.INVENTORY_ITEM_NAME " +
+                "FROM Recipe_Item r " + 
+                "JOIN Inventory_Item i ON r.INVENTORY_ID = i.INVENTORY_ID " +
+                "JOIN Item_Sold s ON r.MENU_ID = s.MENU_ITEM_ID " +
+                "JOIN Orders o ON s.ORDER_ID = o.ORDER_ID " +
+                "WHERE o.DATE_ORDERED BETWEEN " + initialDate + " AND " + finalDate +  
+                "GROUP BY i.INVENTORY_ID, i.INVENTORY_ITEM_NAME"
+                
+                );
 
-            );
-            if (result == null)
-                return excess;
             // Parse the sales data into a list of SaleData objects
             while (result.next()) {
                 String inventoryItemName = result.getString("INVENTORY_ITEM_NAME");
                 Long inventoryID = result.getLong("INVENTORY_ID");
                 Long quantityUsed = result.getLong("TOTAL_AMT_USED");
 
-                ResultSet res2 = runCommand(
-                        "SELECT INVENTORY_ITEM_QUANTITY FROM INVENTORY_ITEM WHERE INVENTORY_ID = " + inventoryID + ";");
-                res2.next();
-
+                ResultSet res2 = runCommand("SELECT INVENTORY_ITEM_QUANTITY FROM INVENTORY_ITEM WHERE INVENTORY_ID = " + inventoryID + ";");
                 Long inventoryOnHand = res2.getLong("INVENTORY_ITEM_QUANTITY");
-                // System.out.println("DEBUG LOG: " + inventoryItemName + " : " + inventoryID +
-                // " : " + quantityUsed
-                // + " : " + inventoryOnHand);
-
-                if (inventoryOnHand + quantityUsed > quantityUsed * 10) {
-                    Excess ex = new Excess(inventoryID, inventoryItemName);
-                    excess.add(ex);
+                if (inventoryOnHand + quantityUsed > quantityUsed * 10){
+                    excess.add(new Excess(inventoryID, inventoryItemName));
                 }
             }
 
@@ -341,7 +325,6 @@ public class Database {
      *                    be 2, and so on.
      * @return An ObservableList of Recipe objects representing the retrieved rows
      *         of recipe items.
-     * @author Ariela
      */
     public ObservableList<Recipe> get20RowsRecipe(int whichTwenty) {
         String tableName = "recipe_item";
@@ -372,18 +355,6 @@ public class Database {
         return rows;
     }
 
-    /**
-     * Retrieves 20 rows of recipe items from the report table starting from
-     * a specified position.
-     * 
-     * @param whichTwenty An integer specifying which set of 20 rows to retrieve.
-     *                    The first set of 20 rows would be 1, the second set would
-     *                    be 2, and so on.
-     * @return An ObservableList of report objects representing the retrieved rows
-     *         of recipe items.
-     * @author Srikar
-     */
-
     public ObservableList<Report> get20RowsReport(int whichTwenty) {
         String tableName = "zreports";
         ObservableList<Report> rows = FXCollections.observableArrayList();
@@ -412,34 +383,6 @@ public class Database {
         return rows;
     }
 
-    public ObservableList<ReportContent> get20RowsReportContent(int whichTwenty) {
-        String tableName = "zreportcontent";
-        ObservableList<ReportContent> rows = FXCollections.observableArrayList();
-        try {
-            // run query
-            ResultSet result = runCommand("SELECT * FROM "
-                    + tableName);
-
-            // Get metadata which gets info about the types/properties of the columns in a
-            // ResultSet
-            // ResultSetMetaData metaData = result.getMetaData();
-            // int numberOfColumns = metaData.getColumnCount();
-
-            // Loop through the 20 rows in result
-            while (result.next()) {
-                // Loop through columns an
-                rows.add(new ReportContent(result.getString(3), result.getInt(4)));
-            }
-
-            result.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
-        return rows;
-    }
-
     /**
      * Returns an ArrayList of integers representing the quantities of specific
      * recipe items used in the specified item on the menu.
@@ -451,7 +394,7 @@ public class Database {
      * @return an ArrayList of integers representing the quantities of specific
      *         recipe items used in the specified item on the menu
      * @throws Exception if there is an error executing the query
-     * @author Ariela
+     * @author
      */
     public ArrayList<Integer> getRecipe(String item) {
         int inventoryItemsCount = getNumRows("inventoryItem");
@@ -493,7 +436,7 @@ public class Database {
      * @param inventoryItems a list of CustomPair objects representing the inventory
      *                       items and their corresponding quantities in the order
      * @throws Exception if there is an error executing the query
-     * @author Daniela Santos
+     * @author
      */
     public void createOrder(double cost, ArrayList<CustomPair> menuItems, ArrayList<CustomPair> inventoryItems) {
         try {
@@ -510,7 +453,7 @@ public class Database {
             //
             LocalDate today = LocalDate.now();
             // format the date as a string in "MM-dd-yyyy" format
-            String date = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            String date = today.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(
                     String.format("INSERT INTO orders (order_id, date_ordered, order_cost) VALUES (%d, '%s', %f)",
@@ -535,7 +478,7 @@ public class Database {
      * 
      * @param itemName the name or ID of the menu item to update
      * @param newCost  the new cost of the menu item
-     * @author Bryan
+     * @author
      */
     public void changePrice(String itemName, double newCost) {
         try {
@@ -561,7 +504,7 @@ public class Database {
      *                 skip update)
      * @param quantity the new quantity of the inventory item (can be empty string
      *                 to skip update)
-     * @author Daniela M
+     * @author
      */
     public void updateInventoryItem(String itemID, String itemName, String newCost, String quantity) {
         try {
@@ -599,7 +542,7 @@ public class Database {
      *                 skip update)
      * @param quantity the new quantity of the recipe item (can be empty string to
      *                 skip update)
-     * @author Arjun
+     * @author
      */
     public void updateRecipeItem(String itemID, String itemName, String invID, String menuID, String quantity) {
         try {
@@ -636,7 +579,7 @@ public class Database {
      * @param MenuId   the ID of the menu item being sold
      * @param orderID  the ID of the order this menu item is being sold under
      * @param quantity the quantity of the menu item being sold
-     * @author Srikar
+     * @author
      */
     private void createMenuItemSold(int MenuId, int orderID, int quantity) {
         // add a row to ItemsSold
@@ -698,7 +641,7 @@ public class Database {
      * @param inventoryId the ID of the inventory item being sold
      * @param orderId     the ID of the order associated with the item sold record
      * @param quantity    the quantity of the inventory item being sold
-     * @author Bryan
+     * @author
      */
     private void createInventoryItemSold(int InventoryId, int orderID, int quantity) {
         // add a row to ItemsSold
@@ -734,7 +677,7 @@ public class Database {
      *
      * @param itemID the ID of the menu item to get the price for.
      * @return the cost of the menu item as a double.
-     * @author Srikar
+     * @author
      */
     public double getPriceOfMenuItem(int itemID) {
         double price = 0.0;
@@ -773,7 +716,7 @@ public class Database {
      *
      * @param itemID the ID of the inventory item to get the price for.
      * @return the cost of the inventory item as a double.
-     * @author Arjun
+     * @author
      */
     public double getPriceOfInventoryItem(int itemID) {
         double price = 0.0;
@@ -801,7 +744,7 @@ public class Database {
      *
      * @param email the email address of the employee to get the password for.
      * @return the password associated with the email address as a String.
-     * @author Daniela M
+     * @author
      */
     public String getPasswd(String email) { // check error handlign
         try {
@@ -831,7 +774,7 @@ public class Database {
      *
      * @param name the name of the new menu item
      * @param cost the cost of the new menu item
-     * @author Daniela Santos
+     * @author
      */
     public void addMenuItem(String name, double cost) {
         try {
@@ -855,7 +798,7 @@ public class Database {
      * @param inventoryId the ID of the inventory item used in the recipe
      * @param menuId      the ID of the menu item that the recipe item belongs to
      * @param amtUsed     the amount of the inventory item used in the recipe
-     * @author Arjun
+     * @author
      */
     public void addRecipeItem(String name, int inventoryId, int menuId, int amtUsed) {
         try {
@@ -887,7 +830,7 @@ public class Database {
      * @param name     name of the inventory item
      * @param cost     the cost of the inventory item
      * @param quantity the quantity of the inventory item
-     * @author Ariela
+     * @author
      */
     public void addInventoryItem(String name, double cost, double quantity) {
         try {
@@ -918,7 +861,7 @@ public class Database {
      * @param id the ID of the menu item to get the name of
      * @return the name of the menu item with the given ID, or an empty string if no
      *         such item exists
-     * @author Srikar
+     * @author
      */
     public String getNameFromID(int id) {
         try {
@@ -941,7 +884,7 @@ public class Database {
      * 
      * @param itemName    the name or ID of the inventory item to update
      * @param newQuantity the new quantity of the inventory item
-     * @author Srikar
+     * @author
      */
     public void changeInventoryQuantity(String itemName, int newQuantity) {
         try {
@@ -977,9 +920,9 @@ public class Database {
         ObservableList<SaleData> saleData = FXCollections.observableArrayList();
         try {
             // Get the sales data for the given time window
-            // SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            // String initialDateString = formatter.format(initialDate);
-            // String finalDateString = formatter.format(finalDate);
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String initialDateString = formatter.format(initialDate);
+            String finalDateString = formatter.format(finalDate);
 
             ResultSet result = runCommand(
                     "SELECT Menu.MENU_ITEM_ID, Menu.MENU_ITEM_NAME, SUM(item_sold.ITEM_SOLD_QUANTITY) AS TOTAL_QUANTITY FROM item_sold "
@@ -1051,11 +994,6 @@ public class Database {
         return popularCombos;
     }
 
-    /**
-     * Creates a Z report object
-     * 
-     * @author Srikar
-     */
     public void createZReport() {
         try {
             // get new pk
@@ -1066,30 +1004,30 @@ public class Database {
             if (result.next()) {
                 newReportID = result.getInt(1) + 1;
             }
-            
+
             // get new latest order
             int lastOrderID = 0;
             String sqlStatement5 = "SELECT MAX(order_id) FROM orders";
             ResultSet result3 = stmt.executeQuery(sqlStatement5);
             if (result3.next()) {
-                lastOrderID = result3.getInt(1);
+                lastOrderID = result.getInt(1);
             }
-            
+
             // get zreport date
             // get the current date as a LocalDate object
             //
             LocalDate today = LocalDate.now();
             // format the date as a string in "MM-dd-yyyy" format
             String date = today.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
-            
+
             //get report_total_cost
             float reportTotalCost = 0;
             String sqlStatement6 = "SELECT order_cost FROM orders WHERE order_id > (SELECT last_order_id FROM zreports WHERE report_id=(SELECT MAX(report_id) FROM zreports))";
             ResultSet result4 = stmt.executeQuery(sqlStatement6);
             while (result4.next()) {
-                reportTotalCost += Float.parseFloat(result4.getString(1));
+                reportTotalCost += Float.parseFloat(result.getString(1));
             }
-            
+
             // insert into item sold
             String sqlStatement2 = String.format(
                     "INSERT INTO zreports (report_id, last_order_id, zreport_date, report_total_cost, is_zreport) VALUES ('%d', '%d', '%s', '%f', '%d')",
@@ -1123,7 +1061,7 @@ public class Database {
             String sqlStatement4 = "SELECT * FROM menu";
             ResultSet result2 = stmt.executeQuery(sqlStatement4);
             String sqlStatement2 = "";
-            ArrayList<String> vector1 = new ArrayList<String>();
+            ArrayList<Integer> vector1 = new ArrayList<String>();
             ArrayList<Integer> vector2 = new ArrayList<Integer>();
             while (result2.next()) {
                 vector1.add(result2.getString("menu_item_name"));
@@ -1160,10 +1098,10 @@ public class Database {
 
             // get new latest order
             int lastOrderID = 0;
-            String sqlStatement5 = "SELECT last_order_id FROM zreports WHERE report_id=(SELECT MAX(report_id) FROM zreports)";
+            String sqlStatement5 = "SELECT zreport_date FROM zreports WHERE report_id=(SELECT MAX(report_id) FROM zreports)";
             ResultSet result3 = stmt.executeQuery(sqlStatement5);
             if (result3.next()) {
-                lastOrderID = result3.getInt(1);
+                lastOrderID = result.getString(1);
             }
 
             // get zreport date
@@ -1178,7 +1116,7 @@ public class Database {
             String sqlStatement6 = "SELECT order_cost FROM orders WHERE order_id > (SELECT last_order_id FROM zreports WHERE report_id=(SELECT MAX(report_id) FROM zreports))";
             ResultSet result4 = stmt.executeQuery(sqlStatement6);
             while (result4.next()) {
-                reportTotalCost += Float.parseFloat(result4.getString(1));
+                reportTotalCost += Float.parseFloat(result.getString(1));
             }
 
             // insert into item sold
@@ -1204,45 +1142,43 @@ public class Database {
      * @return an ObservableList of Inventory objects representing the retrieved
      *         rows of inventory items.
      * @author Daniela Martinez Banda
+     * /*
+     *         public ObservableList<Inventory> createRestockReport() {
+     *         String tableName = "inventory_item";
+     *         ObservableList<Inventory> rows = FXCollections.observableArrayList();
      * 
+     *         try {
+     *         // Get inventory that has a quantity of less than 30
+     *         ResultSet result = runCommand("Select * FROM "
+     *         + tableName + " WHERE inventory_item_quantity <= 50");
+     *         // Loop through the rows in result
+     *         while (result.next()) {
+     *         // Loop through columns an
+     *         rows.add(new Inventory(result.getLong(1), result.getString(2),
+     *         result.getDouble(3), result.getLong(4)));
+     *         // Add current row to rows
+     *         }
+     *         result.close();
+     *         } catch (Exception e) {
+     *         e.printStackTrace();
+     *         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+     *         System.exit(0);
+     *         }
+     *         return rows;
+     *         }
      * 
+     *         }
+     * 
+     *         /**
+     *         Class to store Id and Quantity within the Database function
      */
-    public ObservableList<Inventory> createRestockReport() {
-        String tableName = "inventory_item";
-        ObservableList<Inventory> rows = FXCollections.observableArrayList();
+     }
+    class CustomPair {
+        public int ID;
+        public int Quantity;
 
-        try {
-            // Get inventory that has a quantity of less than 30
-            ResultSet result = runCommand("Select * FROM "
-                    + tableName + " WHERE inventory_item_quantity <= 50");
-            // Loop through the rows in result
-            while (result.next()) {
-                // Loop through columns an
-                rows.add(new Inventory(result.getLong(1), result.getString(2),
-                        result.getDouble(3), result.getLong(4)));
-                // Add current row to rows
-            }
-            result.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
+        CustomPair(int iD, int quantity) {
+            this.ID = iD;
+            this.Quantity = quantity;
         }
-        return rows;
     }
-
-}
-
-/**
- * * Class to store Id and Quantity within the Database function
- */
-
-class CustomPair {
-    public int ID;
-    public int Quantity;
-
-    CustomPair(int iD, int quantity) {
-        this.ID = iD;
-        this.Quantity = quantity;
-    }
-}

@@ -55,6 +55,10 @@ public class ManagerController implements Initializable {
 	private Button deleteRecipeItem;
 	@FXML
 	private Button populateOrder;
+	@FXML
+	private Button createXreportBtn;
+	@FXML
+	private Button createZreportBtn;
 
 	@FXML
 	TextField fInventoryID;
@@ -117,6 +121,8 @@ public class ManagerController implements Initializable {
 	@FXML
 	private TableView<Report> reportTable;
 	@FXML
+	private TableView<ReportContent> reportContentTable;
+	@FXML
 	private TableView<Inventory> restockReport;
 
 	@FXML
@@ -169,6 +175,11 @@ public class ManagerController implements Initializable {
 	private TableColumn<Report, Float> reportTotalCost;
 
 	@FXML
+	private TableColumn<ReportContent, String> menuItemNameForReports;
+	@FXML
+	private TableColumn<ReportContent, Integer> menuItemQuantityForReports;
+
+	@FXML
 	private TableColumn<Inventory, Long> inventoryID2;
 	@FXML
 	private TableColumn<Inventory, String> inventoryItemName2;
@@ -186,32 +197,39 @@ public class ManagerController implements Initializable {
 		System.out.println("Manager controller running");
 		this.db = new Database();
 
+		// this.setUpReportContentTable();
 		this.setUpReportTable();
 		this.setUpInventoryTable();
 		this.setUpMenuTable();
 		this.setUpRecipeTable();
 		this.setUpReportTable();
 		this.setUpRestockReport();
-		this.setUpSalesHistoryTable();
-		this.setUpPopularCombosTable();
+		System.out.println("is this the problem?");
+
+		// this.setUpSalesHistoryTable();
+		// this.setUpPopularCombosTable();
+		System.out.println("is this the problem?");
+
 		this.setUpExcessTable();
 
 		this.updateInventoryTable(0);
 		this.updateMenuTable(0);
 		this.updateRecipeTable(0);
 		this.updateRestockReport();
-		this.updateSalesHistoryTable("2022-1-1", "2022-1-1");
-		this.updatePopularCombosTable("2022-1-1", "2022-1-1");
-		// this.updateSalesHistoryTable("2022-01-01", "2022-01-01");
+		// this.updateSalesHistoryTable("2022-1-1", "2022-1-1");
+		// this.updatePopularCombosTable("2022-1-1", "2022-1-1");
+		System.out.println("is this the problem?");
+
 		this.updateExcessTable(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
 		this.inventoryTable.refresh();
 		this.menuTable.refresh();
 		this.recipeTable.refresh();
 		this.restockReport.refresh();
-		this.salesHistoryTable.refresh();
-		this.popularCombosTable.refresh();
 		// this.salesHistoryTable.refresh();
+		// this.popularCombosTable.refresh();
+		System.out.println("is this the problem?");
+
 		this.excessTable.refresh();
 
 		addMenu.setOnAction(new EventHandler<ActionEvent>() {
@@ -230,6 +248,17 @@ public class ManagerController implements Initializable {
 					updateMenuTable(0);
 					menuTable.refresh();
 				}
+			}
+		});
+		createXreportBtn.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				db.createXReport();
+			}
+		});
+
+		createZreportBtn.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				db.createZReport();
 			}
 		});
 
@@ -490,6 +519,16 @@ public class ManagerController implements Initializable {
 		this.reportTable.setItems(items);
 	}
 
+	private void setUpReportContentTable() {
+		this.menuItemNameForReports.setCellValueFactory(cellData -> cellData.getValue().getMenuItemNameForReports());
+		this.menuItemQuantityForReports
+				.setCellValueFactory(cellData -> cellData.getValue().getMenuItemQuantityForReports());
+
+		final ObservableList<ReportContent> items = db.get20RowsReportContent(0);
+
+		this.reportContentTable.setItems(items);
+	}
+
 	private void setUpExcessTable() {
 		this.excessTable.setItems(
 				db.getExcess(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
@@ -585,7 +624,8 @@ public class ManagerController implements Initializable {
 	}
 
 	/**
-	 * Updates the popular combos table to display popular combinations of items for a specific date
+	 * Updates the popular combos table to display popular combinations of items for
+	 * a specific date
 	 * range.
 	 *
 	 * @param initialDate The initial date of the range to display sales data for.
