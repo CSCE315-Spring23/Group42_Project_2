@@ -417,8 +417,8 @@ public class Database {
         ObservableList<ReportContent> rows = FXCollections.observableArrayList();
         try {
             // run query
-            ResultSet result = runCommand("SELECT * FROM "
-                    + tableName);
+            ResultSet result = runCommand("SELECT * FROM zreportcontent");
+            // ResultSet result = runCommand(String.format("SELECT * FROM zreportcontent WHERE report_id= '%d'", whichTwenty));
 
             // Get metadata which gets info about the types/properties of the columns in a
             // ResultSet
@@ -654,6 +654,10 @@ public class Database {
                     "INSERT INTO item_sold (item_id, menu_item_id, order_id, item_sold_quantity) VALUES ('%d', '%d', '%d', '%d')",
                     newItemID, MenuId, orderID, quantity);
             stmt.executeUpdate(sqlStatement2);
+
+            //update menu
+            String sqlStatement6 = String.format("UPDATE menu SET menu_item_sold_since_z = menu_item_sold_since_z + 1 WHERE menu_item_id= '%d'", MenuId);
+            stmt.executeUpdate(sqlStatement6);
 
             // update inventory
             String sqlStatement4 = String.format("SELECT * FROM recipe_item WHERE menu_id = %d", MenuId);

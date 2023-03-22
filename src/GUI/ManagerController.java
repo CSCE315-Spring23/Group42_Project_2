@@ -210,8 +210,8 @@ public class ManagerController implements Initializable {
 		this.setUpReportTable();
 		this.setUpRestockReport();
 
-		// this.setUpSalesHistoryTable();
-		// this.setUpPopularCombosTable();
+		this.setUpSalesHistoryTable();
+		this.setUpPopularCombosTable();
 
 		this.setUpExcessTable();
 
@@ -220,8 +220,8 @@ public class ManagerController implements Initializable {
 		this.updateMenuTable(0);
 		this.updateRecipeTable(0);
 		this.updateRestockReport();
-		// this.updateSalesHistoryTable("2022-1-1", "2022-1-1");
-		// this.updatePopularCombosTable("2022-1-1", "2022-1-1");
+		this.updateSalesHistoryTable("2022-1-1", "2022-1-1");
+		this.updatePopularCombosTable("2022-1-1", "2022-1-1");
 
 		this.updateExcessTable(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
@@ -230,8 +230,8 @@ public class ManagerController implements Initializable {
 		this.menuTable.refresh();
 		this.recipeTable.refresh();
 		this.restockReport.refresh();
-		// this.salesHistoryTable.refresh();
-		// this.popularCombosTable.refresh();
+		this.salesHistoryTable.refresh();
+		this.popularCombosTable.refresh();
 		System.out.println("is this the problem?");
 
 		this.excessTable.refresh();
@@ -363,9 +363,9 @@ public class ManagerController implements Initializable {
 
 		salesButton.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				String startdate = startDateSales.getText().strip();
-				String enddate2 = endDateSales.getText().strip();
-				if (startDateSales.getText().strip().equals("") || endDateSales.getText().strip().equals("")) {
+				String startdate = startDateSale.getText().strip();
+				String enddate2 = endDateSale.getText().strip();
+				if (startDateSale.getText().strip().equals("") || endDateSale.getText().strip().equals("")) {
 					System.out.println("Missing Item Name");
 				} else {
 					updateSalesHistoryTable(startdate, enddate2);
@@ -625,7 +625,7 @@ public class ManagerController implements Initializable {
 
 		this.totalQuantityCol.setCellValueFactory(cellData -> cellData.getValue().getTotalQuantity());
 
-		final ObservableList<SaleData> salesData = db.salesHistory("01/01/2022", "01/01/2022");
+		final ObservableList<SaleData> salesData = db.salesHistory("2022-01-01", LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
 		this.salesHistoryTable.setItems(salesData);
 		// THIS IS THE ENTIRE PROBLEM
@@ -656,7 +656,7 @@ public class ManagerController implements Initializable {
 		// TableColumn<String[], Integer> countCol = new TableColumn<>("Count");
 		this.countCol.setCellValueFactory(cellData -> cellData.getValue().getNumTimesOrdered());
 
-		final ObservableList<Combo> popularCombosData = db.popularCombos("01/01/2022", "01/01/2022");
+		final ObservableList<Combo> popularCombosData = db.popularCombos("2022-01-01", "2022-01-01");
 
 		this.popularCombosTable.getColumns().add(countCol);
 		this.popularCombosTable.setItems(popularCombosData);
