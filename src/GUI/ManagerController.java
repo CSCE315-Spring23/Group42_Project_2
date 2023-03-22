@@ -64,6 +64,8 @@ public class ManagerController implements Initializable {
 
 	@FXML
 	private Button salesButton;
+	@FXML
+	private Button loadReportBtn;
 
 	@FXML
 	TextField fInventoryID;
@@ -106,6 +108,9 @@ public class ManagerController implements Initializable {
 
 	@FXML
 	TextField endDateSale;
+
+	@FXML
+	TextField whichReport;
 
 	private Database db;
 
@@ -267,6 +272,20 @@ public class ManagerController implements Initializable {
 				db.createZReport();
 				updateReportTable(0);
 				reportTable.refresh();
+			}
+		});
+
+		loadReportBtn.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				String reportidS = whichReport.getText().strip();
+				if (reportidS.equals("")) {
+					System.out.println("Missing report_id");
+				}
+				else{
+				int reportid = Integer.parseInt(reportidS);
+				updateReportContentTable(reportid);
+				reportTable.refresh();
+				}
 			}
 		});
 
@@ -536,6 +555,11 @@ public class ManagerController implements Initializable {
 	private void updateReportTable(int whichTwenty) {
 		this.reportTable.setItems(db.get20RowsReport(whichTwenty));
 		this.reportTable.refresh();
+	}
+
+	private void updateReportContentTable(int whichTwenty) {
+		this.reportContentTable.setItems(db.get20RowsReportContent(whichTwenty));
+		this.reportContentTable.refresh();
 	}
 
 	private void updateRecipeTable(int whichTwenty) {
