@@ -59,6 +59,11 @@ public class ManagerController implements Initializable {
 	private Button createXreportBtn;
 	@FXML
 	private Button createZreportBtn;
+	@FXML
+	private Button comboButton;
+
+	@FXML
+	private Button salesButton;
 
 	@FXML
 	TextField fInventoryID;
@@ -342,6 +347,32 @@ public class ManagerController implements Initializable {
 				}
 			}
 		});
+
+		comboButton.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				String startdate = startDateCombo;
+				String enddate2 = endDateCombo;
+				if (startDateCombo.getText().strip().equals("") || endDateCombo.getText().strip().equals("")) {
+					System.out.println("Missing Item Name");
+				} else {
+					updatePopularCombosTable(startdate, enddate2);
+					popularCombosTable.refresh();
+				}
+			}
+		}
+
+		salesButton.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				String startdate = startDateSales;
+				String enddate2 = endDateSales;
+				if (startDateSales.getText().strip().equals("") || endDateSales.getText().strip().equals("")) {
+					System.out.println("Missing Item Name");
+				} else {
+					updateSalesHistoryTable(startdate, enddate2);
+					salesHistoryTable.refresh();
+				}
+			}
+		}
 
 		bUpdateInventory.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
