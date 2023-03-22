@@ -281,7 +281,7 @@
                   </TableView>
                   <TextField fx:id="startDateSale" promptText="Start Date" GridPane.rowIndex="2" />
                   <TextField fx:id="endDateSale" prefHeight="39.0" prefWidth="600.0" promptText="End Date" GridPane.rowIndex="5" />
-                  <Button mnemonicParsing="false" text="View" GridPane.rowIndex="8" />
+                  <Button fx:id="salesButton" mnemonicParsing="false" text="View" GridPane.rowIndex="8" />
                </children>
             </GridPane>
         </content>
@@ -316,7 +316,7 @@
                   </TableView>
                   <TextField fx:id="startDateCombo" promptText="Start Date" GridPane.rowIndex="1" />
                   <TextField fx:id="endDateCombo" prefHeight="39.0" prefWidth="600.0" promptText="End Date" GridPane.rowIndex="4" />
-                  <Button mnemonicParsing="false" text="View" GridPane.rowIndex="7" />
+                  <Button fx:id="comboButton" mnemonicParsing="false" text="View" GridPane.rowIndex="7" />
                </children>
             </GridPane>
         </content>
