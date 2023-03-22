@@ -197,10 +197,8 @@ public class ManagerController implements Initializable {
 		this.menuTable.refresh();
 		this.recipeTable.refresh();
 		this.restockReport.refresh();
-<<<<<<< HEAD
 		this.salesHistoryTable.refresh();
 		this.popularCombosTable.refresh();
-=======
 		// this.salesHistoryTable.refresh();
 		this.excessTable.refresh();
 
@@ -539,12 +537,9 @@ public class ManagerController implements Initializable {
 
 		final ObservableList<SaleData> salesData = db.salesHistory("01/01/2022", "01/01/2022");
 
-<<<<<<< HEAD
 		this.salesHistoryTable.setItems(salesData);
-=======
 		// THIS IS THE ENTIRE PROBLEM
 		// this.salesHistoryTable.setItems(salesData);
->>>>>>> afcf0ef1bb7b008bfa60ec316a304f74f8ed31a5
 	}
 
 	/**
