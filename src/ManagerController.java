@@ -96,6 +96,10 @@ public class ManagerController implements Initializable {
 	private TableView<SaleData> salesHistoryTable;
 	@FXML
 	private TableView<Combo> popularCombosTable;
+	@FXML
+	private TableView<Report> reportTable;
+	@FXML
+	private TableView<Inventory> restockReport;
 
 	@FXML
 	private TableColumn<Combo, Long> countCol;
@@ -137,20 +141,43 @@ public class ManagerController implements Initializable {
 	@FXML
 	private TableColumn<Recipe, Double> recipeAmountUsed;
 
+	@FXML
+	private TableColumn<Report, Integer> reportID;
+	@FXML
+	private TableColumn<Report, Integer> lastOrderID;
+	@FXML
+	private TableColumn<Report, String> zReportDate;
+	@FXML
+	private TableColumn<Report, Float> reportTotalCost;
+
+	@FXML
+	private TableColumn<Inventory, Long> inventoryID2;
+	@FXML
+	private TableColumn<Inventory, String> inventoryItemName2;
+	@FXML
+	private TableColumn<Inventory, Double> inventoryItemCost2;
+	@FXML
+	private TableColumn<Inventory, Long> inventoryItemQty2;
+
 
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println("Manager controller running");
 		this.db = new Database();
 
+		this.setUpReportTable();
 		this.setUpInventoryTable();
 		this.setUpMenuTable();
 		this.setUpRecipeTable();
+		this.setUpReportTable();
+		this.setUpRestockReport();
 		this.updateInventoryTable(0);
 		this.updateMenuTable(0);
 		this.updateRecipeTable(0);
+		this.updateRestockReport();
 		this.inventoryTable.refresh();
 		this.menuTable.refresh();
 		this.recipeTable.refresh();
+		this.restockReport.refresh();
 
 		addMenu.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -402,6 +429,21 @@ public class ManagerController implements Initializable {
 		this.recipeTable.refresh();
 	}
 
+	private void updateRestockReport() {
+		this.restockReport.setItems(db.createRestockReport());
+		this.restockReport.refresh();
+	}
+
+	private void setUpReportTable() {
+		this.reportID.setCellValueFactory(cellData -> cellData.getValue().getReportID());
+		this.lastOrderID.setCellValueFactory(cellData -> cellData.getValue().getLastOrderID());
+		this.zReportDate.setCellValueFactory(cellData -> cellData.getValue().getZReportDate());
+		this.reportTotalCost.setCellValueFactory(cellData -> cellData.getValue().getReportTotalCost());
+		final ObservableList<Report> items = db.get20RowsReport(0);
+
+		this.reportTable.setItems(items);
+	}
+
 	private void setUpInventoryTable() {
 		this.inventoryID.setCellValueFactory(cellData -> cellData.getValue().getInventoryID());
 		this.inventoryItemName.setCellValueFactory(cellData -> cellData.getValue().getItemName());
@@ -430,6 +472,16 @@ public class ManagerController implements Initializable {
 		final ObservableList<Recipe> items = db.get20RowsRecipe(0);
 
 		this.recipeTable.setItems(items);
+	}
+
+	private void setUpRestockReport() {
+		this.inventoryID2.setCellValueFactory(cellData -> cellData.getValue().getInventoryID());
+		this.inventoryItemName2.setCellValueFactory(cellData -> cellData.getValue().getItemName());
+		this.inventoryItemCost2.setCellValueFactory(cellData -> cellData.getValue().getItemCost());
+		this.inventoryItemQty2.setCellValueFactory(cellData -> cellData.getValue().getItemQuantity());
+		final ObservableList<Inventory> items = db.createRestockReport();
+
+		this.restockReport.setItems(items);
 	}
 
 	/**

@@ -345,6 +345,34 @@ public class Database {
         return rows;
     }
 
+    public ObservableList<Report> get20RowsReport(int whichTwenty) {
+        String tableName = "zreports";
+        ObservableList<Report> rows = FXCollections.observableArrayList();
+        try {
+            // run query
+            ResultSet result = runCommand("SELECT * FROM "
+                    + tableName);
+
+            // Get metadata which gets info about the types/properties of the columns in a
+            // ResultSet
+            // ResultSetMetaData metaData = result.getMetaData();
+            // int numberOfColumns = metaData.getColumnCount();
+
+            // Loop through the 20 rows in result
+            while (result.next()) {
+                // Loop through columns an
+                rows.add(new Report(result.getInt(1), result.getInt(2), result.getString(3), result.getFloat(4)));
+            }
+
+            result.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return rows;
+    }
+
     /**
      * Returns an ArrayList of integers representing the quantities of specific
      * recipe items used in the specified item on the menu.
@@ -874,15 +902,18 @@ public class Database {
      * 
      * @param initialDate lowerbound for sales history interval
      * @param finalDate   upperbound for sales history interval
-     * @author
+     * @author Daniela Santos
      */
     public ObservableList<SaleData> salesHistory(String initialDate, String finalDate) {
         ObservableList<SaleData> saleData = FXCollections.observableArrayList();
         try {
             // Get the sales data for the given time window
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String initialDateString = formatter.format(initialDate);
+            String finalDateString = formatter.format(finalDate);
+            
             ResultSet result = runCommand(
-                    "SELECT Menu.MENU_ITEM_ID, Menu.MENU_ITEM_NAME, SUM(item_sold.ITEM_SOLD_QUANTITY) AS TOTAL_QUANTITY FROM item_sold "
-                            +
+                            "SELECT Menu.MENU_ITEM_ID, Menu.MENU_ITEM_NAME, SUM(item_sold.ITEM_SOLD_QUANTITY) AS TOTAL_QUANTITY FROM item_sold " +
                             "JOIN Menu ON Menu.MENU_ITEM_ID = item_sold.MENU_ITEM_ID " +
                             "JOIN Orders ON Orders.ORDER_ID = item_sold.ORDER_ID " +
                             "WHERE Orders.DATE_ORDERED BETWEEN '" + initialDate + "' AND '" + finalDate + "' " +
@@ -913,24 +944,23 @@ public class Database {
      * @param finalDate   the end of the date range
      * @return an ObservableList of String arrays, each containing the names of two
      *         menu items that are frequently sold together
-     * @author
+     * @author Daniela Santos
      */
     public ObservableList<Combo> popularCombos(String initialDate, String finalDate) {
         ObservableList<Combo> popularCombos = FXCollections.observableArrayList();
         try {
-            // Query to get the most popular combos
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            String initialDateString = formatter.format(initialDate);
+            String finalDateString = formatter.format(finalDate);
+
             String query = "SELECT m1.MENU_ITEM_NAME, m2.MENU_ITEM_NAME, COUNT(*) AS combo_count " +
-                    "FROM ItemSold s1, ItemSold s2, Menu m1, Menu m2 " +
-                    "WHERE s1.ORDER_ID = s2.ORDER_ID " +
-                    "  AND s1.MENU_ITEM_ID = m1.MENU_ITEM_ID " +
-                    "  AND s2.MENU_ITEM_ID = m2.MENU_ITEM_ID " +
-                    "  AND s1.MENU_ITEM_ID < s2.MENU_ITEM_ID " +
-                    "  AND s1.ORDER_ID IN (SELECT ORDER_ID " +
-                    "                      FROM Order " +
-                    "                      WHERE DATE_ORDERED BETWEEN '" + initialDate + "' AND '" + finalDate + "') " +
-                    "GROUP BY s1.MENU_ITEM_ID, s2.MENU_ITEM_ID " +
-                    "ORDER BY combo_count DESC " +
-                    "LIMIT 20";
+                            "FROM item_sold s1 " +
+                            "JOIN item_sold s2 ON s1.ORDER_ID = s2.ORDER_ID AND s1.MENU_ITEM_ID < s2.MENU_ITEM_ID " +
+                            "JOIN Menu m1 ON s1.MENU_ITEM_ID = m1.MENU_ITEM_ID " +
+                            "JOIN Menu m2 ON s2.MENU_ITEM_ID = m2.MENU_ITEM_ID " +
+                            "WHERE s1.ORDER_ID IN (SELECT ORDER_ID FROM orders WHERE DATE_ORDERED BETWEEN '" + initialDateString + "' AND '" + finalDateString + "') " +
+                            "GROUP BY m1.MENU_ITEM_NAME, m2.MENU_ITEM_NAME " +
+                            "ORDER BY combo_count DESC LIMIT 20;";
 
             ResultSet result = runCommand(query);
 
@@ -949,6 +979,82 @@ public class Database {
         }
         return popularCombos;
     }
+
+    
+    public void createZReport(){
+        try {
+            //get new pk
+            int newReportID = 0;
+            Statement stmt = conn.createStatement();
+            String sqlStatement1 = "SELECT MAX(report_id) FROM zreports";
+            ResultSet result = stmt.executeQuery(sqlStatement1);
+            if (result.next()) {
+                newReportID = result.getInt(1) + 1;
+            }
+
+            //get new latest order
+            int lastOrderID = 0;
+            String sqlStatement5 = "SELECT MAX(order_id) FROM orders";
+            ResultSet result3 = stmt.executeQuery(sqlStatement1);
+            if (result3.next()) {
+                lastOrderID = result.getInt(1);
+            }
+
+            //get zreport date
+            // get the current date as a LocalDate object
+            //
+            LocalDate today = LocalDate.now();
+            // format the date as a string in "MM-dd-yyyy" format
+            String date = today.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
+
+            // insert into item sold
+            String sqlStatement2 = String.format(
+                    "INSERT INTO zreports (report_id, last_order_id, zreport_date, report_total_cost) VALUES ('%d', '%d', '%s', '%f')",
+                    newReportID, lastOrderID, date, zReportTotal);
+            stmt.executeUpdate(sqlStatement2);
+            zReportTotal = 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
+    // public void createXReport(){
+
+    // }
+
+    /**
+     * Retrieves a list of all inventory items that need to be restocked
+     * 
+     *
+     * @return an ObservableList of Inventory objects representing the retrieved
+     *         rows of inventory items.
+     * @author Daniela Martinez Banda
+     */
+    public ObservableList<Inventory> createRestockReport() {
+        String tableName = "inventory_item";
+        ObservableList<Inventory> rows = FXCollections.observableArrayList();
+
+        try {
+            //Get inventory that has a quantity of less than 30
+            ResultSet result = runCommand("Select * FROM "
+                    + tableName + " WHERE inventory_item_quantity <= 50");
+            // Loop through the rows in result
+            while (result.next()) {
+                // Loop through columns an
+                rows.add(new Inventory(result.getLong(1), result.getString(2), result.getDouble(3), result.getLong(4)));
+                // Add current row to rows
+            }
+            result.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return rows;
+    }
+
 }
 
 /**

@@ -165,5 +165,124 @@
                </children>
             </GridPane>
          </content></Tab>
+      <Tab text="X/Z Reports">
+         <content>
+            <GridPane>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="429.5" minHeight="10.0" prefHeight="416.5" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <TableView fx:id="reportTable" prefHeight="379.0" prefWidth="397.0" GridPane.rowIndex="1">
+                     <columns>
+                        <TableColumn fx:id="reportID" prefWidth="71.33334350585938" text="REPORT_ID" />
+                        <TableColumn fx:id="lastOrderID" prefWidth="101.33334350585938" text="LAST_ORDER_ID" />
+                        <TableColumn fx:id="zReportDate" prefWidth="94.666748046875" text="ZREPORT_DATE" />
+                        <TableColumn fx:id="reportTotalCost" prefWidth="136.6666259765625" text="REPORT_TOTAL_COST" />
+                     </columns>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
+                  </TableView>
+                  <GridPane>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <Button fx:id="bAddInventory1" mnemonicParsing="false" text="Add Inventory Item" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <Button fx:id="bUpdateInventory1" mnemonicParsing="false" text="Update Inventory Item" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+                        <Button fx:id="deleteInvItem1" mnemonicParsing="false" text="Delete Inventory Item" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+               </children>
+            </GridPane>
+         </content>
+      </Tab>
+      <Tab text="Restock Report">
+         <content>
+            <GridPane>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="429.5" minHeight="10.0" prefHeight="416.5" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <TableView fx:id="restockReport" prefHeight="401.0" prefWidth="600.0" GridPane.rowIndex="1">
+                     <columns>
+                        <TableColumn fx:id="inventoryID2" prefWidth="104.0" text="INVENTORY_ID" />
+                        <TableColumn fx:id="inventoryItemName2" prefWidth="186.66665649414062" text="ITEM_NAME" />
+                        <TableColumn fx:id="inventoryItemCost2" prefWidth="103.33331298828125" text="ITEM_COST" />
+                        <TableColumn fx:id="inventoryItemQty2" prefWidth="160.66668701171875" text="ITEM_QUANTITY" />
+                     </columns>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
+                  </TableView>
+               </children>
+            </GridPane>
+         </content>
+      </Tab>
+      <Tab text="Sales Report">
+        <content>
+          <GridPane>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="430" minHeight="10.0" prefHeight="430" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <TableView fx:id="salesHistoryTable" prefHeight="400.0" prefWidth="600.0" GridPane.rowIndex="1">
+                     <columns>
+                        <TableColumn fx:id="menuItemIDCol" prefWidth="150" text="MENU_ITEM_ID" />
+                        <TableColumn fx:id="menuItemNameCol" prefWidth="200" text="MENU_ITEM_NAME" />
+                        <TableColumn fx:id="totalQuantityCol" prefWidth="200" text="TOTAL_QUANTITY" />
+                     </columns>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
+                  </TableView>
+               </children>
+            </GridPane>
+        </content>
+      </Tab>
+      <Tab text="What Sales Together">
+        <content>
+          <GridPane>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="430" minHeight="10.0" prefHeight="430" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <TableView fx:id="popularCombosTable" prefHeight="400.0" prefWidth="600.0" GridPane.rowIndex="1">
+                     <columns>
+                        <TableColumn fx:id="menuItem1Col" prefWidth="300" text="MENU_ITEM_1" />
+                        <TableColumn fx:id="menuItem2Col" prefWidth="300" text="MENU_ITEM_2" />
+                     </columns>
+                     <GridPane.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </GridPane.margin>
+                  </TableView>
+               </children>
+            </GridPane>
+        </content>
+      </Tab>
   </tabs>
 </TabPane>
