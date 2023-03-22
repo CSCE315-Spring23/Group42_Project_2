@@ -992,8 +992,7 @@ public class Database {
         return popularCombos;
     }
 
-    public void createZReport(){
-        {
+    public void createZReport() {
         try {
             // get new pk
             int newReportID = 0;
@@ -1002,7 +1001,7 @@ public class Database {
             ResultSet result = stmt.executeQuery(sqlStatement1);
             if (result.next()) {
                 newReportID = result.getInt(1) + 1;
-            } 
+            }
 
             // get new latest order
             int lastOrderID = 0;
@@ -1010,7 +1009,7 @@ public class Database {
             ResultSet result3 = stmt.executeQuery(sqlStatement1);
             if (result3.next()) {
                 lastOrderID = result.getInt(1);
-            } 
+            }
 
             // get zreport date
             // get the current date as a LocalDate object
