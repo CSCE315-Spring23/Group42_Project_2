@@ -171,14 +171,18 @@ public class ManagerController implements Initializable {
 		this.setUpReportTable();
 		this.setUpRestockReport();
 		this.setUpSalesHistoryTable();
+		
 		this.updateInventoryTable(0);
 		this.updateMenuTable(0);
 		this.updateRecipeTable(0);
 		this.updateRestockReport();
+		this.updateSalesHistoryTable("2022-01-01", "2022-01-01");
+
 		this.inventoryTable.refresh();
 		this.menuTable.refresh();
 		this.recipeTable.refresh();
 		this.restockReport.refresh();
+		this.salesHistoryTable.refresh();
 
 		addMenu.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
