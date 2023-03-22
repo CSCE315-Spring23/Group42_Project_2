@@ -1055,30 +1055,30 @@ public class Database {
             if (result.next()) {
                 newReportID = result.getInt(1) + 1;
             }
-
+            
             // get new latest order
             int lastOrderID = 0;
             String sqlStatement5 = "SELECT MAX(order_id) FROM orders";
             ResultSet result3 = stmt.executeQuery(sqlStatement5);
             if (result3.next()) {
-                lastOrderID = result.getInt(1);
+                lastOrderID = result3.getInt(1);
             }
-
+            
             // get zreport date
             // get the current date as a LocalDate object
             //
             LocalDate today = LocalDate.now();
             // format the date as a string in "MM-dd-yyyy" format
             String date = today.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
-
+            
             //get report_total_cost
             float reportTotalCost = 0;
             String sqlStatement6 = "SELECT order_cost FROM orders WHERE order_id > (SELECT last_order_id FROM zreports WHERE report_id=(SELECT MAX(report_id) FROM zreports))";
             ResultSet result4 = stmt.executeQuery(sqlStatement6);
             while (result4.next()) {
-                reportTotalCost += Float.parseFloat(result.getString(1));
+                reportTotalCost += Float.parseFloat(result4.getString(1));
             }
-
+            
             // insert into item sold
             String sqlStatement2 = String.format(
                     "INSERT INTO zreports (report_id, last_order_id, zreport_date, report_total_cost, is_zreport) VALUES ('%d', '%d', '%s', '%f', '%d')",
@@ -1152,7 +1152,7 @@ public class Database {
             String sqlStatement5 = "SELECT last_order_id FROM zreports WHERE report_id=(SELECT MAX(report_id) FROM zreports)";
             ResultSet result3 = stmt.executeQuery(sqlStatement5);
             if (result3.next()) {
-                lastOrderID = result.getInt(1);
+                lastOrderID = result3.getInt(1);
             }
 
             // get zreport date
@@ -1167,7 +1167,7 @@ public class Database {
             String sqlStatement6 = "SELECT order_cost FROM orders WHERE order_id > (SELECT last_order_id FROM zreports WHERE report_id=(SELECT MAX(report_id) FROM zreports))";
             ResultSet result4 = stmt.executeQuery(sqlStatement6);
             while (result4.next()) {
-                reportTotalCost += Float.parseFloat(result.getString(1));
+                reportTotalCost += Float.parseFloat(result4.getString(1));
             }
 
             // insert into item sold
