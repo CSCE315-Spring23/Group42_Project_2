@@ -919,11 +919,10 @@ public class Database {
         try {
             // Get the sales data for the given time window
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String initialDateString = formatter.format(initialDa
+            String initialDateString = formatter.format(initialDate);
+            String finalDateString = formatter.format(finalDate);
 
-            
-                     = runCommand(
-                            
+            ResultSet result = runCommand(
                     "SELECT Menu.MENU_ITEM_ID, Menu.MENU_ITEM_NAME, SUM(item_sold.ITEM_SOLD_QUANTITY) AS TOTAL_QUANTITY FROM item_sold "
                             +
                             "JOIN Menu ON Menu.MENU_ITEM_ID = item_sold.MENU_ITEM_ID " +
@@ -964,14 +963,13 @@ public class Database {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String initialDateString = formatter.format(initialDate);
             String finalDateString = formatter.format(finalDate);
-                    
-                    SELECT m1.MENU_ITEM_NAME, m2.MENU_ITEM_NAME, COUNT(*) AS combo_count " +
-                    em_sold s1 " +
-                    em_sold s2 ON s1.ORDER_ID = s2.ORDER_ID AND s1.MENU_IT
-                    nu m1 ON s1.MENU_ITEM_ID = m1.MENU_ITEM_ID " +
-                    
-                    nu m2 ON s2.MENU_ITEM_ID = m2.MENU_ITEM_ID " +
-                    1.ORDER_ID IN (SELECT ORDER_ID FROM orders WHERE DATE_ORDERED BETWEEN '" + initialDateString
+
+            String query = "SELECT m1.MENU_ITEM_NAME, m2.MENU_ITEM_NAME, COUNT(*) AS combo_count " +
+                    "FROM item_sold s1 " +
+                    "JOIN item_sold s2 ON s1.ORDER_ID = s2.ORDER_ID AND s1.MENU_ITEM_ID < s2.MENU_ITEM_ID " +
+                    "JOIN Menu m1 ON s1.MENU_ITEM_ID = m1.MENU_ITEM_ID " +
+                    "JOIN Menu m2 ON s2.MENU_ITEM_ID = m2.MENU_ITEM_ID " +
+                    "WHERE s1.ORDER_ID IN (SELECT ORDER_ID FROM orders WHERE DATE_ORDERED BETWEEN '" + initialDateString
                     + "' AND '" + finalDateString + "') " +
                     "GROUP BY m1.MENU_ITEM_NAME, m2.MENU_ITEM_NAME " +
                     "ORDER BY combo_count DESC LIMIT 20;";
@@ -986,20 +984,16 @@ public class Database {
                 popularCombos.add(combo);
             }
 
-        }atch(
-
-    
-    
-        
-        n e)
-
-     
-
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return popularCombos;
     }
 
-    public voi d
-
-    createZReport() {
+    public void createZReport(){
+        {
         try {
             // get new pk
             int newReportID = 0;
@@ -1049,41 +1043,42 @@ public class Database {
      * @return an ObservableList of Inventory objects representing the retrieved
      *         rows of inventory items.
      * @author Daniela Martinez Banda
+     * /*
+     *         public ObservableList<Inventory> createRestockReport() {
+     *         String tableName = "inventory_item";
+     *         ObservableList<Inventory> rows = FXCollections.observableArrayList();
+     * 
+     *         try {
+     *         // Get inventory that has a quantity of less than 30
+     *         ResultSet result = runCommand("Select * FROM "
+     *         + tableName + " WHERE inventory_item_quantity <= 50");
+     *         // Loop through the rows in result
+     *         while (result.next()) {
+     *         // Loop through columns an
+     *         rows.add(new Inventory(result.getLong(1), result.getString(2),
+     *         result.getDouble(3), result.getLong(4)));
+     *         // Add current row to rows
+     *         }
+     *         result.close();
+     *         } catch (Exception e) {
+     *         e.printStackTrace();
+     *         System.err.println(e.getClass().getName() + ": " + e.getMessage());
+     *         System.exit(0);
+     *         }
+     *         return rows;
+     *         }
+     * 
+     *         }
+     * 
+     *         /**
+     *         Class to store Id and Quantity within the Database function
+     */
+    class CustomPair {
+        public int ID;
+        public int Quantity;
 
-        ic ObservableList<Inventory> createRestockReport() {
-        String tableName = "inventory_item";
-        ObservableList<Inventory> rows = FXCollections.observableArrayList();
-
-        try {
-            // Get inventory that has a quantity of less than 30
-            ResultSet result = runCommand("Select * FROM "
-                    + tableName + " WHERE inventory_item_quantity <= 50");
-            // Loop through the rows in result
-            while (result.next()) {
-                // Loop through columns an
-                rows.add(new Inventory(result.getLong(1), result.getString(2), result.getDouble(3), result.getLong(4)));
-                // Add current row to rows
-            }
-            result.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
+        CustomPair(int iD, int quantity) {
+            this.ID = iD;
+            this.Quantity = quantity;
         }
-        return rows;
-    }
-
-}
-
-/**
- * Class to store Id and Quantity within the Database function
- */
-class CustomPair {
-    public int ID;
-    public int Quantity;
-
-    CustomPair(int iD, int quantity) {
-        this.ID = iD;
-        this.Quantity = quantity;
-    }
 }
