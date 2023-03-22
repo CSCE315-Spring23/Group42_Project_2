@@ -88,8 +88,8 @@ public class ManagerController implements Initializable {
 
 	private Database db;
 
-	@FXML
-	private TableView<SaleData> salesTable;
+	// @FXML
+	// private TableView<SaleData> salesTable;
 	@FXML
 	private TableView<Excess> excessTable;
 	@FXML
@@ -181,19 +181,32 @@ public class ManagerController implements Initializable {
 		this.setUpReportTable();
 		this.setUpRestockReport();
 		this.setUpSalesHistoryTable();
+<<<<<<< HEAD
+		this.setUpPopularCombosTable();
+=======
 		this.setUpExcessTable();
 
+>>>>>>> afcf0ef1bb7b008bfa60ec316a304f74f8ed31a5
 		this.updateInventoryTable(0);
 		this.updateMenuTable(0);
 		this.updateRecipeTable(0);
 		this.updateRestockReport();
+<<<<<<< HEAD
+		this.updateSalesHistoryTable("2022-1-1", "2022-1-1");
+		this.updatePopularCombosTable("2022-1-1", "2022-1-1");
+=======
 		// this.updateSalesHistoryTable("2022-01-01", "2022-01-01");
 		this.updateExcessTable(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
+>>>>>>> afcf0ef1bb7b008bfa60ec316a304f74f8ed31a5
 		this.inventoryTable.refresh();
 		this.menuTable.refresh();
 		this.recipeTable.refresh();
 		this.restockReport.refresh();
+<<<<<<< HEAD
+		this.salesHistoryTable.refresh();
+		this.popularCombosTable.refresh();
+=======
 		// this.salesHistoryTable.refresh();
 		this.excessTable.refresh();
 
@@ -530,10 +543,14 @@ public class ManagerController implements Initializable {
 
 		this.totalQuantityCol.setCellValueFactory(cellData -> cellData.getValue().getTotalQuantity());
 
-		final ObservableList<SaleData> salesData = db.salesHistory("2022-01-01", "2022-01-01");
+		final ObservableList<SaleData> salesData = db.salesHistory("01/01/2022", "01/01/2022");
 
+<<<<<<< HEAD
+		this.salesHistoryTable.setItems(salesData);
+=======
 		// THIS IS THE ENTIRE PROBLEM
 		// this.salesHistoryTable.setItems(salesData);
+>>>>>>> afcf0ef1bb7b008bfa60ec316a304f74f8ed31a5
 	}
 
 	/**
