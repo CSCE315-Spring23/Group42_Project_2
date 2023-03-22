@@ -53,6 +53,8 @@ public class ManagerController implements Initializable {
 	private Button bUpdateRecipe;
 	@FXML
 	private Button deleteRecipeItem;
+	@FXML
+	private Button populateOrder;
 
 	@FXML
 	TextField fInventoryID;
@@ -81,10 +83,15 @@ public class ManagerController implements Initializable {
 	@FXML
 	TextField fRecipeQuantity;
 
+	@FXML
+	TextField startDate;
+
 	private Database db;
 
-	//@FXML
-	//private TableView<SaleData> salesTable;
+	// @FXML
+	// private TableView<SaleData> salesTable;
+	@FXML
+	private TableView<Excess> excessTable;
 	@FXML
 	private TableView<Inventory> inventoryTable;
 	@FXML
@@ -158,6 +165,11 @@ public class ManagerController implements Initializable {
 	@FXML
 	private TableColumn<Inventory, Long> inventoryItemQty2;
 
+	@FXML
+	private TableColumn<Excess, Long> excessID;
+	@FXML
+	private TableColumn<Excess, String> excessName;
+
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println("Manager controller running");
 		this.db = new Database();
@@ -169,32 +181,26 @@ public class ManagerController implements Initializable {
 		this.setUpReportTable();
 		this.setUpRestockReport();
 		this.setUpSalesHistoryTable();
-<<<<<<< HEAD
 		this.setUpPopularCombosTable();
-=======
+		this.setUpExcessTable();
 
->>>>>>> afcf0ef1bb7b008bfa60ec316a304f74f8ed31a5
 		this.updateInventoryTable(0);
 		this.updateMenuTable(0);
 		this.updateRecipeTable(0);
 		this.updateRestockReport();
-<<<<<<< HEAD
 		this.updateSalesHistoryTable("2022-1-1", "2022-1-1");
 		this.updatePopularCombosTable("2022-1-1", "2022-1-1");
-=======
 		// this.updateSalesHistoryTable("2022-01-01", "2022-01-01");
+		this.updateExcessTable(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
->>>>>>> afcf0ef1bb7b008bfa60ec316a304f74f8ed31a5
 		this.inventoryTable.refresh();
 		this.menuTable.refresh();
 		this.recipeTable.refresh();
 		this.restockReport.refresh();
-<<<<<<< HEAD
 		this.salesHistoryTable.refresh();
 		this.popularCombosTable.refresh();
-=======
 		// this.salesHistoryTable.refresh();
->>>>>>> afcf0ef1bb7b008bfa60ec316a304f74f8ed31a5
+		this.excessTable.refresh();
 
 		addMenu.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -277,6 +283,18 @@ public class ManagerController implements Initializable {
 					db.addInventoryItem(name, Double.parseDouble(cost), Double.parseDouble(quantity));
 					updateInventoryTable(0);
 					inventoryTable.refresh();
+				}
+			}
+		});
+
+		populateOrder.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				String date = startDate.getText().strip();
+				if (startDate.getText().strip().equals("")) {
+					System.out.println("Missing Item Name");
+				} else {
+					updateExcessTable(date);
+					excessTable.refresh();
 				}
 			}
 		});
@@ -460,6 +478,12 @@ public class ManagerController implements Initializable {
 		this.reportTable.setItems(items);
 	}
 
+	private void setUpExcessTable() {
+		this.excessTable.setItems(
+				db.getExcess(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+						LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+	}
+
 	private void setUpInventoryTable() {
 		this.inventoryID.setCellValueFactory(cellData -> cellData.getValue().getInventoryID());
 		this.inventoryItemName.setCellValueFactory(cellData -> cellData.getValue().getItemName());
@@ -513,12 +537,9 @@ public class ManagerController implements Initializable {
 
 		final ObservableList<SaleData> salesData = db.salesHistory("01/01/2022", "01/01/2022");
 
-<<<<<<< HEAD
 		this.salesHistoryTable.setItems(salesData);
-=======
 		// THIS IS THE ENTIRE PROBLEM
 		// this.salesHistoryTable.setItems(salesData);
->>>>>>> afcf0ef1bb7b008bfa60ec316a304f74f8ed31a5
 	}
 
 	/**
@@ -561,6 +582,12 @@ public class ManagerController implements Initializable {
 	private void updatePopularCombosTable(String initialDate, String finalDate) {
 		this.popularCombosTable.setItems(db.popularCombos(initialDate, finalDate));
 		this.popularCombosTable.refresh();
+	}
+
+	private void updateExcessTable(String date) {
+		this.excessTable
+				.setItems(db.getExcess(date, LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+		this.excessTable.refresh();
 	}
 
 	// public void setEmployeeScene(Scene scene) {

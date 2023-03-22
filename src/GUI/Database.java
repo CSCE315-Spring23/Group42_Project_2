@@ -471,7 +471,7 @@ public class Database {
             //
             LocalDate today = LocalDate.now();
             // format the date as a string in "MM-dd-yyyy" format
-            String date = today.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
+            String date = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(
                     String.format("INSERT INTO orders (order_id, date_ordered, order_cost) VALUES (%d, '%s', %f)",
