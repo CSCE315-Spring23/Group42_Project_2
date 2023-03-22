@@ -252,10 +252,24 @@
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="430" minHeight="10.0" prefHeight="430" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="430.0" minHeight="10.0" prefHeight="430.0" vgrow="SOMETIMES" />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
                </rowConstraints>
                <children>
-                  <TableView fx:id="salesHstoryTable" prefHeight="400.0" prefWidth="600.0" GridPane.rowIndex="1">
+                  <TableView fx:id="salesHistoryTable" prefHeight="400.0" prefWidth="600.0" GridPane.rowIndex="9">
                      <columns>
                         <TableColumn fx:id="menuItemIDCol" prefWidth="150" text="MENU_ITEM_ID" />
                         <TableColumn fx:id="menuItemNameCol" prefWidth="200" text="MENU_ITEM_NAME" />
@@ -265,6 +279,9 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>
                   </TableView>
+                  <TextField fx:id="startDateSale" promptText="Start Date" GridPane.rowIndex="2" />
+                  <TextField fx:id="endDateSale" prefHeight="39.0" prefWidth="600.0" promptText="End Date" GridPane.rowIndex="5" />
+                  <Button mnemonicParsing="false" text="View" GridPane.rowIndex="8" />
                </children>
             </GridPane>
         </content>
