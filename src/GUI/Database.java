@@ -1019,17 +1019,17 @@ public class Database {
     public ObservableList<Combo> popularCombos(String initialDate, String finalDate) {
         ObservableList<Combo> popularCombos = FXCollections.observableArrayList();
         try {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String initialDateString = formatter.format(initialDate);
-            String finalDateString = formatter.format(finalDate);
+            // SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            // String initialDateString = formatter.format(initialDate);
+            // String finalDateString = formatter.format(finalDate);
 
             String query = "SELECT m1.MENU_ITEM_NAME, m2.MENU_ITEM_NAME, COUNT(*) AS combo_count " +
                     "FROM item_sold s1 " +
                     "JOIN item_sold s2 ON s1.ORDER_ID = s2.ORDER_ID AND s1.MENU_ITEM_ID < s2.MENU_ITEM_ID " +
                     "JOIN Menu m1 ON s1.MENU_ITEM_ID = m1.MENU_ITEM_ID " +
                     "JOIN Menu m2 ON s2.MENU_ITEM_ID = m2.MENU_ITEM_ID " +
-                    "WHERE s1.ORDER_ID IN (SELECT ORDER_ID FROM orders WHERE DATE_ORDERED BETWEEN '" + initialDateString
-                    + "' AND '" + finalDateString + "') " +
+                    "WHERE s1.ORDER_ID IN (SELECT ORDER_ID FROM orders WHERE DATE_ORDERED BETWEEN '" + initialDate
+                    + "' AND '" + finalDate + "') " +
                     "GROUP BY m1.MENU_ITEM_NAME, m2.MENU_ITEM_NAME " +
                     "ORDER BY combo_count DESC LIMIT 20;";
 
