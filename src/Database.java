@@ -270,19 +270,27 @@ public class Database {
         return rows;
     }
 
+    /**
+     * Retrieves a list of items that have used less than 10% of their inventory in the given timeframe
+     * @param initialDate
+     * the start date for this measure.
+     * @param finalDate
+     * the end date for this measure.  use current date for the most up to date measurement.
+     * @return
+     */
     public ObservableList<Excess> getExcess(String initialDate, String finalDate){
         ObservableList<Excess> excess = FXCollections.observableArrayList();
         try {
             // Get the sales data for the given time window
             ResultSet result = runCommand(
-                    "SELECT RI.MENU_ID AS MENU_ITEM_ID,
-                    RI.INVENTORY_ID,
-                    RI.AMT_USED * SUM(IS.QTY_SOLD) AS TOTAL_AMT_USED
-                FROM RECIPE_ITEM AS RI
-                JOIN ITEM_SOLD AS IS ON RI.MENU_ID = IS.MENU_ITEM_ID AND RI.INVENTORY_ID = IS.INVENTORY_ID
-                JOIN ORDERS AS O ON O.ORDER_ID = IS.ORDER_ID
-                WHERE O.DATE_ORDERED BETWEEN initialDate AND finalDate
-                GROUP BY RI.MENU_ID, RI.INVENTORY_ID
+                "SELECT SUM(AMT_USED) AS total_amt_used, i.INVENTORY_ID, i.INVENTORY_ITEM_NAME 
+                FROM Recipe_Item r 
+                JOIN Inventory_Item i ON r.INVENTORY_ID = i.INVENTORY_ID 
+                JOIN Item_Sold s ON r.MENU_ID = s.MENU_ITEM_ID 
+                JOIN Orders o ON s.ORDER_ID = o.ORDER_ID 
+                WHERE o.DATE_ORDERED BETWEEN " + initialDate + " AND " + finalDate + " 
+                GROUP BY i.INVENTORY_ID, i.INVENTORY_ITEM_NAME;
+                
                 ");
 
             // Parse the sales data into a list of SaleData objects
@@ -290,7 +298,7 @@ public class Database {
                 String inventoryItemName = result.getString("INVENTORY_ITEM_NAME");
                 Long inventoryID = result.getLong("INVENTORY_ID");
                 Long quantityUsed = result.getLong("TOTAL_AMT_USED");
-                
+
                 ResultSet res2 = runCommand("SELECT INVENTORY_ITEM_QUANTITY FROM INVENTORY_ITEM WHERE INVENTORY_ID = " + inventoryID + ";");
                 Long inventoryOnHand = res2.getLong("INVENTORY_ITEM_QUANTITY");
                 if (inventoryOnHand + quantityUsed > quantityUsed * 10){
@@ -813,10 +821,12 @@ public class Database {
     }
 
     /**
-     * Adds an inventory item to the database with the given name, cost, and quantity.
-     *
-     * @param name the name of the inventory item
-     * @param cost the cost of the inventory item
+     * Adds an inventory item to the database with the given name, cost, and
+     * 
+     * quantity.
+     * 
+     * @param name     name of the inventory item
+     * @param cost     the cost of the inventory item
      * @param quantity the quantity of the inventory item
      * @author
      */
@@ -909,11 +919,13 @@ public class Database {
         try {
             // Get the sales data for the given time window
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String initialDateString = formatter.format(initialDate);
-            String finalDateString = formatter.format(finalDate);
+            String initialDateString = formatter.format(initialDa
+
             
-            ResultSet result = runCommand(
-                            "SELECT Menu.MENU_ITEM_ID, Menu.MENU_ITEM_NAME, SUM(item_sold.ITEM_SOLD_QUANTITY) AS TOTAL_QUANTITY FROM item_sold " +
+                     = runCommand(
+                            
+                    "SELECT Menu.MENU_ITEM_ID, Menu.MENU_ITEM_NAME, SUM(item_sold.ITEM_SOLD_QUANTITY) AS TOTAL_QUANTITY FROM item_sold "
+                            +
                             "JOIN Menu ON Menu.MENU_ITEM_ID = item_sold.MENU_ITEM_ID " +
                             "JOIN Orders ON Orders.ORDER_ID = item_sold.ORDER_ID " +
                             "WHERE Orders.DATE_ORDERED BETWEEN '" + initialDate + "' AND '" + finalDate + "' " +
@@ -952,15 +964,17 @@ public class Database {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
             String initialDateString = formatter.format(initialDate);
             String finalDateString = formatter.format(finalDate);
-
-            String query = "SELECT m1.MENU_ITEM_NAME, m2.MENU_ITEM_NAME, COUNT(*) AS combo_count " +
-                            "FROM item_sold s1 " +
-                            "JOIN item_sold s2 ON s1.ORDER_ID = s2.ORDER_ID AND s1.MENU_ITEM_ID < s2.MENU_ITEM_ID " +
-                            "JOIN Menu m1 ON s1.MENU_ITEM_ID = m1.MENU_ITEM_ID " +
-                            "JOIN Menu m2 ON s2.MENU_ITEM_ID = m2.MENU_ITEM_ID " +
-                            "WHERE s1.ORDER_ID IN (SELECT ORDER_ID FROM orders WHERE DATE_ORDERED BETWEEN '" + initialDateString + "' AND '" + finalDateString + "') " +
-                            "GROUP BY m1.MENU_ITEM_NAME, m2.MENU_ITEM_NAME " +
-                            "ORDER BY combo_count DESC LIMIT 20;";
+                    
+                    SELECT m1.MENU_ITEM_NAME, m2.MENU_ITEM_NAME, COUNT(*) AS combo_count " +
+                    em_sold s1 " +
+                    em_sold s2 ON s1.ORDER_ID = s2.ORDER_ID AND s1.MENU_IT
+                    nu m1 ON s1.MENU_ITEM_ID = m1.MENU_ITEM_ID " +
+                    
+                    nu m2 ON s2.MENU_ITEM_ID = m2.MENU_ITEM_ID " +
+                    1.ORDER_ID IN (SELECT ORDER_ID FROM orders WHERE DATE_ORDERED BETWEEN '" + initialDateString
+                    + "' AND '" + finalDateString + "') " +
+                    "GROUP BY m1.MENU_ITEM_NAME, m2.MENU_ITEM_NAME " +
+                    "ORDER BY combo_count DESC LIMIT 20;";
 
             ResultSet result = runCommand(query);
 
@@ -972,35 +986,39 @@ public class Database {
                 popularCombos.add(combo);
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
-        return popularCombos;
-    }
+        }atch(
 
     
-    public void createZReport(){
+    
+        
+        n e)
+
+     
+
+    }
+
+    public voi d
+
+    createZReport() {
         try {
-            //get new pk
+            // get new pk
             int newReportID = 0;
             Statement stmt = conn.createStatement();
             String sqlStatement1 = "SELECT MAX(report_id) FROM zreports";
             ResultSet result = stmt.executeQuery(sqlStatement1);
             if (result.next()) {
                 newReportID = result.getInt(1) + 1;
-            }
+            } 
 
-            //get new latest order
+            // get new latest order
             int lastOrderID = 0;
             String sqlStatement5 = "SELECT MAX(order_id) FROM orders";
             ResultSet result3 = stmt.executeQuery(sqlStatement1);
             if (result3.next()) {
                 lastOrderID = result.getInt(1);
-            }
+            } 
 
-            //get zreport date
+            // get zreport date
             // get the current date as a LocalDate object
             //
             LocalDate today = LocalDate.now();
@@ -1031,13 +1049,13 @@ public class Database {
      * @return an ObservableList of Inventory objects representing the retrieved
      *         rows of inventory items.
      * @author Daniela Martinez Banda
-     */
-    public ObservableList<Inventory> createRestockReport() {
+
+        ic ObservableList<Inventory> createRestockReport() {
         String tableName = "inventory_item";
         ObservableList<Inventory> rows = FXCollections.observableArrayList();
 
         try {
-            //Get inventory that has a quantity of less than 30
+            // Get inventory that has a quantity of less than 30
             ResultSet result = runCommand("Select * FROM "
                     + tableName + " WHERE inventory_item_quantity <= 50");
             // Loop through the rows in result
