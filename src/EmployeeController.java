@@ -247,9 +247,13 @@ public class EmployeeController implements Initializable {
 	@FXML
 	Button logout;
 
-
 	/**
+	 * 
 	 * initializes databse and java fx buttons
+	 * 
+	 * @param location  URL for initilaization
+	 * @param resources javafx resources
+	 * @author Ariela
 	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		this.db = new Database();
@@ -289,44 +293,46 @@ public class EmployeeController implements Initializable {
 		 */
 		logout.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				try{
+				try {
 					// set up login scene
 					FXMLLoader loginLoader = new FXMLLoader(
 							getClass().getResource("login.fxml"));
 					Parent loginParent = (Parent) loginLoader.load();
 					Scene loginScene = new Scene(loginParent, 650, 650);
-			
+
 					// set up employee scene
 					FXMLLoader employeeLoader = new FXMLLoader(
 							getClass().getResource("employee.fxml"));
 					Parent employeeParent = (Parent) employeeLoader.load();
 					Scene employeeScene = new Scene(employeeParent, 650, 650);
-			
+
 					// set up manager scene
 					FXMLLoader managerLoader = new FXMLLoader(
 							getClass().getResource("manager.fxml"));
 					Parent managerParent = (Parent) managerLoader.load();
 					Scene managerScene = new Scene(managerParent, 650, 650);
-			
+
 					LoginController loginController = (LoginController) loginLoader.getController();
 					Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			
+
 					loginController.setEmployeeScene(employeeScene);
 					// managerController.setEmployeeScene(employeeScene)
 					loginController.setManagerScene(managerScene);
-			
+
 					stage.setTitle("315 Project 2");
 					stage.setScene(loginScene);
 					stage.show();
-				} catch(IOException e){
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
+
 			}
 		});
 
 		/**
 		 * add a Rev's Burger to the order
+		 * 
+		 * 
 		 */
 		bBurg1.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -964,9 +970,10 @@ public class EmployeeController implements Initializable {
 
 	/**
 	 * 
-	 * @param b1
-	 * @param b2
-	 * @param b3
+	 * @param b1 button 1
+	 * @param b2 button 2
+	 * @param b3 button 3
+	 * @author Ariela
 	 */
 	void onActionGroups(RadioButton b1, RadioButton b2, RadioButton b3) {
 		b1.setOnAction(new EventHandler<ActionEvent>() { // combo for burger
@@ -991,6 +998,13 @@ public class EmployeeController implements Initializable {
 		});
 	}
 
+	/**
+	 * 
+	 * @param b1 button 1
+	 * @param b2 button 2
+	 * @param b3 button 3
+	 * @author Ariela
+	 */
 	void onActionGroups(RadioButton b1, RadioButton b2) {
 		b1.setOnAction(new EventHandler<ActionEvent>() { // combo for burger
 			public void handle(ActionEvent event) {
@@ -1006,8 +1020,9 @@ public class EmployeeController implements Initializable {
 	}
 
 	/**
-	 * @Ariela
-	 *         turn all buttons off
+	 * turn all buttons off
+	 * 
+	 * @author Ariela
 	 */
 	void toggleOffAll() {
 		cNoBurg.setSelected(false);
@@ -1073,10 +1088,10 @@ public class EmployeeController implements Initializable {
 	/**
 	 * compares recipe to order to check for modifications
 	 * 
-	 * @Ariela
-	 * @param recipe
-	 * @param out
-	 * @return
+	 * @author Ariela
+	 * @param recipe list of inventory items customized
+	 * @param out    text output to screen
+	 * @return specific combo selected
 	 */
 	String compareToBurgerRecipe(ArrayList<RadioButton> recipe, String out) {
 		// String out = "";
@@ -1153,11 +1168,11 @@ public class EmployeeController implements Initializable {
 	/**
 	 * executes changes to burger recipe
 	 * 
-	 * @Srikar
-	 * @param recipe
-	 * @param inventoryItems
-	 * @param totalOrderCost
-	 * @return
+	 * @author Srikar
+	 * @param recipe         list of customizations
+	 * @param inventoryItems list of inventory items customized
+	 * @param totalOrderCost total order cost
+	 * @return cost of ordered item
 	 */
 	double addToBurgerRecipe(ArrayList<RadioButton> recipe, ArrayList<CustomPair> inventoryItems,
 			double totalOrderCost) {
@@ -1287,9 +1302,9 @@ public class EmployeeController implements Initializable {
 	 * runs comparison to recipe for modifications
 	 * 
 	 * @author Ariela
-	 * @param recipe
-	 * @param out
-	 * @return
+	 * @param recipe list of customizations
+	 * @param out    text output to screen
+	 * @return customization text
 	 */
 	String compareToBasketRecipe(ArrayList<RadioButton> recipe, String out) {
 		// String out = "";
@@ -1316,9 +1331,9 @@ public class EmployeeController implements Initializable {
 
 	/**
 	 * @author Srikar
-	 * @param recipe
-	 * @param out
-	 * @return
+	 * @param recipe list of customizations
+	 * @param out    text output to screen
+	 * @return cost of item ordered
 	 */
 	double addToBasketRecipe(ArrayList<RadioButton> recipe, ArrayList<CustomPair> inventoryItems,
 			double totalOrderCost) {
@@ -1357,6 +1372,12 @@ public class EmployeeController implements Initializable {
 		return totalOrderCost;
 	}
 
+	/**
+	 * instantiates new item
+	 * 
+	 * @author Daniela Santos
+	 * 
+	 */
 	void initNewItem() {
 		if (db.getNumRows("menu") > 26) {
 			sb1.setText(db.getNameFromID(27));
@@ -1420,9 +1441,9 @@ public class EmployeeController implements Initializable {
 	 * compares sandwich recipe to sandwich order for changes
 	 * 
 	 * @author Ariela
-	 * @param recipe
-	 * @param out
-	 * @return
+	 * @param recipe list of customizations
+	 * @param out    text output to screen
+	 * @return Custom order output
 	 */
 	String compareToSanRecipe(ArrayList<RadioButton> recipe, String out) {
 		// String out = "";
@@ -1489,6 +1510,14 @@ public class EmployeeController implements Initializable {
 		return out;
 	}
 
+	/**
+	 * adds item to order
+	 * 
+	 * @param recipe         list of customizations
+	 * @param inventoryItems list of items customized
+	 * @param totalOrderCost cost of order
+	 * @return cost of customized item
+	 */
 	double addToSanRecipe(ArrayList<RadioButton> recipe, ArrayList<CustomPair> inventoryItems, double totalOrderCost) {
 		// String out = "";
 		if ((checkChanged(cNoSan, cChipSan, cRegSan, recipe.get(0)) == 2)
@@ -1604,11 +1633,11 @@ public class EmployeeController implements Initializable {
 	 * for combo, 2 is chips and 3 is fries
 	 * 
 	 * @Ariela
-	 * @param b1
-	 * @param b2
-	 * @param b3
-	 * @param b4
-	 * @return
+	 * @param b1 button 1
+	 * @param b2 button 2
+	 * @param b3 button 3
+	 * @param b4 button 4
+	 * @return returns the state of the button combination, as integer
 	 */
 	int checkChanged(RadioButton b1, RadioButton b2, RadioButton b3, RadioButton b4) {
 		if (b4.isSelected()) {

@@ -37,7 +37,7 @@ public class Database {
     /**
      * Runs a SQL command on the database and returns the results as a ResultSet.
      * 
-     * @param command the SQL command to run
+     * @param sqlStatement the SQL command to run
      * @return a ResultSet object containing the results of the query
      * @throws SQLException if there is an error executing the SQL command
      * @author Arjun
@@ -273,27 +273,30 @@ public class Database {
     }
 
     /**
-     * Retrieves a list of items that have used less than 10% of their inventory in the given timeframe
+     * Retrieves a list of items that have used less than 10% of their inventory in
+     * the given timeframe
+     * 
      * @param initialDate
-     * the start date for this measure.
+     *                    the start date for this measure.
      * @param finalDate
-     * the end date for this measure.  use current date for the most up to date measurement.
+     *                    the end date for this measure. use current date for the
+     *                    most up to date measurement.
      * @return
      */
-    public ObservableList<Excess> getExcess(String initialDate, String finalDate){
+    public ObservableList<Excess> getExcess(String initialDate, String finalDate) {
         ObservableList<Excess> excess = FXCollections.observableArrayList();
         try {
             // Get the sales data for the given time window
             ResultSet result = runCommand(
-                "SELECT SUM(AMT_USED) AS total_amt_used, i.INVENTORY_ID, i.INVENTORY_ITEM_NAME " +
-                "FROM Recipe_Item r " + 
-                "JOIN Inventory_Item i ON r.INVENTORY_ID = i.INVENTORY_ID " +
-                "JOIN Item_Sold s ON r.MENU_ID = s.MENU_ITEM_ID " +
-                "JOIN Orders o ON s.ORDER_ID = o.ORDER_ID " +
-                "WHERE o.DATE_ORDERED BETWEEN " + initialDate + " AND " + finalDate +  
-                "GROUP BY i.INVENTORY_ID, i.INVENTORY_ITEM_NAME"
-                
-                );
+                    "SELECT SUM(AMT_USED) AS total_amt_used, i.INVENTORY_ID, i.INVENTORY_ITEM_NAME " +
+                            "FROM Recipe_Item r " +
+                            "JOIN Inventory_Item i ON r.INVENTORY_ID = i.INVENTORY_ID " +
+                            "JOIN Item_Sold s ON r.MENU_ID = s.MENU_ITEM_ID " +
+                            "JOIN Orders o ON s.ORDER_ID = o.ORDER_ID " +
+                            "WHERE o.DATE_ORDERED BETWEEN " + initialDate + " AND " + finalDate +
+                            "GROUP BY i.INVENTORY_ID, i.INVENTORY_ITEM_NAME"
+
+            );
 
             // Parse the sales data into a list of SaleData objects
             while (result.next()) {
@@ -301,9 +304,10 @@ public class Database {
                 Long inventoryID = result.getLong("INVENTORY_ID");
                 Long quantityUsed = result.getLong("TOTAL_AMT_USED");
 
-                ResultSet res2 = runCommand("SELECT INVENTORY_ITEM_QUANTITY FROM INVENTORY_ITEM WHERE INVENTORY_ID = " + inventoryID + ";");
+                ResultSet res2 = runCommand(
+                        "SELECT INVENTORY_ITEM_QUANTITY FROM INVENTORY_ITEM WHERE INVENTORY_ID = " + inventoryID + ";");
                 Long inventoryOnHand = res2.getLong("INVENTORY_ITEM_QUANTITY");
-                if (inventoryOnHand + quantityUsed > quantityUsed * 10){
+                if (inventoryOnHand + quantityUsed > quantityUsed * 10) {
                     excess.add(new Excess(inventoryID, inventoryItemName));
                 }
             }
@@ -1044,7 +1048,7 @@ public class Database {
      * @return an ObservableList of Inventory objects representing the retrieved
      *         rows of inventory items.
      * @author Daniela Martinez Banda
-     * /*
+     *         /*
      *         public ObservableList<Inventory> createRestockReport() {
      *         String tableName = "inventory_item";
      *         ObservableList<Inventory> rows = FXCollections.observableArrayList();
@@ -1074,13 +1078,14 @@ public class Database {
      *         /**
      *         Class to store Id and Quantity within the Database function
      */
-     }
-    class CustomPair {
-        public int ID;
-        public int Quantity;
+}
 
-        CustomPair(int iD, int quantity) {
-            this.ID = iD;
-            this.Quantity = quantity;
-        }
+class CustomPair {
+    public int ID;
+    public int Quantity;
+
+    CustomPair(int iD, int quantity) {
+        this.ID = iD;
+        this.Quantity = quantity;
     }
+}
