@@ -283,15 +283,15 @@ public class Database {
         try {
             // Get the sales data for the given time window
             ResultSet result = runCommand(
-                "SELECT SUM(AMT_USED) AS total_amt_used, i.INVENTORY_ID, i.INVENTORY_ITEM_NAME 
-                FROM Recipe_Item r 
-                JOIN Inventory_Item i ON r.INVENTORY_ID = i.INVENTORY_ID 
-                JOIN Item_Sold s ON r.MENU_ID = s.MENU_ITEM_ID 
-                JOIN Orders o ON s.ORDER_ID = o.ORDER_ID 
-                WHERE o.DATE_ORDERED BETWEEN " + initialDate + " AND " + finalDate + " 
-                GROUP BY i.INVENTORY_ID, i.INVENTORY_ITEM_NAME;
+                "SELECT SUM(AMT_USED) AS total_amt_used, i.INVENTORY_ID, i.INVENTORY_ITEM_NAME " +
+                "FROM Recipe_Item r " + 
+                "JOIN Inventory_Item i ON r.INVENTORY_ID = i.INVENTORY_ID " +
+                "JOIN Item_Sold s ON r.MENU_ID = s.MENU_ITEM_ID " +
+                "JOIN Orders o ON s.ORDER_ID = o.ORDER_ID " +
+                "WHERE o.DATE_ORDERED BETWEEN " + initialDate + " AND " + finalDate +  
+                "GROUP BY i.INVENTORY_ID, i.INVENTORY_ITEM_NAME"
                 
-                ");
+                );
 
             // Parse the sales data into a list of SaleData objects
             while (result.next()) {
@@ -993,7 +993,7 @@ public class Database {
     }
 
     public void createZReport(){
-        {
+        
         try {
             // get new pk
             int newReportID = 0;
@@ -1081,4 +1081,5 @@ public class Database {
             this.ID = iD;
             this.Quantity = quantity;
         }
+    }
 }
