@@ -288,12 +288,14 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView layoutX="25.0" layoutY="27.0" prefHeight="416.0" prefWidth="548.0">
+                  <TableView fx:id="excessTable" layoutX="25.0" layoutY="27.0" prefHeight="416.0" prefWidth="548.0">
                     <columns>
-                      <TableColumn fx:id="ExcessID" prefWidth="269.60003662109375" text="Menu Item ID" />
-                      <TableColumn fx:id="ExcessName" prefWidth="277.5999755859375" text="Menu Item Name" />
+                      <TableColumn fx:id="excessID" prefWidth="269.60003662109375" text="Menu Item ID" />
+                      <TableColumn fx:id="excessName" prefWidth="277.5999755859375" text="Menu Item Name" />
                     </columns>
                   </TableView>
+                  <Button fx:id="populateOrder" layoutX="419.0" layoutY="1.0" mnemonicParsing="false" text="Generate Report" />
+                  <TextField fx:id="startDate" layoutX="71.0" layoutY="2.0" promptText="Start Date" />
                </children>
             </AnchorPane>
         </content>
