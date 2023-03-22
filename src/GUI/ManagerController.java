@@ -625,7 +625,7 @@ public class ManagerController implements Initializable {
 
 		this.totalQuantityCol.setCellValueFactory(cellData -> cellData.getValue().getTotalQuantity());
 
-		final ObservableList<SaleData> salesData = db.salesHistory("01/01/2022", "01/01/2022");
+		final ObservableList<SaleData> salesData = db.salesHistory("2022-01-01", LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
 		this.salesHistoryTable.setItems(salesData);
 		// THIS IS THE ENTIRE PROBLEM
@@ -656,7 +656,7 @@ public class ManagerController implements Initializable {
 		// TableColumn<String[], Integer> countCol = new TableColumn<>("Count");
 		this.countCol.setCellValueFactory(cellData -> cellData.getValue().getNumTimesOrdered());
 
-		final ObservableList<Combo> popularCombosData = db.popularCombos("01/01/2022", "01/01/2022");
+		final ObservableList<Combo> popularCombosData = db.popularCombos("2022-01-01", "2022-01-01");
 
 		this.popularCombosTable.getColumns().add(countCol);
 		this.popularCombosTable.setItems(popularCombosData);
