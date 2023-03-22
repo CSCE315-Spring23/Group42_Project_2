@@ -417,7 +417,8 @@ public class Database {
         ObservableList<ReportContent> rows = FXCollections.observableArrayList();
         try {
             // run query
-            ResultSet result = runCommand(String.format("SELECT * FROM zreportcontent WHERE report_id= '%d'", whichTwenty));
+            ResultSet result = runCommand("SELECT * FROM zreportcontent");
+            // ResultSet result = runCommand(String.format("SELECT * FROM zreportcontent WHERE report_id= '%d'", whichTwenty));
 
             // Get metadata which gets info about the types/properties of the columns in a
             // ResultSet
