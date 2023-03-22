@@ -181,24 +181,18 @@ public class ManagerController implements Initializable {
 		this.setUpReportTable();
 		this.setUpRestockReport();
 		this.setUpSalesHistoryTable();
-<<<<<<< HEAD
 		this.setUpPopularCombosTable();
-=======
 		this.setUpExcessTable();
 
->>>>>>> afcf0ef1bb7b008bfa60ec316a304f74f8ed31a5
 		this.updateInventoryTable(0);
 		this.updateMenuTable(0);
 		this.updateRecipeTable(0);
 		this.updateRestockReport();
-<<<<<<< HEAD
 		this.updateSalesHistoryTable("2022-1-1", "2022-1-1");
 		this.updatePopularCombosTable("2022-1-1", "2022-1-1");
-=======
 		// this.updateSalesHistoryTable("2022-01-01", "2022-01-01");
 		this.updateExcessTable(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
->>>>>>> afcf0ef1bb7b008bfa60ec316a304f74f8ed31a5
 		this.inventoryTable.refresh();
 		this.menuTable.refresh();
 		this.recipeTable.refresh();
