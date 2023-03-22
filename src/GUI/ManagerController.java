@@ -186,7 +186,7 @@ public class ManagerController implements Initializable {
 		// this.setUpPopularCombosTable();
 		System.out.println("is this the problem?");
 
-		this.setUpExcessTable();
+		// this.setUpExcessTable();
 
 		this.updateInventoryTable(0);
 		this.updateMenuTable(0);
@@ -196,7 +196,7 @@ public class ManagerController implements Initializable {
 		// this.updatePopularCombosTable("2022-1-1", "2022-1-1");
 		System.out.println("is this the problem?");
 
-		this.updateExcessTable(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		// this.updateExcessTable(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
 		this.inventoryTable.refresh();
 		this.menuTable.refresh();
