@@ -3,6 +3,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+
 import javafx.collections.ObservableList;
 import javafx.collections.FXCollections;
 import java.time.LocalDate;
@@ -1072,6 +1074,7 @@ public class Database {
      *         /**
      *         Class to store Id and Quantity within the Database function
      */
+     }
     class CustomPair {
         public int ID;
         public int Quantity;
@@ -1081,4 +1084,3 @@ public class Database {
             this.Quantity = quantity;
         }
     }
-}
