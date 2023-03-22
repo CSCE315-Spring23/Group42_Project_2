@@ -192,11 +192,9 @@ public class ManagerController implements Initializable {
 		this.setUpRecipeTable();
 		this.setUpReportTable();
 		this.setUpRestockReport();
-		System.out.println("is this the problem?");
 
 		// this.setUpSalesHistoryTable();
 		// this.setUpPopularCombosTable();
-		System.out.println("is this the problem?");
 
 		this.setUpExcessTable();
 
@@ -206,7 +204,6 @@ public class ManagerController implements Initializable {
 		this.updateRestockReport();
 		// this.updateSalesHistoryTable("2022-1-1", "2022-1-1");
 		// this.updatePopularCombosTable("2022-1-1", "2022-1-1");
-		System.out.println("is this the problem?");
 
 		this.updateExcessTable(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
@@ -625,6 +622,9 @@ public class ManagerController implements Initializable {
 	}
 
 	private void updateExcessTable(String date) {
+
+		this.excessID.setCellValueFactory(cellData -> cellData.getValue().getMenuItemId());
+		this.excessName.setCellValueFactory(cellData -> cellData.getValue().getMenuItemName());
 		this.excessTable
 				.setItems(db.getExcess(date, LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
 		this.excessTable.refresh();
