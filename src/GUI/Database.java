@@ -418,7 +418,8 @@ public class Database {
         try {
             // run query
             ResultSet result = runCommand("SELECT * FROM zreportcontent");
-            // ResultSet result = runCommand(String.format("SELECT * FROM zreportcontent WHERE report_id= '%d'", whichTwenty));
+            // ResultSet result = runCommand(String.format("SELECT * FROM zreportcontent
+            // WHERE report_id= '%d'", whichTwenty));
 
             // Get metadata which gets info about the types/properties of the columns in a
             // ResultSet
@@ -655,8 +656,10 @@ public class Database {
                     newItemID, MenuId, orderID, quantity);
             stmt.executeUpdate(sqlStatement2);
 
-            //update menu
-            String sqlStatement6 = String.format("UPDATE menu SET menu_item_sold_since_z = menu_item_sold_since_z + 1 WHERE menu_item_id= '%d'", MenuId);
+            // update menu
+            String sqlStatement6 = String.format(
+                    "UPDATE menu SET menu_item_sold_since_z = menu_item_sold_since_z + 1 WHERE menu_item_id= '%d'",
+                    MenuId);
             stmt.executeUpdate(sqlStatement6);
 
             // update inventory
@@ -1028,15 +1031,14 @@ public class Database {
             // String finalDateString = formatter.format(finalDate);
 
             String query = "SELECT m1.MENU_ITEM_NAME, m2.MENU_ITEM_NAME, COUNT(*) AS combo_count " +
-                            "FROM item_sold s1 " +
-                            "JOIN item_sold s2 ON s1.ORDER_ID = s2.ORDER_ID AND s1.MENU_ITEM_ID < s2.MENU_ITEM_ID " +
-                            "JOIN Menu m1 ON s1.MENU_ITEM_ID = m1.MENU_ITEM_ID AND m1.MENU_ITEM_ID <= 25 " +
-                            "JOIN Menu m2 ON s2.MENU_ITEM_ID = m2.MENU_ITEM_ID AND m2.MENU_ITEM_ID <= 25 " +
-                            "WHERE s1.ORDER_ID IN (SELECT ORDER_ID FROM orders WHERE DATE_ORDERED BETWEEN '" + initialDate
-                            + "' AND '" + finalDate + "') " +
-                            "GROUP BY m1.MENU_ITEM_NAME, m2.MENU_ITEM_NAME " +
-                            "ORDER BY combo_count DESC LIMIT 20;";
-
+                    "FROM item_sold s1 " +
+                    "JOIN item_sold s2 ON s1.ORDER_ID = s2.ORDER_ID AND s1.MENU_ITEM_ID < s2.MENU_ITEM_ID " +
+                    "JOIN Menu m1 ON s1.MENU_ITEM_ID = m1.MENU_ITEM_ID AND m1.MENU_ITEM_ID <= 25 " +
+                    "JOIN Menu m2 ON s2.MENU_ITEM_ID = m2.MENU_ITEM_ID AND m2.MENU_ITEM_ID <= 25 " +
+                    "WHERE s1.ORDER_ID IN (SELECT ORDER_ID FROM orders WHERE DATE_ORDERED BETWEEN '" + initialDate
+                    + "' AND '" + finalDate + "') " +
+                    "GROUP BY m1.MENU_ITEM_NAME, m2.MENU_ITEM_NAME " +
+                    "ORDER BY combo_count DESC LIMIT 20;";
 
             ResultSet result = runCommand(query);
 
@@ -1071,7 +1073,7 @@ public class Database {
             if (result.next()) {
                 newReportID = result.getInt(1) + 1;
             }
-            
+
             // get new latest order
             int lastOrderID = 0;
             String sqlStatement5 = "SELECT MAX(order_id) FROM orders";
@@ -1079,32 +1081,32 @@ public class Database {
             if (result3.next()) {
                 lastOrderID = result3.getInt(1);
             }
-            
+
             // get zreport date
             // get the current date as a LocalDate object
             //
             LocalDate today = LocalDate.now();
             // format the date as a string in "MM-dd-yyyy" format
             String date = today.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
-            
-            //get report_total_cost
+
+            // get report_total_cost
             float reportTotalCost = 0;
             String sqlStatement6 = "SELECT order_cost FROM orders WHERE order_id > (SELECT last_order_id FROM zreports WHERE report_id=(SELECT MAX(report_id) FROM zreports))";
             ResultSet result4 = stmt.executeQuery(sqlStatement6);
             while (result4.next()) {
                 reportTotalCost += Float.parseFloat(result4.getString(1));
             }
-            
+
             // insert into item sold
             String sqlStatement2 = String.format(
                     "INSERT INTO zreports (report_id, last_order_id, zreport_date, report_total_cost, is_zreport) VALUES ('%d', '%d', '%s', '%f', '%d')",
                     newReportID, lastOrderID, date, reportTotalCost, 1);
             stmt.executeUpdate(sqlStatement2);
 
-            //create zreportContent
+            // create zreportContent
             createZReportContent(newReportID);
 
-            //reset menu items sold to 0
+            // reset menu items sold to 0
             String sqlStatement7 = "UPDATE menu SET menu_item_sold_since_z =0";
             stmt.executeUpdate(sqlStatement7);
         } catch (Exception e) {
@@ -1113,7 +1115,8 @@ public class Database {
             System.exit(0);
         }
     }
-    public void createZReportContent(int reportID){
+
+    public void createZReportContent(int reportID) {
         try {
             // get new pk
             int newReportCID = 0;
@@ -1124,7 +1127,7 @@ public class Database {
                 newReportCID = result.getInt(1) + 1;
             }
 
-            //populate zreport content table
+            // populate zreport content table
             String sqlStatement4 = "SELECT * FROM menu";
             ResultSet result2 = stmt.executeQuery(sqlStatement4);
             String sqlStatement2 = "";
@@ -1133,18 +1136,18 @@ public class Database {
             while (result2.next()) {
                 vector1.add(result2.getString("menu_item_name"));
                 vector2.add(result2.getInt("menu_item_sold_since_z"));
-                
+
             }
             for (int i = 0; i < vector1.size(); i++) {
-                 sqlStatement2 = String.format(
-                    "INSERT INTO zreportcontent (report_content_id, report_id, menu_item_name, menu_item_quantity) VALUES ('%d', '%d', '%s', '%d')",
-                    newReportCID, reportID, vector1.get(i), vector2.get(i));
-            stmt.executeUpdate(sqlStatement2);
-            newReportCID += 1;
+                sqlStatement2 = String.format(
+                        "INSERT INTO zreportcontent (report_content_id, report_id, menu_item_name, menu_item_quantity) VALUES ('%d', '%d', '%s', '%d')",
+                        newReportCID, reportID, vector1.get(i), vector2.get(i));
+                stmt.executeUpdate(sqlStatement2);
+                newReportCID += 1;
             }
 
             // insert into item sold
-           
+
             // zReportTotal = 0;
 
         } catch (Exception e) {
@@ -1153,7 +1156,8 @@ public class Database {
             System.exit(0);
         }
     }
-    public void createXReport(){
+
+    public void createXReport() {
         try {
             int newReportID = 0;
             Statement stmt = conn.createStatement();
@@ -1178,7 +1182,7 @@ public class Database {
             // format the date as a string in "MM-dd-yyyy" format
             String date = today.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
 
-            //get report_total_cost
+            // get report_total_cost
             float reportTotalCost = 0;
             String sqlStatement6 = "SELECT order_cost FROM orders WHERE order_id > (SELECT last_order_id FROM zreports WHERE report_id=(SELECT MAX(report_id) FROM zreports))";
             ResultSet result4 = stmt.executeQuery(sqlStatement6);
@@ -1192,7 +1196,7 @@ public class Database {
                     newReportID, lastOrderID, date, reportTotalCost, 0);
             stmt.executeUpdate(sqlStatement2);
 
-            //create zreportContent
+            // create zreportContent
             createZReportContent(newReportID);
 
         } catch (Exception e) {

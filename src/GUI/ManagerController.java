@@ -625,7 +625,8 @@ public class ManagerController implements Initializable {
 
 		this.totalQuantityCol.setCellValueFactory(cellData -> cellData.getValue().getTotalQuantity());
 
-		final ObservableList<SaleData> salesData = db.salesHistory("2022-01-01", LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		final ObservableList<SaleData> salesData = db.salesHistory("2022-01-01",
+				LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
 		this.salesHistoryTable.setItems(salesData);
 		// THIS IS THE ENTIRE PROBLEM
@@ -671,6 +672,8 @@ public class ManagerController implements Initializable {
 	 * @param finalDate   The final date of the range to display sales data for.
 	 */
 	private void updatePopularCombosTable(String initialDate, String finalDate) {
+		this.menuItem1Col.setCellValueFactory(cellData -> cellData.getValue().getItem1());
+		this.menuItem2Col.setCellValueFactory(cellData -> cellData.getValue().getItem2());
 		this.popularCombosTable.setItems(db.popularCombos(initialDate, finalDate));
 		this.popularCombosTable.refresh();
 	}
