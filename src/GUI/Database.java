@@ -1030,21 +1030,23 @@ public class Database {
             // String initialDateString = formatter.format(initialDate);
             // String finalDateString = formatter.format(finalDate);
 
-            String query = "SELECT m1.MENU_ITEM_NAME, m2.MENU_ITEM_NAME, COUNT(*) AS combo_count " +
+            String query = "SELECT m1.MENU_ITEM_NAME AS menu_item_name_1, m2.MENU_ITEM_NAME AS menu_item_name_2, COUNT(*) AS combo_count "
+                    +
                     "FROM item_sold s1 " +
                     "JOIN item_sold s2 ON s1.ORDER_ID = s2.ORDER_ID AND s1.MENU_ITEM_ID < s2.MENU_ITEM_ID " +
                     "JOIN Menu m1 ON s1.MENU_ITEM_ID = m1.MENU_ITEM_ID AND m1.MENU_ITEM_ID <= 25 " +
                     "JOIN Menu m2 ON s2.MENU_ITEM_ID = m2.MENU_ITEM_ID AND m2.MENU_ITEM_ID <= 25 " +
                     "WHERE s1.ORDER_ID IN (SELECT ORDER_ID FROM orders WHERE DATE_ORDERED BETWEEN '" + initialDate
                     + "' AND '" + finalDate + "') " +
-                    "GROUP BY m1.MENU_ITEM_NAME, m2.MENU_ITEM_NAME " +
+                    "GROUP BY menu_item_name_1, menu_item_name_2 " +
                     "ORDER BY combo_count DESC LIMIT 20;";
 
             ResultSet result = runCommand(query);
-
+            if (result == null)
+                return popularCombos;
             while (result.next()) {
-                String menuItem1 = result.getString("MENU_ITEM_NAME");
-                String menuItem2 = result.getString("MENU_ITEM_NAME");
+                String menuItem1 = result.getString("menu_item_name_1");
+                String menuItem2 = result.getString("menu_item_name_2");
                 Long comboCount = result.getLong("combo_count");
                 Combo combo = new Combo(menuItem1, menuItem2, comboCount);
                 popularCombos.add(combo);
