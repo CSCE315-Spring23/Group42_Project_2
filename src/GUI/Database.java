@@ -282,10 +282,13 @@ public class Database {
      *                    the end date for this measure. use current date for the
      *                    most up to date measurement.
      * @return list of items
-     * @author Daniela M
+     * @author Arjun
      */
     public ObservableList<Excess> getExcess(String initialDate, String finalDate) {
         ObservableList<Excess> excess = FXCollections.observableArrayList();
+        if (initialDate.equals(finalDate))
+            return excess;
+
         try {
             // Get the sales data for the given time window
             ResultSet result = runCommand(
@@ -294,11 +297,12 @@ public class Database {
                             "JOIN Inventory_Item i ON r.INVENTORY_ID = i.INVENTORY_ID " +
                             "JOIN Item_Sold s ON r.MENU_ID = s.MENU_ITEM_ID " +
                             "JOIN Orders o ON s.ORDER_ID = o.ORDER_ID " +
-                            "WHERE o.DATE_ORDERED BETWEEN " + initialDate + " AND " + finalDate +
-                            "GROUP BY i.INVENTORY_ID, i.INVENTORY_ITEM_NAME"
+                            "WHERE o.DATE_ORDERED BETWEEN '" + initialDate.strip() + "' AND '" + finalDate.strip() +
+                            "' GROUP BY i.INVENTORY_ID, i.INVENTORY_ITEM_NAME"
 
             );
-
+            if (result == null)
+                return excess;
             // Parse the sales data into a list of SaleData objects
             while (result.next()) {
                 String inventoryItemName = result.getString("INVENTORY_ITEM_NAME");
@@ -307,9 +311,16 @@ public class Database {
 
                 ResultSet res2 = runCommand(
                         "SELECT INVENTORY_ITEM_QUANTITY FROM INVENTORY_ITEM WHERE INVENTORY_ID = " + inventoryID + ";");
+                res2.next();
+
                 Long inventoryOnHand = res2.getLong("INVENTORY_ITEM_QUANTITY");
+                // System.out.println("DEBUG LOG: " + inventoryItemName + " : " + inventoryID +
+                // " : " + quantityUsed
+                // + " : " + inventoryOnHand);
+
                 if (inventoryOnHand + quantityUsed > quantityUsed * 10) {
-                    excess.add(new Excess(inventoryID, inventoryItemName));
+                    Excess ex = new Excess(inventoryID, inventoryItemName);
+                    excess.add(ex);
                 }
             }
 

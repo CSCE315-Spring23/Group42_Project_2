@@ -198,7 +198,7 @@ public class ManagerController implements Initializable {
 		// this.setUpPopularCombosTable();
 		System.out.println("is this the problem?");
 
-		// this.setUpExcessTable();
+		this.setUpExcessTable();
 
 		this.updateInventoryTable(0);
 		this.updateMenuTable(0);
@@ -208,7 +208,7 @@ public class ManagerController implements Initializable {
 		// this.updatePopularCombosTable("2022-1-1", "2022-1-1");
 		System.out.println("is this the problem?");
 
-		// this.updateExcessTable(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+		this.updateExcessTable(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
 		this.inventoryTable.refresh();
 		this.menuTable.refresh();
@@ -498,8 +498,9 @@ public class ManagerController implements Initializable {
 
 	private void setUpReportContentTable() {
 		this.menuItemNameForReports.setCellValueFactory(cellData -> cellData.getValue().getMenuItemNameForReports());
-		this.menuItemQuantityForReports.setCellValueFactory(cellData -> cellData.getValue().getMenuItemQuantityForReports());
-		
+		this.menuItemQuantityForReports
+				.setCellValueFactory(cellData -> cellData.getValue().getMenuItemQuantityForReports());
+
 		final ObservableList<ReportContent> items = db.get20RowsReportContent(0);
 
 		this.reportContentTable.setItems(items);
@@ -600,7 +601,8 @@ public class ManagerController implements Initializable {
 	}
 
 	/**
-	 * Updates the popular combos table to display popular combinations of items for a specific date
+	 * Updates the popular combos table to display popular combinations of items for
+	 * a specific date
 	 * range.
 	 *
 	 * @param initialDate The initial date of the range to display sales data for.
