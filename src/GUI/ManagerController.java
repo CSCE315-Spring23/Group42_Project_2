@@ -573,7 +573,7 @@ public class ManagerController implements Initializable {
 	}
 
 	/**
-	 * Updates the sales history table to display sales data for a specific date
+	 * Updates the popular combos table to display popular combinations of items for a specific date
 	 * range.
 	 *
 	 * @param initialDate The initial date of the range to display sales data for.
