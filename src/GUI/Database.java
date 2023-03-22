@@ -655,6 +655,10 @@ public class Database {
                     newItemID, MenuId, orderID, quantity);
             stmt.executeUpdate(sqlStatement2);
 
+            //update menu
+            String sqlStatement6 = String.format("UPDATE menu SET menu_item_sold_since_z = menu_item_sold_since_z + 1 WHERE menu_item_id= '%d'", MenuId);
+            stmt.executeUpdate(sqlStatement6);
+
             // update inventory
             String sqlStatement4 = String.format("SELECT * FROM recipe_item WHERE menu_id = %d", MenuId);
             ResultSet result2 = stmt.executeQuery(sqlStatement4);

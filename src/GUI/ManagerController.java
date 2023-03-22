@@ -363,9 +363,9 @@ public class ManagerController implements Initializable {
 
 		salesButton.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				String startdate = startDateSales.getText().strip();
-				String enddate2 = endDateSales.getText().strip();
-				if (startDateSales.getText().strip().equals("") || endDateSales.getText().strip().equals("")) {
+				String startdate = startDateSale.getText().strip();
+				String enddate2 = endDateSale.getText().strip();
+				if (startDateSale.getText().strip().equals("") || endDateSale.getText().strip().equals("")) {
 					System.out.println("Missing Item Name");
 				} else {
 					updateSalesHistoryTable(startdate, enddate2);
