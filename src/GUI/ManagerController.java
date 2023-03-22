@@ -210,8 +210,8 @@ public class ManagerController implements Initializable {
 		this.setUpReportTable();
 		this.setUpRestockReport();
 
-		// this.setUpSalesHistoryTable();
-		// this.setUpPopularCombosTable();
+		this.setUpSalesHistoryTable();
+		this.setUpPopularCombosTable();
 
 		this.setUpExcessTable();
 
@@ -220,8 +220,8 @@ public class ManagerController implements Initializable {
 		this.updateMenuTable(0);
 		this.updateRecipeTable(0);
 		this.updateRestockReport();
-		// this.updateSalesHistoryTable("2022-1-1", "2022-1-1");
-		// this.updatePopularCombosTable("2022-1-1", "2022-1-1");
+		this.updateSalesHistoryTable("2022-1-1", "2022-1-1");
+		this.updatePopularCombosTable("2022-1-1", "2022-1-1");
 
 		this.updateExcessTable(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
@@ -230,8 +230,8 @@ public class ManagerController implements Initializable {
 		this.menuTable.refresh();
 		this.recipeTable.refresh();
 		this.restockReport.refresh();
-		// this.salesHistoryTable.refresh();
-		// this.popularCombosTable.refresh();
+		this.salesHistoryTable.refresh();
+		this.popularCombosTable.refresh();
 		System.out.println("is this the problem?");
 
 		this.excessTable.refresh();
