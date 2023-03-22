@@ -10,6 +10,9 @@ import javafx.collections.FXCollections;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Contains all functionality to access the SQL Database
+ */
 public class Database {
 
     private Connection conn = null;
