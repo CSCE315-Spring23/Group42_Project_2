@@ -86,6 +86,18 @@ public class ManagerController implements Initializable {
 	@FXML
 	TextField startDate;
 
+	@FXML
+	TextField startDateCombo;
+
+	@FXML
+	TextField endDateCombo;
+
+	@FXML
+	TextField startDateSale;
+
+	@FXML
+	TextField endDateSale;
+
 	private Database db;
 
 	// @FXML

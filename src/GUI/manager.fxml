@@ -269,10 +269,17 @@
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="430" minHeight="10.0" prefHeight="430" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="100.0" minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="430.0" minHeight="10.0" prefHeight="430.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <TableView fx:id="popularCombosTable" prefHeight="400.0" prefWidth="600.0" GridPane.rowIndex="1">
+                  <TableView fx:id="popularCombosTable" prefHeight="350.0" prefWidth="580.0" GridPane.rowIndex="8">
                      <columns>
                         <TableColumn fx:id="menuItem1Col" prefWidth="200" text="MENU_ITEM_1" />
                         <TableColumn fx:id="menuItem2Col" prefWidth="200" text="MENU_ITEM_2" />
@@ -282,6 +289,9 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>
                   </TableView>
+                  <TextField fx:id="startDateCombo" promptText="Start Date" GridPane.rowIndex="1" />
+                  <TextField fx:id="endDateCombo" prefHeight="39.0" prefWidth="600.0" promptText="End Date" GridPane.rowIndex="4" />
+                  <Button mnemonicParsing="false" text="View" GridPane.rowIndex="7" />
                </children>
             </GridPane>
         </content>
