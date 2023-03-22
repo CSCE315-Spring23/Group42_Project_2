@@ -350,8 +350,8 @@ public class ManagerController implements Initializable {
 
 		comboButton.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				String startdate = startDateCombo;
-				String enddate2 = endDateCombo;
+				String startdate = startDateCombo.getText().strip();
+				String enddate2 = endDateCombo.getText().strip();
 				if (startDateCombo.getText().strip().equals("") || endDateCombo.getText().strip().equals("")) {
 					System.out.println("Missing Item Name");
 				} else {
@@ -359,12 +359,12 @@ public class ManagerController implements Initializable {
 					popularCombosTable.refresh();
 				}
 			}
-		}
+		});
 
 		salesButton.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				String startdate = startDateSales;
-				String enddate2 = endDateSales;
+				String startdate = startDateSales.getText().strip();
+				String enddate2 = endDateSales.getText().strip();
 				if (startDateSales.getText().strip().equals("") || endDateSales.getText().strip().equals("")) {
 					System.out.println("Missing Item Name");
 				} else {
@@ -372,7 +372,7 @@ public class ManagerController implements Initializable {
 					salesHistoryTable.refresh();
 				}
 			}
-		}
+		});
 
 		bUpdateInventory.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
