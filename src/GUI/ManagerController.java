@@ -84,8 +84,8 @@ public class ManagerController implements Initializable {
 
 	private Database db;
 
-	@FXML
-	private TableView<SaleData> salesTable;
+	//@FXML
+	//private TableView<SaleData> salesTable;
 	@FXML
 	private TableView<Inventory> inventoryTable;
 	@FXML
@@ -171,18 +171,19 @@ public class ManagerController implements Initializable {
 		this.setUpReportTable();
 		this.setUpRestockReport();
 		this.setUpSalesHistoryTable();
-		
+		this.setUpPopularCombosTable();
 		this.updateInventoryTable(0);
 		this.updateMenuTable(0);
 		this.updateRecipeTable(0);
 		this.updateRestockReport();
-		this.updateSalesHistoryTable("2022-01-01", "2022-01-01");
-
+		this.updateSalesHistoryTable("2022-1-1", "2022-1-1");
+		this.updatePopularCombosTable("2022-1-1", "2022-1-1");
 		this.inventoryTable.refresh();
 		this.menuTable.refresh();
 		this.recipeTable.refresh();
 		this.restockReport.refresh();
 		this.salesHistoryTable.refresh();
+		this.popularCombosTable.refresh();
 
 		addMenu.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -499,9 +500,9 @@ public class ManagerController implements Initializable {
 		this.menuItemNameCol.setCellValueFactory(cellData -> cellData.getValue().getMenuItemName());
 		this.totalQuantityCol.setCellValueFactory(cellData -> cellData.getValue().getTotalQuantity());
 
-		final ObservableList<SaleData> salesData = db.salesHistory("2022-01-01", "2022-01-01");
+		final ObservableList<SaleData> salesData = db.salesHistory("01/01/2022", "01/01/2022");
 
-		this.salesTable.setItems(salesData);
+		this.salesHistoryTable.setItems(salesData);
 	}
 
 	/**
