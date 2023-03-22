@@ -238,6 +238,17 @@ public class ManagerController implements Initializable {
 				}
 			}
 		});
+		createXreportBtn.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				db.createXReport();
+			}
+		});
+
+		createZreportBtn.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				db.createZReport();
+			}
+		});
 
 		/*
 		 * addRecipeItem.setOnAction(new EventHandler<ActionEvent>() {

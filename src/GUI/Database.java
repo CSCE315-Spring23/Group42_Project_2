@@ -1066,13 +1066,104 @@ public class Database {
             if (result.next()) {
                 newReportID = result.getInt(1) + 1;
             }
-
+            
             // get new latest order
             int lastOrderID = 0;
             String sqlStatement5 = "SELECT MAX(order_id) FROM orders";
-            ResultSet result3 = stmt.executeQuery(sqlStatement1);
+            ResultSet result3 = stmt.executeQuery(sqlStatement5);
             if (result3.next()) {
-                lastOrderID = result.getInt(1);
+                lastOrderID = result3.getInt(1);
+            }
+            
+            // get zreport date
+            // get the current date as a LocalDate object
+            //
+            LocalDate today = LocalDate.now();
+            // format the date as a string in "MM-dd-yyyy" format
+            String date = today.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
+            
+            //get report_total_cost
+            float reportTotalCost = 0;
+            String sqlStatement6 = "SELECT order_cost FROM orders WHERE order_id > (SELECT last_order_id FROM zreports WHERE report_id=(SELECT MAX(report_id) FROM zreports))";
+            ResultSet result4 = stmt.executeQuery(sqlStatement6);
+            while (result4.next()) {
+                reportTotalCost += Float.parseFloat(result4.getString(1));
+            }
+            
+            // insert into item sold
+            String sqlStatement2 = String.format(
+                    "INSERT INTO zreports (report_id, last_order_id, zreport_date, report_total_cost, is_zreport) VALUES ('%d', '%d', '%s', '%f', '%d')",
+                    newReportID, lastOrderID, date, reportTotalCost, 1);
+            stmt.executeUpdate(sqlStatement2);
+
+            //create zreportContent
+            createZReportContent(newReportID);
+
+            //reset menu items sold to 0
+            String sqlStatement7 = "UPDATE menu SET menu_item_sold_since_z =0";
+            stmt.executeUpdate(sqlStatement7);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
+    public void createZReportContent(int reportID){
+        try {
+            // get new pk
+            int newReportCID = 0;
+            Statement stmt = conn.createStatement();
+            String sqlStatement1 = "SELECT MAX(report_content_id) FROM zreportcontent";
+            ResultSet result = stmt.executeQuery(sqlStatement1);
+            if (result.next()) {
+                newReportCID = result.getInt(1) + 1;
+            }
+
+            //populate zreport content table
+            String sqlStatement4 = "SELECT * FROM menu";
+            ResultSet result2 = stmt.executeQuery(sqlStatement4);
+            String sqlStatement2 = "";
+            ArrayList<String> vector1 = new ArrayList<String>();
+            ArrayList<Integer> vector2 = new ArrayList<Integer>();
+            while (result2.next()) {
+                vector1.add(result2.getString("menu_item_name"));
+                vector2.add(result2.getInt("menu_item_sold_since_z"));
+                
+            }
+            for (int i = 0; i < vector1.size(); i++) {
+                 sqlStatement2 = String.format(
+                    "INSERT INTO zreportcontent (report_content_id, report_id, menu_item_name, menu_item_quantity) VALUES ('%d', '%d', '%s', '%d')",
+                    newReportCID, reportID, vector1.get(i), vector2.get(i));
+            stmt.executeUpdate(sqlStatement2);
+            newReportCID += 1;
+            }
+
+            // insert into item sold
+           
+            // zReportTotal = 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+    }
+    public void createXReport(){
+        try {
+            int newReportID = 0;
+            Statement stmt = conn.createStatement();
+            String sqlStatement1 = "SELECT MAX(report_id) FROM zreports";
+            ResultSet result = stmt.executeQuery(sqlStatement1);
+            if (result.next()) {
+                newReportID = result.getInt(1) + 1;
+            }
+
+            // get new latest order
+            int lastOrderID = 0;
+            String sqlStatement5 = "SELECT last_order_id FROM zreports WHERE report_id=(SELECT MAX(report_id) FROM zreports)";
+            ResultSet result3 = stmt.executeQuery(sqlStatement5);
+            if (result3.next()) {
+                lastOrderID = result3.getInt(1);
             }
 
             // get zreport date
@@ -1082,12 +1173,22 @@ public class Database {
             // format the date as a string in "MM-dd-yyyy" format
             String date = today.format(DateTimeFormatter.ofPattern("MM-dd-yyyy"));
 
+            //get report_total_cost
+            float reportTotalCost = 0;
+            String sqlStatement6 = "SELECT order_cost FROM orders WHERE order_id > (SELECT last_order_id FROM zreports WHERE report_id=(SELECT MAX(report_id) FROM zreports))";
+            ResultSet result4 = stmt.executeQuery(sqlStatement6);
+            while (result4.next()) {
+                reportTotalCost += Float.parseFloat(result4.getString(1));
+            }
+
             // insert into item sold
             String sqlStatement2 = String.format(
-                    "INSERT INTO zreports (report_id, last_order_id, zreport_date, report_total_cost) VALUES ('%d', '%d', '%s', '%f')",
-                    newReportID, lastOrderID, date, zReportTotal);
+                    "INSERT INTO zreports (report_id, last_order_id, zreport_date, report_total_cost, is_zreport) VALUES ('%d', '%d', '%s', '%f', '%d')",
+                    newReportID, lastOrderID, date, reportTotalCost, 0);
             stmt.executeUpdate(sqlStatement2);
-            zReportTotal = 0;
+
+            //create zreportContent
+            createZReportContent(newReportID);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -1095,9 +1196,6 @@ public class Database {
             System.exit(0);
         }
     }
-    // public void createXReport(){
-
-    // }
 
     /**
      * Retrieves a list of all inventory items that need to be restocked
