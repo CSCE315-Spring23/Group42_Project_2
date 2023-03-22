@@ -168,12 +168,16 @@ public class ManagerController implements Initializable {
 		this.setUpInventoryTable();
 		this.setUpMenuTable();
 		this.setUpRecipeTable();
+		this.setUpReportTable();
+		this.setUpRestockReport();
 		this.updateInventoryTable(0);
 		this.updateMenuTable(0);
 		this.updateRecipeTable(0);
+		this.updateRestockReport();
 		this.inventoryTable.refresh();
 		this.menuTable.refresh();
 		this.recipeTable.refresh();
+		this.restockReport.refresh();
 
 		addMenu.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -468,6 +472,16 @@ public class ManagerController implements Initializable {
 		final ObservableList<Recipe> items = db.get20RowsRecipe(0);
 
 		this.recipeTable.setItems(items);
+	}
+
+	private void setUpRestockReport() {
+		this.inventoryID2.setCellValueFactory(cellData -> cellData.getValue().getInventoryID());
+		this.inventoryItemName2.setCellValueFactory(cellData -> cellData.getValue().getItemName());
+		this.inventoryItemCost2.setCellValueFactory(cellData -> cellData.getValue().getItemCost());
+		this.inventoryItemQty2.setCellValueFactory(cellData -> cellData.getValue().getItemQuantity());
+		final ObservableList<Inventory> items = db.createRestockReport();
+
+		this.restockReport.setItems(items);
 	}
 
 	/**
