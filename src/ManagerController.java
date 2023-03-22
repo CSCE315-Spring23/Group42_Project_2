@@ -98,6 +98,8 @@ public class ManagerController implements Initializable {
 	private TableView<Combo> popularCombosTable;
 	@FXML
 	private TableView<Report> reportTable;
+	@FXML
+	private TableView<Inventory> restockReport;
 
 	@FXML
 	private TableColumn<Combo, Long> countCol;
@@ -147,6 +149,15 @@ public class ManagerController implements Initializable {
 	private TableColumn<Report, String> zReportDate;
 	@FXML
 	private TableColumn<Report, Float> reportTotalCost;
+
+	@FXML
+	private TableColumn<Inventory, Long> inventoryID2;
+	@FXML
+	private TableColumn<Inventory, String> inventoryItemName2;
+	@FXML
+	private TableColumn<Inventory, Double> inventoryItemCost2;
+	@FXML
+	private TableColumn<Inventory, Long> inventoryItemQty2;
 
 
 	public void initialize(URL location, ResourceBundle resources) {
@@ -412,6 +423,11 @@ public class ManagerController implements Initializable {
 	private void updateRecipeTable(int whichTwenty) {
 		this.recipeTable.setItems(db.get20RowsRecipe(whichTwenty));
 		this.recipeTable.refresh();
+	}
+
+	private void updateRestockReport() {
+		this.restockReport.setItems(db.createRestockReport());
+		this.restockReport.refresh();
 	}
 
 	private void setUpReportTable() {

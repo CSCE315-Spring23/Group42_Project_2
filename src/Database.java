@@ -985,6 +985,38 @@ public class Database {
     // public void createXReport(){
 
     // }
+
+    /**
+     * Retrieves a list of all inventory items that need to be restocked
+     * 
+     *
+     * @return an ObservableList of Inventory objects representing the retrieved
+     *         rows of inventory items.
+     * @author Daniela Martinez Banda
+     */
+    public ObservableList<Inventory> createRestockReport() {
+        String tableName = "inventory_item";
+        ObservableList<Inventory> rows = FXCollections.observableArrayList();
+
+        try {
+            //Get inventory that has a quantity of less than 30
+            ResultSet result = runCommand("Select * FROM "
+                    + tableName + "WHERE inventory_item_quantity <= 50");
+            // Loop through the rows in result
+            while (result.next()) {
+                // Loop through columns an
+                rows.add(new Inventory(result.getLong(1), result.getString(2), result.getDouble(3), result.getLong(4)));
+                // Add current row to rows
+            }
+            result.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            System.exit(0);
+        }
+        return rows;
+    }
+
 }
 
 /**
