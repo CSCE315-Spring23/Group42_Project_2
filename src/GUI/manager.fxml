@@ -246,7 +246,7 @@
                   <RowConstraints maxHeight="430" minHeight="10.0" prefHeight="430" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <TableView fx:id="salesHistoryTable" prefHeight="400.0" prefWidth="600.0" GridPane.rowIndex="1">
+                  <TableView fx:id="salesHstoryTable" prefHeight="400.0" prefWidth="600.0" GridPane.rowIndex="1">
                      <columns>
                         <TableColumn fx:id="menuItemIDCol" prefWidth="150" text="MENU_ITEM_ID" />
                         <TableColumn fx:id="menuItemNameCol" prefWidth="200" text="MENU_ITEM_NAME" />
@@ -282,6 +282,20 @@
                   </TableView>
                </children>
             </GridPane>
+        </content>
+      </Tab>
+      <Tab text="Excess Report">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView layoutX="25.0" layoutY="27.0" prefHeight="416.0" prefWidth="548.0">
+                    <columns>
+                      <TableColumn fx:id="ExcessID" prefWidth="269.60003662109375" text="Menu Item ID" />
+                      <TableColumn fx:id="ExcessName" prefWidth="277.5999755859375" text="Menu Item Name" />
+                    </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
         </content>
       </Tab>
   </tabs>

@@ -54,7 +54,6 @@ public class ManagerController implements Initializable {
 	@FXML
 	private Button deleteRecipeItem;
 
-
 	@FXML
 	TextField fInventoryID;
 	@FXML
@@ -159,7 +158,6 @@ public class ManagerController implements Initializable {
 	@FXML
 	private TableColumn<Inventory, Long> inventoryItemQty2;
 
-
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println("Manager controller running");
 		this.db = new Database();
@@ -171,18 +169,18 @@ public class ManagerController implements Initializable {
 		this.setUpReportTable();
 		this.setUpRestockReport();
 		this.setUpSalesHistoryTable();
-		
+
 		this.updateInventoryTable(0);
 		this.updateMenuTable(0);
 		this.updateRecipeTable(0);
 		this.updateRestockReport();
-		this.updateSalesHistoryTable("2022-01-01", "2022-01-01");
+		// this.updateSalesHistoryTable("2022-01-01", "2022-01-01");
 
 		this.inventoryTable.refresh();
 		this.menuTable.refresh();
 		this.recipeTable.refresh();
 		this.restockReport.refresh();
-		this.salesHistoryTable.refresh();
+		// this.salesHistoryTable.refresh();
 
 		addMenu.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -363,7 +361,7 @@ public class ManagerController implements Initializable {
 
 		switchView.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				try{
+				try {
 					FXMLLoader employeeLoader = new FXMLLoader(getClass().getResource("employee.fxml"));
 					Parent employeeParent = (Parent) employeeLoader.load();
 					Scene employeeScene = new Scene(employeeParent, 750, 750);
@@ -371,53 +369,52 @@ public class ManagerController implements Initializable {
 					stage.setTitle("315 Project 2");
 					stage.setScene(employeeScene);
 					stage.show();
-				} catch(IOException e){
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
+
 			}
 		});
 
 		logout.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				try{
+				try {
 					// set up login scene
 					FXMLLoader loginLoader = new FXMLLoader(
 							getClass().getResource("login.fxml"));
 					Parent loginParent = (Parent) loginLoader.load();
 					Scene loginScene = new Scene(loginParent, 650, 650);
-			
+
 					// set up employee scene
 					FXMLLoader employeeLoader = new FXMLLoader(
 							getClass().getResource("employee.fxml"));
 					Parent employeeParent = (Parent) employeeLoader.load();
 					Scene employeeScene = new Scene(employeeParent, 650, 650);
-			
+
 					// set up manager scene
 					FXMLLoader managerLoader = new FXMLLoader(
 							getClass().getResource("manager.fxml"));
 					Parent managerParent = (Parent) managerLoader.load();
 					Scene managerScene = new Scene(managerParent, 650, 650);
-			
+
 					LoginController loginController = (LoginController) loginLoader.getController();
 					Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-			
+
 					loginController.setEmployeeScene(employeeScene);
 					// managerController.setEmployeeScene(employeeScene)
 					loginController.setManagerScene(managerScene);
-			
+
 					stage.setTitle("315 Project 2");
 					stage.setScene(loginScene);
 					stage.show();
-				} catch(IOException e){
+				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				
+
 			}
 		});
 
 	}
-	
 
 	private void updateMenuTable(int whichTwenty) {
 		this.menuTable.setItems(db.get20RowsMenu(whichTwenty));
@@ -497,11 +494,13 @@ public class ManagerController implements Initializable {
 	private void setUpSalesHistoryTable() {
 		this.menuItemIDCol.setCellValueFactory(cellData -> cellData.getValue().getMenuItemId());
 		this.menuItemNameCol.setCellValueFactory(cellData -> cellData.getValue().getMenuItemName());
+
 		this.totalQuantityCol.setCellValueFactory(cellData -> cellData.getValue().getTotalQuantity());
 
 		final ObservableList<SaleData> salesData = db.salesHistory("2022-01-01", "2022-01-01");
 
-		this.salesTable.setItems(salesData);
+		// THIS IS THE ENTIRE PROBLEM
+		// this.salesHistoryTable.setItems(salesData);
 	}
 
 	/**
@@ -514,6 +513,7 @@ public class ManagerController implements Initializable {
 	private void updateSalesHistoryTable(String initialDate, String finalDate) {
 		this.salesHistoryTable.setItems(db.salesHistory(initialDate, finalDate));
 		this.salesHistoryTable.refresh();
+
 	}
 
 	/**
