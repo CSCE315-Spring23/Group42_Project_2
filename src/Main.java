@@ -22,7 +22,11 @@ public class Main extends Application {
     }
 
     /**
+     *
      * starts the program by setting up the login, employee, and manager fxml scenes
+     *
+     * @param primaryStage stage
+     * @throws IOException
      */
     @Override
     public void start(Stage primaryStage) throws IOException {
