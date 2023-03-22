@@ -55,6 +55,10 @@ public class ManagerController implements Initializable {
 	private Button deleteRecipeItem;
 	@FXML
 	private Button populateOrder;
+	@FXML
+	private Button createXreportBtn;
+	@FXML
+	private Button createZreportBtn;
 
 	@FXML
 	TextField fInventoryID;
@@ -104,6 +108,8 @@ public class ManagerController implements Initializable {
 	private TableView<Combo> popularCombosTable;
 	@FXML
 	private TableView<Report> reportTable;
+	@FXML
+	private TableView<ReportContent> reportContentTable;
 	@FXML
 	private TableView<Inventory> restockReport;
 
@@ -157,6 +163,11 @@ public class ManagerController implements Initializable {
 	private TableColumn<Report, Float> reportTotalCost;
 
 	@FXML
+	private TableColumn<ReportContent, String> menuItemNameForReports;
+	@FXML
+	private TableColumn<ReportContent, Integer> menuItemQuantityForReports;
+
+	@FXML
 	private TableColumn<Inventory, Long> inventoryID2;
 	@FXML
 	private TableColumn<Inventory, String> inventoryItemName2;
@@ -174,6 +185,7 @@ public class ManagerController implements Initializable {
 		System.out.println("Manager controller running");
 		this.db = new Database();
 
+		// this.setUpReportContentTable();
 		this.setUpReportTable();
 		this.setUpInventoryTable();
 		this.setUpMenuTable();
@@ -482,6 +494,15 @@ public class ManagerController implements Initializable {
 		final ObservableList<Report> items = db.get20RowsReport(0);
 
 		this.reportTable.setItems(items);
+	}
+
+	private void setUpReportContentTable() {
+		this.menuItemNameForReports.setCellValueFactory(cellData -> cellData.getValue().getMenuItemNameForReports());
+		this.menuItemQuantityForReports.setCellValueFactory(cellData -> cellData.getValue().getMenuItemQuantityForReports());
+		
+		final ObservableList<ReportContent> items = db.get20RowsReportContent(0);
+
+		this.reportContentTable.setItems(items);
 	}
 
 	private void setUpExcessTable() {
