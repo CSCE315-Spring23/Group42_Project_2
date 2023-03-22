@@ -4,8 +4,19 @@ import javafx.beans.property.SimpleObjectProperty;
  * Stores combos
  */
 public class Combo {
+    /**
+     * Stores item 1
+     */
     private SimpleObjectProperty<String> item1;
+
+    /**
+     * Stores item 2
+     */
     private SimpleObjectProperty<String> item2;
+
+    /**
+     * Stores the number of times this combo was ordered
+     */
     private SimpleObjectProperty<Long> numTimesOrdered;
 
     /**
