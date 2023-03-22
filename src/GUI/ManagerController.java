@@ -240,7 +240,7 @@ public class ManagerController implements Initializable {
 		});
 		createXreportBtn.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				// db.createXReport();
+				db.createXReport();
 			}
 		});
 
