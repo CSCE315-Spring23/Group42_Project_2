@@ -938,9 +938,9 @@ public class Database {
         ObservableList<SaleData> saleData = FXCollections.observableArrayList();
         try {
             // Get the sales data for the given time window
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-            String initialDateString = formatter.format(initialDate);
-            String finalDateString = formatter.format(finalDate);
+            // SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+            // String initialDateString = formatter.format(initialDate);
+            // String finalDateString = formatter.format(finalDate);
 
             ResultSet result = runCommand(
                     "SELECT Menu.MENU_ITEM_ID, Menu.MENU_ITEM_NAME, SUM(item_sold.ITEM_SOLD_QUANTITY) AS TOTAL_QUANTITY FROM item_sold "

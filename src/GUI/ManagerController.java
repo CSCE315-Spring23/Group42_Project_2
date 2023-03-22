@@ -170,6 +170,7 @@ public class ManagerController implements Initializable {
 		this.setUpRecipeTable();
 		this.setUpReportTable();
 		this.setUpRestockReport();
+		this.setUpSalesHistoryTable();
 		this.updateInventoryTable(0);
 		this.updateMenuTable(0);
 		this.updateRecipeTable(0);
@@ -494,7 +495,7 @@ public class ManagerController implements Initializable {
 		this.menuItemNameCol.setCellValueFactory(cellData -> cellData.getValue().getMenuItemName());
 		this.totalQuantityCol.setCellValueFactory(cellData -> cellData.getValue().getTotalQuantity());
 
-		final ObservableList<SaleData> salesData = db.salesHistory("01/01/2022", "01/01/2022");
+		final ObservableList<SaleData> salesData = db.salesHistory("2022-01-01", "2022-01-01");
 
 		this.salesTable.setItems(salesData);
 	}
