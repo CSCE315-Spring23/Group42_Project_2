@@ -197,7 +197,7 @@ public class ManagerController implements Initializable {
 		System.out.println("Manager controller running");
 		this.db = new Database();
 
-		// this.setUpReportContentTable();
+		this.setUpReportContentTable();
 		this.setUpReportTable();
 		this.setUpInventoryTable();
 		this.setUpMenuTable();
@@ -210,6 +210,7 @@ public class ManagerController implements Initializable {
 
 		this.setUpExcessTable();
 
+		this.updateReportTable(0);
 		this.updateInventoryTable(0);
 		this.updateMenuTable(0);
 		this.updateRecipeTable(0);
@@ -219,6 +220,7 @@ public class ManagerController implements Initializable {
 
 		this.updateExcessTable(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
 
+		this.reportTable.refresh();
 		this.inventoryTable.refresh();
 		this.menuTable.refresh();
 		this.recipeTable.refresh();
@@ -250,12 +252,16 @@ public class ManagerController implements Initializable {
 		createXreportBtn.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				db.createXReport();
+				updateReportTable(0);
+				reportTable.refresh();
 			}
 		});
 
 		createZreportBtn.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				db.createZReport();
+				updateReportTable(0);
+				reportTable.refresh();
 			}
 		});
 
@@ -494,6 +500,11 @@ public class ManagerController implements Initializable {
 	private void updateInventoryTable(int whichTwenty) {
 		this.inventoryTable.setItems(db.get20RowsInventory(whichTwenty));
 		this.inventoryTable.refresh();
+	}
+
+	private void updateReportTable(int whichTwenty) {
+		this.reportTable.setItems(db.get20RowsReport(whichTwenty));
+		this.reportTable.refresh();
 	}
 
 	private void updateRecipeTable(int whichTwenty) {
