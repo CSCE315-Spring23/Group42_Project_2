@@ -56,10 +56,7 @@ public class Database {
     }
 
     /**
-     * <<<<<<< HEAD
-     * =======
      * 
-     * >>>>>>> bd10b86cec59345cb0b60afcdc9b0fb4056336ae
      * Call when done to close connection
      * Closes the database connection and prints a message indicating whether the
      * connection was closed.
@@ -106,7 +103,7 @@ public class Database {
      * @param tableName the name of the table to retrieve the number of rows for
      * @return an integer value representing the number of rows in the table
      * @throws Exception if there is an error executing the query
-     * @author
+     * @author Arjun
      */
     public int getNumRows(String tableName) {
         int rows = 0;
@@ -139,7 +136,7 @@ public class Database {
      *             inventory items used
      * @return an ArrayList of integers representing the inventory items used on the
      *         specified day
-     * @author
+     * @author Arjun
      */
     public ArrayList<Integer> inventoryItemsUsed(String date) {
         int inventoryItemsCount = getNumRows("inventoryItem");
@@ -201,7 +198,7 @@ public class Database {
      *                    the inventory table
      * @return an ObservableList of Inventory objects representing the retrieved
      *         rows of inventory items.
-     * @author
+     * @author Bryan
      */
     public ObservableList<Inventory> get20RowsInventory(int whichTwenty) {
         String tableName = "inventory_item";
@@ -242,7 +239,7 @@ public class Database {
      *                    be 2, and so on.
      * @return An ObservableList of Menu objects representing the retrieved rows of
      *         menu items.
-     * @author
+     * @author Daniela Santos
      */
     public ObservableList<Menu> get20RowsMenu(int whichTwenty) {
         String tableName = "menu";
@@ -281,7 +278,8 @@ public class Database {
      * @param finalDate
      *                    the end date for this measure. use current date for the
      *                    most up to date measurement.
-     * @return
+     * @return list of items
+     * @author Daniela M
      */
     public ObservableList<Excess> getExcess(String initialDate, String finalDate) {
         ObservableList<Excess> excess = FXCollections.observableArrayList();
@@ -329,6 +327,7 @@ public class Database {
      *                    be 2, and so on.
      * @return An ObservableList of Recipe objects representing the retrieved rows
      *         of recipe items.
+     * @author Ariela
      */
     public ObservableList<Recipe> get20RowsRecipe(int whichTwenty) {
         String tableName = "recipe_item";
@@ -358,6 +357,18 @@ public class Database {
         }
         return rows;
     }
+
+    /**
+     * Retrieves 20 rows of recipe items from the report table starting from
+     * a specified position.
+     * 
+     * @param whichTwenty An integer specifying which set of 20 rows to retrieve.
+     *                    The first set of 20 rows would be 1, the second set would
+     *                    be 2, and so on.
+     * @return An ObservableList of report objects representing the retrieved rows
+     *         of recipe items.
+     * @author Srikar
+     */
 
     public ObservableList<Report> get20RowsReport(int whichTwenty) {
         String tableName = "zreports";
@@ -398,7 +409,7 @@ public class Database {
      * @return an ArrayList of integers representing the quantities of specific
      *         recipe items used in the specified item on the menu
      * @throws Exception if there is an error executing the query
-     * @author
+     * @author Ariela
      */
     public ArrayList<Integer> getRecipe(String item) {
         int inventoryItemsCount = getNumRows("inventoryItem");
@@ -440,7 +451,7 @@ public class Database {
      * @param inventoryItems a list of CustomPair objects representing the inventory
      *                       items and their corresponding quantities in the order
      * @throws Exception if there is an error executing the query
-     * @author
+     * @author Daniela Santos
      */
     public void createOrder(double cost, ArrayList<CustomPair> menuItems, ArrayList<CustomPair> inventoryItems) {
         try {
@@ -482,7 +493,7 @@ public class Database {
      * 
      * @param itemName the name or ID of the menu item to update
      * @param newCost  the new cost of the menu item
-     * @author
+     * @author Bryan
      */
     public void changePrice(String itemName, double newCost) {
         try {
@@ -508,7 +519,7 @@ public class Database {
      *                 skip update)
      * @param quantity the new quantity of the inventory item (can be empty string
      *                 to skip update)
-     * @author
+     * @author Daniela M
      */
     public void updateInventoryItem(String itemID, String itemName, String newCost, String quantity) {
         try {
@@ -546,7 +557,7 @@ public class Database {
      *                 skip update)
      * @param quantity the new quantity of the recipe item (can be empty string to
      *                 skip update)
-     * @author
+     * @author Arjun
      */
     public void updateRecipeItem(String itemID, String itemName, String invID, String menuID, String quantity) {
         try {
@@ -583,7 +594,7 @@ public class Database {
      * @param MenuId   the ID of the menu item being sold
      * @param orderID  the ID of the order this menu item is being sold under
      * @param quantity the quantity of the menu item being sold
-     * @author
+     * @author Srikar
      */
     private void createMenuItemSold(int MenuId, int orderID, int quantity) {
         // add a row to ItemsSold
@@ -645,7 +656,7 @@ public class Database {
      * @param inventoryId the ID of the inventory item being sold
      * @param orderId     the ID of the order associated with the item sold record
      * @param quantity    the quantity of the inventory item being sold
-     * @author
+     * @author Bryan
      */
     private void createInventoryItemSold(int InventoryId, int orderID, int quantity) {
         // add a row to ItemsSold
@@ -681,7 +692,7 @@ public class Database {
      *
      * @param itemID the ID of the menu item to get the price for.
      * @return the cost of the menu item as a double.
-     * @author
+     * @author Srikar
      */
     public double getPriceOfMenuItem(int itemID) {
         double price = 0.0;
@@ -720,7 +731,7 @@ public class Database {
      *
      * @param itemID the ID of the inventory item to get the price for.
      * @return the cost of the inventory item as a double.
-     * @author
+     * @author Arjun
      */
     public double getPriceOfInventoryItem(int itemID) {
         double price = 0.0;
@@ -748,7 +759,7 @@ public class Database {
      *
      * @param email the email address of the employee to get the password for.
      * @return the password associated with the email address as a String.
-     * @author
+     * @author Daniela M
      */
     public String getPasswd(String email) { // check error handlign
         try {
@@ -778,7 +789,7 @@ public class Database {
      *
      * @param name the name of the new menu item
      * @param cost the cost of the new menu item
-     * @author
+     * @author Daniela Santos
      */
     public void addMenuItem(String name, double cost) {
         try {
@@ -802,7 +813,7 @@ public class Database {
      * @param inventoryId the ID of the inventory item used in the recipe
      * @param menuId      the ID of the menu item that the recipe item belongs to
      * @param amtUsed     the amount of the inventory item used in the recipe
-     * @author
+     * @author Arjun
      */
     public void addRecipeItem(String name, int inventoryId, int menuId, int amtUsed) {
         try {
@@ -834,7 +845,7 @@ public class Database {
      * @param name     name of the inventory item
      * @param cost     the cost of the inventory item
      * @param quantity the quantity of the inventory item
-     * @author
+     * @author Ariela
      */
     public void addInventoryItem(String name, double cost, double quantity) {
         try {
@@ -865,7 +876,7 @@ public class Database {
      * @param id the ID of the menu item to get the name of
      * @return the name of the menu item with the given ID, or an empty string if no
      *         such item exists
-     * @author
+     * @author Srikar
      */
     public String getNameFromID(int id) {
         try {
@@ -888,7 +899,7 @@ public class Database {
      * 
      * @param itemName    the name or ID of the inventory item to update
      * @param newQuantity the new quantity of the inventory item
-     * @author
+     * @author Srikar
      */
     public void changeInventoryQuantity(String itemName, int newQuantity) {
         try {
@@ -998,6 +1009,11 @@ public class Database {
         return popularCombos;
     }
 
+    /**
+     * Creates a Z report object
+     * 
+     * @author Srikar
+     */
     public void createZReport() {
         try {
             // get new pk
