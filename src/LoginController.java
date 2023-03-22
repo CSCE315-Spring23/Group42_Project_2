@@ -32,7 +32,12 @@ public class LoginController implements Initializable {
 	private Database db;
 
 	/**
+	 * 
 	 * initializes the scene and implements trigger functionality
+	 *
+	 * @param location URL
+	 * @param resources resources bundle
+	 * 
 	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println("Login controller running");
@@ -63,7 +68,7 @@ public class LoginController implements Initializable {
 	/**
 	 * loads in the employee scene for when we want to switch
 	 * 
-	 * @param scene
+	 * @param scene scene to load
 	 */
 	public void setEmployeeScene(Scene scene) {
 		System.out.println("setting employee");
@@ -73,7 +78,7 @@ public class LoginController implements Initializable {
 	/**
 	 * loads in the manager scene for when we want to switch
 	 * 
-	 * @param scene
+	 * @param scene scene to load
 	 */
 	public void setManagerScene(Scene scene) {
 		System.out.println("setting manager");
@@ -85,8 +90,8 @@ public class LoginController implements Initializable {
 	 * If authentication fails, no access. If manager, full access, if employee,
 	 * limited access.
 	 * 
-	 * @param email
-	 * @param pass
+	 * @param email email of user
+	 * @param pass password of user
 	 * @return
 	 */
 	private char validateCredentials(String email, String pass) {
@@ -98,7 +103,7 @@ public class LoginController implements Initializable {
 	 * based on permissions, logs in to the correct interface, or doesn't log in at
 	 * all
 	 * 
-	 * @param perm
+	 * @param perm either m or e for manager and employee
 	 */
 	private void triggerLogin(char perm) {
 		if (perm == 'm') {
