@@ -1144,6 +1144,10 @@ public class Database {
         }
     }
 
+    /**
+     * Creates the content of the Z report
+     * @param reportID ID of the report
+     */
     public void createZReportContent(int reportID) {
         try {
             // get new pk
@@ -1185,6 +1189,9 @@ public class Database {
         }
     }
 
+    /**
+     * Creates an X report object
+     */
     public void createXReport() {
         try {
             int newReportID = 0;
@@ -1278,6 +1285,11 @@ class CustomPair {
     public int ID;
     public int Quantity;
 
+    /**
+     * Constructor for CustomPair
+     * @param iD ID of the pair
+     * @param quantity quantity of the pair
+     */
     CustomPair(int iD, int quantity) {
         this.ID = iD;
         this.Quantity = quantity;

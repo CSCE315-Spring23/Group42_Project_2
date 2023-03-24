@@ -20,6 +20,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+/**
+ * Controls the backend for the login interface
+ */
 public class LoginController implements Initializable {
 	@FXML
 	Button bLogin;

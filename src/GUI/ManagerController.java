@@ -30,6 +30,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+/**
+ * Creates the backend for the manager interface
+ */
 public class ManagerController implements Initializable {
 	@FXML
 	private Button switchView;
@@ -203,6 +206,11 @@ public class ManagerController implements Initializable {
 	@FXML
 	private TableColumn<Excess, String> excessName;
 
+	/**
+	 * Initialize all of the set up functions and buttons
+	 * @param location location of the URL
+	 * @param resources resource bundle 
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		System.out.println("Manager controller running");
 		this.db = new Database();
@@ -542,36 +550,62 @@ public class ManagerController implements Initializable {
 
 	}
 
+	/**
+	 * Update the menu table
+	 * @param whichTwenty location of the 20 rows to update
+	 */
 	private void updateMenuTable(int whichTwenty) {
 		this.menuTable.setItems(db.get20RowsMenu(whichTwenty));
 		this.menuTable.refresh();
 	}
 
+	/**
+	 * Update the inventory table
+	 * @param whichTwenty location of the 20 rows to update
+	 */
 	private void updateInventoryTable(int whichTwenty) {
 		this.inventoryTable.setItems(db.get20RowsInventory(whichTwenty));
 		this.inventoryTable.refresh();
 	}
 
+	/**
+	 * Update the report table
+	 * @param whichTwenty location of the 20 rows to update
+	 */
 	private void updateReportTable(int whichTwenty) {
 		this.reportTable.setItems(db.get20RowsReport(whichTwenty));
 		this.reportTable.refresh();
 	}
 
+	/**
+	 * Update the report content table
+	 * @param whichTwenty location of the 20 rows to update
+	 */
 	private void updateReportContentTable(int whichTwenty) {
 		this.reportContentTable.setItems(db.get20RowsReportContent(whichTwenty));
 		this.reportContentTable.refresh();
 	}
 
+	/**
+	 * Update the recipe table
+	 * @param whichTwenty location of the 20 rows to update
+	 */
 	private void updateRecipeTable(int whichTwenty) {
 		this.recipeTable.setItems(db.get20RowsRecipe(whichTwenty));
 		this.recipeTable.refresh();
 	}
 
+	/**
+	 * Update the restock report
+	 */
 	private void updateRestockReport() {
 		this.restockReport.setItems(db.createRestockReport());
 		this.restockReport.refresh();
 	}
 
+	/**
+	 * Set up the report table
+	 */
 	private void setUpReportTable() {
 		this.reportID.setCellValueFactory(cellData -> cellData.getValue().getReportID());
 		this.lastOrderID.setCellValueFactory(cellData -> cellData.getValue().getLastOrderID());
@@ -582,6 +616,9 @@ public class ManagerController implements Initializable {
 		this.reportTable.setItems(items);
 	}
 
+	/**
+	 * Set up the report content table
+	 */
 	private void setUpReportContentTable() {
 		this.menuItemNameForReports.setCellValueFactory(cellData -> cellData.getValue().getMenuItemNameForReports());
 		this.menuItemQuantityForReports
@@ -592,12 +629,18 @@ public class ManagerController implements Initializable {
 		this.reportContentTable.setItems(items);
 	}
 
+	/**
+	 * Set up the excess table
+	 */
 	private void setUpExcessTable() {
 		this.excessTable.setItems(
 				db.getExcess(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
 						LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
 	}
 
+	/**
+	 * Set up the inventory table
+	 */
 	private void setUpInventoryTable() {
 		this.inventoryID.setCellValueFactory(cellData -> cellData.getValue().getInventoryID());
 		this.inventoryItemName.setCellValueFactory(cellData -> cellData.getValue().getItemName());
@@ -608,6 +651,9 @@ public class ManagerController implements Initializable {
 		this.inventoryTable.setItems(items);
 	}
 
+	/**
+	 * Set up the menu table
+	 */
 	private void setUpMenuTable() {
 		this.menuID.setCellValueFactory(cellData -> cellData.getValue().getMenuID());
 		this.menuItemName.setCellValueFactory(cellData -> cellData.getValue().getItemName());
@@ -617,6 +663,9 @@ public class ManagerController implements Initializable {
 		this.inventoryTable.setItems(items);
 	}
 
+	/**
+	 * Set up the recipe table
+	 */
 	private void setUpRecipeTable() {
 		this.recipeID.setCellValueFactory(cellData -> cellData.getValue().getRecipeID());
 		this.recipeItemName.setCellValueFactory(cellData -> cellData.getValue().getRecipeName());
@@ -628,6 +677,9 @@ public class ManagerController implements Initializable {
 		this.recipeTable.setItems(items);
 	}
 
+	/**
+	 * Set up the restock report
+	 */
 	private void setUpRestockReport() {
 		this.inventoryID2.setCellValueFactory(cellData -> cellData.getValue().getInventoryID());
 		this.inventoryItemName2.setCellValueFactory(cellData -> cellData.getValue().getItemName());
@@ -702,6 +754,10 @@ public class ManagerController implements Initializable {
 		this.popularCombosTable.refresh();
 	}
 
+	/**
+	 * Update the excess table
+	 * @param date date at which to start excess collection
+	 */
 	private void updateExcessTable(String date) {
 
 		this.excessID.setCellValueFactory(cellData -> cellData.getValue().getMenuItemId());
