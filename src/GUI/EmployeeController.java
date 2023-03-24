@@ -22,6 +22,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+/**
+ * Controls the backend for the employee interface
+ */
 public class EmployeeController implements Initializable {
 	boolean burger = false; // check it item is burger
 	ArrayList<String> orderList = new ArrayList<String>();// ArrayList for the string of orders to print at checkout
