@@ -35,218 +35,527 @@ public class EmployeeController implements Initializable {
 	double totalOrderCost = 0.0;// total cost per order
 	private Database db;// database object to be used in all functions
 
+	/**
+	 * burger button
+	 */
 	@FXML
 	Button bBurg1;
+	/**
+	 * burger button
+	 */
 	@FXML
 	Button bBurg2;
+	/**
+	 * burger button
+	 */
 	@FXML
 	Button bBurg3;
+	/**
+	 * burger button
+	 */
 	@FXML
 	Button bBurg4;
 
+	/**
+	 * three tenders button
+	 */
 	@FXML
 	Button bThreeTender;
+	/**
+	 * three tenders button
+	 */
 	@FXML
 	Button bFourTender;
 
+	/**
+	 * sandwich button
+	 */
 	@FXML
 	Button bSan1;
+	/**
+	 * sandwich button
+	 */
 	@FXML
 	Button bSan2;
+	/**
+	 * sandwich button
+	 */
 	@FXML
 	Button bSan3;
+	/**
+	 * sandwich button
+	 */
 	@FXML
 	Button bSan4;
 
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton cNoBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton cChipBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton cFriesBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton patRegBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton patBeanBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton patDoubleBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton cNoneBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton cRegBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton cExtraBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton sNoneBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton sRegBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton pNoneBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton pRegBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton pExtraBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton lNoneBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton lRegBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton lExtraBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton tNoneBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton tRegBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton tExtraBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton oNoneBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton oRegBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton oExtraBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton bNoneBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton bRegBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	RadioButton bExtraBurg;
+	/**
+	 * button for customization of burger
+	 */
 	@FXML
 	Button bCheckoutBurg;
 
+	/**
+	 * button for customization of tender basket
+	 */
 	@FXML
 	RadioButton cNoBask;
+	/**
+	 * button for customization of tender basket
+	 */
 	@FXML
 	RadioButton cYesBask;
+	/**
+	 * button for customization of tender basket
+	 */
 	@FXML
 	RadioButton tNoneBask;
+	/**
+	 * button for customization of tender basket
+	 */
 	@FXML
 	RadioButton tRegBask;
+	/**
+	 * button for customization of tender basket
+	 */
 	@FXML
 	RadioButton tExtraBask;
+	/**
+	 * button for customization of tender basket
+	 */
 	@FXML
 	RadioButton gNoneBask;
+	/**
+	 * button for customization of tender basket
+	 */
 	@FXML
 	RadioButton gRegBask;
+	/**
+	 * button for customization of tender basket
+	 */
 	@FXML
 	RadioButton gExtraBask;
+	/**
+	 * button for customization of tender basket
+	 */
 	@FXML
 	Button bCheckoutBask;
 
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton cNoSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton cChipSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton cFriesSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton patRegSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton patBeanSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton patChickenSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton cNoneSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton cRegSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton cExtraSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton sNoneSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton sRevSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton sSpicySan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton pNoneSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton pRegSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton pExtraSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton lNoneSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton lRegSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton lExtraSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton tNoneSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton tRegSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton tExtraSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton oNoneSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton oRegSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	RadioButton oExtraSan;
+	/**
+	 * button for customization of sandwich
+	 */
 	@FXML
 	Button bCheckoutSan;
 
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button vIce;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button cIce;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button sIce;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button coIce;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button vMilk;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button cMilk;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button sMilk;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button coMilk;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button brownie;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button cookie;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button salad;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button gigem;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button buff;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button bbq;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button hMustard;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button ranch;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button sRanch;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button drink;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button drip;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button fries;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button tTots;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button oRings;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button kChips;
+	/**
+	 * button for customization of item
+	 */
 	@FXML
 	Button silverware;
 
+	/**
+	 * GUI button
+	 */
 	@FXML
 	Button sb1;
+	/**
+	 * GUI button
+	 */
 	@FXML
 	Button sb2;
+	/**
+	 * GUI button
+	 */
 	@FXML
 	Button sb3;
+	/**
+	 * GUI button
+	 */
 	@FXML
 	Button sb4;
 
+	/**
+	 * button to checkout
+	 */
 	@FXML
 	Tab checkoutTab;
+	/**
+	 * button for order list
+	 */
 	@FXML
 	Label orderListLabel;
+	/**
+	 * button to place order
+	 */
 	@FXML
 	Button placeOrder;
+	/**
+	 * button to log out
+	 */
 	@FXML
 	Button logout;
 

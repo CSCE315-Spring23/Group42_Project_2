@@ -34,175 +34,404 @@ import javafx.stage.Stage;
  * Creates the backend for the manager interface
  */
 public class ManagerController implements Initializable {
+	/**
+	 * button to switch to employee view
+	 */
 	@FXML
 	private Button switchView;
+	/**
+	 * button to log out
+	 */
 	@FXML
 	private Button logout;
+	/**
+	 * button for adding to menu
+	 */
 	@FXML
 	private Button addMenu;
+	/**
+	 * button for updating menu
+	 */
 	@FXML
 	private Button updateMenu;
+	/**
+	 * button for deleting menu item
+	 */
 	@FXML
 	private Button deleteMenuItem;
+	/**
+	 * button for adding to inventory
+	 */
 	@FXML
 	private Button bAddInventory;
+	/**
+	 * button for updating inventory
+	 */
 	@FXML
 	private Button bUpdateInventory;
+	/**
+	 * button for deleting inventory item
+	 */
 	@FXML
 	private Button deleteInvItem;
+	/**
+	 * button for adding to recipe
+	 */
 	@FXML
 	private Button bAddRecipe;
+	/**
+	 * button for updating recipe
+	 */
 	@FXML
 	private Button bUpdateRecipe;
+	/**
+	 * button for deleting recipe item
+	 */
 	@FXML
 	private Button deleteRecipeItem;
+	/**
+	 * button for populating order
+	 */
 	@FXML
 	private Button populateOrder;
+	/**
+	 * button to create X report
+	 */
 	@FXML
 	private Button createXreportBtn;
+	/**
+	 * button to create Z report
+	 */
 	@FXML
 	private Button createZreportBtn;
+	/**
+	 * button to view combo table
+	 */
 	@FXML
 	private Button comboButton;
 
+	/**
+	 * button to view sales table
+	 */
 	@FXML
 	private Button salesButton;
+	/**
+	 * button to load the report
+	 */
 	@FXML
 	private Button loadReportBtn;
 
+	/**
+	 * text field for inventory ID
+	 */
 	@FXML
 	TextField fInventoryID;
+	/**
+	 * text field for item name
+	 */
 	@FXML
 	TextField fItemName;
+	/**
+	 * text field for item cost
+	 */
 	@FXML
 	TextField fItemCost;
+	/**
+	 * 
+	 * text field for item quantity
+	 */
 	@FXML
 	TextField fItemQuantity;
 
+	/**
+	 * text field for menu ID
+	 */
 	@FXML
 	TextField fMenuID;
+	/**
+	 * text field for menu name
+	 */
 	@FXML
 	TextField fMenuName;
+	/**
+	 * text field for menu price
+	 */
 	@FXML
 	TextField fMenuPrice;
 
+	/**
+	 * text field for recipe name
+	 */
 	@FXML
 	TextField fRecipeName;
+	/**
+	 * text field for recipe ID
+	 */
 	@FXML
 	TextField fRecipeID;
+	/**
+	 * text field for recipe inventory ID
+	 */
 	@FXML
 	TextField fRecipeInventoryID;
+	/**
+	 * text field for recipe menu ID
+	 */
 	@FXML
 	TextField fRecipeMenuID;
+	/**
+	 * text field for recipe quantity
+	 */
 	@FXML
 	TextField fRecipeQuantity;
 
+	/**
+	 * textfield for start date
+	 */
 	@FXML
 	TextField startDate;
 
+	/**
+	 * text field for start date of combo report
+	 */
 	@FXML
 	TextField startDateCombo;
 
+	/**
+	 * text field for end date of combo report
+	 */
 	@FXML
 	TextField endDateCombo;
 
+	/**
+	 * text field for start date of sales report
+	 */
 	@FXML
 	TextField startDateSale;
-
+	/**
+	 * text field for end date of sales report
+	 */
 	@FXML
 	TextField endDateSale;
 
+	/**
+	 * text field for report
+	 */
 	@FXML
 	TextField whichReport;
 
+	/**
+	 * database
+	 */
 	private Database db;
 
 	// @FXML
 	// private TableView<SaleData> salesTable;
+
+	/**
+	 * excess table
+	 */
 	@FXML
 	private TableView<Excess> excessTable;
+	/**
+	 * inventory table
+	 */
 	@FXML
 	private TableView<Inventory> inventoryTable;
+	/**
+	 * menu table
+	 */
 	@FXML
 	private TableView<Menu> menuTable;
+	/**
+	 * recipe table
+	 */
 	@FXML
 	private TableView<Recipe> recipeTable;
+	/**
+	 * sales history table
+	 */
 	@FXML
 	private TableView<SaleData> salesHistoryTable;
+	/**
+	 * popular combinations table
+	 */
 	@FXML
 	private TableView<Combo> popularCombosTable;
+	/**
+	 * report table
+	 */
 	@FXML
 	private TableView<Report> reportTable;
+	/**
+	 * report content table
+	 */
 	@FXML
 	private TableView<ReportContent> reportContentTable;
+	/**
+	 * restock report table
+	 */
 	@FXML
 	private TableView<Inventory> restockReport;
 
+	/**
+	 * count column for combo report
+	 */
 	@FXML
 	private TableColumn<Combo, Long> countCol;
+	/**
+	 * menu item ID column for sales report
+	 */
 	@FXML
 	TableColumn<SaleData, Long> menuItemIDCol;
+	/**
+	 * total quantity for sales report
+	 */
 	@FXML
 	private TableColumn<SaleData, Long> totalQuantity;
+	/**
+	 * menu item name column for sales report
+	 */
 	@FXML
 	private TableColumn<SaleData, String> menuItemNameCol;
+	/**
+	 * total quantity column for sales report
+	 */
 	@FXML
 	private TableColumn<SaleData, Long> totalQuantityCol;
+	/**
+	 * menu item 1 column for combo report
+	 */
 	@FXML
 	private TableColumn<Combo, String> menuItem1Col;
+	/**
+	 * menu item 2 column for combo report
+	 */
 	@FXML
 	private TableColumn<Combo, String> menuItem2Col;
 
+	/**
+	 * inventory ID
+	 */
 	@FXML
 	private TableColumn<Inventory, Long> inventoryID;
+	/**
+	 * inventory item name
+	 */
 	@FXML
 	private TableColumn<Inventory, String> inventoryItemName;
+	/**
+	 * inventory item cost
+	 */
 	@FXML
 	private TableColumn<Inventory, Double> inventoryItemCost;
+	/**
+	 * inventory item quantity
+	 */
 	@FXML
 	private TableColumn<Inventory, Long> inventoryItemQty;
+	/**
+	 * menu ID
+	 */
 	@FXML
 	private TableColumn<Menu, Long> menuID;
+	/**
+	 * menu item name
+	 */
 	@FXML
 	private TableColumn<Menu, String> menuItemName;
+	/**
+	 * menu item cost
+	 */
 	@FXML
 	private TableColumn<Menu, Double> menuItemCost;
+	/**
+	 * recipe ID
+	 */
 	@FXML
 	private TableColumn<Recipe, Long> recipeID;
+	/**
+	 * recipe item name
+	 */
 	@FXML
 	private TableColumn<Recipe, String> recipeItemName;
+	/**
+	 * recipe inventory ID
+	 */
 	@FXML
 	private TableColumn<Recipe, Long> recipeInventoryID;
+	/**
+	 * recipe menu ID
+	 */
 	@FXML
 	private TableColumn<Recipe, Long> recipeMenuID;
+	/**
+	 * recipe amount used
+	 */
 	@FXML
 	private TableColumn<Recipe, Double> recipeAmountUsed;
 
+	/**
+	 * report ID
+	 */
 	@FXML
 	private TableColumn<Report, Integer> reportID;
+	/**
+	 * last order ID
+	 */
 	@FXML
 	private TableColumn<Report, Integer> lastOrderID;
+	/**
+	 * Z report date
+	 */
 	@FXML
 	private TableColumn<Report, String> zReportDate;
+	/**
+	 * report total cost
+	 */
 	@FXML
 	private TableColumn<Report, Float> reportTotalCost;
 
+	/**
+	 * menu item name
+	 */
 	@FXML
 	private TableColumn<ReportContent, String> menuItemNameForReports;
+	/**
+	 * menu item quantity
+	 */
 	@FXML
 	private TableColumn<ReportContent, Integer> menuItemQuantityForReports;
 
+	/**
+	 * inventory ID 2
+	 */
 	@FXML
 	private TableColumn<Inventory, Long> inventoryID2;
+	/**
+	 * inventory item name 2
+	 */
 	@FXML
 	private TableColumn<Inventory, String> inventoryItemName2;
+	/**
+	 * inventory item cost 2
+	 */
 	@FXML
 	private TableColumn<Inventory, Double> inventoryItemCost2;
+	/**
+	 * inventory item quantity 2
+	 */
 	@FXML
 	private TableColumn<Inventory, Long> inventoryItemQty2;
 
+	/**
+	 * excess ID
+	 */
 	@FXML
 	private TableColumn<Excess, Long> excessID;
+	/**
+	 * excess name
+	 */
 	@FXML
 	private TableColumn<Excess, String> excessName;
 

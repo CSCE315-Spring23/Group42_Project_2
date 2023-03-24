@@ -24,14 +24,32 @@ import javafx.stage.Stage;
  * Controls the backend for the login interface
  */
 public class LoginController implements Initializable {
+	/**
+	 * button for login
+	 */
 	@FXML
 	Button bLogin;
+	/**
+	 * email text field
+	 */
 	@FXML
 	TextField fEmail;
+	/**
+	 * password text field
+	 */
 	@FXML
 	TextField fPassword;
+	/**
+	 * employee JavaFX scene
+	 */
 	private Scene employeeScene;
+	/**
+	 * manager JavaFX scene
+	 */
 	private Scene managerScene;
+	/**
+	 * database
+	 */
 	private Database db;
 
 	/**
