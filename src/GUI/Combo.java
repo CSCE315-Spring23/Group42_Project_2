@@ -1,16 +1,16 @@
 import javafx.beans.property.SimpleObjectProperty;
 
 /**
- * Stores combos
+ * Stores combinations of 2 menu items and the amount of times they are orderd
  */
 public class Combo {
     /**
-     * Stores item 1
+     * Stores menu item 1
      */
     private SimpleObjectProperty<String> item1;
 
     /**
-     * Stores item 2
+     * Stores menu item 2
      */
     private SimpleObjectProperty<String> item2;
 
@@ -33,10 +33,9 @@ public class Combo {
     }
 
     /**
-     * returns the first item
+     * returns the first menu item
      * 
-     * @return return first item
-     * @author Arjun
+     * @return first menu item
      */
     public SimpleObjectProperty<String> getItem1() {
         return this.item1;
@@ -45,8 +44,7 @@ public class Combo {
     /**
      * returns the first item
      * 
-     * @return return second item
-     * @author Arjun
+     * @return second menu item
      */
     public SimpleObjectProperty<String> getItem2() {
         return this.item2;

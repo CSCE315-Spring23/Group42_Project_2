@@ -15,10 +15,29 @@ import java.time.format.DateTimeFormatter;
  */
 public class Database {
 
+    /**
+     * The Connection object representing the connection to the PostgreSQL database.
+     */
     private Connection conn = null;
+
+     /**
+     * The team number used to construct the name of the database.
+     */
     private static String teamNumber = "team_42";
+    
+    /**
+     * The name of the database.
+     */
     private static String dbName = "csce315331_" + teamNumber;
+    
+    /**
+     * The connection string used to connect to the database.
+     */
     private static String dbConnectionString = "jdbc:postgresql://csce-315-db.engr.tamu.edu/" + dbName;
+    
+    /**
+     * The total amount for a Z report.
+     */
     private float zReportTotal = 0;
 
     /**
@@ -412,6 +431,13 @@ public class Database {
         return rows;
     }
 
+    /**
+     * Gets the 20 rows of report content with a given report ID
+     * 
+     * @param whichTwenty the report ID for which to get the rows
+     * @return an ObservableList of ReportContent objects representing the 20 rows of report content with the given report ID
+     * @author Srikar
+     */
     public ObservableList<ReportContent> get20RowsReportContent(int whichTwenty) {
         String tableName = "zreportcontent";
         ObservableList<ReportContent> rows = FXCollections.observableArrayList();
